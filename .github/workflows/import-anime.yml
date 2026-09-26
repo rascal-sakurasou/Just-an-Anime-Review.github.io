@@ -26,17 +26,14 @@ jobs:
     env:
       SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
       SUPABASE_SECRET_KEY: ${{ secrets.SUPABASE_SECRET_KEY }}
-
       DATASET_URL: https://github.com/manami-project/anime-offline-database/releases/download/latest/anime-offline-database.jsonl
-
       MAX_RECORDS: ${{ inputs.max_records || '10' }}
       DRY_RUN: ${{ inputs.dry_run || 'true' }}
 
     steps:
-
-      # ----------------------------------------
-      # 1. Secret確認
-      # ----------------------------------------
+      # ============================================
+      # 1. Supabase設定確認
+      # ============================================
       - name: Check required secrets
         shell: bash
         run: |
@@ -54,9 +51,9 @@ jobs:
 
           echo "Supabase configuration is present."
 
-      # ----------------------------------------
-      # 2. データセット取得
-      # ----------------------------------------
+      # ============================================
+      # 2. アニメデータセット取得
+      # ============================================
       - name: Download anime dataset
         shell: bash
         run: |
@@ -80,9 +77,9 @@ jobs:
 
           ls -lh /tmp/anime-import/anime-offline-database.jsonl
 
-      # ----------------------------------------
-      # 3. Supabaseへ登録
-      # ----------------------------------------
+      # ============================================
+      # 3. Animeciaへ登録
+      # ============================================
       - name: Import anime metadata
         shell: bash
         run: |
@@ -153,7 +150,7 @@ jobs:
           }
 
           # ============================================
-          # Helpers
+          # Utility
           # ============================================
 
           def has_japanese(value):
@@ -177,11 +174,11 @@ jobs:
               return value
 
 
-          def extract_mal_id(sources):
-              """
-              Extract MyAnimeList numeric ID from sources.
-              """
+          # ============================================
+          # MAL ID
+          # ============================================
 
+          def extract_mal_id(sources):
               for source in sources or []:
 
                   source = str(source)
@@ -194,10 +191,11 @@ jobs:
               return None
 
 
+          # ============================================
+          # Titles
+          # ============================================
+
           def pick_japanese_title(main_title, synonyms):
-              """
-              Try to find a Japanese title.
-              """
 
               main_title = clean_text(main_title)
 
@@ -218,9 +216,6 @@ jobs:
 
 
           def pick_latin_title(main_title, synonyms):
-              """
-              Try to find a non-Japanese title.
-              """
 
               main_title = clean_text(main_title)
 
@@ -240,10 +235,11 @@ jobs:
               return None
 
 
+          # ============================================
+          # Season
+          # ============================================
+
           def map_season(value):
-              """
-              Convert dataset season to Animecia format.
-              """
 
               if not value:
                   return None
@@ -264,17 +260,14 @@ jobs:
               return None
 
 
+          # ============================================
+          # Status
+          # ============================================
+
           def map_status(value):
-              """
-              Dataset:
-                FINISHED
-                ONGOING
-                UPCOMING
-                UNKNOWN
-              """
 
               if not value:
-                  return None
+                  return "UNKNOWN"
 
               value = str(value).upper().strip()
 
@@ -291,19 +284,14 @@ jobs:
               return "UNKNOWN"
 
 
+          # ============================================
+          # Format
+          # ============================================
+
           def map_format(value):
-              """
-              Dataset:
-                TV
-                MOVIE
-                OVA
-                ONA
-                SPECIAL
-                UNKNOWN
-              """
 
               if not value:
-                  return None
+                  return "UNKNOWN"
 
               value = str(value).upper().strip()
 
@@ -322,11 +310,11 @@ jobs:
               return "UNKNOWN"
 
 
+          # ============================================
+          # Duration
+          # ============================================
+
           def map_duration(duration):
-              """
-              Dataset duration is stored in seconds.
-              Animecia duration is stored in minutes.
-              """
 
               if not duration:
                   return None
@@ -349,40 +337,11 @@ jobs:
               return max(1, minutes)
 
 
-          def map_score(score):
-              """
-              Dataset score is 1-10.
-              """
-
-              if not score:
-                  return None
-
-              if not isinstance(score, dict):
-                  return None
-
-              value = score.get(
-                  "arithmeticMean"
-              )
-
-              if not isinstance(value, (int, float)):
-                  return None
-
-              if value < 1 or value > 10:
-                  return None
-
-              return round(
-                  float(value),
-                  2
-              )
-
+          # ============================================
+          # Genres
+          # ============================================
 
           def map_genres(tags):
-              """
-              Animecia currently stores the legacy genre field
-              as comma-separated text.
-
-              Only known genre-like tags are used.
-              """
 
               result = []
 
@@ -393,9 +352,9 @@ jobs:
                   if not tag:
                       continue
 
-                  key = tag.lower()
-
-                  mapped = GENRE_MAP.get(key)
+                  mapped = GENRE_MAP.get(
+                      tag.lower()
+                  )
 
                   if mapped and mapped not in result:
                       result.append(mapped)
@@ -418,12 +377,10 @@ jobs:
                   sources
               )
 
-              # Animecia external_id is unique.
-              # A separate numeric range is used here so
-              # existing external IDs are less likely to collide.
               if mal_id is None:
                   return None
 
+              # Animecia内で使用するexternal_id
               external_id = (
                   1_000_000_000
                   + mal_id
@@ -467,6 +424,10 @@ jobs:
               if not title:
                   return None
 
+              # ========================================
+              # Season
+              # ========================================
+
               season_data = (
                   item.get("animeSeason")
                   or {}
@@ -486,6 +447,10 @@ jobs:
               ):
                   season_year = None
 
+              # ========================================
+              # Episodes
+              # ========================================
+
               episodes = item.get(
                   "episodes"
               )
@@ -496,9 +461,12 @@ jobs:
               ):
                   episodes = None
 
-              if episodes is not None:
-                  if episodes < 0:
-                      episodes = None
+              if episodes is not None and episodes < 0:
+                  episodes = None
+
+              # ========================================
+              # Basic metadata
+              # ========================================
 
               anime_status = map_status(
                   item.get("status")
@@ -508,34 +476,45 @@ jobs:
                   item.get("type")
               )
 
-              duration_minutes = (
-                  map_duration(
-                      item.get("duration")
-                  )
-              )
-
-              average_score = map_score(
-                  item.get("score")
+              duration_minutes = map_duration(
+                  item.get("duration")
               )
 
               genres = map_genres(
                   item.get("tags")
               )
 
-              # Main image
-              picture = clean_text(
+              # ========================================
+              # Image
+              # ========================================
+
+              cover_image = clean_text(
                   item.get("picture")
               )
 
-              # Thumbnail is not used as banner.
-              # Animecia can assign banner images separately later.
-              cover_image = picture
+              # ========================================
+              # IMPORTANT
+              # ========================================
+              #
+              # 外部サイトの評価は一切取り込まない。
+              #
+              # Animeciaでは新規作品を
+              # 「未評価」の状態で登録する。
+              #
+              # average_score = NULL
+              #
+              # ユーザー自身の評価は
+              # user_ratingsテーブルで管理する。
+              # ========================================
+
+              average_score = None
 
               # ========================================
-              # Animecia row
+              # Animecia record
               # ========================================
 
               record = {
+
                   "external_id": external_id,
 
                   "title": title,
@@ -573,10 +552,11 @@ jobs:
 
                   "season_year": season_year,
 
-                  "source": (
-                      "anime-offline-database"
-                  ),
+                  "source": "anime-offline-database",
 
+                  # ====================================
+                  # 評価は必ずNULL
+                  # ====================================
                   "average_score": average_score,
 
                   "site_url": (
@@ -619,27 +599,25 @@ jobs:
                   data=payload,
                   method="POST",
                   headers={
-                      "apikey": (
-                          SUPABASE_SECRET_KEY
-                      ),
 
-                      "Authorization": (
+                      "apikey":
+                          SUPABASE_SECRET_KEY,
+
+                      "Authorization":
                           "Bearer "
-                          + SUPABASE_SECRET_KEY
-                      ),
+                          + SUPABASE_SECRET_KEY,
 
-                      "Content-Type": (
-                          "application/json"
-                      ),
+                      "Content-Type":
+                          "application/json",
 
-                      "Accept": (
-                          "application/json"
-                      ),
+                      "Accept":
+                          "application/json",
 
-                      "Prefer": (
-                          "resolution=merge-duplicates,"
-                          "return=minimal"
-                      ),
+                      "Prefer":
+                          (
+                              "resolution=merge-duplicates,"
+                              "return=minimal"
+                          ),
                   }
               )
 
@@ -688,18 +666,13 @@ jobs:
 
 
           # ============================================
-          # Read JSONL
+          # Read dataset
           # ============================================
 
           total_seen = 0
-
           total_selected = 0
 
           batch = []
-
-          # --------------------------------------------
-          # Dataset open
-          # --------------------------------------------
 
           with open(
               DATASET,
@@ -707,11 +680,13 @@ jobs:
               encoding="utf-8"
           ) as file:
 
-              # First line is dataset metadata
+              # ========================================
+              # Dataset metadata
+              # ========================================
+
               first_line = file.readline()
 
               if not first_line:
-
                   raise RuntimeError(
                       "Dataset is empty."
                   )
@@ -755,9 +730,9 @@ jobs:
                   "================================"
               )
 
-              # ----------------------------------------
+              # ========================================
               # Anime records
-              # ----------------------------------------
+              # ========================================
 
               for line in file:
 
@@ -795,9 +770,9 @@ jobs:
 
                   total_selected += 1
 
-                  # ------------------------------------
-                  # Batch
-                  # ------------------------------------
+                  # ====================================
+                  # Batch processing
+                  # ====================================
 
                   if len(batch) >= BATCH_SIZE:
 
@@ -824,14 +799,13 @@ jobs:
 
                       batch.clear()
 
-                  # ------------------------------------
+                  # ====================================
                   # Max records
-                  # ------------------------------------
+                  # ====================================
 
                   if (
                       MAX_RECORDS > 0
-                      and total_selected
-                      >= MAX_RECORDS
+                      and total_selected >= MAX_RECORDS
                   ):
 
                       break
@@ -862,6 +836,7 @@ jobs:
           # ============================================
 
           print()
+
           print(
               "================================"
           )
@@ -898,6 +873,11 @@ jobs:
                   "Anime import completed "
                   "successfully."
               )
+
+          print(
+              "All imported anime have "
+              "average_score = NULL."
+          )
 
           print(
               "================================"
