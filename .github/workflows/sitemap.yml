@@ -34,29 +34,16 @@ steps:
       import urllib.parse
       import xml.etree.ElementTree as ET
 
-      SUPABASE_URL = os.environ.get(
-          "SUPABASE_URL",
-          ""
-      ).rstrip("/")
-
-      SUPABASE_KEY = os.environ.get(
-          "SUPABASE_KEY",
-          ""
-      )
+      SUPABASE_URL = os.environ.get("SUPABASE_URL", "").rstrip("/")
+      SUPABASE_KEY = os.environ.get("SUPABASE_KEY", "")
 
       if not SUPABASE_URL:
-          raise RuntimeError(
-              "SUPABASE_URL is not configured."
-          )
+          raise RuntimeError("SUPABASE_URL is not configured.")
 
       if not SUPABASE_KEY:
-          raise RuntimeError(
-              "SUPABASE_KEY is not configured."
-          )
+          raise RuntimeError("SUPABASE_KEY is not configured.")
 
-      BASE_URL = (
-          "https://media-mania.github.io/Animecia"
-      )
+      BASE_URL = "https://media-mania.github.io/Animecia"
 
       headers = {
           "apikey": SUPABASE_KEY,
@@ -76,17 +63,11 @@ steps:
           headers=headers
       )
 
-      with urllib.request.urlopen(
-          request,
-          timeout=30
-      ) as response:
-
+      with urllib.request.urlopen(request, timeout=30) as response:
           data = json.load(response)
 
       if not isinstance(data, list):
-          raise RuntimeError(
-              "Unexpected response from Supabase."
-          )
+          raise RuntimeError("Unexpected response from Supabase.")
 
       urls = [
           f"{BASE_URL}/",
@@ -94,7 +75,6 @@ steps:
       ]
 
       for anime in data:
-
           anime_id = anime.get("id")
 
           if anime_id is None:
@@ -102,17 +82,12 @@ steps:
 
           detail_url = (
               f"{BASE_URL}/anime-detail.html?id="
-              + urllib.parse.quote(
-                  str(anime_id),
-                  safe=""
-              )
+              + urllib.parse.quote(str(anime_id), safe="")
           )
 
           urls.append(detail_url)
 
-      urls = list(
-          dict.fromkeys(urls)
-      )
+      urls = list(dict.fromkeys(urls))
 
       urlset = ET.Element(
           "urlset",
@@ -123,25 +98,13 @@ steps:
       )
 
       for page_url in urls:
-
-          url_element = ET.SubElement(
-              urlset,
-              "url"
-          )
-
-          loc = ET.SubElement(
-              url_element,
-              "loc"
-          )
-
+          url_element = ET.SubElement(urlset, "url")
+          loc = ET.SubElement(url_element, "loc")
           loc.text = page_url
 
       tree = ET.ElementTree(urlset)
 
-      ET.indent(
-          tree,
-          space="  "
-      )
+      ET.indent(tree, space="  ")
 
       tree.write(
           "sitemap.xml",
@@ -149,10 +112,7 @@ steps:
           xml_declaration=True
       )
 
-      print(
-          f"Sitemap generated: {len(urls)} URLs"
-      )
-
+      print(f"Sitemap generated: {len(urls)} URLs")
       PY
 
   - name: Commit sitemap
