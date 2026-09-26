@@ -3,7 +3,14 @@
    Main Stylesheet
 ========================================================= */
 
-* {
+
+/* =========================================================
+   RESET / BASE
+========================================================= */
+
+*,
+*::before,
+*::after {
     box-sizing: border-box;
 }
 
@@ -13,23 +20,30 @@ html {
 
 body {
     margin: 0;
+
     font-family:
         -apple-system,
         BlinkMacSystemFont,
         "Segoe UI",
         "Hiragino Kaku Gothic ProN",
+        "Hiragino Sans",
         "Yu Gothic",
         "Noto Sans JP",
+        Meiryo,
         sans-serif;
 
     background: #f5f6f8;
     color: #171717;
+
     line-height: 1.7;
+
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
 }
 
 img {
-    max-width: 100%;
     display: block;
+    max-width: 100%;
 }
 
 button,
@@ -43,13 +57,33 @@ button {
     cursor: pointer;
 }
 
+button:disabled {
+    opacity: .5;
+    cursor: not-allowed;
+}
+
 a {
     color: inherit;
+}
+
+ul,
+ol {
+    margin-top: 0;
 }
 
 .container {
     width: min(1180px, calc(100% - 40px));
     margin: 0 auto;
+}
+
+
+/* =========================================================
+   COMMON FOCUS
+========================================================= */
+
+:focus-visible {
+    outline: 3px solid rgba(37, 99, 235, .35);
+    outline-offset: 3px;
 }
 
 
@@ -62,17 +96,21 @@ a {
     top: 0;
     z-index: 1000;
 
-    background: rgba(17, 17, 17, 0.96);
+    background: rgba(17, 17, 17, .96);
     color: #fff;
 
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    border-bottom: 1px solid rgba(255,255,255,.08);
+
     backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
 }
 
 .header-inner {
     width: min(1180px, calc(100% - 40px));
+
     min-height: 72px;
-    margin: auto;
+
+    margin: 0 auto;
 
     display: flex;
     align-items: center;
@@ -87,14 +125,25 @@ a {
 
     font-size: 22px;
     font-weight: 800;
-    letter-spacing: -0.8px;
+
+    letter-spacing: -.8px;
 
     white-space: nowrap;
 }
 
+.logo:hover {
+    opacity: .8;
+}
+
+
+/* =========================================================
+   NAVIGATION
+========================================================= */
+
 .navigation {
     display: flex;
     align-items: center;
+
     gap: 26px;
 }
 
@@ -107,7 +156,8 @@ a {
     font-size: 14px;
     font-weight: 500;
 
-    transition: color 0.2s ease;
+    transition:
+        color .2s ease;
 }
 
 .navigation a::after {
@@ -122,7 +172,8 @@ a {
 
     background: #fff;
 
-    transition: width 0.2s ease;
+    transition:
+        width .2s ease;
 }
 
 .navigation a:hover {
@@ -141,20 +192,28 @@ a {
 .user-area {
     display: flex;
     align-items: center;
+
     gap: 10px;
+
+    flex-shrink: 0;
 }
 
 .user-name {
     color: #ddd;
+
     font-size: 13px;
+
+    white-space: nowrap;
 }
 
 .login-button,
 .logout-button {
-    border: 1px solid #444;
-    border-radius: 8px;
+    min-height: 38px;
 
     padding: 8px 14px;
+
+    border: 1px solid #444;
+    border-radius: 8px;
 
     background: #fff;
     color: #111;
@@ -163,8 +222,8 @@ a {
     font-weight: 600;
 
     transition:
-        background 0.2s ease,
-        transform 0.2s ease;
+        background .2s ease,
+        transform .2s ease;
 }
 
 .login-button:hover,
@@ -180,12 +239,13 @@ a {
 
 .hero {
     position: relative;
+
     overflow: hidden;
 
     background:
         radial-gradient(
             circle at 80% 20%,
-            rgba(255, 255, 255, 0.08),
+            rgba(255,255,255,.08),
             transparent 30%
         ),
         linear-gradient(
@@ -207,7 +267,7 @@ a {
     background:
         linear-gradient(
             90deg,
-            rgba(0, 0, 0, 0.2),
+            rgba(0,0,0,.2),
             transparent
         );
 
@@ -219,7 +279,8 @@ a {
     z-index: 1;
 
     width: min(1180px, calc(100% - 40px));
-    margin: auto;
+
+    margin: 0 auto;
 
     padding: 115px 0 125px;
 }
@@ -231,7 +292,9 @@ a {
 
     font-size: 11px;
     font-weight: 600;
+
     letter-spacing: 3px;
+
     text-transform: uppercase;
 }
 
@@ -241,6 +304,7 @@ a {
     margin: 0 0 25px;
 
     font-size: clamp(42px, 6vw, 76px);
+
     line-height: 1.08;
 
     letter-spacing: -3px;
@@ -254,12 +318,15 @@ a {
     color: #cfcfcf;
 
     font-size: 16px;
+
     line-height: 1.9;
 }
 
 .hero-actions {
     display: flex;
+
     flex-wrap: wrap;
+
     gap: 12px;
 
     margin-top: 32px;
@@ -272,6 +339,7 @@ a {
 
 .btn {
     display: inline-flex;
+
     align-items: center;
     justify-content: center;
 
@@ -288,9 +356,9 @@ a {
     font-weight: 600;
 
     transition:
-        transform 0.2s ease,
-        background 0.2s ease,
-        border-color 0.2s ease;
+        transform .2s ease,
+        background .2s ease,
+        border-color .2s ease;
 }
 
 .btn:hover {
@@ -309,11 +377,12 @@ a {
 .btn-secondary {
     background: transparent;
     color: #fff;
+
     border-color: #555;
 }
 
 .btn-secondary:hover {
-    background: rgba(255, 255, 255, 0.08);
+    background: rgba(255,255,255,.08);
 }
 
 
@@ -323,13 +392,15 @@ a {
 
 .section {
     width: min(1180px, calc(100% - 40px));
-    margin: auto;
+
+    margin: 0 auto;
 
     padding: 80px 0 0;
 }
 
 .section-heading {
     display: flex;
+
     align-items: flex-end;
     justify-content: space-between;
 
@@ -345,7 +416,9 @@ a {
 
     font-size: 10px;
     font-weight: 600;
+
     letter-spacing: 3px;
+
     text-transform: uppercase;
 }
 
@@ -353,6 +426,7 @@ a {
     margin: 0;
 
     font-size: 30px;
+
     line-height: 1.25;
 
     letter-spacing: -1px;
@@ -364,6 +438,7 @@ a {
     margin: 8px 0 0;
 
     color: #777;
+
     font-size: 14px;
 }
 
@@ -371,6 +446,7 @@ a {
     flex-shrink: 0;
 
     color: #333;
+
     text-decoration: none;
 
     font-size: 14px;
@@ -401,6 +477,8 @@ a {
 ========================================================= */
 
 .anime-card {
+    position: relative;
+
     overflow: hidden;
 
     background: #fff;
@@ -409,12 +487,12 @@ a {
     border-radius: 12px;
 
     box-shadow:
-        0 4px 20px rgba(0, 0, 0, 0.04);
+        0 4px 20px rgba(0,0,0,.04);
 
     transition:
-        transform 0.2s ease,
-        box-shadow 0.2s ease,
-        border-color 0.2s ease;
+        transform .2s ease,
+        box-shadow .2s ease,
+        border-color .2s ease;
 }
 
 .anime-card:hover {
@@ -423,7 +501,7 @@ a {
     border-color: #ddd;
 
     box-shadow:
-        0 14px 35px rgba(0, 0, 0, 0.09);
+        0 14px 35px rgba(0,0,0,.09);
 }
 
 .anime-card-image {
@@ -432,6 +510,7 @@ a {
     height: 260px;
 
     display: flex;
+
     align-items: center;
     justify-content: center;
 
@@ -453,17 +532,54 @@ a {
 
     object-fit: cover;
 
-    transition: transform 0.35s ease;
+    transition:
+        transform .35s ease;
 }
 
 .anime-card:hover .anime-card-image img {
     transform: scale(1.04);
 }
 
-.anime-card-image span {
+.anime-card-image > span {
     font-size: 28px;
     font-weight: 700;
 }
+
+
+/* =========================================================
+   CARD BADGE
+========================================================= */
+
+.anime-badge {
+    position: absolute;
+
+    top: 12px;
+    left: 12px;
+
+    z-index: 2;
+
+    padding: 5px 9px;
+
+    border-radius: 999px;
+
+    background: rgba(17,17,17,.88);
+    color: #fff;
+
+    font-size: 10px;
+    font-weight: 700;
+
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+}
+
+.anime-badge-recommended {
+    background: #111;
+}
+
+
+/* =========================================================
+   CARD CONTENT
+========================================================= */
 
 .anime-card-content {
     padding: 22px;
@@ -476,7 +592,9 @@ a {
 
     font-size: 10px;
     font-weight: 600;
+
     letter-spacing: 1.5px;
+
     text-transform: uppercase;
 }
 
@@ -484,7 +602,10 @@ a {
     margin: 0 0 10px;
 
     font-size: 19px;
+
     line-height: 1.45;
+
+    overflow-wrap: anywhere;
 }
 
 .anime-card p {
@@ -497,6 +618,7 @@ a {
     color: #666;
 
     font-size: 14px;
+
     line-height: 1.75;
 
     -webkit-box-orient: vertical;
@@ -509,6 +631,7 @@ a {
     margin-top: 15px;
 
     color: #111;
+
     text-decoration: none;
 
     font-size: 13px;
@@ -526,7 +649,9 @@ a {
 
 .anime-meta {
     display: flex;
+
     flex-wrap: wrap;
+
     gap: 8px;
 
     margin-top: 14px;
@@ -544,9 +669,40 @@ a {
     font-size: 11px;
 }
 
-.rating {
+.anime-meta .rating {
+    color: #111;
+
     font-weight: 700;
-    color: #111 !important;
+}
+
+
+/* =========================================================
+   TAG LIST
+========================================================= */
+
+.tag-list {
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 7px;
+}
+
+.tag-list .tag,
+.tag {
+    display: inline-flex;
+
+    align-items: center;
+
+    padding: 5px 10px;
+
+    background: #f1f2f4;
+
+    border-radius: 5px;
+
+    color: #555;
+
+    font-size: 11px;
 }
 
 
@@ -567,6 +723,7 @@ a {
     min-height: 110px;
 
     display: flex;
+
     flex-direction: column;
     justify-content: center;
 
@@ -578,18 +735,19 @@ a {
     border-radius: 10px;
 
     color: #111;
+
     text-decoration: none;
 
     transition:
-        transform 0.2s ease,
-        box-shadow 0.2s ease;
+        transform .2s ease,
+        box-shadow .2s ease;
 }
 
 .genre-card:hover {
     transform: translateY(-3px);
 
     box-shadow:
-        0 10px 25px rgba(0, 0, 0, 0.07);
+        0 10px 25px rgba(0,0,0,.07);
 }
 
 .genre-card span {
@@ -603,7 +761,9 @@ a {
     color: #888;
 
     font-size: 9px;
+
     letter-spacing: 2px;
+
     text-transform: uppercase;
 }
 
@@ -618,6 +778,7 @@ a {
 
 .search-box {
     display: flex;
+
     gap: 10px;
 
     max-width: 800px;
@@ -627,6 +788,7 @@ a {
     flex: 1;
 
     min-width: 0;
+
     height: 48px;
 
     padding: 0 16px;
@@ -641,19 +803,21 @@ a {
     color: #111;
 
     transition:
-        border-color 0.2s ease,
-        box-shadow 0.2s ease;
+        border-color .2s ease,
+        box-shadow .2s ease;
 }
 
 .search-box input:focus {
     border-color: #555;
 
     box-shadow:
-        0 0 0 3px rgba(0, 0, 0, 0.05);
+        0 0 0 3px rgba(0,0,0,.05);
 }
 
 .search-button {
     min-width: 100px;
+
+    min-height: 48px;
 
     border: none;
     border-radius: 8px;
@@ -663,10 +827,16 @@ a {
 
     font-size: 14px;
     font-weight: 600;
+
+    transition:
+        background .2s ease,
+        transform .2s ease;
 }
 
 .search-button:hover {
     background: #292929;
+
+    transform: translateY(-1px);
 }
 
 
@@ -688,6 +858,7 @@ a {
 .filter-area select,
 .filter-area input {
     width: 100%;
+
     height: 44px;
 
     padding: 0 12px;
@@ -698,6 +869,7 @@ a {
     border-radius: 7px;
 
     color: #333;
+
     outline: none;
 }
 
@@ -728,13 +900,15 @@ a {
     min-height: 90px;
 
     display: flex;
+
     align-items: center;
 
     padding: 20px 30px;
 
     border-bottom: 1px solid #eee;
 
-    transition: background 0.2s ease;
+    transition:
+        background .2s ease;
 }
 
 .ranking-item:last-child {
@@ -784,7 +958,10 @@ a {
     margin: 0;
 
     font-size: 18px;
+
     line-height: 1.4;
+
+    overflow-wrap: anywhere;
 }
 
 .ranking-genre {
@@ -797,6 +974,8 @@ a {
 
 .ranking-score {
     margin-left: auto;
+
+    padding-left: 15px;
 
     color: #333;
 
@@ -829,6 +1008,7 @@ a {
 
 .review-card-header {
     display: flex;
+
     align-items: center;
     justify-content: space-between;
 
@@ -844,6 +1024,8 @@ a {
 }
 
 .review-rating {
+    flex-shrink: 0;
+
     font-size: 14px;
     font-weight: 700;
 }
@@ -854,6 +1036,50 @@ a {
     color: #666;
 
     font-size: 14px;
+}
+
+
+/* =========================================================
+   REVIEW DETAIL
+========================================================= */
+
+.review-list {
+    display: grid;
+
+    gap: 16px;
+}
+
+.review-item {
+    padding: 20px;
+
+    background: #fff;
+
+    border: 1px solid #ececef;
+    border-radius: 10px;
+}
+
+.review-item-title {
+    margin: 0 0 8px;
+
+    font-size: 18px;
+
+    line-height: 1.5;
+}
+
+.review-item-meta {
+    color: #888;
+
+    font-size: 12px;
+}
+
+.review-item-content {
+    margin-top: 14px;
+
+    color: #555;
+
+    white-space: pre-wrap;
+
+    overflow-wrap: anywhere;
 }
 
 
@@ -872,6 +1098,7 @@ a {
 
 .profile-header {
     display: flex;
+
     align-items: center;
 
     gap: 18px;
@@ -882,6 +1109,7 @@ a {
     height: 64px;
 
     display: flex;
+
     align-items: center;
     justify-content: center;
 
@@ -893,11 +1121,14 @@ a {
 
     font-size: 22px;
     font-weight: 700;
+
+    flex-shrink: 0;
 }
 
 .profile-avatar img {
     width: 100%;
     height: 100%;
+
     object-fit: cover;
 }
 
@@ -905,13 +1136,18 @@ a {
     margin: 0;
 
     font-size: 20px;
+
+    overflow-wrap: anywhere;
 }
 
 .profile-bio {
     margin: 5px 0 0;
 
     color: #777;
+
     font-size: 13px;
+
+    white-space: pre-wrap;
 }
 
 
@@ -921,6 +1157,7 @@ a {
 
 .favorite-button {
     display: inline-flex;
+
     align-items: center;
     justify-content: center;
 
@@ -937,21 +1174,29 @@ a {
 
     font-size: 13px;
     font-weight: 600;
+
+    transition:
+        background .2s ease,
+        border-color .2s ease,
+        transform .2s ease;
 }
 
 .favorite-button:hover {
     background: #f4f4f4;
+
+    transform: translateY(-1px);
 }
 
 .favorite-button.active {
     background: #111;
     color: #fff;
+
     border-color: #111;
 }
 
 
 /* =========================================================
-   STATUS
+   WATCH STATUS
 ========================================================= */
 
 .status-select {
@@ -967,6 +1212,12 @@ a {
     border-radius: 7px;
 
     color: #333;
+
+    outline: none;
+}
+
+.status-select:focus {
+    border-color: #555;
 }
 
 
@@ -1012,7 +1263,7 @@ a {
     border-color: #555;
 
     box-shadow:
-        0 0 0 3px rgba(0, 0, 0, 0.05);
+        0 0 0 3px rgba(0,0,0,.05);
 }
 
 .form-group textarea {
@@ -1028,16 +1279,19 @@ a {
 
 .modal {
     position: fixed;
+
     inset: 0;
+
     z-index: 2000;
 
     display: none;
+
     align-items: center;
     justify-content: center;
 
     padding: 20px;
 
-    background: rgba(0, 0, 0, 0.65);
+    background: rgba(0,0,0,.65);
 }
 
 .modal.active {
@@ -1060,16 +1314,22 @@ a {
     border-radius: 14px;
 
     box-shadow:
-        0 25px 70px rgba(0, 0, 0, 0.25);
+        0 25px 70px rgba(0,0,0,.25);
 }
 
 .modal-close {
     position: absolute;
+
     top: 15px;
     right: 15px;
 
     width: 36px;
     height: 36px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
 
     border: none;
     border-radius: 50%;
@@ -1077,6 +1337,7 @@ a {
     background: #f2f2f2;
 
     font-size: 20px;
+
     line-height: 1;
 }
 
@@ -1092,7 +1353,7 @@ a {
 
 
 /* =========================================================
-   LOGIN / SIGNUP
+   AUTH TABS
 ========================================================= */
 
 .auth-tabs {
@@ -1109,7 +1370,9 @@ a {
     padding: 12px;
 
     border: none;
-    border-bottom: 2px solid transparent;
+
+    border-bottom:
+        2px solid transparent;
 
     background: transparent;
 
@@ -1125,12 +1388,19 @@ a {
     border-bottom-color: #111;
 }
 
+
+/* =========================================================
+   AUTH MESSAGE
+========================================================= */
+
 .auth-message {
     margin-top: 15px;
 
     color: #666;
 
     font-size: 13px;
+
+    line-height: 1.7;
 }
 
 
@@ -1144,20 +1414,25 @@ a {
     border-radius: 7px;
 
     font-size: 13px;
+
+    line-height: 1.7;
 }
 
 .alert-error {
     background: #fff0f0;
+
     color: #9b2222;
 }
 
 .alert-success {
     background: #effaf2;
+
     color: #28743c;
 }
 
 .alert-info {
     background: #f1f5f9;
+
     color: #475569;
 }
 
@@ -1173,7 +1448,9 @@ a {
 
     background: #fff;
 
-    border: 1px dashed #d8d8d8;
+    border:
+        1px dashed #d8d8d8;
+
     border-radius: 12px;
 }
 
@@ -1198,6 +1475,7 @@ a {
 
 .loading {
     display: flex;
+
     align-items: center;
     justify-content: center;
 
@@ -1214,14 +1492,18 @@ a {
 
     margin-right: 10px;
 
-    border: 3px solid #ddd;
+    border:
+        3px solid #ddd;
+
     border-top-color: #333;
+
     border-radius: 50%;
 
-    animation: spin 0.8s linear infinite;
+    animation:
+        animecia-spin .8s linear infinite;
 }
 
-@keyframes spin {
+@keyframes animecia-spin {
     to {
         transform: rotate(360deg);
     }
@@ -1234,7 +1516,8 @@ a {
 
 .page-header {
     width: min(1180px, calc(100% - 40px));
-    margin: auto;
+
+    margin: 0 auto;
 
     padding: 70px 0 35px;
 }
@@ -1242,10 +1525,14 @@ a {
 .page-header h1 {
     margin: 0 0 10px;
 
-    font-size: clamp(38px, 5vw, 52px);
+    font-size:
+        clamp(38px, 5vw, 52px);
+
     line-height: 1.15;
 
     letter-spacing: -2px;
+
+    overflow-wrap: anywhere;
 }
 
 .page-header p {
@@ -1258,10 +1545,6 @@ a {
     font-size: 14px;
 }
 
-.page-header p:last-child {
-    color: #777;
-}
-
 
 /* =========================================================
    BREADCRUMB
@@ -1269,17 +1552,23 @@ a {
 
 .breadcrumb {
     width: min(1180px, calc(100% - 40px));
-    margin: auto;
+
+    margin: 0 auto;
 
     padding-top: 25px;
 
     color: #888;
 
     font-size: 12px;
+
+    overflow-x: auto;
+
+    white-space: nowrap;
 }
 
 .breadcrumb a {
     color: #666;
+
     text-decoration: none;
 }
 
@@ -1295,7 +1584,8 @@ a {
 .anime-detail {
     display: grid;
 
-    grid-template-columns: 280px minmax(0, 1fr);
+    grid-template-columns:
+        280px minmax(0, 1fr);
 
     gap: 35px;
 
@@ -1326,11 +1616,18 @@ a {
     object-fit: cover;
 }
 
+.anime-detail-info {
+    min-width: 0;
+}
+
 .anime-detail-info h1 {
     margin: 0 0 10px;
 
     font-size: 32px;
+
     line-height: 1.3;
+
+    overflow-wrap: anywhere;
 }
 
 .anime-detail-description {
@@ -1339,29 +1636,207 @@ a {
     color: #666;
 
     font-size: 15px;
+
+    white-space: pre-wrap;
+
+    overflow-wrap: anywhere;
 }
 
 
 /* =========================================================
-   TAGS
+   DETAIL INFO GRID
 ========================================================= */
 
-.tag-list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 7px;
+.anime-info-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 10px;
+
+    margin-top: 20px;
 }
 
-.tag {
-    padding: 5px 10px;
+.anime-info-item {
+    padding: 12px;
 
-    background: #f1f2f4;
+    background: #f7f7f8;
 
-    border-radius: 5px;
+    border-radius: 8px;
+}
 
-    color: #555;
+.anime-info-label {
+    display: block;
+
+    margin-bottom: 2px;
+
+    color: #888;
 
     font-size: 11px;
+}
+
+.anime-info-value {
+    color: #222;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    overflow-wrap: anywhere;
+}
+
+
+/* =========================================================
+   SCORE
+========================================================= */
+
+.score-box {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    padding: 8px 12px;
+
+    background: #f2f3f5;
+
+    border-radius: 7px;
+}
+
+.score-value {
+    color: #111;
+
+    font-size: 18px;
+    font-weight: 800;
+}
+
+.score-label {
+    color: #888;
+
+    font-size: 11px;
+}
+
+
+/* =========================================================
+   USER RATING
+========================================================= */
+
+.user-rating {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 8px;
+}
+
+.user-rating select {
+    min-height: 40px;
+
+    padding: 8px 10px;
+
+    border:
+        1px solid #ddd;
+
+    border-radius: 7px;
+
+    background: #fff;
+
+    color: #111;
+}
+
+
+/* =========================================================
+   WATCH ACTIONS
+========================================================= */
+
+.anime-actions {
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 10px;
+
+    margin-top: 22px;
+}
+
+.anime-actions > * {
+    min-height: 42px;
+}
+
+
+/* =========================================================
+   RELATED ANIME
+========================================================= */
+
+.related-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, minmax(0, 1fr));
+
+    gap: 16px;
+}
+
+.related-card {
+    overflow: hidden;
+
+    background: #fff;
+
+    border:
+        1px solid #ececef;
+
+    border-radius: 10px;
+
+    text-decoration: none;
+
+    transition:
+        transform .2s ease,
+        box-shadow .2s ease;
+}
+
+.related-card:hover {
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 10px 25px rgba(0,0,0,.07);
+}
+
+.related-card-image {
+    aspect-ratio: 2 / 3;
+
+    overflow: hidden;
+
+    background: #eee;
+}
+
+.related-card-image img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+}
+
+.related-card-content {
+    padding: 12px;
+}
+
+.related-card-title {
+    margin: 0;
+
+    font-size: 14px;
+
+    line-height: 1.5;
+
+    overflow-wrap: anywhere;
+}
+
+.related-card-type {
+    margin-top: 4px;
+
+    color: #888;
+
+    font-size: 10px;
 }
 
 
@@ -1371,6 +1846,7 @@ a {
 
 .ad-section {
     width: min(1180px, calc(100% - 40px));
+
     margin: 50px auto 0;
 }
 
@@ -1378,6 +1854,7 @@ a {
     min-height: 120px;
 
     display: flex;
+
     align-items: center;
     justify-content: center;
 
@@ -1391,6 +1868,197 @@ a {
     color: #999;
 
     font-size: 12px;
+
+    overflow: hidden;
+}
+
+
+/* =========================================================
+   AD CARD WITH IMAGE
+========================================================= */
+
+.ad-card a {
+    display: block;
+
+    width: 100%;
+
+    text-decoration: none;
+}
+
+.ad-card img {
+    width: 100%;
+
+    max-height: 320px;
+
+    margin: 0 auto;
+
+    object-fit: contain;
+
+    border-radius: 7px;
+}
+
+
+/* =========================================================
+   PAGINATION
+========================================================= */
+
+.pagination {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    flex-wrap: wrap;
+
+    gap: 8px;
+
+    margin-top: 35px;
+}
+
+.pagination a,
+.pagination button {
+    min-width: 40px;
+    min-height: 40px;
+
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 8px 12px;
+
+    border:
+        1px solid #ddd;
+
+    border-radius: 7px;
+
+    background: #fff;
+
+    color: #333;
+
+    text-decoration: none;
+
+    font-size: 13px;
+}
+
+.pagination a:hover,
+.pagination button:hover {
+    background: #f3f3f3;
+}
+
+.pagination .active {
+    background: #111;
+
+    border-color: #111;
+
+    color: #fff;
+}
+
+
+/* =========================================================
+   STAT CARDS
+========================================================= */
+
+.stats-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, minmax(0, 1fr));
+
+    gap: 14px;
+}
+
+.stat-card {
+    padding: 22px;
+
+    background: #fff;
+
+    border:
+        1px solid #ececef;
+
+    border-radius: 10px;
+}
+
+.stat-label {
+    display: block;
+
+    color: #888;
+
+    font-size: 11px;
+}
+
+.stat-value {
+    display: block;
+
+    margin-top: 3px;
+
+    color: #111;
+
+    font-size: 28px;
+    font-weight: 800;
+}
+
+
+/* =========================================================
+   LIST TOOLBAR
+========================================================= */
+
+.list-toolbar {
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 15px;
+
+    margin-bottom: 20px;
+}
+
+.list-count {
+    color: #777;
+
+    font-size: 13px;
+}
+
+
+/* =========================================================
+   SKELETON
+========================================================= */
+
+.skeleton {
+    position: relative;
+
+    overflow: hidden;
+
+    background: #e9eaec;
+
+    border-radius: 8px;
+}
+
+.skeleton::after {
+    content: "";
+
+    position: absolute;
+    inset: 0;
+
+    transform: translateX(-100%);
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(255,255,255,.55),
+            transparent
+        );
+
+    animation:
+        animecia-skeleton 1.4s infinite;
+}
+
+@keyframes animecia-skeleton {
+    to {
+        transform: translateX(100%);
+    }
 }
 
 
@@ -1402,12 +2070,14 @@ footer {
     margin-top: 90px;
 
     background: #111;
+
     color: #fff;
 }
 
 .footer-inner {
     width: min(1180px, calc(100% - 40px));
-    margin: auto;
+
+    margin: 0 auto;
 
     padding: 60px 0;
 }
@@ -1430,7 +2100,10 @@ footer {
 
 .footer-links {
     display: flex;
+
     flex-wrap: wrap;
+
+    align-items: center;
 
     gap: 20px;
 
@@ -1449,16 +2122,62 @@ footer {
     color: #fff;
 }
 
+.footer-links span {
+    color: #555;
+
+    font-size: 12px;
+}
+
 .copyright {
     margin-top: 35px !important;
 
     font-size: 11px !important;
+
     color: #777 !important;
 }
 
 
 /* =========================================================
    MOBILE / TABLET
+========================================================= */
+
+@media (max-width: 1000px) {
+
+    .anime-grid {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+
+    .genre-grid {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+
+    .filter-area {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+
+    .anime-detail {
+        grid-template-columns:
+            220px minmax(0, 1fr);
+    }
+
+    .related-grid {
+        grid-template-columns:
+            repeat(3, minmax(0, 1fr));
+    }
+
+    .stats-grid {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+
+}
+
+
+/* =========================================================
+   TABLET
 ========================================================= */
 
 @media (max-width: 900px) {
@@ -1483,26 +2202,10 @@ footer {
         gap: 20px;
     }
 
-    .anime-grid {
-        grid-template-columns:
-            repeat(2, minmax(0, 1fr));
+    .navigation a {
+        white-space: nowrap;
     }
 
-    .genre-grid {
-        grid-template-columns:
-            repeat(2, minmax(0, 1fr));
-    }
-
-    .filter-area {
-        grid-template-columns:
-            repeat(2, minmax(0, 1fr));
-    }
-
-    .anime-detail {
-        grid-template-columns: 210px minmax(0, 1fr);
-
-        padding: 25px;
-    }
 }
 
 
@@ -1520,28 +2223,43 @@ footer {
     .breadcrumb,
     .ad-section,
     .footer-inner {
-        width: min(100% - 30px, 1180px);
+        width:
+            min(
+                calc(100% - 30px),
+                1180px
+            );
     }
+
 
     .site-header {
         position: relative;
     }
 
+
     .header-inner {
         gap: 14px;
     }
+
 
     .logo {
         font-size: 20px;
     }
 
+
     .user-area {
         margin-left: auto;
     }
 
+
+    .user-name {
+        display: none;
+    }
+
+
     .hero-content {
         padding: 75px 0 85px;
     }
+
 
     .hero h1 {
         font-size: 42px;
@@ -1549,13 +2267,16 @@ footer {
         letter-spacing: -2px;
     }
 
+
     .hero-description {
         font-size: 14px;
     }
 
+
     .section {
         padding-top: 60px;
     }
+
 
     .section-heading {
         align-items: flex-start;
@@ -1567,43 +2288,53 @@ footer {
         margin-bottom: 22px;
     }
 
+
     .section h2 {
         font-size: 25px;
     }
+
 
     .anime-grid {
         grid-template-columns: 1fr;
     }
 
+
     .genre-grid {
         grid-template-columns: 1fr;
     }
+
 
     .review-grid {
         grid-template-columns: 1fr;
     }
 
+
     .filter-area {
         grid-template-columns: 1fr;
     }
+
 
     .search-box {
         flex-direction: column;
     }
 
+
     .search-button {
         min-height: 44px;
     }
 
+
     .ranking-item {
         padding: 18px;
     }
+
 
     .ranking-number {
         width: 45px;
 
         font-size: 24px;
     }
+
 
     .ranking-image {
         width: 45px;
@@ -1612,13 +2343,16 @@ footer {
         margin-right: 12px;
     }
 
+
     .ranking-item h3 {
         font-size: 15px;
     }
 
+
     .ranking-score {
         display: none;
     }
+
 
     .anime-detail {
         grid-template-columns: 1fr;
@@ -1626,29 +2360,53 @@ footer {
         padding: 20px;
     }
 
+
     .anime-detail-cover {
         max-width: 230px;
 
         margin: 0 auto;
     }
 
+
     .anime-detail-info h1 {
         font-size: 26px;
     }
+
+
+    .anime-info-grid {
+        grid-template-columns: 1fr;
+    }
+
+
+    .related-grid {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+
 
     .profile-header {
         align-items: flex-start;
     }
 
+
+    .stats-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+
+
     .modal-content {
         padding: 25px 20px;
     }
 
+
     .footer-links {
         flex-direction: column;
 
+        align-items: flex-start;
+
         gap: 10px;
     }
+
 }
 
 
@@ -1662,21 +2420,26 @@ footer {
         font-size: 36px;
     }
 
+
     .hero-content {
         padding: 60px 0 70px;
     }
+
 
     .anime-card-content {
         padding: 18px;
     }
 
+
     .page-header {
         padding-top: 50px;
     }
 
+
     .page-header h1 {
         font-size: 35px;
     }
+
 
     .login-button,
     .logout-button {
@@ -1684,20 +2447,22 @@ footer {
 
         font-size: 12px;
     }
+
+
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+
 }
 
 
 /* =========================================================
-   ACCESSIBILITY
+   SELECTION
 ========================================================= */
-
-:focus-visible {
-    outline: 3px solid rgba(0, 0, 0, 0.25);
-    outline-offset: 2px;
-}
 
 ::selection {
     background: #111;
+
     color: #fff;
 }
 
@@ -1715,8 +2480,14 @@ footer {
     *,
     *::before,
     *::after {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
+        animation-duration:
+            .01ms !important;
+
+        animation-iteration-count:
+            1 !important;
+
+        transition-duration:
+            .01ms !important;
     }
+
 }
