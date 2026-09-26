@@ -19,7 +19,6 @@ runs-on: ubuntu-latest
 
 ```
 steps:
-
   - name: Checkout
     uses: actions/checkout@v4
 
@@ -28,7 +27,6 @@ steps:
       SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
       SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
     run: |
-
       python3 <<'PY'
       import os
       import json
@@ -36,16 +34,29 @@ steps:
       import urllib.parse
       import xml.etree.ElementTree as ET
 
-      SUPABASE_URL = os.environ.get("SUPABASE_URL", "").rstrip("/")
-      SUPABASE_KEY = os.environ.get("SUPABASE_KEY", "")
+      SUPABASE_URL = os.environ.get(
+          "SUPABASE_URL",
+          ""
+      ).rstrip("/")
+
+      SUPABASE_KEY = os.environ.get(
+          "SUPABASE_KEY",
+          ""
+      )
 
       if not SUPABASE_URL:
-          raise RuntimeError("SUPABASE_URL is not configured.")
+          raise RuntimeError(
+              "SUPABASE_URL is not configured."
+          )
 
       if not SUPABASE_KEY:
-          raise RuntimeError("SUPABASE_KEY is not configured.")
+          raise RuntimeError(
+              "SUPABASE_KEY is not configured."
+          )
 
-      BASE_URL = "https://media-mania.github.io/Animecia"
+      BASE_URL = (
+          "https://media-mania.github.io/Animecia"
+      )
 
       headers = {
           "apikey": SUPABASE_KEY,
@@ -53,7 +64,7 @@ steps:
           "Accept": "application/json"
       }
 
-      url = (
+      api_url = (
           SUPABASE_URL
           + "/rest/v1/anime"
           + "?select=id"
@@ -61,7 +72,7 @@ steps:
       )
 
       request = urllib.request.Request(
-          url,
+          api_url,
           headers=headers
       )
 
@@ -69,6 +80,7 @@ steps:
           request,
           timeout=30
       ) as response:
+
           data = json.load(response)
 
       if not isinstance(data, list):
@@ -76,20 +88,13 @@ steps:
               "Unexpected response from Supabase."
           )
 
-      urls = []
-
-      # トップページ
-      urls.append(
-          f"{BASE_URL}/"
-      )
-
-      # アニメ一覧
-      urls.append(
+      urls = [
+          f"{BASE_URL}/",
           f"{BASE_URL}/anime.html"
-      )
+      ]
 
-      # アニメ詳細ページ
       for anime in data:
+
           anime_id = anime.get("id")
 
           if anime_id is None:
@@ -105,10 +110,10 @@ steps:
 
           urls.append(detail_url)
 
-      # 重複URLを削除
-      urls = list(dict.fromkeys(urls))
+      urls = list(
+          dict.fromkeys(urls)
+      )
 
-      # sitemap.xml
       urlset = ET.Element(
           "urlset",
           {
@@ -152,7 +157,6 @@ steps:
 
   - name: Commit sitemap
     run: |
-
       git config user.name "github-actions[bot]"
       git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
