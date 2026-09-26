@@ -2,9 +2,6 @@ name: Generate Sitemap
 
 on:
   workflow_dispatch:
-  schedule:
-    # 毎日夜中に自動更新したい場合は以下を有効化（例: 毎日午前0時 UTC）
-    # - cron: '0 0 * * *'
   push:
     branches:
       - main
@@ -66,7 +63,6 @@ jobs:
               if anime_id is not None:
                   urls.append(f"{base_url}/anime-detail.html?id={anime_id}")
 
-          # 重複を除去
           urls = list(dict.fromkeys(urls))
 
           urlset = ET.Element(
@@ -81,7 +77,6 @@ jobs:
 
           tree = ET.ElementTree(urlset)
 
-          # ElementTreeのindent処理 (Python 3.9+)
           ET.indent(tree, space="  ")
 
           tree.write(
@@ -101,7 +96,7 @@ jobs:
           git add sitemap.xml
 
           if git diff --cached --quiet; then
-            echo "No changes detected in sitemap.xml"
+            echo "No changes"
           else
             git commit -m "chore: update sitemap.xml [skip ci]"
             git push origin HEAD:main
