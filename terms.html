@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="ja">
 
@@ -5,151 +6,268 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>利用規約 | Just An Anime Review</title>
+<title>利用規約 | Animecia</title>
 
-<meta name="description" content="Just An Anime Reviewの利用規約です。">
+<meta
+    name="description"
+    content="Animeciaの利用規約です。"
+/>
 
 <style>
 
 * {
-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
 }
 
 body {
-margin: 0;
-font-family:
--apple-system,
-BlinkMacSystemFont,
-"Segoe UI",
-"Hiragino Kaku Gothic ProN",
-"Yu Gothic",
-Meiryo,
-sans-serif;
+    margin: 0;
 
-background: #f7f7f7;
-color: #222;
-line-height: 1.8;
+    font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        "Hiragino Kaku Gothic ProN",
+        "Yu Gothic",
+        Meiryo,
+        sans-serif;
+
+    background: #f5f6f8;
+    color: #171717;
+
+    line-height: 1.8;
+}
+
+a {
+    color: inherit;
 }
 
 header {
-background: #111;
-color: white;
+    background: #111;
+    color: #fff;
+
+    border-bottom: 1px solid rgba(255,255,255,.08);
 }
 
 .header-inner {
-max-width: 900px;
-margin: auto;
-padding: 20px;
+    width: min(1180px, calc(100% - 40px));
+
+    min-height: 72px;
+
+    margin: auto;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
 .logo {
-color: white;
-text-decoration: none;
-font-size: 21px;
-font-weight: bold;
+    color: #fff;
+
+    text-decoration: none;
+
+    font-size: 22px;
+    font-weight: 800;
+
+    letter-spacing: -0.8px;
 }
 
 .logo:hover {
-opacity: .85;
+    opacity: .8;
 }
 
 main {
-max-width: 900px;
-margin: auto;
-padding: 45px 20px;
+    width: min(900px, calc(100% - 40px));
+
+    margin: auto;
+
+    padding: 55px 0 80px;
 }
 
 .policy-box {
-background: white;
-padding: 40px;
-border-radius: 12px;
-box-shadow:
-0 3px 15px rgba(0,0,0,.08);
+    background: #fff;
+
+    padding: 45px;
+
+    border: 1px solid #ececef;
+    border-radius: 14px;
+
+    box-shadow:
+        0 5px 25px rgba(0,0,0,.05);
 }
 
 h1 {
-font-size: 36px;
-line-height: 1.4;
-margin-top: 0;
-margin-bottom: 10px;
+    margin: 0 0 10px;
+
+    font-size: 38px;
+    line-height: 1.35;
+
+    letter-spacing: -1px;
 }
 
 .updated {
-color: #888;
-font-size: 13px;
-margin-bottom: 40px;
+    margin: 0 0 45px;
+
+    color: #888;
+
+    font-size: 13px;
 }
 
 h2 {
-font-size: 22px;
-margin-top: 38px;
-padding-bottom: 8px;
-border-bottom: 2px solid #eee;
+    margin: 42px 0 15px;
+
+    padding-bottom: 8px;
+
+    border-bottom: 2px solid #eee;
+
+    font-size: 21px;
+    line-height: 1.5;
 }
 
 p {
-color: #444;
+    color: #444;
+
+    font-size: 14px;
 }
 
 ul {
-color: #444;
-padding-left: 25px;
+    margin: 15px 0;
+
+    padding-left: 25px;
+
+    color: #444;
+
+    font-size: 14px;
+}
+
+li {
+    margin-bottom: 7px;
 }
 
 .back {
-display: inline-block;
-margin-top: 35px;
-color: #666;
-text-decoration: none;
+    display: inline-flex;
+
+    margin-top: 35px;
+
+    color: #555;
+
+    text-decoration: none;
+
+    font-size: 14px;
+    font-weight: 600;
 }
 
 .back:hover {
-text-decoration: underline;
+    text-decoration: underline;
 }
 
 footer {
-margin-top: 70px;
-background: #111;
-color: white;
-padding: 35px 20px;
+    background: #111;
+
+    color: #fff;
 }
 
 .footer-inner {
-max-width: 900px;
-margin: auto;
+    width: min(900px, calc(100% - 40px));
+
+    margin: auto;
+
+    padding: 55px 0;
 }
 
-.footer-inner p {
-color: #bbb;
-font-size: 13px;
+.footer-brand {
+    margin: 0 0 10px;
+
+    color: #fff;
+
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.footer-description {
+    margin: 0;
+
+    color: #aaa;
+
+    font-size: 13px;
+}
+
+.footer-links {
+    display: flex;
+    flex-wrap: wrap;
+
+    gap: 10px;
+
+    margin-top: 22px;
 }
 
 .footer-links a {
-color: #bbb;
-text-decoration: none;
+    color: #aaa;
+
+    text-decoration: none;
+
+    font-size: 12px;
 }
 
 .footer-links a:hover {
-color: white;
+    color: #fff;
+}
+
+.copyright {
+    margin-top: 30px;
+
+    color: #777;
+
+    font-size: 11px;
 }
 
 @media (max-width: 600px) {
 
-main {
-padding: 30px 15px;
-}
+    .header-inner {
+        width: calc(100% - 30px);
 
-.policy-box {
-padding: 25px 20px;
-}
+        min-height: 64px;
+    }
 
-h1 {
-font-size: 30px;
-}
+    .logo {
+        font-size: 20px;
+    }
 
-h2 {
-font-size: 20px;
-}
+    main {
+        width: calc(100% - 30px);
+
+        padding: 30px 0 60px;
+    }
+
+    .policy-box {
+        padding: 28px 20px;
+
+        border-radius: 10px;
+    }
+
+    h1 {
+        font-size: 30px;
+    }
+
+    h2 {
+        margin-top: 35px;
+
+        font-size: 19px;
+    }
+
+    p,
+    ul {
+        font-size: 13px;
+    }
+
+    .footer-inner {
+        width: calc(100% - 30px);
+
+        padding: 45px 0;
+    }
 
 }
 
@@ -163,12 +281,13 @@ font-size: 20px;
 <div class="header-inner">
 
 <a href="index.html" class="logo">
-Just An Anime Review
+Animecia
 </a>
 
 </div>
 
 </header>
+
 
 <main>
 
@@ -179,39 +298,59 @@ Just An Anime Review
 </h1>
 
 <p class="updated">
-最終更新日：2026年8月14日
+最終更新日：2026年9月26日
 </p>
+
 
 <h2>
 第1条（適用）
 </h2>
 
 <p>
-本利用規約（以下「本規約」といいます。）は、Just An Anime Review（以下「当サイト」といいます。）が提供するサービスの利用条件を定めるものです。
+本利用規約（以下「本規約」といいます。）は、Animecia（以下「当サイト」といいます。）が提供するサービスの利用条件を定めるものです。
 </p>
 
 <p>
 利用者は、当サイトを利用することによって、本規約に同意したものとみなされます。
 </p>
 
+
 <h2>
 第2条（当サイトのサービス）
 </h2>
 
 <p>
-当サイトでは、アニメ作品に関する情報、あらすじ、レビュー等を提供しています。
+当サイトでは、アニメ作品に関する情報、あらすじ、評価、レビュー、ランキング、関連作品その他の情報を提供しています。
 </p>
 
 <p>
-また、一部のページでは、利用者が作品に対して「いいね」を行ったり、コメントを投稿したりする機能を提供しています。
+また、利用者は、アカウントを作成することで、お気に入り作品の登録、視聴状況の管理、作品への評価、レビューの投稿その他のユーザー向け機能を利用できる場合があります。
 </p>
 
+
 <h2>
-第3条（コメントの投稿）
+第3条（アカウント）
 </h2>
 
 <p>
-利用者は、コメントを投稿する際、以下の事項を遵守するものとします。
+利用者は、アカウントを作成する場合、正確かつ適切な情報を登録するものとします。
+</p>
+
+<p>
+利用者は、自らのアカウントを適切に管理する責任を負うものとします。
+</p>
+
+<p>
+アカウントの不正利用または不正アクセスが疑われる場合、利用者は速やかに当サイトの管理者へ連絡するものとします。
+</p>
+
+
+<h2>
+第4条（レビュー等の投稿）
+</h2>
+
+<p>
+利用者は、レビュー、コメントその他のコンテンツを投稿する際、以下の事項を遵守するものとします。
 </p>
 
 <ul>
@@ -219,23 +358,27 @@ Just An Anime Review
 <li>他者の個人情報を無断で投稿しないこと</li>
 <li>差別的、脅迫的、暴力的な内容を投稿しないこと</li>
 <li>法令または公序良俗に反する内容を投稿しないこと</li>
+<li>第三者の著作権その他の権利を侵害する内容を投稿しないこと</li>
+<li>虚偽または他者を誤認させることを目的とする内容を投稿しないこと</li>
 <li>その他、当サイトの運営に支障をきたす内容を投稿しないこと</li>
 </ul>
 
+
 <h2>
-第4条（コメントの削除）
+第5条（投稿内容の削除）
 </h2>
 
 <p>
-当サイトの管理者は、投稿されたコメントが本規約に違反している、または当サイトの運営上不適切であると判断した場合、投稿者への事前の通知なくコメントを削除することがあります。
+当サイトの管理者は、投稿されたレビュー、コメントその他のコンテンツが本規約に違反している、または当サイトの運営上不適切であると判断した場合、投稿者への事前の通知なく当該コンテンツを削除または非公開とすることがあります。
 </p>
 
 <p>
-また、当サイトの管理者が必要と判断した場合には、コメント機能の利用を制限することがあります。
+また、当サイトの管理者が必要と判断した場合には、レビュー、コメントその他のユーザー機能の利用を制限することがあります。
 </p>
 
+
 <h2>
-第5条（禁止事項）
+第6条（禁止事項）
 </h2>
 
 <p>
@@ -248,12 +391,14 @@ Just An Anime Review
 <li>当サイトの運営を妨害する行為</li>
 <li>他者になりすます行為</li>
 <li>他者の権利または利益を侵害する行為</li>
+<li>他者のアカウントを不正に利用する行為</li>
 <li>本規約に違反する行為</li>
 <li>その他、当サイトの管理者が不適切と判断する行為</li>
 </ul>
 
+
 <h2>
-第6条（著作権等）
+第7条（著作権等）
 </h2>
 
 <p>
@@ -261,35 +406,43 @@ Just An Anime Review
 </p>
 
 <p>
-利用者は、権利者の許可なくこれらのコンテンツを無断で転載、複製、改変、配布等してはいけません。
+利用者は、権利者の許可なく、これらのコンテンツを無断で転載、複製、改変、配布等してはいけません。
 </p>
 
+
 <h2>
-第7条（掲載情報について）
+第8条（掲載情報について）
 </h2>
 
 <p>
 当サイトでは、アニメ作品に関する情報を掲載していますが、その内容について完全な正確性、完全性または最新性を保証するものではありません。
 </p>
 
+<p>
+放送日時、配信状況、作品情報その他の情報については、変更される場合があります。
+</p>
+
+
 <h2>
-第8条（サービスの変更・停止）
+第9条（サービスの変更・停止）
 </h2>
 
 <p>
 当サイトは、必要に応じて、事前に通知することなくサービスの内容を変更、停止または終了することがあります。
 </p>
 
+
 <h2>
-第9条（免責事項）
+第10条（免責事項）
 </h2>
 
 <p>
-当サイトの利用または掲載されている情報によって利用者に生じた損害について、当サイトの管理者は、法令上責任を負う必要がある場合を除き、責任を負わないものとします。
+当サイトの利用または当サイトに掲載されている情報によって利用者に生じた損害について、当サイトの管理者は、法令上責任を負う必要がある場合を除き、責任を負わないものとします。
 </p>
 
+
 <h2>
-第10条（規約の変更）
+第11条（規約の変更）
 </h2>
 
 <p>
@@ -300,13 +453,15 @@ Just An Anime Review
 変更後の本規約は、当サイト上に掲載した時点から適用されるものとします。
 </p>
 
+
 <h2>
-第11条（準拠法）
+第12条（準拠法）
 </h2>
 
 <p>
 本規約は、日本法に準拠して解釈されるものとします。
 </p>
+
 
 <a href="index.html" class="back">
 ← ホームへ戻る
@@ -316,22 +471,35 @@ Just An Anime Review
 
 </main>
 
+
 <footer>
 
 <div class="footer-inner">
 
-<p>
-Just An Anime Review
+<p class="footer-brand">
+Animecia
 </p>
 
-<p class="footer-links">
-<a href="terms.html">利用規約</a>
-｜
-<a href="privacy.html">プライバシーポリシー</a>
+<p class="footer-description">
+アニメをもっと探しやすく、もっと楽しめる。
 </p>
 
-<p>
-© 2026 Just An Anime Review
+<div class="footer-links">
+
+<a href="terms.html">
+利用規約
+</a>
+
+<span>｜</span>
+
+<a href="privacy.html">
+プライバシーポリシー
+</a>
+
+</div>
+
+<p class="copyright">
+© 2026 Animecia
 </p>
 
 </div>
@@ -340,3 +508,4 @@ Just An Anime Review
 
 </body>
 </html>
+```
