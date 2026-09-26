@@ -1,12 +1,10 @@
 name: Generate Sitemap
 
 on:
+workflow_dispatch:
 push:
 branches:
 - main
-schedule:
-- cron: "0 * * * *"
-workflow_dispatch:
 
 permissions:
 contents: write
@@ -25,101 +23,60 @@ steps:
       SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
       SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
     run: |
-      python3 <<'PY'
+      python3 - <<'PY'
       import os
       import json
       import urllib.request
-      import urllib.parse
       import xml.etree.ElementTree as ET
 
-      supabase_url = os.environ.get("SUPABASE_URL", "").rstrip("/")
-      supabase_key = os.environ.get("SUPABASE_KEY", "")
-
-      if not supabase_url:
-          raise RuntimeError("SUPABASE_URL is not configured.")
-
-      if not supabase_key:
-          raise RuntimeError("SUPABASE_KEY is not configured.")
+      supabase_url = os.environ["SUPABASE_URL"].rstrip("/")
+      supabase_key = os.environ["SUPABASE_KEY"]
 
       base_url = "https://media-mania.github.io/Animecia"
 
-      headers = {
-          "apikey": supabase_key,
-          "Authorization": f"Bearer {supabase_key}",
-          "Accept": "application/json"
-      }
-
-      api_url = (
-          f"{supabase_url}/rest/v1/anime"
-          "?select=id&order=id.asc"
-      )
+      url = supabase_url + "/rest/v1/anime?select=id&order=id.asc"
 
       request = urllib.request.Request(
-          api_url,
-          headers=headers
+          url,
+          headers={
+              "apikey": supabase_key,
+              "Authorization": "Bearer " + supabase_key
+          }
       )
 
-      with urllib.request.urlopen(
-          request,
-          timeout=30
-      ) as response:
-          data = json.load(response)
-
-      if not isinstance(data, list):
-          raise RuntimeError(
-              "Unexpected response from Supabase."
-          )
+      with urllib.request.urlopen(request) as response:
+          anime_list = json.load(response)
 
       urls = [
-          f"{base_url}/",
-          f"{base_url}/anime.html"
+          base_url + "/",
+          base_url + "/anime.html"
       ]
 
-      for anime in data:
+      for anime in anime_list:
           anime_id = anime.get("id")
 
-          if anime_id is None:
-              continue
-
-          detail_url = (
-              f"{base_url}/anime-detail.html?id="
-              + urllib.parse.quote(
-                  str(anime_id),
-                  safe=""
+          if anime_id is not None:
+              urls.append(
+                  base_url
+                  + "/anime-detail.html?id="
+                  + str(anime_id)
               )
-          )
-
-          urls.append(detail_url)
-
-      urls = list(dict.fromkeys(urls))
 
       urlset = ET.Element(
           "urlset",
           {
-              "xmlns":
-              "http://www.sitemaps.org/schemas/sitemap/0.9"
+              "xmlns": "http://www.sitemaps.org/schemas/sitemap/0.9"
           }
       )
 
       for page_url in urls:
-          url_element = ET.SubElement(
-              urlset,
-              "url"
-          )
-
-          loc = ET.SubElement(
-              url_element,
-              "loc"
-          )
-
+          item = ET.SubElement(urlset, "url")
+          loc = ET.SubElement(item, "loc")
           loc.text = page_url
 
       tree = ET.ElementTree(urlset)
 
-      ET.indent(
-          tree,
-          space="  "
-      )
+      ET.indent(tree, space="  ")
 
       tree.write(
           "sitemap.xml",
@@ -127,9 +84,7 @@ steps:
           xml_declaration=True
       )
 
-      print(
-          f"Sitemap generated: {len(urls)} URLs"
-      )
+      print("Sitemap generated:", len(urls), "URLs")
       PY
 
   - name: Commit sitemap
@@ -140,10 +95,8 @@ steps:
       git add sitemap.xml
 
       if git diff --cached --quiet; then
-        echo "No changes to sitemap.xml"
-        exit 0
+        echo "No changes"
+      else
+        git commit -m "Update sitemap"
+        git push
       fi
-
-      git commit -m "Update sitemap"
-      git push
-```
