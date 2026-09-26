@@ -1,87 +1,46 @@
 <!DOCTYPE html>
 <html lang="ja">
-
 <head>
-
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 
-<meta
-name="viewport"
-content="width=device-width, initial-scale=1.0">
+<title>Animecia｜アニメ情報・レビュー・作品データベース</title>
 
-<title>
-Just An Anime Review｜アニメレビュー・作品紹介
-</title>
+<meta name="description"
+content="Animeciaは、アニメ作品の情報・レビュー・お気に入り・視聴管理をまとめて利用できるアニメ情報サービスです。">
 
-<meta
-name="description"
-content="Just An Anime Reviewは、アニメ作品のあらすじ・作品情報・レビューを紹介するアニメレビューサイトです。">
+<meta name="robots" content="index,follow">
 
-<meta
-name="robots"
-content="index, follow">
+<link rel="canonical"
+href="https://media-mania.github.io/Animecia/">
 
-<meta
-name="googlebot"
-content="index, follow">
-
-<link
-rel="canonical"
-href="https://just-an-anime-review.github.io/">
-
-<meta
-property="og:type"
-content="website">
-
-<meta
-property="og:title"
-content="Just An Anime Review｜アニメレビュー・作品紹介">
-
-<meta
-property="og:description"
+<meta property="og:type" content="website">
+<meta property="og:title"
+content="Animecia｜アニメ情報・レビュー・作品データベース">
+<meta property="og:description"
 content="アニメをもっと深く、もっと面白く。">
+<meta property="og:url"
+content="https://media-mania.github.io/Animecia/">
+<meta property="og:site_name" content="Animecia">
 
-<meta
-property="og:url"
-content="https://just-an-anime-review.github.io/">
+<meta name="twitter:card" content="summary">
 
-<meta
-property="og:site_name"
-content="Just An Anime Review">
-
-<meta
-name="twitter:card"
-content="summary">
-
-<meta
-name="twitter:title"
-content="Just An Anime Review｜アニメレビュー・作品紹介">
-
-<meta
-name="twitter:description"
-content="アニメ作品のあらすじ・作品情報・レビューを紹介しています。">
-
-
-<script
-src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2">
-</script>
-
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script type="application/ld+json">
 {
-  "@context": "https://schema.org",
-  "@type": "WebSite",
-  "name": "Just An Anime Review",
-  "url": "https://just-an-anime-review.github.io/",
-  "description": "アニメ作品のあらすじ・作品情報・レビューを紹介するアニメレビューサイトです。",
-  "potentialAction": {
-    "@type": "SearchAction",
-    "target": "https://just-an-anime-review.github.io/anime.html?search={search_term_string}",
-    "query-input": "required name=search_term_string"
+  "@context":"https://schema.org",
+  "@type":"WebSite",
+  "name":"Animecia",
+  "url":"https://media-mania.github.io/Animecia/",
+  "description":"アニメ作品の情報・レビュー・お気に入り・視聴管理をまとめて利用できるアニメ情報サービスです。",
+  "potentialAction":{
+    "@type":"SearchAction",
+    "target":"https://media-mania.github.io/Animecia/anime.html?search={search_term_string}",
+    "query-input":"required name=search_term_string"
   }
 }
 </script>
-
 
 <style>
 
@@ -90,34 +49,30 @@ src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2">
 ========================================================= */
 
 * {
-box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 html {
-scroll-behavior: smooth;
+  scroll-behavior: smooth;
 }
 
 body {
-margin: 0;
-
-font-family:
--apple-system,
-BlinkMacSystemFont,
-"Segoe UI",
-"Hiragino Kaku Gothic ProN",
-"Yu Gothic",
-Meiryo,
-sans-serif;
-
-background: #f5f6f8;
-
-color: #171717;
-
-line-height: 1.7;
+  margin: 0;
+  font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    "Hiragino Kaku Gothic ProN",
+    "Yu Gothic",
+    Meiryo,
+    sans-serif;
+  background: #f5f6f8;
+  color: #171717;
+  line-height: 1.7;
 }
 
 a {
-color: inherit;
+  color: inherit;
 }
 
 
@@ -126,55 +81,73 @@ color: inherit;
 ========================================================= */
 
 header {
-background: #111;
-
-color: white;
+  background: #111;
+  color: white;
 }
 
 .header-inner {
-max-width: 1100px;
+  max-width: 1100px;
+  margin: auto;
+  padding: 16px 20px;
 
-margin: auto;
-
-padding: 18px 20px;
-
-display: flex;
-
-align-items: center;
-
-justify-content: space-between;
-
-gap: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
 }
 
 .logo {
-color: white;
-
-text-decoration: none;
-
-font-weight: bold;
-
-font-size: 17px;
+  color: white;
+  text-decoration: none;
+  font-weight: 800;
+  font-size: 18px;
 }
 
 nav {
-display: flex;
-
-gap: 18px;
-
-align-items: center;
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  flex-wrap: wrap;
 }
 
 nav a {
-color: #ddd;
-
-text-decoration: none;
-
-font-size: 14px;
+  color: #ddd;
+  text-decoration: none;
+  font-size: 14px;
 }
 
 nav a:hover {
-color: white;
+  color: white;
+}
+
+
+/* =========================================================
+   認証ボタン
+========================================================= */
+
+.auth-button {
+  border: 1px solid #555;
+  background: #222;
+  color: white;
+  border-radius: 7px;
+  padding: 7px 12px;
+  font: inherit;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.auth-button:hover {
+  background: #333;
+}
+
+.user-menu {
+  font-size: 13px;
+  color: #ddd;
+  display: none;
+}
+
+.user-menu.is-open {
+  display: inline;
 }
 
 
@@ -183,11 +156,9 @@ color: white;
 ========================================================= */
 
 main {
-max-width: 1100px;
-
-margin: auto;
-
-padding: 35px 20px 60px;
+  max-width: 1100px;
+  margin: auto;
+  padding: 35px 20px 60px;
 }
 
 
@@ -196,32 +167,73 @@ padding: 35px 20px 60px;
 ========================================================= */
 
 .hero {
-background: white;
+  background: white;
+  border-radius: 14px;
+  padding: 35px;
 
-border-radius: 14px;
+  box-shadow:
+    0 3px 15px rgba(0,0,0,.06);
 
-padding: 35px;
-
-box-shadow:
-0 3px 15px rgba(0,0,0,.06);
-
-margin-bottom: 30px;
+  margin-bottom: 30px;
 }
 
 .hero h1 {
-margin: 0 0 12px;
-
-font-size: 30px;
-
-line-height: 1.4;
+  margin: 0 0 12px;
+  font-size: 30px;
+  line-height: 1.4;
 }
 
 .hero p {
-margin: 0;
+  margin: 0;
+  color: #666;
+  font-size: 14px;
+}
 
-color: #666;
 
-font-size: 14px;
+/* =========================================================
+   プロフィール
+========================================================= */
+
+.profile-box {
+  display: none;
+
+  margin-top: 20px;
+
+  background: white;
+
+  border-radius: 12px;
+
+  padding: 20px;
+
+  box-shadow:
+    0 3px 12px rgba(0,0,0,.05);
+}
+
+.profile-box.is-open {
+  display: block;
+}
+
+.profile-box strong {
+  display: block;
+  font-size: 17px;
+}
+
+.profile-box small {
+  color: #777;
+}
+
+.logout-button {
+  margin-top: 12px;
+
+  border: 1px solid #ccc;
+
+  background: white;
+
+  border-radius: 7px;
+
+  padding: 8px 14px;
+
+  cursor: pointer;
 }
 
 
@@ -230,169 +242,132 @@ font-size: 14px;
 ========================================================= */
 
 .recommendation-section {
-margin-top: 40px;
+  margin-top: 40px;
 }
 
 .recommendation-header {
-display: flex;
+  display: flex;
 
-align-items: center;
+  align-items: center;
 
-justify-content: space-between;
+  justify-content: space-between;
 
-gap: 15px;
+  gap: 15px;
 
-margin-bottom: 15px;
+  margin-bottom: 15px;
 }
 
 .recommendation-header h2 {
-margin: 0;
-
-font-size: 22px;
+  margin: 0;
+  font-size: 22px;
 }
 
 .recommendation-period {
-color: #888;
-
-font-size: 13px;
-
-text-align: right;
-
-line-height: 1.6;
+  color: #888;
+  font-size: 13px;
+  text-align: right;
 }
 
 .recommendation-grid {
-display: grid;
+  display: grid;
 
-grid-template-columns:
-repeat(3, minmax(0, 1fr));
+  grid-template-columns:
+    repeat(3, minmax(0, 1fr));
 
-gap: 18px;
+  gap: 18px;
 }
 
 .recommendation-card {
-background: white;
+  background: white;
 
-border-radius: 12px;
+  border-radius: 12px;
 
-padding: 22px;
+  padding: 22px;
 
-box-shadow:
-0 3px 12px rgba(0,0,0,.05);
+  box-shadow:
+    0 3px 12px rgba(0,0,0,.05);
 
-border-top: 3px solid #111;
+  border-top: 3px solid #111;
 
-transition:
-transform .15s ease,
-box-shadow .15s ease;
+  transition: .15s;
 }
 
 .recommendation-card:hover {
-transform: translateY(-2px);
+  transform: translateY(-2px);
 
-box-shadow:
-0 6px 18px rgba(0,0,0,.08);
+  box-shadow:
+    0 6px 18px rgba(0,0,0,.08);
 }
 
 .recommendation-card a {
-text-decoration: none;
+  text-decoration: none;
 }
 
 .recommendation-number {
-font-size: 12px;
-
-color: #999;
-
-margin-bottom: 7px;
+  font-size: 12px;
+  color: #999;
+  margin-bottom: 7px;
 }
 
 .recommendation-card h3 {
-margin: 0;
-
-font-size: 18px;
-
-line-height: 1.5;
+  margin: 0;
+  font-size: 18px;
+  line-height: 1.5;
 }
 
 .recommendation-english {
-margin-top: 3px;
-
-font-size: 12px;
-
-color: #888;
-}
-
-.recommendation-genre {
-display: inline-block;
-
-margin-top: 12px;
-
-padding: 3px 8px;
-
-background: #f0f0f0;
-
-border-radius: 20px;
-
-font-size: 12px;
-
-color: #555;
+  margin-top: 3px;
+  font-size: 12px;
+  color: #888;
 }
 
 .recommendation-description {
-margin-top: 12px;
+  margin-top: 12px;
 
-font-size: 13px;
+  font-size: 13px;
 
-color: #555;
+  color: #555;
 
-display: -webkit-box;
+  display: -webkit-box;
 
--webkit-line-clamp: 3;
+  -webkit-line-clamp: 3;
 
--webkit-box-orient: vertical;
+  -webkit-box-orient: vertical;
 
-overflow: hidden;
+  overflow: hidden;
 }
 
 .recommendation-empty {
-background: white;
+  background: white;
 
-border-radius: 12px;
+  border-radius: 12px;
 
-padding: 30px;
+  padding: 30px;
 
-text-align: center;
+  text-align: center;
 
-color: #777;
+  color: #777;
 }
 
 
 /* =========================================================
-   アニメ一覧へのリンク
+   アニメ一覧
 ========================================================= */
 
 .anime-list-link-section {
-margin-top: 45px;
-
-padding: 0;
+  margin-top: 45px;
 }
 
 .anime-list-link {
-display: inline-block;
+  font-size: 22px;
 
-font-size: 22px;
+  font-weight: 700;
 
-font-weight: 700;
-
-color: #171717;
-
-text-decoration: none;
-
-cursor: pointer;
+  text-decoration: none;
 }
 
 .anime-list-link:hover {
-text-decoration: underline;
+  text-decoration: underline;
 }
 
 
@@ -401,94 +376,90 @@ text-decoration: underline;
 ========================================================= */
 
 .ad-section {
-margin: 30px 0;
+  margin: 30px 0;
 
-display: none;
+  display: none;
 }
 
 .ad-label {
-margin-bottom: 7px;
+  text-align: center;
 
-text-align: center;
+  font-size: 10px;
 
-font-size: 10px;
+  letter-spacing: .12em;
 
-letter-spacing: .12em;
+  color: #999;
 
-color: #999;
+  margin-bottom: 7px;
 }
 
 .ad-box {
-background: white;
+  background: white;
 
-border-radius: 12px;
+  border-radius: 12px;
 
-padding: 18px;
+  padding: 18px;
 
-box-shadow:
-0 3px 12px rgba(0,0,0,.04);
+  box-shadow:
+    0 3px 12px rgba(0,0,0,.04);
 
-text-align: center;
+  text-align: center;
 }
 
 .ad-box img {
-display: block;
+  display: block;
 
-width: 100%;
+  width: 100%;
 
-max-height: 320px;
+  max-height: 320px;
 
-object-fit: contain;
+  object-fit: contain;
 
-border-radius: 8px;
+  border-radius: 8px;
 
-margin: 0 auto 12px;
+  margin: 0 auto 12px;
 }
 
 .ad-company {
-margin-top: 5px;
+  margin-top: 5px;
 
-font-size: 11px;
+  font-size: 11px;
 
-color: #888;
+  color: #888;
 }
 
 .ad-title {
-margin-top: 3px;
+  margin-top: 3px;
 
-font-size: 17px;
+  font-size: 17px;
 
-font-weight: 700;
+  font-weight: 700;
 }
 
 .ad-description {
-margin-top: 5px;
+  margin-top: 5px;
 
-font-size: 13px;
+  font-size: 13px;
 
-color: #666;
+  color: #666;
 }
 
 .ad-button {
-display: inline-block;
+  display: inline-block;
 
-margin-top: 13px;
+  margin-top: 13px;
 
-padding: 8px 16px;
+  padding: 8px 16px;
 
-background: #111;
+  background: #111;
 
-color: white;
+  color: white;
 
-border-radius: 6px;
+  border-radius: 6px;
 
-font-size: 13px;
+  font-size: 13px;
 
-text-decoration: none;
-}
-
-.ad-button:hover {
-opacity: .8;
+  text-decoration: none;
 }
 
 
@@ -497,73 +468,228 @@ opacity: .8;
 ========================================================= */
 
 footer {
-background: #111;
-
-color: #aaa;
+  background: #111;
+  color: #aaa;
 }
 
 .footer-inner {
-max-width: 1100px;
+  max-width: 1100px;
 
-margin: auto;
+  margin: auto;
 
-padding: 35px 20px;
+  padding: 35px 20px;
 }
 
 .footer-title {
-margin: 0;
+  margin: 0;
 
-font-size: 15px;
+  font-size: 15px;
 
-color: white;
+  color: white;
 }
 
 .footer-description {
-margin: 7px 0 0;
+  margin: 7px 0 0;
 
-font-size: 13px;
+  font-size: 13px;
 
-color: #888;
+  color: #888;
 }
 
 .footer-links {
-display: flex;
+  display: flex;
 
-flex-wrap: wrap;
+  flex-wrap: wrap;
 
-gap: 15px;
+  gap: 15px;
 
-margin-top: 20px;
+  margin-top: 20px;
 }
 
 .footer-links a {
-color: #aaa;
+  color: #aaa;
 
-text-decoration: none;
+  text-decoration: none;
 
-font-size: 13px;
-}
-
-.footer-links a:hover {
-color: white;
-
-text-decoration: underline;
+  font-size: 13px;
 }
 
 .admin-login-link {
-display: inline-block;
+  display: inline-block;
 
-margin-top: 20px;
+  margin-top: 20px;
 
-color: #777;
+  color: #777;
 
-font-size: 12px;
+  font-size: 12px;
 
-text-decoration: none;
+  text-decoration: none;
 }
 
-.admin-login-link:hover {
-color: white;
+
+/* =========================================================
+   Auth モーダル
+========================================================= */
+
+.auth-modal {
+  display: none;
+
+  position: fixed;
+
+  inset: 0;
+
+  z-index: 1000;
+
+  align-items: center;
+
+  justify-content: center;
+
+  padding: 20px;
+}
+
+.auth-modal.is-open {
+  display: flex;
+}
+
+.auth-modal-backdrop {
+  position: absolute;
+
+  inset: 0;
+
+  background: rgba(0,0,0,.55);
+}
+
+.auth-modal-card {
+  position: relative;
+
+  width: min(420px,100%);
+
+  background: white;
+
+  border-radius: 14px;
+
+  padding: 30px;
+
+  box-shadow:
+    0 15px 50px rgba(0,0,0,.25);
+
+  z-index: 1;
+}
+
+.auth-modal-card h2 {
+  margin: 0 35px 8px 0;
+
+  font-size: 22px;
+}
+
+.auth-description {
+  margin: 0 0 20px;
+
+  color: #666;
+
+  font-size: 13px;
+}
+
+.auth-close {
+  position: absolute;
+
+  top: 10px;
+
+  right: 14px;
+
+  border: 0;
+
+  background: transparent;
+
+  color: #555;
+
+  font-size: 28px;
+
+  cursor: pointer;
+}
+
+.auth-form {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 8px;
+}
+
+.auth-form label {
+  font-size: 13px;
+
+  font-weight: 600;
+
+  margin-top: 7px;
+}
+
+.auth-form input {
+  width: 100%;
+
+  border: 1px solid #d5d5d5;
+
+  border-radius: 7px;
+
+  padding: 10px 11px;
+
+  font: inherit;
+
+  outline: none;
+}
+
+.auth-form input:focus {
+  border-color: #111;
+}
+
+.auth-submit {
+  margin-top: 12px;
+
+  border: 0;
+
+  border-radius: 7px;
+
+  padding: 11px;
+
+  background: #111;
+
+  color: white;
+
+  font: inherit;
+
+  cursor: pointer;
+}
+
+.auth-submit:disabled {
+  opacity: .6;
+
+  cursor: wait;
+}
+
+.auth-switch {
+  border: 0;
+
+  background: transparent;
+
+  color: #555;
+
+  padding: 7px;
+
+  font: inherit;
+
+  font-size: 13px;
+
+  cursor: pointer;
+}
+
+.auth-message {
+  min-height: 1.5em;
+
+  margin: 4px 0 0;
+
+  color: #666;
+
+  font-size: 13px;
 }
 
 
@@ -571,62 +697,59 @@ color: white;
    レスポンシブ
 ========================================================= */
 
-@media (max-width: 800px) {
+@media (max-width:800px) {
 
-.recommendation-grid {
-grid-template-columns:
-repeat(2, minmax(0, 1fr));
+  .recommendation-grid {
+    grid-template-columns:
+      repeat(2,minmax(0,1fr));
+  }
+
 }
 
-}
+@media (max-width:550px) {
 
+  .header-inner {
+    padding: 15px;
+  }
 
-@media (max-width: 550px) {
+  .header-inner nav {
+    gap: 9px;
+  }
 
-.header-inner {
-padding: 15px;
-}
+  .header-inner nav a {
+    font-size: 12px;
+  }
 
-nav {
-gap: 10px;
-}
+  main {
+    padding: 25px 15px 45px;
+  }
 
-nav a {
-font-size: 12px;
-}
+  .hero {
+    padding: 25px;
+  }
 
-main {
-padding: 25px 15px 45px;
-}
+  .hero h1 {
+    font-size: 24px;
+  }
 
-.hero {
-padding: 25px;
-}
+  .recommendation-grid {
+    grid-template-columns: 1fr;
+  }
 
-.hero h1 {
-font-size: 24px;
-}
+  .recommendation-header {
+    align-items: flex-start;
 
-.recommendation-grid {
-grid-template-columns: 1fr;
-}
+    flex-direction: column;
+  }
 
-.recommendation-header {
-align-items: flex-start;
-
-flex-direction: column;
-}
-
-.recommendation-period {
-text-align: left;
-}
+  .recommendation-period {
+    text-align: left;
+  }
 
 }
 
 </style>
-
 </head>
-
 
 <body>
 
@@ -639,14 +762,9 @@ text-align: left;
 
 <div class="header-inner">
 
-<a
-href="index.html"
-class="logo">
-
-Just An Anime Review
-
+<a href="index.html" class="logo">
+Animecia
 </a>
-
 
 <nav>
 
@@ -658,11 +776,134 @@ Just An Anime Review
 アニメ一覧
 </a>
 
+<span
+id="user-menu"
+class="user-menu">
+</span>
+
+<button
+id="auth-button"
+class="auth-button"
+type="button">
+ログイン
+</button>
+
 </nav>
 
 </div>
 
 </header>
+
+
+<!-- =========================================================
+     Authモーダル
+========================================================= -->
+
+<div
+id="auth-modal"
+class="auth-modal"
+aria-hidden="true">
+
+<div
+class="auth-modal-backdrop"
+data-auth-close>
+</div>
+
+<div
+class="auth-modal-card"
+role="dialog"
+aria-modal="true"
+aria-labelledby="auth-modal-title">
+
+<button
+id="auth-close"
+class="auth-close"
+type="button"
+aria-label="閉じる">
+×
+</button>
+
+<h2 id="auth-modal-title">
+Animeciaにログイン
+</h2>
+
+<p
+id="auth-description"
+class="auth-description">
+お気に入りや視聴状況を保存できます。
+</p>
+
+<form
+id="auth-form"
+class="auth-form">
+
+<label for="auth-email">
+メールアドレス
+</label>
+
+<input
+id="auth-email"
+type="email"
+autocomplete="email"
+required>
+
+
+<label for="auth-password">
+パスワード
+</label>
+
+<input
+id="auth-password"
+type="password"
+autocomplete="current-password"
+minlength="6"
+required>
+
+
+<div
+id="auth-display-name-wrap"
+hidden>
+
+<label for="auth-display-name">
+表示名
+</label>
+
+<input
+id="auth-display-name"
+type="text"
+maxlength="50"
+autocomplete="nickname">
+
+</div>
+
+
+<button
+id="auth-submit"
+class="auth-submit"
+type="submit">
+ログイン
+</button>
+
+
+<button
+id="auth-switch"
+class="auth-switch"
+type="button">
+新規登録はこちら
+</button>
+
+
+<p
+id="auth-message"
+class="auth-message"
+role="status">
+</p>
+
+</form>
+
+</div>
+
+</div>
 
 
 <!-- =========================================================
@@ -672,20 +913,41 @@ Just An Anime Review
 <main>
 
 
-<!-- =========================================================
-     ヒーロー
-========================================================= -->
-
 <section class="hero">
 
 <h1>
-Just An Anime Review
+Animecia
 </h1>
 
 <p>
-アニメをもっと深く、もっと面白く。
-アニメ作品のあらすじ・作品情報・レビューを紹介しています。
+アニメをもっと深く、もっと面白く。<br>
+アニメ作品の情報・レビュー・お気に入り・視聴管理をまとめて利用できます。
 </p>
+
+
+<div
+id="profile-box"
+class="profile-box">
+
+<strong
+id="profile-name">
+Animecia User
+</strong>
+
+<small
+id="profile-email">
+</small>
+
+<br>
+
+<button
+id="logout-button"
+class="logout-button"
+type="button">
+ログアウト
+</button>
+
+</div>
 
 </section>
 
@@ -697,7 +959,8 @@ Just An Anime Review
 <section
 class="recommendation-section">
 
-<div class="recommendation-header">
+<div
+class="recommendation-header">
 
 <h2>
 おすすめアニメ
@@ -715,7 +978,8 @@ class="recommendation-period">
 id="recommendation-list"
 class="recommendation-grid">
 
-<div class="recommendation-empty">
+<div
+class="recommendation-empty">
 おすすめアニメを読み込み中……
 </div>
 
@@ -725,7 +989,7 @@ class="recommendation-grid">
 
 
 <!-- =========================================================
-     アニメ一覧へのリンク
+     アニメ一覧
 ========================================================= -->
 
 <section
@@ -762,7 +1026,6 @@ class="ad-box">
 
 </section>
 
-
 </main>
 
 
@@ -775,7 +1038,7 @@ class="ad-box">
 <div class="footer-inner">
 
 <h2 class="footer-title">
-Just An Anime Review
+Animecia
 </h2>
 
 <p class="footer-description">
@@ -833,14 +1096,18 @@ const SUPABASE_KEY =
 
 const supabaseClient =
 supabase.createClient(
-SUPABASE_URL,
-SUPABASE_KEY
+  SUPABASE_URL,
+  SUPABASE_KEY
 );
 
 
 /* =========================================================
-   HTMLエスケープ
+   共通
 ========================================================= */
+
+const $ = id =>
+document.getElementById(id);
+
 
 function escapeHTML(text) {
 
@@ -855,26 +1122,16 @@ return div.innerHTML;
 }
 
 
-/* =========================================================
-   URL安全性
-========================================================= */
-
 function isSafeURL(url) {
-
-if (!url) {
-
-return false;
-
-}
 
 try {
 
-const parsed =
+const u =
 new URL(url);
 
 return (
-parsed.protocol === "http:" ||
-parsed.protocol === "https:"
+u.protocol === "http:" ||
+u.protocol === "https:"
 );
 
 } catch {
@@ -886,260 +1143,520 @@ return false;
 }
 
 
-/* =========================================================
-   現在の日付取得
-========================================================= */
-
 function getTodayString() {
 
-const now =
-new Date();
-
-const year =
-now.getFullYear();
-
-const month =
-String(
-now.getMonth() + 1
-).padStart(
-2,
-"0"
-);
-
-const day =
-String(
-now.getDate()
-).padStart(
-2,
-"0"
-);
-
-return `${year}-${month}-${day}`;
+return new Date()
+.toISOString()
+.slice(0,10);
 
 }
 
-
-/* =========================================================
-   現在時刻取得
-========================================================= */
 
 function getCurrentTimeString() {
 
-const now =
-new Date();
-
-const hours =
-String(
-now.getHours()
-).padStart(
-2,
-"0"
-);
-
-const minutes =
-String(
-now.getMinutes()
-).padStart(
-2,
-"0"
-);
-
-return `${hours}:${minutes}`;
+return new Date()
+.toTimeString()
+.slice(0,5);
 
 }
 
-
-/* =========================================================
-   日付範囲判定
-========================================================= */
 
 function isDateInPeriod(
-currentDate,
-startDate,
-endDate
+current,
+start,
+end
 ) {
 
-const start =
-startDate ||
-"0000-01-01";
-
-const end =
-endDate ||
-"9999-12-31";
-
-
 return (
-currentDate >= start &&
-currentDate <= end
+current >= (start || "0000-01-01") &&
+current <= (end || "9999-12-31")
 );
 
 }
 
-
-/* =========================================================
-   時刻範囲判定
-========================================================= */
 
 function isTimeInPeriod(
-currentTime,
-startTime,
-endTime
+current,
+start,
+end
 ) {
 
-const start =
-String(
-startTime ||
-"00:00"
-)
-.slice(
-0,
-5
-);
+start =
+String(start || "00:00")
+.slice(0,5);
 
-const end =
-String(
-endTime ||
-"23:59"
-)
-.slice(
-0,
-5
-);
+end =
+String(end || "23:59")
+.slice(0,5);
 
 
-/*
-   同じ時刻の場合は
-   その1分間を表示対象とする。
-*/
+if (start === end) {
 
-if (
-start === end
-) {
-
-return currentTime === start;
+return current === start;
 
 }
 
 
-/*
-   通常の時間帯
-
-   例：
-   09:00 ～ 18:00
-*/
-
-if (
-start < end
-) {
+if (start < end) {
 
 return (
-currentTime >= start &&
-currentTime <= end
+current >= start &&
+current <= end
 );
 
 }
 
-
-/*
-   日付をまたぐ時間帯
-
-   例：
-   20:00 ～ 05:00
-*/
 
 return (
-currentTime >= start ||
-currentTime <= end
+current >= start ||
+current <= end
 );
 
 }
 
 
-/* =========================================================
-   日付表示
-========================================================= */
+function formatDate(date) {
 
-function formatDate(
-date
-) {
+if (!date) return "";
 
-if (!date) {
+const p =
+String(date).split("-");
 
-return "";
-
-}
-
-const parts =
-String(date)
-.split("-");
-
-if (
-parts.length !== 3
-) {
+if (p.length !== 3) {
 
 return date;
 
 }
 
-return `${parts[0]}年${parts[1]}月${parts[2]}日`;
+return `${p[0]}年${p[1]}月${p[2]}日`;
+
+}
+
+
+function formatTime(time) {
+
+if (!time) return "";
+
+return String(time).slice(0,5);
 
 }
 
 
 /* =========================================================
-   時刻表示
+   Auth
 ========================================================= */
 
-function formatTime(
-time
+let authMode =
+"login";
+
+
+function openAuth(
+mode = "login"
 ) {
 
-if (!time) {
+authMode = mode;
 
-return "";
+$("auth-modal")
+.classList.add("is-open");
+
+$("auth-modal")
+.setAttribute(
+  "aria-hidden",
+  "false"
+);
+
+
+$("auth-modal-title")
+.textContent =
+mode === "signup"
+  ? "Animeciaに新規登録"
+  : "Animeciaにログイン";
+
+
+$("auth-description")
+.textContent =
+mode === "signup"
+  ? "アカウントを作成してお気に入りや視聴状況を保存できます。"
+  : "お気に入りや視聴状況を保存できます。";
+
+
+$("auth-submit")
+.textContent =
+mode === "signup"
+  ? "新規登録"
+  : "ログイン";
+
+
+$("auth-switch")
+.textContent =
+mode === "signup"
+  ? "ログインはこちら"
+  : "新規登録はこちら";
+
+
+$("auth-display-name-wrap")
+.hidden =
+mode !== "signup";
+
+
+$("auth-message")
+.textContent = "";
 
 }
 
-return String(time)
-.slice(
-0,
-5
+
+function closeAuth() {
+
+$("auth-modal")
+.classList.remove("is-open");
+
+$("auth-modal")
+.setAttribute(
+  "aria-hidden",
+  "true"
 );
 
 }
 
 
 /* =========================================================
-   おすすめアニメ取得
+   ログイン状態UI
+========================================================= */
+
+async function updateAuthUI(user) {
+
+const button =
+$("auth-button");
+
+const menu =
+$("user-menu");
+
+const box =
+$("profile-box");
+
+
+if (user) {
+
+let displayName =
+user.user_metadata?.display_name ||
+"Animecia User";
+
+
+const {
+data: profile
+} =
+await supabaseClient
+.from("profiles")
+.select("display_name")
+.eq("id",user.id)
+.maybeSingle();
+
+
+if (
+profile?.display_name
+) {
+
+displayName =
+profile.display_name;
+
+}
+
+
+menu.textContent =
+displayName;
+
+menu.classList.add(
+"is-open"
+);
+
+
+button.textContent =
+"アカウント";
+
+
+box.classList.add(
+"is-open"
+);
+
+
+$("profile-name")
+.textContent =
+displayName;
+
+
+$("profile-email")
+.textContent =
+user.email || "";
+
+
+button.onclick = () => {
+
+box.scrollIntoView({
+behavior:"smooth",
+block:"center"
+});
+
+};
+
+
+} else {
+
+menu.classList.remove(
+"is-open"
+);
+
+button.textContent =
+"ログイン";
+
+box.classList.remove(
+"is-open"
+);
+
+
+button.onclick = () =>
+openAuth("login");
+
+}
+
+}
+
+
+/* =========================================================
+   新規登録・ログイン
+========================================================= */
+
+async function handleAuthSubmit(e) {
+
+e.preventDefault();
+
+
+const email =
+$("auth-email")
+.value
+.trim();
+
+const password =
+$("auth-password")
+.value;
+
+const displayName =
+$("auth-display-name")
+.value
+.trim();
+
+const message =
+$("auth-message");
+
+const submit =
+$("auth-submit");
+
+
+message.textContent = "";
+
+submit.disabled = true;
+
+
+try {
+
+
+/* =======================================================
+   新規登録
+======================================================= */
+
+if (
+authMode === "signup"
+) {
+
+const {
+data,
+error
+} =
+await supabaseClient.auth.signUp({
+
+email,
+
+password,
+
+options: {
+
+data: {
+
+display_name:
+displayName ||
+"Animecia User"
+
+}
+
+}
+
+});
+
+
+if (error) {
+
+throw error;
+
+}
+
+
+if (data.user) {
+
+if (data.session) {
+
+message.textContent =
+"登録しました。";
+
+await updateAuthUI(
+data.user
+);
+
+setTimeout(
+closeAuth,
+500
+);
+
+} else {
+
+message.textContent =
+"確認メールを確認してください。";
+
+}
+
+}
+
+
+/* =======================================================
+   ログイン
+======================================================= */
+
+} else {
+
+const {
+data,
+error
+} =
+await supabaseClient.auth.signInWithPassword({
+
+email,
+
+password
+
+});
+
+
+if (error) {
+
+throw error;
+
+}
+
+
+await updateAuthUI(
+data.user
+);
+
+closeAuth();
+
+}
+
+
+} catch (error) {
+
+console.error(
+"認証エラー:",
+error
+);
+
+message.textContent =
+error?.message ||
+"認証に失敗しました。";
+
+
+} finally {
+
+submit.disabled = false;
+
+}
+
+}
+
+
+/* =========================================================
+   ログアウト
+========================================================= */
+
+async function logout() {
+
+const {
+error
+} =
+await supabaseClient.auth.signOut();
+
+
+if (error) {
+
+alert(error.message);
+
+return;
+
+}
+
+
+await updateAuthUI(null);
+
+}
+
+
+/* =========================================================
+   Auth初期化
+========================================================= */
+
+async function initAuth() {
+
+const {
+data: {
+session
+}
+} =
+await supabaseClient.auth.getSession();
+
+
+await updateAuthUI(
+session?.user || null
+);
+
+
+supabaseClient.auth.onAuthStateChange(
+async (_event,session) => {
+
+await updateAuthUI(
+session?.user || null
+);
+
+});
+
+}
+
+
+/* =========================================================
+   おすすめアニメ
 ========================================================= */
 
 async function loadRecommendations() {
 
 const container =
-document.getElementById(
-"recommendation-list"
-);
+$("recommendation-list");
 
 const periodText =
-document.getElementById(
-"recommendation-period"
-);
+$("recommendation-period");
 
 
-container.innerHTML = `
-<div class="recommendation-empty">
-おすすめアニメを読み込み中……
-</div>
-`;
-
-periodText.textContent = "";
+container.innerHTML =
+'<div class="recommendation-empty">おすすめアニメを読み込み中……</div>';
 
 
 try {
 
-/* =======================================================
-   現在日時
-======================================================= */
 
 const currentDate =
 getTodayString();
@@ -1148,19 +1665,8 @@ const currentTime =
 getCurrentTimeString();
 
 
-console.log(
-"現在日付:",
-currentDate
-);
-
-console.log(
-"現在時刻:",
-currentTime
-);
-
-
 /* =======================================================
-   おすすめ設定取得
+   おすすめ設定
 ======================================================= */
 
 const {
@@ -1186,33 +1692,20 @@ true
 .order(
 "display_order",
 {
-ascending: true
+ascending:true
 }
 )
 .order(
 "id",
 {
-ascending: true
+ascending:true
 }
 );
 
 
-if (
-settingsError
-) {
+if (settingsError) {
 
-console.error(
-"おすすめアニメ取得エラー:",
-settingsError
-);
-
-container.innerHTML = `
-<div class="recommendation-empty">
-おすすめアニメを取得できませんでした。
-</div>
-`;
-
-return;
+throw settingsError;
 
 }
 
@@ -1222,11 +1715,8 @@ if (
 settings.length === 0
 ) {
 
-container.innerHTML = `
-<div class="recommendation-empty">
-現在、おすすめアニメは設定されていません。
-</div>
-`;
+container.innerHTML =
+'<div class="recommendation-empty">現在、おすすめアニメは設定されていません。</div>';
 
 return;
 
@@ -1234,53 +1724,36 @@ return;
 
 
 /* =======================================================
-   現在の期間・時間に該当する設定だけ取得
+   現在有効なおすすめ
 ======================================================= */
 
-const activeSettings =
+const active =
 settings.filter(
 item => {
 
-const dateOK =
+return (
 isDateInPeriod(
 currentDate,
 item.start_date,
 item.end_date
-);
-
-if (!dateOK) {
-
-return false;
-
-}
-
-
-const timeOK =
+)
+&&
 isTimeInPeriod(
 currentTime,
 item.start_time,
 item.end_time
+)
 );
 
-return timeOK;
+});
 
-}
-);
-
-
-/* =======================================================
-   該当するおすすめがない場合
-======================================================= */
 
 if (
-activeSettings.length === 0
+active.length === 0
 ) {
 
-container.innerHTML = `
-<div class="recommendation-empty">
-現在、この期間のおすすめアニメは設定されていません。
-</div>
-`;
+container.innerHTML =
+'<div class="recommendation-empty">現在、この期間のおすすめアニメは設定されていません。</div>';
 
 return;
 
@@ -1292,72 +1765,53 @@ return;
 ======================================================= */
 
 const first =
-activeSettings[0];
+active[0];
 
-const startDate =
-first.start_date || "";
-
-const endDate =
-first.end_date || "";
-
-const startTime =
-formatTime(
-first.start_time
-);
-
-const endTime =
-formatTime(
-first.end_time
-);
-
-
-let periodParts = [];
+let period = [];
 
 
 if (
-startDate &&
-endDate
+first.start_date &&
+first.end_date
 ) {
 
-periodParts.push(
-`${formatDate(startDate)} ～ ${formatDate(endDate)}`
+period.push(
+`${formatDate(first.start_date)} ～ ${formatDate(first.end_date)}`
 );
 
 } else if (
-startDate
+first.start_date
 ) {
 
-periodParts.push(
-`${formatDate(startDate)} ～`
+period.push(
+`${formatDate(first.start_date)} ～`
 );
 
 } else if (
-endDate
+first.end_date
 ) {
 
-periodParts.push(
-`～ ${formatDate(endDate)}`
+period.push(
+`～ ${formatDate(first.end_date)}`
 );
 
 }
 
 
 if (
-startTime &&
-endTime
+first.start_time &&
+first.end_time
 ) {
 
-periodParts.push(
-`${startTime} ～ ${endTime}`
+period.push(
+`${formatTime(first.start_time)} ～ ${formatTime(first.end_time)}`
 );
 
 }
 
 
 periodText.textContent =
-periodParts.join(
-" / "
-);
+period.join(" / ");
 
 
 /* =======================================================
@@ -1365,10 +1819,9 @@ periodParts.join(
 ======================================================= */
 
 const ids =
-activeSettings
+active
 .map(
-item =>
-item.anime_id
+item => item.anime_id
 )
 .filter(
 id =>
@@ -1378,15 +1831,10 @@ id !== ""
 );
 
 
-if (
-ids.length === 0
-) {
+if (!ids.length) {
 
-container.innerHTML = `
-<div class="recommendation-empty">
-現在、おすすめアニメは設定されていません。
-</div>
-`;
+container.innerHTML =
+'<div class="recommendation-empty">現在、おすすめアニメは設定されていません。</div>';
 
 return;
 
@@ -1394,7 +1842,7 @@ return;
 
 
 /* =======================================================
-   アニメ情報取得
+   アニメ取得
 ======================================================= */
 
 const {
@@ -1403,38 +1851,27 @@ error: animeError
 } =
 await supabaseClient
 .from("anime")
-.select(
-"id,title,english_title,genre,description"
-)
+.select(`
+id,
+title,
+title_romaji,
+title_english,
+title_native,
+title_japanese,
+description
+`)
 .in(
 "id",
 ids
 );
 
 
-if (
-animeError
-) {
+if (animeError) {
 
-console.error(
-"おすすめ作品取得エラー:",
-animeError
-);
-
-container.innerHTML = `
-<div class="recommendation-empty">
-おすすめアニメを表示できませんでした。
-</div>
-`;
-
-return;
+throw animeError;
 
 }
 
-
-/* =======================================================
-   アニメをIDで管理
-======================================================= */
 
 const animeMap =
 new Map(
@@ -1449,43 +1886,7 @@ anime
 
 
 /* =======================================================
-   管理画面の表示順を維持
-======================================================= */
-
-const orderedAnime =
-activeSettings
-.map(
-setting =>
-animeMap.get(
-String(
-setting.anime_id
-)
-)
-)
-.filter(Boolean);
-
-
-/* =======================================================
-   作品がない場合
-======================================================= */
-
-if (
-orderedAnime.length === 0
-) {
-
-container.innerHTML = `
-<div class="recommendation-empty">
-現在、おすすめアニメは設定されていません。
-</div>
-`;
-
-return;
-
-}
-
-
-/* =======================================================
-   同じ作品の重複を削除
+   表示順を維持
 ======================================================= */
 
 const uniqueAnime = [];
@@ -1494,21 +1895,37 @@ const usedIds =
 new Set();
 
 
-orderedAnime.forEach(
-anime => {
+for (
+const setting of active
+) {
+
+const anime =
+animeMap.get(
+String(setting.anime_id)
+);
+
+
+if (
+!anime
+) {
+
+continue;
+
+}
+
 
 const id =
-String(
-anime.id
-);
+String(anime.id);
+
 
 if (
 usedIds.has(id)
 ) {
 
-return;
+continue;
 
 }
+
 
 usedIds.add(id);
 
@@ -1517,23 +1934,35 @@ anime
 );
 
 }
-);
 
 
 /* =======================================================
-   カード表示
+   表示
 ======================================================= */
+
+if (
+uniqueAnime.length === 0
+) {
+
+container.innerHTML =
+'<div class="recommendation-empty">現在、おすすめアニメを設定できる作品がありません。</div>';
+
+return;
+
+}
+
 
 container.innerHTML = "";
 
 
 uniqueAnime.forEach(
-(anime, index) => {
+(anime,index) => {
 
 const card =
 document.createElement(
 "article"
 );
+
 
 card.className =
 "recommendation-card";
@@ -1544,108 +1973,78 @@ document.createElement(
 "a"
 );
 
+
 link.href =
 "anime-detail.html?id=" +
 encodeURIComponent(
 anime.id
 );
 
-link.style.textDecoration =
-"none";
-
-
-/* =====================================================
-   順番
-===================================================== */
 
 const number =
 document.createElement(
 "div"
 );
 
+
 number.className =
 "recommendation-number";
+
 
 number.textContent =
 `RECOMMENDATION ${index + 1}`;
 
-link.appendChild(
-number
-);
-
-
-/* =====================================================
-   タイトル
-===================================================== */
 
 const title =
 document.createElement(
 "h3"
 );
 
+
 title.textContent =
-anime.title || "";
+anime.title ||
+anime.title_native ||
+anime.title_romaji ||
+"無題";
+
+
+link.appendChild(
+number
+);
 
 link.appendChild(
 title
 );
 
 
-/* =====================================================
-   英語タイトル
-===================================================== */
-
-if (
-anime.english_title
-) {
+/* 英語・ローマ字タイトル */
 
 const english =
+anime.title_english ||
+anime.title_romaji;
+
+
+if (english) {
+
+const englishElement =
 document.createElement(
 "div"
 );
 
-english.className =
+englishElement.className =
 "recommendation-english";
 
-english.textContent =
-anime.english_title;
+englishElement.textContent =
+english;
 
 link.appendChild(
-english
+englishElement
 );
 
 }
 
 
-/* =====================================================
-   ジャンル
-===================================================== */
-
-if (
-anime.genre
-) {
-
-const genre =
-document.createElement(
-"div"
-);
-
-genre.className =
-"recommendation-genre";
-
-genre.textContent =
-anime.genre;
-
-link.appendChild(
-genre
-);
-
-}
-
-
-/* =====================================================
-   あらすじ
-===================================================== */
+/* あらすじ */
 
 if (
 anime.description
@@ -1679,21 +2078,15 @@ card
 
 });
 
-
-} catch (
-error
-) {
+} catch (error) {
 
 console.error(
 "おすすめアニメ読み込みエラー:",
 error
 );
 
-container.innerHTML = `
-<div class="recommendation-empty">
-現在、おすすめアニメを表示できません。
-</div>
-`;
+container.innerHTML =
+'<div class="recommendation-empty">おすすめアニメを表示できませんでした。</div>';
 
 }
 
@@ -1701,20 +2094,16 @@ container.innerHTML = `
 
 
 /* =========================================================
-   広告取得
+   広告
 ========================================================= */
 
 async function loadAdvertisement() {
 
 const section =
-document.getElementById(
-"ad-section"
-);
+$("ad-section");
 
 const container =
-document.getElementById(
-"ad-container"
-);
+$("ad-container");
 
 
 try {
@@ -1725,9 +2114,14 @@ error
 } =
 await supabaseClient
 .from("advertisements")
-.select(
-"id,company_name,title,description,image_url,link_url"
-)
+.select(`
+id,
+company_name,
+title,
+description,
+image_url,
+link_url
+`)
 .eq(
 "is_active",
 true
@@ -1735,29 +2129,14 @@ true
 .order(
 "id",
 {
-ascending: true
+ascending:true
 }
 )
-.limit(
-1
-);
+.limit(1);
 
 
 if (
-error
-) {
-
-console.error(
-"広告の取得に失敗しました:",
-error
-);
-
-return;
-
-}
-
-
-if (
+error ||
 !data ||
 data.length === 0
 ) {
@@ -1773,9 +2152,7 @@ data[0];
 let html = "";
 
 
-/* =======================================================
-   広告画像
-======================================================= */
+/* 画像 */
 
 if (
 ad.image_url &&
@@ -1785,87 +2162,62 @@ ad.image_url
 ) {
 
 html += `
-
 <img
 src="${escapeHTML(ad.image_url)}"
-alt="${escapeHTML(
-ad.title || "広告"
-)}"
+alt="${escapeHTML(ad.title || "広告")}"
 loading="lazy"
-onerror="this.style.display='none';"
->
-
+onerror="this.style.display='none'">
 `;
 
 }
 
 
-/* =======================================================
-   企業名
-======================================================= */
+/* 企業名 */
 
 if (
 ad.company_name
 ) {
 
 html += `
-
 <div class="ad-company">
-${escapeHTML(
-ad.company_name
-)}
+${escapeHTML(ad.company_name)}
 </div>
-
 `;
 
 }
 
 
-/* =======================================================
-   タイトル
-======================================================= */
+/* タイトル */
 
 if (
 ad.title
 ) {
 
 html += `
-
 <div class="ad-title">
-${escapeHTML(
-ad.title
-)}
+${escapeHTML(ad.title)}
 </div>
-
 `;
 
 }
 
 
-/* =======================================================
-   説明
-======================================================= */
+/* 説明 */
 
 if (
 ad.description
 ) {
 
 html += `
-
 <div class="ad-description">
-${escapeHTML(
-ad.description
-)}
+${escapeHTML(ad.description)}
 </div>
-
 `;
 
 }
 
 
-/* =======================================================
-   リンク
-======================================================= */
+/* リンク */
 
 if (
 ad.link_url &&
@@ -1875,19 +2227,13 @@ ad.link_url
 ) {
 
 html += `
-
 <a
 class="ad-button"
-href="${escapeHTML(
-ad.link_url
-)}"
+href="${escapeHTML(ad.link_url)}"
 target="_blank"
 rel="noopener noreferrer nofollow">
-
 詳しくはこちら
-
 </a>
-
 `;
 
 }
@@ -1909,12 +2255,10 @@ section.style.display =
 "block";
 
 
-} catch (
-error
-) {
+} catch (error) {
 
 console.error(
-"広告読み込み中にエラーが発生しました:",
+"広告読み込みエラー:",
 error
 );
 
@@ -1929,17 +2273,88 @@ error
 
 document.addEventListener(
 "DOMContentLoaded",
-function() {
+() => {
+
+
+initAuth();
 
 loadRecommendations();
 
 loadAdvertisement();
 
+
+$("auth-button")
+.addEventListener(
+"click",
+() => {
+
+openAuth("login");
+
+});
+
+
+$("auth-close")
+.addEventListener(
+"click",
+closeAuth
+);
+
+
+document
+.querySelector(
+"[data-auth-close]"
+)
+.addEventListener(
+"click",
+closeAuth
+);
+
+
+$("auth-switch")
+.addEventListener(
+"click",
+() => {
+
+openAuth(
+authMode === "login"
+? "signup"
+: "login"
+);
+
+});
+
+
+$("auth-form")
+.addEventListener(
+"submit",
+handleAuthSubmit
+);
+
+
+$("logout-button")
+.addEventListener(
+"click",
+logout
+);
+
+
+document.addEventListener(
+"keydown",
+event => {
+
+if (
+event.key === "Escape"
+) {
+
+closeAuth();
+
+}
+
+});
+
 });
 
 </script>
 
-
 </body>
-
 </html>
