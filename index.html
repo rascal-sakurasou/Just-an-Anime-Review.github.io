@@ -2,12 +2,12 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Animecia｜アニメ情報・レビュー・作品データベース</title>
+<title>Animecia｜アニメを探す・評価する・記録する</title>
 
 <meta name="description"
-content="Animeciaは、アニメ作品の情報・レビュー・お気に入り・視聴管理をまとめて利用できるアニメ情報サービスです。">
+content="Animeciaは、アニメ作品を探し、評価し、レビューし、お気に入りや視聴状況を管理できるアニメ情報・作品データベースです。">
 
 <meta name="robots" content="index,follow">
 
@@ -16,9 +16,9 @@ href="https://media-mania.github.io/Animecia/">
 
 <meta property="og:type" content="website">
 <meta property="og:title"
-content="Animecia｜アニメ情報・レビュー・作品データベース">
+content="Animecia｜アニメを探す・評価する・記録する">
 <meta property="og:description"
-content="アニメをもっと深く、もっと面白く。">
+content="アニメをもっと深く、もっと面白く。作品を探して、評価して、自分だけのアニメライフを。">
 <meta property="og:url"
 content="https://media-mania.github.io/Animecia/">
 <meta property="og:site_name" content="Animecia">
@@ -29,15 +29,15 @@ content="https://media-mania.github.io/Animecia/">
 
 <script type="application/ld+json">
 {
-  "@context":"https://schema.org",
-  "@type":"WebSite",
-  "name":"Animecia",
-  "url":"https://media-mania.github.io/Animecia/",
-  "description":"アニメ作品の情報・レビュー・お気に入り・視聴管理をまとめて利用できるアニメ情報サービスです。",
-  "potentialAction":{
-    "@type":"SearchAction",
-    "target":"https://media-mania.github.io/Animecia/anime.html?search={search_term_string}",
-    "query-input":"required name=search_term_string"
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "Animecia",
+  "url": "https://media-mania.github.io/Animecia/",
+  "description": "アニメ作品を探し、評価し、レビューし、お気に入りや視聴状況を管理できるアニメ情報・作品データベースです。",
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": "https://media-mania.github.io/Animecia/anime.html?search={search_term_string}",
+    "query-input": "required name=search_term_string"
   }
 }
 </script>
@@ -66,13 +66,27 @@ body {
     "Yu Gothic",
     Meiryo,
     sans-serif;
+
   background: #f5f6f8;
   color: #171717;
   line-height: 1.7;
 }
 
+button,
+input {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
 a {
   color: inherit;
+}
+
+img {
+  max-width: 100%;
 }
 
 
@@ -82,68 +96,94 @@ a {
 
 header {
   background: #111;
-  color: white;
+  color: #fff;
+
+  position: sticky;
+  top: 0;
+  z-index: 100;
 }
 
 .header-inner {
-  max-width: 1100px;
+  max-width: 1200px;
   margin: auto;
-  padding: 16px 20px;
+
+  min-height: 64px;
+  padding: 12px 20px;
 
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 20px;
+  gap: 24px;
 }
 
 .logo {
-  color: white;
+  color: #fff;
   text-decoration: none;
+
+  font-size: 20px;
   font-weight: 800;
-  font-size: 18px;
+
+  letter-spacing: -.02em;
+
+  white-space: nowrap;
 }
 
-nav {
+.main-nav {
   display: flex;
-  gap: 16px;
   align-items: center;
-  flex-wrap: wrap;
+  gap: 18px;
+
+  flex: 1;
 }
 
-nav a {
-  color: #ddd;
+.main-nav a {
+  color: #cfcfcf;
+
   text-decoration: none;
-  font-size: 14px;
+
+  font-size: 13px;
+
+  transition: color .15s ease;
 }
 
-nav a:hover {
-  color: white;
+.main-nav a:hover {
+  color: #fff;
 }
 
-
-/* =========================================================
-   認証ボタン
-========================================================= */
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
 
 .auth-button {
   border: 1px solid #555;
   background: #222;
-  color: white;
-  border-radius: 7px;
-  padding: 7px 12px;
-  font: inherit;
+  color: #fff;
+
+  border-radius: 8px;
+
+  padding: 8px 13px;
+
   font-size: 13px;
-  cursor: pointer;
+
+  transition:
+    background .15s ease,
+    border-color .15s ease;
 }
 
 .auth-button:hover {
   background: #333;
+  border-color: #777;
 }
 
 .user-menu {
-  font-size: 13px;
-  color: #ddd;
   display: none;
+
+  color: #ddd;
+
+  font-size: 13px;
+
+  white-space: nowrap;
 }
 
 .user-menu.is-open {
@@ -156,9 +196,11 @@ nav a:hover {
 ========================================================= */
 
 main {
-  max-width: 1100px;
+  max-width: 1200px;
+
   margin: auto;
-  padding: 35px 20px 60px;
+
+  padding: 32px 20px 70px;
 }
 
 
@@ -167,88 +209,261 @@ main {
 ========================================================= */
 
 .hero {
-  background: white;
-  border-radius: 14px;
-  padding: 35px;
+  background: #111;
+  color: #fff;
+
+  border-radius: 18px;
+
+  padding: 52px 42px;
+
+  margin-bottom: 28px;
 
   box-shadow:
-    0 3px 15px rgba(0,0,0,.06);
+    0 8px 30px rgba(0,0,0,.12);
+}
 
-  margin-bottom: 30px;
+.hero-content {
+  max-width: 760px;
+}
+
+.hero-label {
+  display: inline-block;
+
+  margin-bottom: 10px;
+
+  font-size: 12px;
+
+  color: #aaa;
+
+  letter-spacing: .12em;
+
+  font-weight: 700;
 }
 
 .hero h1 {
-  margin: 0 0 12px;
-  font-size: 30px;
-  line-height: 1.4;
+  margin: 0;
+
+  font-size: clamp(30px, 5vw, 48px);
+
+  line-height: 1.2;
+
+  letter-spacing: -.04em;
 }
 
-.hero p {
-  margin: 0;
-  color: #666;
-  font-size: 14px;
+.hero-lead {
+  margin: 18px 0 0;
+
+  color: #d2d2d2;
+
+  font-size: 15px;
+
+  max-width: 650px;
+}
+
+.hero-actions {
+  display: flex;
+
+  flex-wrap: wrap;
+
+  gap: 10px;
+
+  margin-top: 28px;
+}
+
+.hero-button {
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  min-height: 42px;
+
+  padding: 9px 17px;
+
+  border-radius: 8px;
+
+  text-decoration: none;
+
+  font-size: 13px;
+
+  font-weight: 700;
+
+  border: 1px solid #555;
+
+  color: #fff;
+
+  background: #222;
+
+  transition: .15s ease;
+}
+
+.hero-button:hover {
+  background: #333;
+}
+
+.hero-button.primary {
+  background: #fff;
+  color: #111;
+  border-color: #fff;
+}
+
+.hero-button.primary:hover {
+  background: #eee;
 }
 
 
 /* =========================================================
-   プロフィール
+   検索
 ========================================================= */
 
-.profile-box {
-  display: none;
+.search-section {
+  margin-bottom: 35px;
+}
 
-  margin-top: 20px;
+.search-box {
+  background: #fff;
 
-  background: white;
+  border-radius: 14px;
 
-  border-radius: 12px;
+  padding: 18px;
+
+  box-shadow:
+    0 3px 15px rgba(0,0,0,.05);
+}
+
+.search-title {
+  margin: 0 0 10px;
+
+  font-size: 16px;
+
+  font-weight: 700;
+}
+
+.search-form {
+  display: flex;
+
+  gap: 9px;
+}
+
+.search-input {
+  flex: 1;
+
+  min-width: 0;
+
+  border: 1px solid #d5d5d5;
+
+  border-radius: 8px;
+
+  padding: 11px 13px;
+
+  outline: none;
+
+  background: #fff;
+}
+
+.search-input:focus {
+  border-color: #111;
+}
+
+.search-submit {
+  border: 0;
+
+  border-radius: 8px;
+
+  padding: 0 18px;
+
+  background: #111;
+
+  color: #fff;
+
+  font-size: 13px;
+
+  font-weight: 700;
+}
+
+.search-submit:hover {
+  background: #333;
+}
+
+
+/* =========================================================
+   クイックナビ
+========================================================= */
+
+.quick-navigation {
+  display: grid;
+
+  grid-template-columns:
+    repeat(4, minmax(0, 1fr));
+
+  gap: 14px;
+
+  margin-bottom: 42px;
+}
+
+.quick-card {
+  display: block;
+
+  background: #fff;
+
+  border-radius: 13px;
 
   padding: 20px;
 
+  text-decoration: none;
+
   box-shadow:
     0 3px 12px rgba(0,0,0,.05);
+
+  transition:
+    transform .15s ease,
+    box-shadow .15s ease;
 }
 
-.profile-box.is-open {
-  display: block;
+.quick-card:hover {
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 7px 20px rgba(0,0,0,.09);
 }
 
-.profile-box strong {
-  display: block;
+.quick-label {
+  color: #999;
+
+  font-size: 11px;
+
+  font-weight: 700;
+
+  letter-spacing: .08em;
+}
+
+.quick-card h2 {
+  margin: 5px 0 0;
+
   font-size: 17px;
 }
 
-.profile-box small {
+.quick-card p {
+  margin: 7px 0 0;
+
   color: #777;
-}
 
-.logout-button {
-  margin-top: 12px;
-
-  border: 1px solid #ccc;
-
-  background: white;
-
-  border-radius: 7px;
-
-  padding: 8px 14px;
-
-  cursor: pointer;
+  font-size: 12px;
 }
 
 
 /* =========================================================
-   おすすめアニメ
+   セクション共通
 ========================================================= */
 
-.recommendation-section {
-  margin-top: 40px;
+.section {
+  margin-top: 42px;
 }
 
-.recommendation-header {
+.section-header {
   display: flex;
 
-  align-items: center;
+  align-items: flex-end;
 
   justify-content: space-between;
 
@@ -257,14 +472,50 @@ main {
   margin-bottom: 15px;
 }
 
-.recommendation-header h2 {
+.section-title {
   margin: 0;
-  font-size: 22px;
+
+  font-size: 23px;
+
+  line-height: 1.3;
+}
+
+.section-description {
+  margin: 4px 0 0;
+
+  color: #777;
+
+  font-size: 12px;
+}
+
+.section-link {
+  color: #555;
+
+  font-size: 12px;
+
+  text-decoration: none;
+
+  white-space: nowrap;
+}
+
+.section-link:hover {
+  text-decoration: underline;
+}
+
+
+/* =========================================================
+   おすすめ
+========================================================= */
+
+.recommendation-header {
+  align-items: center;
 }
 
 .recommendation-period {
   color: #888;
-  font-size: 13px;
+
+  font-size: 12px;
+
   text-align: right;
 }
 
@@ -274,59 +525,73 @@ main {
   grid-template-columns:
     repeat(3, minmax(0, 1fr));
 
-  gap: 18px;
+  gap: 17px;
 }
 
 .recommendation-card {
-  background: white;
+  background: #fff;
 
-  border-radius: 12px;
+  border-radius: 13px;
 
-  padding: 22px;
+  padding: 21px;
 
   box-shadow:
     0 3px 12px rgba(0,0,0,.05);
 
   border-top: 3px solid #111;
 
-  transition: .15s;
+  transition:
+    transform .15s ease,
+    box-shadow .15s ease;
 }
 
 .recommendation-card:hover {
   transform: translateY(-2px);
 
   box-shadow:
-    0 6px 18px rgba(0,0,0,.08);
+    0 7px 20px rgba(0,0,0,.09);
 }
 
 .recommendation-card a {
+  display: block;
+
   text-decoration: none;
 }
 
 .recommendation-number {
-  font-size: 12px;
   color: #999;
-  margin-bottom: 7px;
+
+  font-size: 11px;
+
+  margin-bottom: 6px;
+
+  font-weight: 700;
+
+  letter-spacing: .05em;
 }
 
 .recommendation-card h3 {
   margin: 0;
+
   font-size: 18px;
-  line-height: 1.5;
+
+  line-height: 1.45;
 }
 
 .recommendation-english {
   margin-top: 3px;
-  font-size: 12px;
+
   color: #888;
+
+  font-size: 11px;
 }
 
 .recommendation-description {
-  margin-top: 12px;
-
-  font-size: 13px;
+  margin-top: 11px;
 
   color: #555;
+
+  font-size: 12px;
 
   display: -webkit-box;
 
@@ -338,36 +603,155 @@ main {
 }
 
 .recommendation-empty {
-  background: white;
+  background: #fff;
 
-  border-radius: 12px;
+  border-radius: 13px;
 
-  padding: 30px;
+  padding: 28px;
 
   text-align: center;
 
   color: #777;
+
+  font-size: 13px;
+
+  grid-column: 1 / -1;
 }
 
 
 /* =========================================================
-   アニメ一覧
+   Animeciaでできること
 ========================================================= */
 
-.anime-list-link-section {
-  margin-top: 45px;
+.features-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, minmax(0, 1fr));
+
+  gap: 15px;
 }
 
-.anime-list-link {
-  font-size: 22px;
+.feature-card {
+  background: #fff;
+
+  border-radius: 13px;
+
+  padding: 21px;
+
+  box-shadow:
+    0 3px 12px rgba(0,0,0,.05);
+}
+
+.feature-number {
+  color: #999;
+
+  font-size: 11px;
 
   font-weight: 700;
-
-  text-decoration: none;
 }
 
-.anime-list-link:hover {
-  text-decoration: underline;
+.feature-card h3 {
+  margin: 7px 0 0;
+
+  font-size: 17px;
+}
+
+.feature-card p {
+  margin: 8px 0 0;
+
+  color: #666;
+
+  font-size: 12px;
+}
+
+
+/* =========================================================
+   ログイン後プロフィール
+========================================================= */
+
+.profile-box {
+  display: none;
+
+  margin-top: 22px;
+
+  background: rgba(255,255,255,.08);
+
+  border: 1px solid rgba(255,255,255,.13);
+
+  border-radius: 11px;
+
+  padding: 17px;
+}
+
+.profile-box.is-open {
+  display: block;
+}
+
+.profile-box strong {
+  display: block;
+
+  font-size: 16px;
+}
+
+.profile-box small {
+  display: block;
+
+  margin-top: 2px;
+
+  color: #aaa;
+
+  font-size: 11px;
+}
+
+.profile-actions {
+  display: flex;
+
+  flex-wrap: wrap;
+
+  gap: 8px;
+
+  margin-top: 13px;
+}
+
+.profile-action {
+  display: inline-block;
+
+  border: 1px solid #555;
+
+  background: #222;
+
+  color: #fff;
+
+  border-radius: 7px;
+
+  padding: 7px 12px;
+
+  text-decoration: none;
+
+  font-size: 12px;
+}
+
+.profile-action:hover {
+  background: #333;
+}
+
+.logout-button {
+  border: 1px solid #555;
+
+  background: transparent;
+
+  color: #ddd;
+
+  border-radius: 7px;
+
+  padding: 7px 12px;
+
+  font-size: 12px;
+}
+
+.logout-button:hover {
+  background: #222;
 }
 
 
@@ -376,7 +760,7 @@ main {
 ========================================================= */
 
 .ad-section {
-  margin: 30px 0;
+  margin: 35px 0;
 
   display: none;
 }
@@ -384,7 +768,7 @@ main {
 .ad-label {
   text-align: center;
 
-  font-size: 10px;
+  font-size: 9px;
 
   letter-spacing: .12em;
 
@@ -394,9 +778,9 @@ main {
 }
 
 .ad-box {
-  background: white;
+  background: #fff;
 
-  border-radius: 12px;
+  border-radius: 13px;
 
   padding: 18px;
 
@@ -423,9 +807,9 @@ main {
 .ad-company {
   margin-top: 5px;
 
-  font-size: 11px;
-
   color: #888;
+
+  font-size: 11px;
 }
 
 .ad-title {
@@ -439,9 +823,9 @@ main {
 .ad-description {
   margin-top: 5px;
 
-  font-size: 13px;
-
   color: #666;
+
+  font-size: 13px;
 }
 
 .ad-button {
@@ -453,7 +837,7 @@ main {
 
   background: #111;
 
-  color: white;
+  color: #fff;
 
   border-radius: 6px;
 
@@ -469,31 +853,32 @@ main {
 
 footer {
   background: #111;
+
   color: #aaa;
 }
 
 .footer-inner {
-  max-width: 1100px;
+  max-width: 1200px;
 
   margin: auto;
 
-  padding: 35px 20px;
+  padding: 38px 20px;
 }
 
 .footer-title {
   margin: 0;
 
-  font-size: 15px;
+  color: #fff;
 
-  color: white;
+  font-size: 16px;
 }
 
 .footer-description {
-  margin: 7px 0 0;
-
-  font-size: 13px;
+  margin: 6px 0 0;
 
   color: #888;
+
+  font-size: 12px;
 }
 
 .footer-links {
@@ -501,7 +886,7 @@ footer {
 
   flex-wrap: wrap;
 
-  gap: 15px;
+  gap: 16px;
 
   margin-top: 20px;
 }
@@ -511,17 +896,21 @@ footer {
 
   text-decoration: none;
 
-  font-size: 13px;
+  font-size: 12px;
+}
+
+.footer-links a:hover {
+  color: #fff;
 }
 
 .admin-login-link {
   display: inline-block;
 
-  margin-top: 20px;
+  margin-top: 22px;
 
-  color: #777;
+  color: #666;
 
-  font-size: 12px;
+  font-size: 11px;
 
   text-decoration: none;
 }
@@ -556,7 +945,7 @@ footer {
 
   inset: 0;
 
-  background: rgba(0,0,0,.55);
+  background: rgba(0,0,0,.58);
 }
 
 .auth-modal-card {
@@ -564,7 +953,7 @@ footer {
 
   width: min(420px,100%);
 
-  background: white;
+  background: #fff;
 
   border-radius: 14px;
 
@@ -633,8 +1022,6 @@ footer {
 
   padding: 10px 11px;
 
-  font: inherit;
-
   outline: none;
 }
 
@@ -653,9 +1040,7 @@ footer {
 
   background: #111;
 
-  color: white;
-
-  font: inherit;
+  color: #fff;
 
   cursor: pointer;
 }
@@ -675,11 +1060,7 @@ footer {
 
   padding: 7px;
 
-  font: inherit;
-
   font-size: 13px;
-
-  cursor: pointer;
 }
 
 .auth-message {
@@ -697,46 +1078,112 @@ footer {
    レスポンシブ
 ========================================================= */
 
-@media (max-width:800px) {
+@media (max-width: 900px) {
 
-  .recommendation-grid {
+  .header-inner {
+    flex-wrap: wrap;
+  }
+
+  .main-nav {
+    order: 3;
+
+    width: 100%;
+
+    overflow-x: auto;
+
+    padding-bottom: 2px;
+  }
+
+  .quick-navigation {
     grid-template-columns:
-      repeat(2,minmax(0,1fr));
+      repeat(2, minmax(0, 1fr));
+  }
+
+  .features-grid {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
   }
 
 }
 
-@media (max-width:550px) {
+@media (max-width: 700px) {
+
+  .recommendation-grid {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+  }
+
+}
+
+@media (max-width: 550px) {
 
   .header-inner {
-    padding: 15px;
+    padding: 12px 15px;
   }
 
-  .header-inner nav {
-    gap: 9px;
+  .main-nav {
+    gap: 14px;
   }
 
-  .header-inner nav a {
+  .main-nav a {
     font-size: 12px;
   }
 
+  .header-actions {
+    margin-left: auto;
+  }
+
+  .user-menu {
+    display: none !important;
+  }
+
   main {
-    padding: 25px 15px 45px;
+    padding: 22px 15px 50px;
   }
 
   .hero {
-    padding: 25px;
+    padding: 34px 24px;
   }
 
   .hero h1 {
-    font-size: 24px;
+    font-size: 31px;
+  }
+
+  .hero-lead {
+    font-size: 13px;
+  }
+
+  .search-form {
+    flex-direction: column;
+  }
+
+  .search-submit {
+    min-height: 42px;
+  }
+
+  .quick-navigation {
+    grid-template-columns: 1fr 1fr;
+
+    gap: 10px;
+  }
+
+  .quick-card {
+    padding: 16px;
+  }
+
+  .quick-card h2 {
+    font-size: 15px;
   }
 
   .recommendation-grid {
     grid-template-columns: 1fr;
   }
 
-  .recommendation-header {
+  .features-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .section-header {
     align-items: flex-start;
 
     flex-direction: column;
@@ -744,6 +1191,10 @@ footer {
 
   .recommendation-period {
     text-align: left;
+  }
+
+  .auth-modal-card {
+    padding: 24px;
   }
 
 }
@@ -766,7 +1217,7 @@ footer {
 Animecia
 </a>
 
-<nav>
+<nav class="main-nav" aria-label="メインナビゲーション">
 
 <a href="index.html">
 ホーム
@@ -775,6 +1226,22 @@ Animecia
 <a href="anime.html#anime-list">
 アニメ一覧
 </a>
+
+<a href="anime.html?filter=season">
+今期アニメ
+</a>
+
+<a href="anime.html?filter=ranking">
+ランキング
+</a>
+
+<a href="anime.html?filter=genre">
+ジャンル
+</a>
+
+</nav>
+
+<div class="header-actions">
 
 <span
 id="user-menu"
@@ -788,7 +1255,7 @@ type="button">
 ログイン
 </button>
 
-</nav>
+</div>
 
 </div>
 
@@ -847,7 +1314,6 @@ type="email"
 autocomplete="email"
 required>
 
-
 <label for="auth-password">
 パスワード
 </label>
@@ -858,7 +1324,6 @@ type="password"
 autocomplete="current-password"
 minlength="6"
 required>
-
 
 <div
 id="auth-display-name-wrap"
@@ -876,7 +1341,6 @@ autocomplete="nickname">
 
 </div>
 
-
 <button
 id="auth-submit"
 class="auth-submit"
@@ -884,14 +1348,12 @@ type="submit">
 ログイン
 </button>
 
-
 <button
 id="auth-switch"
 class="auth-switch"
 type="button">
 新規登録はこちら
 </button>
-
 
 <p
 id="auth-message"
@@ -913,17 +1375,47 @@ role="status">
 <main>
 
 
+<!-- =========================================================
+     ヒーロー
+========================================================= -->
+
 <section class="hero">
+
+<div class="hero-content">
+
+<div class="hero-label">
+ANIME DISCOVERY DATABASE
+</div>
 
 <h1>
 Animecia
 </h1>
 
-<p>
+<p class="hero-lead">
 アニメをもっと深く、もっと面白く。<br>
-アニメ作品の情報・レビュー・お気に入り・視聴管理をまとめて利用できます。
+作品を探して、評価して、レビューして、自分だけのアニメライフを記録できます。
 </p>
 
+<div class="hero-actions">
+
+<a
+href="anime.html#anime-list"
+class="hero-button primary">
+アニメを探す
+</a>
+
+<a
+href="anime.html?filter=ranking"
+class="hero-button">
+ランキングを見る
+</a>
+
+</div>
+
+
+<!-- =======================================================
+     ログイン後プロフィール
+======================================================= -->
 
 <div
 id="profile-box"
@@ -938,7 +1430,19 @@ Animecia User
 id="profile-email">
 </small>
 
-<br>
+<div class="profile-actions">
+
+<a
+href="anime.html?filter=favorites"
+class="profile-action">
+お気に入り
+</a>
+
+<a
+href="anime.html?filter=watching"
+class="profile-action">
+視聴管理
+</a>
 
 <button
 id="logout-button"
@@ -949,6 +1453,133 @@ type="button">
 
 </div>
 
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =========================================================
+     検索
+========================================================= -->
+
+<section class="search-section">
+
+<div class="search-box">
+
+<h2 class="search-title">
+アニメを検索
+</h2>
+
+<form
+id="search-form"
+class="search-form">
+
+<input
+id="search-input"
+class="search-input"
+type="search"
+placeholder="作品名を入力してください"
+autocomplete="off"
+aria-label="アニメを検索">
+
+<button
+class="search-submit"
+type="submit">
+検索
+</button>
+
+</form>
+
+</div>
+
+</section>
+
+
+<!-- =========================================================
+     クイックナビ
+========================================================= -->
+
+<section
+class="quick-navigation"
+aria-label="Animeciaメニュー">
+
+<a
+href="anime.html?filter=season"
+class="quick-card">
+
+<div class="quick-label">
+SEASON
+</div>
+
+<h2>
+今期アニメ
+</h2>
+
+<p>
+現在放送中の作品を探す
+</p>
+
+</a>
+
+
+<a
+href="anime.html?filter=ranking"
+class="quick-card">
+
+<div class="quick-label">
+RANKING
+</div>
+
+<h2>
+ランキング
+</h2>
+
+<p>
+人気・評価の高い作品を見る
+</p>
+
+</a>
+
+
+<a
+href="anime.html?filter=genre"
+class="quick-card">
+
+<div class="quick-label">
+GENRE
+</div>
+
+<h2>
+ジャンルから探す
+</h2>
+
+<p>
+SF・ファンタジーなどから検索
+</p>
+
+</a>
+
+
+<a
+href="anime.html?filter=hidden"
+class="quick-card">
+
+<div class="quick-label">
+DISCOVERY
+</div>
+
+<h2>
+隠れた作品を探す
+</h2>
+
+<p>
+まだ知らない作品を発見する
+</p>
+
+</a>
+
 </section>
 
 
@@ -957,14 +1588,21 @@ type="button">
 ========================================================= -->
 
 <section
-class="recommendation-section">
+class="section recommendation-section">
 
-<div
-class="recommendation-header">
+<div class="section-header recommendation-header">
 
-<h2>
+<div>
+
+<h2 class="section-title">
 おすすめアニメ
 </h2>
+
+<p class="section-description">
+Animeciaがピックアップした作品
+</p>
+
+</div>
 
 <div
 id="recommendation-period"
@@ -978,8 +1616,7 @@ class="recommendation-period">
 id="recommendation-list"
 class="recommendation-grid">
 
-<div
-class="recommendation-empty">
+<div class="recommendation-empty">
 おすすめアニメを読み込み中……
 </div>
 
@@ -989,19 +1626,132 @@ class="recommendation-empty">
 
 
 <!-- =========================================================
-     アニメ一覧
+     Animeciaの機能
 ========================================================= -->
 
-<section
-class="anime-list-link-section">
+<section class="section">
 
-<a
-href="anime.html#anime-list"
-class="anime-list-link">
+<div class="section-header">
 
-アニメ一覧
+<div>
 
-</a>
+<h2 class="section-title">
+Animeciaでできること
+</h2>
+
+<p class="section-description">
+アニメを探すだけではなく、見つけて、記録して、楽しむ。
+</p>
+
+</div>
+
+</div>
+
+
+<div class="features-grid">
+
+<article class="feature-card">
+
+<div class="feature-number">
+01
+</div>
+
+<h3>
+アニメを探す
+</h3>
+
+<p>
+作品名・ジャンル・放送時期・ランキングなどから、見たいアニメを探せます。
+</p>
+
+</article>
+
+
+<article class="feature-card">
+
+<div class="feature-number">
+02
+</div>
+
+<h3>
+お気に入り・視聴管理
+</h3>
+
+<p>
+気になる作品を保存し、視聴中・視聴済み・視聴予定などを管理できます。
+</p>
+
+</article>
+
+
+<article class="feature-card">
+
+<div class="feature-number">
+03
+</div>
+
+<h3>
+評価・レビュー
+</h3>
+
+<p>
+作品を評価したり、レビューを書いたりして、自分の感想を記録できます。
+</p>
+
+</article>
+
+
+<article class="feature-card">
+
+<div class="feature-number">
+04
+</div>
+
+<h3>
+ランキング
+</h3>
+
+<p>
+人気作品や高評価作品など、さまざまな角度からアニメを発見できます。
+</p>
+
+</article>
+
+
+<article class="feature-card">
+
+<div class="feature-number">
+05
+</div>
+
+<h3>
+自分のアニメ履歴
+</h3>
+
+<p>
+見た作品や評価した作品をまとめて管理し、自分だけのアニメ履歴を作れます。
+</p>
+
+</article>
+
+
+<article class="feature-card">
+
+<div class="feature-number">
+06
+</div>
+
+<h3>
+おすすめ
+</h3>
+
+<p>
+将来的には視聴履歴や評価をもとに、あなたに合った作品を提案します。
+</p>
+
+</article>
+
+</div>
 
 </section>
 
@@ -1025,6 +1775,7 @@ class="ad-box">
 </div>
 
 </section>
+
 
 </main>
 
@@ -1058,6 +1809,14 @@ aria-label="フッターナビゲーション">
 アニメ一覧
 </a>
 
+<a href="anime.html?filter=ranking">
+ランキング
+</a>
+
+<a href="anime.html?filter=season">
+今期アニメ
+</a>
+
 <a href="terms.html">
 利用規約
 </a>
@@ -1072,9 +1831,7 @@ aria-label="フッターナビゲーション">
 <a
 href="admin.html"
 class="admin-login-link">
-
 管理者ログイン
-
 </a>
 
 </div>
@@ -1243,6 +2000,36 @@ return String(time).slice(0,5);
 
 
 /* =========================================================
+   検索
+========================================================= */
+
+function handleSearch(event) {
+
+event.preventDefault();
+
+const input =
+$("search-input");
+
+const keyword =
+input.value.trim();
+
+if (!keyword) {
+
+input.focus();
+
+return;
+
+}
+
+
+window.location.href =
+"anime.html?search=" +
+encodeURIComponent(keyword);
+
+}
+
+
+/* =========================================================
    Auth
 ========================================================= */
 
@@ -1342,6 +2129,8 @@ user.user_metadata?.display_name ||
 "Animecia User";
 
 
+try {
+
 const {
 data: profile
 } =
@@ -1358,6 +2147,15 @@ profile?.display_name
 
 displayName =
 profile.display_name;
+
+}
+
+} catch (error) {
+
+console.warn(
+"プロフィール取得エラー:",
+error
+);
 
 }
 
@@ -1422,12 +2220,12 @@ openAuth("login");
 
 
 /* =========================================================
-   新規登録・ログイン
+   認証
 ========================================================= */
 
-async function handleAuthSubmit(e) {
+async function handleAuthSubmit(event) {
 
-e.preventDefault();
+event.preventDefault();
 
 
 const email =
@@ -1559,7 +2357,6 @@ closeAuth();
 
 }
 
-
 } catch (error) {
 
 console.error(
@@ -1570,7 +2367,6 @@ error
 message.textContent =
 error?.message ||
 "認証に失敗しました。";
-
 
 } finally {
 
@@ -1657,17 +2453,12 @@ container.innerHTML =
 
 try {
 
-
 const currentDate =
 getTodayString();
 
 const currentTime =
 getCurrentTimeString();
 
-
-/* =======================================================
-   おすすめ設定
-======================================================= */
 
 const {
 data: settings,
@@ -1723,10 +2514,6 @@ return;
 }
 
 
-/* =======================================================
-   現在有効なおすすめ
-======================================================= */
-
 const active =
 settings.filter(
 item => {
@@ -1767,7 +2554,7 @@ return;
 const first =
 active[0];
 
-let period = [];
+const period = [];
 
 
 if (
@@ -1815,7 +2602,7 @@ period.join(" / ");
 
 
 /* =======================================================
-   アニメID
+   Anime ID
 ======================================================= */
 
 const ids =
@@ -1834,7 +2621,7 @@ id !== ""
 if (!ids.length) {
 
 container.innerHTML =
-'<div class="recommendation-empty">現在、おすすめアニメは設定されていません。</div>';
+'<div class="recommendation-empty">現在、おすすめアニメがありません。</div>';
 
 return;
 
@@ -1842,7 +2629,7 @@ return;
 
 
 /* =======================================================
-   アニメ取得
+   Anime取得
 ======================================================= */
 
 const {
@@ -1886,7 +2673,7 @@ anime
 
 
 /* =======================================================
-   表示順を維持
+   表示順維持
 ======================================================= */
 
 const uniqueAnime = [];
@@ -1905,9 +2692,7 @@ String(setting.anime_id)
 );
 
 
-if (
-!anime
-) {
+if (!anime) {
 
 continue;
 
@@ -1945,7 +2730,7 @@ uniqueAnime.length === 0
 ) {
 
 container.innerHTML =
-'<div class="recommendation-empty">現在、おすすめアニメを設定できる作品がありません。</div>';
+'<div class="recommendation-empty">現在、おすすめアニメを表示できません。</div>';
 
 return;
 
@@ -1963,7 +2748,6 @@ document.createElement(
 "article"
 );
 
-
 card.className =
 "recommendation-card";
 
@@ -1972,7 +2756,6 @@ const link =
 document.createElement(
 "a"
 );
-
 
 link.href =
 "anime-detail.html?id=" +
@@ -1986,10 +2769,8 @@ document.createElement(
 "div"
 );
 
-
 number.className =
 "recommendation-number";
-
 
 number.textContent =
 `RECOMMENDATION ${index + 1}`;
@@ -1999,7 +2780,6 @@ const title =
 document.createElement(
 "h3"
 );
-
 
 title.textContent =
 anime.title ||
@@ -2017,7 +2797,7 @@ title
 );
 
 
-/* 英語・ローマ字タイトル */
+/* 英語・ローマ字 */
 
 const english =
 anime.title_english ||
@@ -2077,6 +2857,7 @@ card
 );
 
 });
+
 
 } catch (error) {
 
@@ -2172,7 +2953,7 @@ onerror="this.style.display='none'">
 }
 
 
-/* 企業名 */
+/* 企業 */
 
 if (
 ad.company_name
@@ -2276,12 +3057,31 @@ document.addEventListener(
 () => {
 
 
+/* 認証 */
+
 initAuth();
+
+
+/* おすすめ */
 
 loadRecommendations();
 
+
+/* 広告 */
+
 loadAdvertisement();
 
+
+/* 検索 */
+
+$("search-form")
+.addEventListener(
+"submit",
+handleSearch
+);
+
+
+/* Auth */
 
 $("auth-button")
 .addEventListener(
@@ -2337,6 +3137,8 @@ $("logout-button")
 logout
 );
 
+
+/* Escape */
 
 document.addEventListener(
 "keydown",
