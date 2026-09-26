@@ -1,1564 +1,1531 @@
-```html
 <!DOCTYPE html>
+
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
+```
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
 
-    <title>アニメ一覧 | Animecia</title>
+<title>アニメ一覧 | Animecia</title>
 
-    <meta
-        name="description"
-        content="Animeciaのアニメ一覧。作品名、ジャンル、放送年、シーズン、放送状況、評価、人気度などからアニメを検索できます。"
-    >
+<meta
+    name="description"
+    content="Animeciaのアニメ一覧。作品名、ジャンル、放送年、シーズン、放送状況、評価、人気度などからアニメを検索できます。"
+>
 
-    <link
-        rel="canonical"
-        href="https://media-mania.github.io/Animecia/anime.html"
-    >
+<link
+    rel="canonical"
+    href="https://media-mania.github.io/Animecia/anime.html"
+>
 
-    <meta
-        property="og:title"
-        content="アニメ一覧 | Animecia"
-    >
+<meta
+    property="og:title"
+    content="アニメ一覧 | Animecia"
+>
 
-    <meta
-        property="og:description"
-        content="次に見るアニメを見つける。Animeciaのアニメ一覧。"
-    >
+<meta
+    property="og:description"
+    content="次に見るアニメを見つける。Animeciaのアニメ一覧。"
+>
 
-    <meta
-        property="og:type"
-        content="website"
-    >
+<meta
+    property="og:type"
+    content="website"
+>
 
-    <meta
-        property="og:url"
-        content="https://media-mania.github.io/Animecia/anime.html"
-    >
+<meta
+    property="og:url"
+    content="https://media-mania.github.io/Animecia/anime.html"
+>
 
-    <link rel="stylesheet" href="style.css">
+<meta
+    property="og:site_name"
+    content="Animecia"
+>
 
-    <style>
+<link
+    rel="stylesheet"
+    href="style.css"
+>
 
-        /* =========================================
-           Animecia - Anime List
-        ========================================= */
+<style>
+    .anime-page {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 32px 20px 70px;
+    }
 
+    .page-header {
+        margin-bottom: 28px;
+    }
+
+    .breadcrumb {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-bottom: 14px;
+        font-size: 13px;
+        color: #777;
+    }
+
+    .breadcrumb a {
+        color: inherit;
+        text-decoration: none;
+    }
+
+    .breadcrumb a:hover {
+        text-decoration: underline;
+    }
+
+    .page-header h1 {
+        margin: 0 0 10px;
+        font-size: clamp(28px, 4vw, 42px);
+        line-height: 1.2;
+    }
+
+    .page-header p {
+        margin: 0;
+        color: #666;
+        line-height: 1.8;
+    }
+
+    .anime-search-area,
+    .filter-area {
+        margin-bottom: 24px;
+        padding: 22px;
+        background: #fff;
+        border: 1px solid #e8e8e8;
+        border-radius: 16px;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, .04);
+    }
+
+    .search-box {
+        display: flex;
+        gap: 10px;
+    }
+
+    .search-box input {
+        flex: 1;
+        min-width: 0;
+        height: 48px;
+        padding: 0 16px;
+        border: 1px solid #d8d8d8;
+        border-radius: 10px;
+        background: #fff;
+        font-size: 15px;
+        outline: none;
+    }
+
+    .search-box input:focus {
+        border-color: #555;
+        box-shadow: 0 0 0 3px rgba(0, 0, 0, .05);
+    }
+
+    .search-button,
+    .reset-button {
+        height: 48px;
+        padding: 0 20px;
+        border: 0;
+        border-radius: 10px;
+        cursor: pointer;
+        font-weight: 700;
+        transition: .2s ease;
+    }
+
+    .search-button {
+        background: #222;
+        color: #fff;
+    }
+
+    .search-button:hover {
+        opacity: .85;
+    }
+
+    .reset-button {
+        background: #f0f0f0;
+        color: #222;
+    }
+
+    .reset-button:hover {
+        background: #e5e5e5;
+    }
+
+    .filter-title {
+        margin: 0 0 16px;
+        font-size: 18px;
+        font-weight: 800;
+    }
+
+    .filters {
+        display: grid;
+        grid-template-columns:
+            repeat(auto-fit, minmax(170px, 1fr));
+        gap: 14px;
+    }
+
+    .filter-item {
+        display: flex;
+        flex-direction: column;
+        gap: 7px;
+    }
+
+    .filter-item label {
+        font-size: 13px;
+        font-weight: 700;
+        color: #555;
+    }
+
+    .filter-item select {
+        width: 100%;
+        height: 44px;
+        padding: 0 12px;
+        border: 1px solid #d8d8d8;
+        border-radius: 9px;
+        background: #fff;
+        color: #222;
+        font-size: 14px;
+        outline: none;
+    }
+
+    .filter-item select:focus {
+        border-color: #555;
+    }
+
+    .filter-actions {
+        display: flex;
+        justify-content: flex-end;
+        margin-top: 16px;
+    }
+
+    .result-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 15px;
+        margin-bottom: 18px;
+    }
+
+    .result-count {
+        margin: 0;
+        font-size: 17px;
+        font-weight: 800;
+    }
+
+    .result-count span {
+        font-size: 24px;
+    }
+
+    .anime-grid {
+        display: grid;
+        grid-template-columns:
+            repeat(auto-fill, minmax(250px, 1fr));
+        gap: 22px;
+    }
+
+    .anime-card {
+        overflow: hidden;
+        background: #fff;
+        border: 1px solid #e7e7e7;
+        border-radius: 16px;
+        box-shadow: 0 5px 18px rgba(0, 0, 0, .05);
+        transition:
+            transform .2s ease,
+            box-shadow .2s ease;
+    }
+
+    .anime-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 12px 30px rgba(0, 0, 0, .09);
+    }
+
+    .anime-card-image {
+        position: relative;
+        width: 100%;
+        aspect-ratio: 3 / 4;
+        overflow: hidden;
+        background: #f0f0f0;
+    }
+
+    .anime-card-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+    }
+
+    .image-placeholder {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #999;
+        font-size: 14px;
+        background:
+            linear-gradient(
+                135deg,
+                #eeeeee,
+                #dddddd
+            );
+    }
+
+    .score-badge {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        padding: 6px 9px;
+        border-radius: 8px;
+        background: rgba(0, 0, 0, .82);
+        color: #fff;
+        font-size: 13px;
+        font-weight: 800;
+        backdrop-filter: blur(5px);
+    }
+
+    .anime-card-body {
+        padding: 17px;
+    }
+
+    .anime-card-title {
+        margin: 0 0 5px;
+        font-size: 18px;
+        line-height: 1.45;
+    }
+
+    .anime-card-title a {
+        color: #222;
+        text-decoration: none;
+    }
+
+    .anime-card-title a:hover {
+        text-decoration: underline;
+    }
+
+    .anime-card-subtitle {
+        margin: 0 0 12px;
+        color: #777;
+        font-size: 12px;
+        line-height: 1.5;
+    }
+
+    .meta-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        margin-bottom: 12px;
+    }
+
+    .meta-tag {
+        display: inline-flex;
+        align-items: center;
+        padding: 4px 7px;
+        border-radius: 6px;
+        background: #f2f2f2;
+        color: #555;
+        font-size: 11px;
+        line-height: 1.2;
+    }
+
+    .genre-tag {
+        background: #eeeeee;
+        color: #333;
+    }
+
+    .anime-description {
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 4;
+        overflow: hidden;
+        margin: 0 0 14px;
+        color: #666;
+        font-size: 13px;
+        line-height: 1.75;
+    }
+
+    .anime-stats {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+        margin-bottom: 14px;
+    }
+
+    .anime-stat {
+        padding: 9px;
+        border-radius: 8px;
+        background: #f7f7f7;
+    }
+
+    .anime-stat-label {
+        display: block;
+        margin-bottom: 2px;
+        color: #888;
+        font-size: 10px;
+    }
+
+    .anime-stat-value {
+        font-size: 13px;
+        font-weight: 800;
+    }
+
+    .detail-link {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        min-height: 42px;
+        border-radius: 9px;
+        background: #222;
+        color: #fff;
+        text-decoration: none;
+        font-size: 13px;
+        font-weight: 700;
+        transition: .2s ease;
+    }
+
+    .detail-link:hover {
+        opacity: .85;
+    }
+
+    .loading,
+    .empty-state,
+    .error-state {
+        grid-column: 1 / -1;
+        padding: 60px 20px;
+        text-align: center;
+        border: 1px solid #e7e7e7;
+        border-radius: 16px;
+        background: #fff;
+    }
+
+    .loading {
+        color: #777;
+    }
+
+    .empty-state h2,
+    .error-state h2 {
+        margin: 0 0 8px;
+        font-size: 20px;
+    }
+
+    .empty-state p,
+    .error-state p {
+        margin: 0;
+        color: #777;
+        line-height: 1.7;
+    }
+
+    .error-state {
+        border-color: #ead5d5;
+    }
+
+    .error-state h2 {
+        color: #a33;
+    }
+
+    .error-detail {
+        margin-top: 12px !important;
+        font-size: 12px;
+        color: #999 !important;
+        word-break: break-word;
+    }
+
+    @media (max-width: 700px) {
         .anime-page {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 32px 20px 70px;
-        }
-
-        .page-header {
-            margin-bottom: 28px;
-        }
-
-        .breadcrumb {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            margin-bottom: 14px;
-            font-size: 13px;
-            color: #777;
-        }
-
-        .breadcrumb a {
-            color: inherit;
-            text-decoration: none;
-        }
-
-        .breadcrumb a:hover {
-            text-decoration: underline;
-        }
-
-        .page-header h1 {
-            margin: 0 0 10px;
-            font-size: clamp(28px, 4vw, 42px);
-            line-height: 1.2;
-        }
-
-        .page-header p {
-            margin: 0;
-            color: #666;
-            line-height: 1.8;
-        }
-
-        /* Search */
-
-        .anime-search-area {
-            margin-bottom: 24px;
-            padding: 22px;
-            background: #fff;
-            border: 1px solid #e8e8e8;
-            border-radius: 16px;
-            box-shadow: 0 5px 20px rgba(0,0,0,.04);
+            padding: 24px 14px 50px;
         }
 
         .search-box {
-            display: flex;
-            gap: 10px;
-        }
-
-        .search-box input {
-            flex: 1;
-            min-width: 0;
-            height: 48px;
-            padding: 0 16px;
-            border: 1px solid #d8d8d8;
-            border-radius: 10px;
-            background: #fff;
-            font-size: 15px;
-            outline: none;
-        }
-
-        .search-box input:focus {
-            border-color: #555;
-            box-shadow: 0 0 0 3px rgba(0,0,0,.05);
+            flex-direction: column;
         }
 
         .search-button,
         .reset-button {
-            height: 48px;
-            padding: 0 20px;
-            border: 0;
-            border-radius: 10px;
-            cursor: pointer;
-            font-weight: 700;
-            transition: .2s ease;
-        }
-
-        .search-button {
-            background: #222;
-            color: #fff;
-        }
-
-        .search-button:hover {
-            opacity: .85;
-        }
-
-        .reset-button {
-            background: #f0f0f0;
-            color: #222;
-        }
-
-        .reset-button:hover {
-            background: #e5e5e5;
-        }
-
-        /* Filters */
-
-        .filter-area {
-            margin-bottom: 28px;
-            padding: 22px;
-            background: #fff;
-            border: 1px solid #e8e8e8;
-            border-radius: 16px;
-            box-shadow: 0 5px 20px rgba(0,0,0,.04);
-        }
-
-        .filter-title {
-            margin: 0 0 16px;
-            font-size: 18px;
-            font-weight: 800;
-        }
-
-        .filters {
-            display: grid;
-            grid-template-columns:
-                repeat(auto-fit, minmax(170px, 1fr));
-            gap: 14px;
-        }
-
-        .filter-item {
-            display: flex;
-            flex-direction: column;
-            gap: 7px;
-        }
-
-        .filter-item label {
-            font-size: 13px;
-            font-weight: 700;
-            color: #555;
-        }
-
-        .filter-item select {
             width: 100%;
-            height: 44px;
-            padding: 0 12px;
-            border: 1px solid #d8d8d8;
-            border-radius: 9px;
-            background: #fff;
-            color: #222;
-            font-size: 14px;
-            outline: none;
         }
-
-        .filter-item select:focus {
-            border-color: #555;
-        }
-
-        .filter-actions {
-            display: flex;
-            justify-content: flex-end;
-            margin-top: 16px;
-        }
-
-        /* Result header */
-
-        .result-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 15px;
-            margin-bottom: 18px;
-        }
-
-        .result-count {
-            margin: 0;
-            font-size: 17px;
-            font-weight: 800;
-        }
-
-        .result-count span {
-            font-size: 24px;
-        }
-
-        /* Anime grid */
 
         .anime-grid {
-            display: grid;
             grid-template-columns:
-                repeat(auto-fill, minmax(250px, 1fr));
-            gap: 22px;
-        }
-
-        .anime-card {
-            overflow: hidden;
-            background: #fff;
-            border: 1px solid #e7e7e7;
-            border-radius: 16px;
-            box-shadow: 0 5px 18px rgba(0,0,0,.05);
-            transition:
-                transform .2s ease,
-                box-shadow .2s ease;
-        }
-
-        .anime-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 12px 30px rgba(0,0,0,.09);
-        }
-
-        .anime-card-image {
-            position: relative;
-            width: 100%;
-            aspect-ratio: 3 / 4;
-            overflow: hidden;
-            background: #f0f0f0;
-        }
-
-        .anime-card-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-        }
-
-        .image-placeholder {
-            width: 100%;
-            height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #999;
-            font-size: 14px;
-            background:
-                linear-gradient(
-                    135deg,
-                    #eeeeee,
-                    #dddddd
-                );
-        }
-
-        .score-badge {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            padding: 6px 9px;
-            border-radius: 8px;
-            background: rgba(0,0,0,.82);
-            color: #fff;
-            font-size: 13px;
-            font-weight: 800;
-            backdrop-filter: blur(5px);
+                repeat(2, minmax(0, 1fr));
+            gap: 12px;
         }
 
         .anime-card-body {
-            padding: 17px;
+            padding: 12px;
         }
 
         .anime-card-title {
-            margin: 0 0 5px;
-            font-size: 18px;
-            line-height: 1.45;
-        }
-
-        .anime-card-title a {
-            color: #222;
-            text-decoration: none;
-        }
-
-        .anime-card-title a:hover {
-            text-decoration: underline;
-        }
-
-        .anime-card-subtitle {
-            margin: 0 0 12px;
-            color: #777;
-            font-size: 12px;
-            line-height: 1.5;
-        }
-
-        .meta-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 6px;
-            margin-bottom: 12px;
-        }
-
-        .meta-tag {
-            display: inline-flex;
-            align-items: center;
-            padding: 4px 7px;
-            border-radius: 6px;
-            background: #f2f2f2;
-            color: #555;
-            font-size: 11px;
-            line-height: 1.2;
-        }
-
-        .genre-tag {
-            background: #eeeeee;
-            color: #333;
+            font-size: 15px;
         }
 
         .anime-description {
-            display: -webkit-box;
-            -webkit-box-orient: vertical;
-            -webkit-line-clamp: 4;
-            overflow: hidden;
-            margin: 0 0 14px;
-            color: #666;
-            font-size: 13px;
-            line-height: 1.75;
+            -webkit-line-clamp: 3;
+            font-size: 12px;
         }
 
         .anime-stats {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 8px;
-            margin-bottom: 14px;
+            grid-template-columns: 1fr;
         }
 
-        .anime-stat {
-            padding: 9px;
-            border-radius: 8px;
-            background: #f7f7f7;
-        }
-
-        .anime-stat-label {
+        .filter-actions {
             display: block;
-            margin-bottom: 2px;
-            color: #888;
-            font-size: 10px;
+        }
+    }
+
+    @media (max-width: 430px) {
+        .anime-grid {
+            grid-template-columns: 1fr;
         }
 
-        .anime-stat-value {
-            font-size: 13px;
-            font-weight: 800;
+        .anime-card-image {
+            aspect-ratio: 16 / 9;
         }
+    }
+</style>
+```
 
-        .detail-link {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 100%;
-            min-height: 42px;
-            border-radius: 9px;
-            background: #222;
-            color: #fff;
-            text-decoration: none;
-            font-size: 13px;
-            font-weight: 700;
-            transition: .2s ease;
-        }
-
-        .detail-link:hover {
-            opacity: .85;
-        }
-
-        /* States */
-
-        .loading,
-        .empty-state,
-        .error-state {
-            grid-column: 1 / -1;
-            padding: 60px 20px;
-            text-align: center;
-            border: 1px solid #e7e7e7;
-            border-radius: 16px;
-            background: #fff;
-        }
-
-        .loading {
-            color: #777;
-        }
-
-        .empty-state h2,
-        .error-state h2 {
-            margin: 0 0 8px;
-            font-size: 20px;
-        }
-
-        .empty-state p,
-        .error-state p {
-            margin: 0;
-            color: #777;
-            line-height: 1.7;
-        }
-
-        .error-state {
-            border-color: #ead5d5;
-        }
-
-        .error-state h2 {
-            color: #a33;
-        }
-
-        /* Mobile */
-
-        @media (max-width: 700px) {
-
-            .anime-page {
-                padding: 24px 14px 50px;
-            }
-
-            .search-box {
-                flex-direction: column;
-            }
-
-            .search-button,
-            .reset-button {
-                width: 100%;
-            }
-
-            .anime-grid {
-                grid-template-columns:
-                    repeat(2, minmax(0, 1fr));
-                gap: 12px;
-            }
-
-            .anime-card-body {
-                padding: 12px;
-            }
-
-            .anime-card-title {
-                font-size: 15px;
-            }
-
-            .anime-description {
-                -webkit-line-clamp: 3;
-                font-size: 12px;
-            }
-
-            .anime-stats {
-                grid-template-columns: 1fr;
-            }
-
-        }
-
-        @media (max-width: 430px) {
-
-            .anime-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .anime-card-image {
-                aspect-ratio: 16 / 9;
-            }
-
-        }
-
-    </style>
 </head>
 
 <body>
 
-    <!-- =========================================
-         Header
-    ========================================== -->
+<header class="site-header">
+    <div class="container">
 
-    <header class="site-header">
+```
+    <a
+        href="index.html"
+        class="site-logo"
+        aria-label="Animecia ホーム"
+    >
+        Animecia
+    </a>
 
-        <div class="container">
+    <nav
+        class="site-nav"
+        aria-label="メインナビゲーション"
+    >
+        <a href="index.html">
+            ホーム
+        </a>
 
-            <a
-                href="index.html"
-                class="site-logo"
-                aria-label="Animecia ホーム"
-            >
-                Animecia
-            </a>
+        <a
+            href="anime.html"
+            aria-current="page"
+        >
+            アニメ一覧
+        </a>
 
-            <nav
-                class="site-nav"
-                aria-label="メインナビゲーション"
-            >
-                <a href="index.html">
-                    ホーム
-                </a>
+        <a href="terms.html">
+            利用規約
+        </a>
 
-                <a
-                    href="anime.html"
-                    aria-current="page"
-                >
-                    アニメ一覧
-                </a>
+        <a href="privacy.html">
+            プライバシー
+        </a>
+    </nav>
 
-                <a href="terms.html">
-                    利用規約
-                </a>
+</div>
+```
 
-                <a href="privacy.html">
-                    プライバシー
-                </a>
-            </nav>
+</header>
 
-        </div>
+<main>
 
-    </header>
+```
+<div class="anime-page">
 
+    <div class="breadcrumb">
+        <a href="index.html">
+            ホーム
+        </a>
 
-    <main>
+        <span>›</span>
 
-        <div class="anime-page">
-
-            <!-- Breadcrumb -->
-
-            <div class="breadcrumb">
-
-                <a href="index.html">
-                    ホーム
-                </a>
-
-                <span>›</span>
-
-                <span>
-                    アニメ一覧
-                </span>
-
-            </div>
+        <span>
+            アニメ一覧
+        </span>
+    </div>
 
 
-            <!-- Page header -->
+    <section class="page-header">
 
-            <section class="page-header">
+        <h1>
+            アニメ一覧
+        </h1>
 
-                <h1>
-                    アニメ一覧
-                </h1>
+        <p>
+            Animeciaに登録されているアニメを検索できます。
+            作品名、ジャンル、放送年、シーズン、放送状況などから
+            次に見るアニメを探せます。
+        </p>
 
-                <p>
-                    Animeciaに登録されているアニメを検索できます。
-                    作品名、ジャンル、放送年、シーズン、放送状況などから
-                    次に見るアニメを探せます。
-                </p>
-
-            </section>
+    </section>
 
 
-            <!-- Search -->
+    <section
+        class="anime-search-area"
+        aria-label="アニメ検索"
+    >
 
-            <section
-                class="anime-search-area"
+        <div class="search-box">
+
+            <input
+                id="search-input"
+                type="search"
+                placeholder="作品名、英語名、ローマ字などで検索"
+                autocomplete="off"
                 aria-label="アニメ検索"
             >
 
-                <div class="search-box">
-
-                    <input
-                        id="search-input"
-                        type="search"
-                        placeholder="作品名、英語名、ローマ字などで検索"
-                        autocomplete="off"
-                    >
-
-                    <button
-                        id="search-button"
-                        class="search-button"
-                        type="button"
-                    >
-                        検索
-                    </button>
-
-                </div>
-
-            </section>
-
-
-            <!-- Filters -->
-
-            <section
-                class="filter-area"
-                aria-label="アニメフィルター"
+            <button
+                id="search-button"
+                class="search-button"
+                type="button"
             >
-
-                <h2 class="filter-title">
-                    絞り込み
-                </h2>
-
-                <div class="filters">
-
-                    <!-- Year -->
-
-                    <div class="filter-item">
-
-                        <label for="year-filter">
-                            放送年
-                        </label>
-
-                        <select id="year-filter">
-
-                            <option value="">
-                                すべて
-                            </option>
-
-                        </select>
-
-                    </div>
-
-
-                    <!-- Season -->
-
-                    <div class="filter-item">
-
-                        <label for="season-filter">
-                            シーズン
-                        </label>
-
-                        <select id="season-filter">
-
-                            <option value="">
-                                すべて
-                            </option>
-
-                            <option value="WINTER">
-                                冬
-                            </option>
-
-                            <option value="SPRING">
-                                春
-                            </option>
-
-                            <option value="SUMMER">
-                                夏
-                            </option>
-
-                            <option value="FALL">
-                                秋
-                            </option>
-
-                        </select>
-
-                    </div>
-
-
-                    <!-- Status -->
-
-                    <div class="filter-item">
-
-                        <label for="status-filter">
-                            放送状況
-                        </label>
-
-                        <select id="status-filter">
-
-                            <option value="">
-                                すべて
-                            </option>
-
-                            <option value="FINISHED">
-                                放送終了
-                            </option>
-
-                            <option value="RELEASING">
-                                放送中
-                            </option>
-
-                            <option value="NOT_YET_RELEASED">
-                                放送前
-                            </option>
-
-                            <option value="CANCELLED">
-                                中止
-                            </option>
-
-                            <option value="HIATUS">
-                                休止中
-                            </option>
-
-                        </select>
-
-                    </div>
-
-
-                    <!-- Format -->
-
-                    <div class="filter-item">
-
-                        <label for="format-filter">
-                            フォーマット
-                        </label>
-
-                        <select id="format-filter">
-
-                            <option value="">
-                                すべて
-                            </option>
-
-                            <option value="TV">
-                                TV
-                            </option>
-
-                            <option value="TV_SHORT">
-                                TVショート
-                            </option>
-
-                            <option value="MOVIE">
-                                劇場版
-                            </option>
-
-                            <option value="OVA">
-                                OVA
-                            </option>
-
-                            <option value="ONA">
-                                ONA
-                            </option>
-
-                            <option value="SPECIAL">
-                                特別編
-                            </option>
-
-                            <option value="MUSIC">
-                                Music
-                            </option>
-
-                        </select>
-
-                    </div>
-
-
-                    <!-- Genre -->
-
-                    <div class="filter-item">
-
-                        <label for="genre-filter">
-                            ジャンル
-                        </label>
-
-                        <select id="genre-filter">
-
-                            <option value="">
-                                すべて
-                            </option>
-
-                        </select>
-
-                    </div>
-
-
-                    <!-- Sort -->
-
-                    <div class="filter-item">
-
-                        <label for="sort-filter">
-                            並び順
-                        </label>
-
-                        <select id="sort-filter">
-
-                            <option value="default">
-                                おすすめ順
-                            </option>
-
-                            <option value="score">
-                                評価順
-                            </option>
-
-                            <option value="popularity">
-                                人気順
-                            </option>
-
-                            <option value="newest">
-                                新しい順
-                            </option>
-
-                            <option value="title">
-                                タイトル順
-                            </option>
-
-                        </select>
-
-                    </div>
-
-                </div>
-
-
-                <div class="filter-actions">
-
-                    <button
-                        id="reset-button"
-                        class="reset-button"
-                        type="button"
-                    >
-                        条件をリセット
-                    </button>
-
-                </div>
-
-            </section>
-
-
-            <!-- Result -->
-
-            <section>
-
-                <div class="result-header">
-
-                    <p
-                        class="result-count"
-                        id="result-count"
-                    >
-                        <span>0</span> 作品
-                    </p>
-
-                </div>
-
-
-                <div
-                    id="anime-grid"
-                    class="anime-grid"
-                >
-
-                    <div class="loading">
-                        アニメ情報を読み込んでいます……
-                    </div>
-
-                </div>
-
-            </section>
+                検索
+            </button>
 
         </div>
 
-    </main>
+    </section>
 
 
-    <!-- =========================================
-         Footer
-    ========================================== -->
+    <section
+        class="filter-area"
+        aria-label="アニメフィルター"
+    >
 
-    <footer class="site-footer">
+        <h2 class="filter-title">
+            絞り込み
+        </h2>
 
-        <div class="container">
+        <div class="filters">
 
-            <div class="footer-content">
+            <div class="filter-item">
 
-                <div>
+                <label for="year-filter">
+                    放送年
+                </label>
 
-                    <strong>
-                        Animecia
-                    </strong>
+                <select id="year-filter">
 
-                    <p>
-                        次に見るアニメを見つける。
-                    </p>
+                    <option value="">
+                        すべて
+                    </option>
 
-                </div>
-
-                <nav
-                    class="footer-nav"
-                    aria-label="フッターナビゲーション"
-                >
-
-                    <a href="index.html">
-                        ホーム
-                    </a>
-
-                    <a href="anime.html">
-                        アニメ一覧
-                    </a>
-
-                    <a href="terms.html">
-                        利用規約
-                    </a>
-
-                    <a href="privacy.html">
-                        プライバシー
-                    </a>
-
-                </nav>
+                </select>
 
             </div>
 
-            <p class="copyright">
-                © Animecia
+
+            <div class="filter-item">
+
+                <label for="season-filter">
+                    シーズン
+                </label>
+
+                <select id="season-filter">
+
+                    <option value="">
+                        すべて
+                    </option>
+
+                    <option value="WINTER">
+                        冬
+                    </option>
+
+                    <option value="SPRING">
+                        春
+                    </option>
+
+                    <option value="SUMMER">
+                        夏
+                    </option>
+
+                    <option value="FALL">
+                        秋
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="filter-item">
+
+                <label for="status-filter">
+                    放送状況
+                </label>
+
+                <select id="status-filter">
+
+                    <option value="">
+                        すべて
+                    </option>
+
+                    <option value="FINISHED">
+                        放送終了
+                    </option>
+
+                    <option value="RELEASING">
+                        放送中
+                    </option>
+
+                    <option value="NOT_YET_RELEASED">
+                        放送前
+                    </option>
+
+                    <option value="CANCELLED">
+                        中止
+                    </option>
+
+                    <option value="HIATUS">
+                        休止中
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="filter-item">
+
+                <label for="format-filter">
+                    フォーマット
+                </label>
+
+                <select id="format-filter">
+
+                    <option value="">
+                        すべて
+                    </option>
+
+                    <option value="TV">
+                        TV
+                    </option>
+
+                    <option value="TV_SHORT">
+                        TVショート
+                    </option>
+
+                    <option value="MOVIE">
+                        劇場版
+                    </option>
+
+                    <option value="OVA">
+                        OVA
+                    </option>
+
+                    <option value="ONA">
+                        ONA
+                    </option>
+
+                    <option value="SPECIAL">
+                        特別編
+                    </option>
+
+                    <option value="MUSIC">
+                        Music
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="filter-item">
+
+                <label for="genre-filter">
+                    ジャンル
+                </label>
+
+                <select id="genre-filter">
+
+                    <option value="">
+                        すべて
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="filter-item">
+
+                <label for="sort-filter">
+                    並び順
+                </label>
+
+                <select id="sort-filter">
+
+                    <option value="default">
+                        おすすめ順
+                    </option>
+
+                    <option value="score">
+                        評価順
+                    </option>
+
+                    <option value="popularity">
+                        人気順
+                    </option>
+
+                    <option value="newest">
+                        新しい順
+                    </option>
+
+                    <option value="title">
+                        タイトル順
+                    </option>
+
+                </select>
+
+            </div>
+
+        </div>
+
+
+        <div class="filter-actions">
+
+            <button
+                id="reset-button"
+                class="reset-button"
+                type="button"
+            >
+                条件をリセット
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <section aria-label="アニメ作品一覧">
+
+        <div class="result-header">
+
+            <p
+                class="result-count"
+                id="result-count"
+            >
+                <span>0</span> 作品
             </p>
 
         </div>
 
-    </footer>
+
+        <div
+            id="anime-grid"
+            class="anime-grid"
+        >
+
+            <div class="loading">
+                アニメ情報を読み込んでいます……
+            </div>
+
+        </div>
+
+    </section>
+
+</div>
+```
+
+</main>
+
+<footer class="site-footer">
+
+```
+<div class="container">
+
+    <div class="footer-content">
+
+        <div>
+
+            <strong>
+                Animecia
+            </strong>
+
+            <p>
+                次に見るアニメを見つける。
+            </p>
+
+        </div>
 
 
-    <!-- =========================================
-         Supabase
-    ========================================== -->
+        <nav
+            class="footer-nav"
+            aria-label="フッターナビゲーション"
+        >
 
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+            <a href="index.html">
+                ホーム
+            </a>
 
+            <a href="anime.html">
+                アニメ一覧
+            </a>
 
-    <script>
+            <a href="terms.html">
+                利用規約
+            </a>
 
-        /* =========================================
-           Supabase configuration
-        ========================================== */
+            <a href="privacy.html">
+                プライバシー
+            </a>
 
-        const SUPABASE_URL =
-            "https://bhgdjuwlxvbaeraaivmh.supabase.co";
+        </nav>
 
-        const SUPABASE_ANON_KEY =
-            "sb_publishable_-rZ4HusVezs5IlZQnUQ-Kw_SLUd8R0c";
-
-        const supabaseClient =
-            window.supabase.createClient(
-                SUPABASE_URL,
-                SUPABASE_ANON_KEY
-            );
-
-
-        /* =========================================
-           State
-        ========================================== */
-
-        let animeData = [];
-
-        let filteredAnime = [];
+    </div>
 
 
-        /* =========================================
-           DOM
-        ========================================== */
+    <p class="copyright">
+        © Animecia
+    </p>
 
-        const animeGrid =
-            document.getElementById("anime-grid");
+</div>
+```
 
-        const resultCount =
-            document.getElementById("result-count");
+</footer>
 
-        const searchInput =
-            document.getElementById("search-input");
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-        const searchButton =
-            document.getElementById("search-button");
+<script>
+    const SUPABASE_URL =
+        "https://bhgdjuwlxvbaeraaivmh.supabase.co";
 
-        const resetButton =
-            document.getElementById("reset-button");
-
-        const yearFilter =
-            document.getElementById("year-filter");
-
-        const seasonFilter =
-            document.getElementById("season-filter");
-
-        const statusFilter =
-            document.getElementById("status-filter");
-
-        const formatFilter =
-            document.getElementById("format-filter");
-
-        const genreFilter =
-            document.getElementById("genre-filter");
-
-        const sortFilter =
-            document.getElementById("sort-filter");
+    const SUPABASE_ANON_KEY =
+        "sb_publishable_-rZ4HusVezs5IlZQnUQ-Kw_SLUd8R0c";
 
 
-        /* =========================================
-           Utilities
-        ========================================== */
-
-        function escapeHTML(value) {
-
-            if (value === null || value === undefined) {
-                return "";
-            }
-
-            return String(value)
-                .replace(/&/g, "&amp;")
-                .replace(/</g, "&lt;")
-                .replace(/>/g, "&gt;")
-                .replace(/"/g, "&quot;")
-                .replace(/'/g, "&#039;");
-
-        }
+    const supabaseClient =
+        window.supabase.createClient(
+            SUPABASE_URL,
+            SUPABASE_ANON_KEY
+        );
 
 
-        function safeURL(value) {
+    let animeData = [];
+    let filteredAnime = [];
 
-            if (!value) {
-                return "";
-            }
 
-            try {
+    const animeGrid =
+        document.getElementById("anime-grid");
 
-                const url =
-                    new URL(
-                        value,
-                        window.location.href
-                    );
+    const resultCount =
+        document.getElementById("result-count");
 
-                if (
-                    url.protocol === "http:" ||
-                    url.protocol === "https:"
-                ) {
-                    return url.href;
-                }
+    const searchInput =
+        document.getElementById("search-input");
 
-            } catch (error) {
+    const searchButton =
+        document.getElementById("search-button");
 
-                return "";
+    const resetButton =
+        document.getElementById("reset-button");
 
-            }
+    const yearFilter =
+        document.getElementById("year-filter");
 
+    const seasonFilter =
+        document.getElementById("season-filter");
+
+    const statusFilter =
+        document.getElementById("status-filter");
+
+    const formatFilter =
+        document.getElementById("format-filter");
+
+    const genreFilter =
+        document.getElementById("genre-filter");
+
+    const sortFilter =
+        document.getElementById("sort-filter");
+
+
+    function escapeHTML(value) {
+
+        if (
+            value === null ||
+            value === undefined
+        ) {
             return "";
-
         }
 
+        return String(value)
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "&#039;");
 
-        function getMainTitle(anime) {
-
-            return (
-                anime.title_japanese ||
-                anime.title_native ||
-                anime.title_romaji ||
-                anime.title_english ||
-                anime.title ||
-                "タイトル未設定"
-            );
-
-        }
+    }
 
 
-        function getSubTitle(anime) {
+    function safeURL(value) {
 
-            const main =
-                getMainTitle(anime);
-
-            const candidates = [
-                anime.title_english,
-                anime.title_romaji,
-                anime.title_native,
-                anime.title_japanese,
-                anime.title
-            ];
-
-            for (const title of candidates) {
-
-                if (
-                    title &&
-                    title !== main
-                ) {
-                    return title;
-                }
-
-            }
-
+        if (!value) {
             return "";
-
         }
 
+        try {
 
-        function getAnimeGenres(anime) {
-
-            if (
-                !anime ||
-                !Array.isArray(
-                    anime.anime_genres
-                )
-            ) {
-                return [];
-            }
-
-            return anime.anime_genres
-                .map(item => item?.genres)
-                .filter(Boolean)
-                .map(genre => ({
-                    id: genre.id,
-                    name: genre.name
-                }))
-                .filter(
-                    genre => genre.name
+            const url =
+                new URL(
+                    value,
+                    window.location.href
                 );
 
-        }
-
-
-        function formatStatus(status) {
-
-            const map = {
-
-                "FINISHED":
-                    "放送終了",
-
-                "RELEASING":
-                    "放送中",
-
-                "NOT_YET_RELEASED":
-                    "放送前",
-
-                "CANCELLED":
-                    "中止",
-
-                "HIATUS":
-                    "休止中"
-
-            };
-
-            return map[status] || status || "";
-
-        }
-
-
-        function formatSeason(season) {
-
-            const map = {
-
-                "WINTER": "冬",
-
-                "SPRING": "春",
-
-                "SUMMER": "夏",
-
-                "FALL": "秋"
-
-            };
-
-            return map[season] || season || "";
-
-        }
-
-
-        function formatFormat(format) {
-
-            const map = {
-
-                "TV": "TV",
-
-                "TV_SHORT": "TVショート",
-
-                "MOVIE": "劇場版",
-
-                "OVA": "OVA",
-
-                "ONA": "ONA",
-
-                "SPECIAL": "特別編",
-
-                "MUSIC": "Music"
-
-            };
-
-            return map[format] || format || "";
-
-        }
-
-
-        function formatNumber(value) {
-
             if (
-                value === null ||
-                value === undefined ||
-                value === ""
+                url.protocol === "http:" ||
+                url.protocol === "https:"
             ) {
-                return "—";
+                return url.href;
             }
 
-            return Number(value).toLocaleString(
-                "ja-JP"
+        } catch (error) {
+            return "";
+        }
+
+        return "";
+
+    }
+
+
+    function getMainTitle(anime) {
+
+        return (
+            anime.title_japanese ||
+            anime.title_native ||
+            anime.title_romaji ||
+            anime.title_english ||
+            anime.title ||
+            "タイトル未設定"
+        );
+
+    }
+
+
+    function getSubTitle(anime) {
+
+        const main =
+            getMainTitle(anime);
+
+        const candidates = [
+            anime.title_english,
+            anime.title_romaji,
+            anime.title_native,
+            anime.title_japanese,
+            anime.title
+        ];
+
+        for (const title of candidates) {
+
+            if (
+                title &&
+                title !== main
+            ) {
+                return title;
+            }
+
+        }
+
+        return "";
+
+    }
+
+
+    function getAnimeGenres(anime) {
+
+        if (
+            !anime ||
+            !Array.isArray(
+                anime.anime_genres
+            )
+        ) {
+            return [];
+        }
+
+        return anime.anime_genres
+            .map(item => item?.genres)
+            .filter(Boolean)
+            .map(genre => ({
+                id: genre.id,
+                name: genre.name
+            }))
+            .filter(
+                genre => genre.name
             );
 
+    }
+
+
+    function formatStatus(status) {
+
+        const map = {
+            FINISHED: "放送終了",
+            RELEASING: "放送中",
+            NOT_YET_RELEASED: "放送前",
+            CANCELLED: "中止",
+            HIATUS: "休止中"
+        };
+
+        return map[status] || status || "";
+
+    }
+
+
+    function formatSeason(season) {
+
+        const map = {
+            WINTER: "冬",
+            SPRING: "春",
+            SUMMER: "夏",
+            FALL: "秋"
+        };
+
+        return map[season] || season || "";
+
+    }
+
+
+    function formatFormat(format) {
+
+        const map = {
+            TV: "TV",
+            TV_SHORT: "TVショート",
+            MOVIE: "劇場版",
+            OVA: "OVA",
+            ONA: "ONA",
+            SPECIAL: "特別編",
+            MUSIC: "Music"
+        };
+
+        return map[format] || format || "";
+
+    }
+
+
+    function formatNumber(value) {
+
+        if (
+            value === null ||
+            value === undefined ||
+            value === ""
+        ) {
+            return "—";
         }
 
+        const number =
+            Number(value);
 
-        function formatScore(value) {
-
-            if (
-                value === null ||
-                value === undefined ||
-                value === ""
-            ) {
-                return "—";
-            }
-
-            const number =
-                Number(value);
-
-            if (Number.isNaN(number)) {
-                return "—";
-            }
-
-            return number.toFixed(1);
-
+        if (Number.isNaN(number)) {
+            return "—";
         }
 
+        return number.toLocaleString("ja-JP");
 
-        /* =========================================
-           Load anime
-        ========================================== */
+    }
 
-        async function loadAnime() {
 
-            animeGrid.innerHTML = `
-                <div class="loading">
-                    アニメ情報を読み込んでいます……
-                </div>
-            `;
+    function formatScore(value) {
 
-            try {
+        if (
+            value === null ||
+            value === undefined ||
+            value === ""
+        ) {
+            return "—";
+        }
 
-                const {
-                    data,
-                    error
-                } = await supabaseClient
+        const number =
+            Number(value);
 
-                    .from("anime")
+        if (Number.isNaN(number)) {
+            return "—";
+        }
 
-                    .select(`
-                        id,
-                        title,
-                        title_romaji,
-                        title_english,
-                        title_native,
-                        title_japanese,
-                        description,
-                        cover_image,
-                        banner_image,
-                        start_date,
-                        end_date,
-                        episodes,
-                        duration,
-                        status,
-                        format,
-                        season,
-                        season_year,
-                        source,
-                        average_score,
-                        popularity,
-                        favourites_count,
-                        site_url,
-                        updated_at,
-                        anime_genres (
-                            genres (
-                                id,
-                                name
-                            )
+        return number.toFixed(1);
+
+    }
+
+
+    async function loadAnime() {
+
+        animeGrid.innerHTML = `
+            <div class="loading">
+                アニメ情報を読み込んでいます……
+            </div>
+        `;
+
+        resultCount.innerHTML =
+            "<span>0</span> 作品";
+
+
+        try {
+
+            const {
+                data,
+                error
+            } = await supabaseClient
+                .from("anime")
+                .select(`
+                    id,
+                    title,
+                    title_romaji,
+                    title_english,
+                    title_native,
+                    title_japanese,
+                    description,
+                    cover_image,
+                    banner_image,
+                    start_date,
+                    end_date,
+                    episodes,
+                    duration,
+                    status,
+                    format,
+                    season,
+                    season_year,
+                    source,
+                    average_score,
+                    popularity,
+                    favourites_count,
+                    site_url,
+                    updated_at,
+                    anime_genres (
+                        genres (
+                            id,
+                            name
                         )
-                    `)
-
-                    .order(
-                        "popularity",
-                        {
-                            ascending: false,
-                            nullsFirst: false
-                        }
-                    );
-
-                if (error) {
-                    throw error;
-                }
-
-                animeData =
-                    Array.isArray(data)
-                        ? data
-                        : [];
-
-                createYearOptions();
-
-                createGenreOptions();
-
-                applyFilters();
-
-            } catch (error) {
-
-                console.error(
-                    "Anime loading error:",
-                    error
-                );
-
-                animeGrid.innerHTML = `
-                    <div class="error-state">
-
-                        <h2>
-                            アニメ情報を読み込めませんでした
-                        </h2>
-
-                        <p>
-                            Supabaseとの接続または
-                            データベース設定を確認してください。
-                        </p>
-
-                    </div>
-                `;
-
-                resultCount.innerHTML =
-                    "<span>0</span> 作品";
-
-            }
-
-        }
-
-
-        /* =========================================
-           Year options
-        ========================================== */
-
-        function createYearOptions() {
-
-            const years =
-                new Set();
-
-            animeData.forEach(anime => {
-
-                if (anime.season_year) {
-
-                    years.add(
-                        Number(
-                            anime.season_year
-                        )
-                    );
-
-                }
-
-                else if (
-                    anime.start_date
-                ) {
-
-                    const year =
-                        new Date(
-                            anime.start_date
-                        ).getFullYear();
-
-                    if (
-                        !Number.isNaN(year)
-                    ) {
-                        years.add(year);
+                    )
+                `)
+                .order(
+                    "popularity",
+                    {
+                        ascending: false,
+                        nullsFirst: false
                     }
+                );
+
+
+            if (error) {
+                throw error;
+            }
+
+
+            animeData =
+                Array.isArray(data)
+                    ? data
+                    : [];
+
+
+            createYearOptions();
+            createGenreOptions();
+
+
+            if (animeData.length === 0) {
+
+                showEmptyDatabase();
+
+                return;
+
+            }
+
+
+            applyFilters();
+
+
+        } catch (error) {
+
+            console.error(
+                "Anime loading error:",
+                error
+            );
+
+            showLoadError(error);
+
+        }
+
+    }
+
+
+    function showEmptyDatabase() {
+
+        resultCount.innerHTML =
+            "<span>0</span> 作品";
+
+
+        animeGrid.innerHTML = `
+            <div class="empty-state">
+
+                <h2>
+                    登録されているアニメはありません
+                </h2>
+
+                <p>
+                    現在、Animeciaのデータベースに
+                    アニメ作品が登録されていません。
+                </p>
+
+            </div>
+        `;
+
+    }
+
+
+    function showLoadError(error) {
+
+        resultCount.innerHTML =
+            "<span>0</span> 作品";
+
+
+        const message =
+            error?.message ||
+            error?.details ||
+            "Supabaseとの接続に失敗しました。";
+
+
+        animeGrid.innerHTML = `
+            <div class="error-state">
+
+                <h2>
+                    アニメ情報を読み込めませんでした
+                </h2>
+
+                <p>
+                    Supabaseとの接続または
+                    データベース設定を確認してください。
+                </p>
+
+                <p class="error-detail">
+                    ${escapeHTML(message)}
+                </p>
+
+            </div>
+        `;
+
+    }
+
+
+    function createYearOptions() {
+
+        const years =
+            new Set();
+
+
+        animeData.forEach(anime => {
+
+            if (anime.season_year) {
+
+                years.add(
+                    Number(
+                        anime.season_year
+                    )
+                );
+
+                return;
+
+            }
+
+
+            if (anime.start_date) {
+
+                const year =
+                    new Date(
+                        anime.start_date
+                    ).getFullYear();
+
+
+                if (
+                    !Number.isNaN(year)
+                ) {
+                    years.add(year);
+                }
+
+            }
+
+        });
+
+
+        const sortedYears =
+            [...years].sort(
+                (a, b) => b - a
+            );
+
+
+        yearFilter.innerHTML = `
+            <option value="">
+                すべて
+            </option>
+        `;
+
+
+        sortedYears.forEach(year => {
+
+            const option =
+                document.createElement(
+                    "option"
+                );
+
+            option.value =
+                String(year);
+
+            option.textContent =
+                `${year}年`;
+
+            yearFilter.appendChild(
+                option
+            );
+
+        });
+
+    }
+
+
+    function createGenreOptions() {
+
+        const genreMap =
+            new Map();
+
+
+        animeData.forEach(anime => {
+
+            const genres =
+                getAnimeGenres(anime);
+
+
+            genres.forEach(genre => {
+
+                if (
+                    genre.id !== null &&
+                    genre.id !== undefined &&
+                    genre.name
+                ) {
+
+                    genreMap.set(
+                        String(genre.id),
+                        genre.name
+                    );
 
                 }
 
             });
 
-            const sortedYears =
-                [...years].sort(
-                    (a, b) => b - a
+        });
+
+
+        const sortedGenres =
+            [...genreMap.entries()]
+                .sort(
+                    (a, b) =>
+                        String(a[1])
+                            .localeCompare(
+                                String(b[1]),
+                                "ja"
+                            )
                 );
 
-            yearFilter.innerHTML = `
-                <option value="">
-                    すべて
-                </option>
-            `;
 
-            sortedYears.forEach(year => {
+        genreFilter.innerHTML = `
+            <option value="">
+                すべて
+            </option>
+        `;
+
+
+        sortedGenres.forEach(
+            ([id, name]) => {
 
                 const option =
                     document.createElement(
                         "option"
                     );
 
-                option.value =
-                    String(year);
+                option.value = id;
+                option.textContent = name;
 
-                option.textContent =
-                    `${year}年`;
-
-                yearFilter.appendChild(
+                genreFilter.appendChild(
                     option
                 );
 
-            });
+            }
+        );
 
-        }
+    }
 
 
-        /* =========================================
-           Genre options
-        ========================================== */
+    function applyFilters() {
 
-        function createGenreOptions() {
+        const keyword =
+            searchInput.value
+                .trim()
+                .toLowerCase();
 
-            const genreMap =
-                new Map();
 
-            animeData.forEach(anime => {
+        const year =
+            yearFilter.value;
 
-                const genres =
-                    getAnimeGenres(anime);
+        const season =
+            seasonFilter.value;
 
-                genres.forEach(genre => {
+        const status =
+            statusFilter.value;
+
+        const format =
+            formatFilter.value;
+
+        const genre =
+            genreFilter.value;
+
+        const sort =
+            sortFilter.value;
+
+
+        filteredAnime =
+            animeData.filter(anime => {
+
+                if (keyword) {
+
+                    const searchableText = [
+
+                        anime.title,
+                        anime.title_romaji,
+                        anime.title_english,
+                        anime.title_native,
+                        anime.title_japanese,
+                        anime.description,
+                        anime.source,
+
+                        ...getAnimeGenres(
+                            anime
+                        ).map(
+                            item => item.name
+                        )
+
+                    ]
+                        .filter(Boolean)
+                        .join(" ")
+                        .toLowerCase();
+
 
                     if (
-                        genre.id !== null &&
-                        genre.id !== undefined
+                        !searchableText.includes(
+                            keyword
+                        )
                     ) {
-
-                        genreMap.set(
-                            String(genre.id),
-                            genre.name
-                        );
-
+                        return false;
                     }
-
-                });
-
-            });
-
-            const sortedGenres =
-                [...genreMap.entries()]
-                    .sort(
-                        (a, b) =>
-                            String(a[1])
-                                .localeCompare(
-                                    String(b[1]),
-                                    "ja"
-                                )
-                    );
-
-            genreFilter.innerHTML = `
-                <option value="">
-                    すべて
-                </option>
-            `;
-
-            sortedGenres.forEach(
-                ([id, name]) => {
-
-                    const option =
-                        document.createElement(
-                            "option"
-                        );
-
-                    option.value = id;
-
-                    option.textContent =
-                        name;
-
-                    genreFilter.appendChild(
-                        option
-                    );
 
                 }
-            );
-
-        }
 
 
-        /* =========================================
-           Apply filters
-        ========================================== */
+                if (year) {
 
-        function applyFilters() {
-
-            const keyword =
-                searchInput.value
-                    .trim()
-                    .toLowerCase();
-
-            const year =
-                yearFilter.value;
-
-            const season =
-                seasonFilter.value;
-
-            const status =
-                statusFilter.value;
-
-            const format =
-                formatFilter.value;
-
-            const genre =
-                genreFilter.value;
-
-            const sort =
-                sortFilter.value;
-
-
-            filteredAnime =
-                animeData.filter(anime => {
-
-                    /* Search */
-
-                    if (keyword) {
-
-                        const searchableText = [
-
-                            anime.title,
-
-                            anime.title_romaji,
-
-                            anime.title_english,
-
-                            anime.title_native,
-
-                            anime.title_japanese,
-
-                            anime.description,
-
-                            anime.source,
-
-                            ...getAnimeGenres(
-                                anime
-                            ).map(
-                                item => item.name
-                            )
-
-                        ]
-                            .filter(Boolean)
-                            .join(" ")
-                            .toLowerCase();
-
-                        if (
-                            !searchableText.includes(
-                                keyword
-                            )
-                        ) {
-                            return false;
-                        }
-
-                    }
-
-
-                    /* Year */
-
-                    if (year) {
-
-                        const animeYear =
-                            anime.season_year
+                    const animeYear =
+                        anime.season_year
                             ? String(
                                 anime.season_year
                             )
@@ -1572,613 +1539,571 @@
                                     : ""
                             );
 
-                        if (
-                            animeYear !== year
-                        ) {
-                            return false;
-                        }
-
-                    }
-
-
-                    /* Season */
 
                     if (
-                        season &&
-                        anime.season !== season
+                        animeYear !== year
                     ) {
                         return false;
-                    }
-
-
-                    /* Status */
-
-                    if (
-                        status &&
-                        anime.status !== status
-                    ) {
-                        return false;
-                    }
-
-
-                    /* Format */
-
-                    if (
-                        format &&
-                        anime.format !== format
-                    ) {
-                        return false;
-                    }
-
-
-                    /* Genre */
-
-                    if (genre) {
-
-                        const hasGenre =
-                            getAnimeGenres(
-                                anime
-                            ).some(
-                                item =>
-                                    String(
-                                        item.id
-                                    ) ===
-                                    String(
-                                        genre
-                                    )
-                            );
-
-                        if (!hasGenre) {
-                            return false;
-                        }
-
-                    }
-
-
-                    return true;
-
-                });
-
-
-            /* Sorting */
-
-            filteredAnime.sort(
-                (a, b) => {
-
-                    switch (sort) {
-
-                        case "score":
-
-                            return (
-                                Number(
-                                    b.average_score || 0
-                                ) -
-                                Number(
-                                    a.average_score || 0
-                                )
-                            );
-
-
-                        case "popularity":
-
-                            return (
-                                Number(
-                                    b.popularity || 0
-                                ) -
-                                Number(
-                                    a.popularity || 0
-                                )
-                            );
-
-
-                        case "newest":
-
-                            return (
-                                new Date(
-                                    b.start_date ||
-                                    "1900-01-01"
-                                ) -
-                                new Date(
-                                    a.start_date ||
-                                    "1900-01-01"
-                                )
-                            );
-
-
-                        case "title":
-
-                            return getMainTitle(a)
-                                .localeCompare(
-                                    getMainTitle(b),
-                                    "ja"
-                                );
-
-
-                        default:
-
-                            return (
-                                Number(
-                                    b.popularity || 0
-                                ) -
-                                Number(
-                                    a.popularity || 0
-                                )
-                            );
-
                     }
 
                 }
+
+
+                if (
+                    season &&
+                    anime.season !== season
+                ) {
+                    return false;
+                }
+
+
+                if (
+                    status &&
+                    anime.status !== status
+                ) {
+                    return false;
+                }
+
+
+                if (
+                    format &&
+                    anime.format !== format
+                ) {
+                    return false;
+                }
+
+
+                if (genre) {
+
+                    const hasGenre =
+                        getAnimeGenres(
+                            anime
+                        ).some(
+                            item =>
+                                String(
+                                    item.id
+                                ) ===
+                                String(
+                                    genre
+                                )
+                        );
+
+
+                    if (!hasGenre) {
+                        return false;
+                    }
+
+                }
+
+
+                return true;
+
+            });
+
+
+        filteredAnime.sort(
+            (a, b) => {
+
+                switch (sort) {
+
+                    case "score":
+
+                        return (
+                            Number(
+                                b.average_score || 0
+                            ) -
+                            Number(
+                                a.average_score || 0
+                            )
+                        );
+
+
+                    case "popularity":
+
+                        return (
+                            Number(
+                                b.popularity || 0
+                            ) -
+                            Number(
+                                a.popularity || 0
+                            )
+                        );
+
+
+                    case "newest":
+
+                        return (
+                            new Date(
+                                b.start_date ||
+                                "1900-01-01"
+                            ) -
+                            new Date(
+                                a.start_date ||
+                                "1900-01-01"
+                            )
+                        );
+
+
+                    case "title":
+
+                        return getMainTitle(a)
+                            .localeCompare(
+                                getMainTitle(b),
+                                "ja"
+                            );
+
+
+                    case "default":
+                    default:
+
+                        return (
+                            Number(
+                                b.popularity || 0
+                            ) -
+                            Number(
+                                a.popularity || 0
+                            )
+                        );
+
+                }
+
+            }
+        );
+
+
+        renderAnime();
+
+    }
+
+
+    function renderAnime() {
+
+        resultCount.innerHTML =
+            `<span>${formatNumber(
+                filteredAnime.length
+            )}</span> 作品`;
+
+
+        if (
+            filteredAnime.length === 0
+        ) {
+
+            animeGrid.innerHTML = `
+                <div class="empty-state">
+
+                    <h2>
+                        アニメが見つかりませんでした
+                    </h2>
+
+                    <p>
+                        検索条件やフィルターを
+                        変更してみてください。
+                    </p>
+
+                </div>
+            `;
+
+            return;
+
+        }
+
+
+        animeGrid.innerHTML =
+            filteredAnime
+                .map(
+                    anime =>
+                        createAnimeCard(
+                            anime
+                        )
+                )
+                .join("");
+
+    }
+
+
+    function createAnimeCard(anime) {
+
+        const title =
+            getMainTitle(anime);
+
+        const subTitle =
+            getSubTitle(anime);
+
+        const genres =
+            getAnimeGenres(anime);
+
+
+        const coverImage =
+            safeURL(
+                anime.cover_image
             );
 
 
-            renderAnime();
+        const detailURL =
+            `anime-detail.html?id=${
+                encodeURIComponent(
+                    anime.id
+                )
+            }`;
 
-        }
 
+        let tagsHTML = "";
 
-        /* =========================================
-           Render
-        ========================================== */
 
-        function renderAnime() {
+        const statusText =
+            formatStatus(
+                anime.status
+            );
 
-            resultCount.innerHTML =
-                `<span>${formatNumber(
-                    filteredAnime.length
-                )}</span> 作品`;
 
+        if (statusText) {
 
-            if (
-                filteredAnime.length === 0
-            ) {
-
-                animeGrid.innerHTML = `
-                    <div class="empty-state">
-
-                        <h2>
-                            アニメが見つかりませんでした
-                        </h2>
-
-                        <p>
-                            検索条件やフィルターを
-                            変更してみてください。
-                        </p>
-
-                    </div>
-                `;
-
-                return;
-
-            }
-
-
-            animeGrid.innerHTML =
-                filteredAnime
-                    .map(
-                        anime =>
-                            createAnimeCard(
-                                anime
-                            )
-                    )
-                    .join("");
-
-        }
-
-
-        /* =========================================
-           Anime card
-        ========================================== */
-
-        function createAnimeCard(anime) {
-
-            const title =
-                getMainTitle(anime);
-
-            const subTitle =
-                getSubTitle(anime);
-
-            const genres =
-                getAnimeGenres(anime);
-
-
-            const coverImage =
-                safeURL(
-                    anime.cover_image
-                );
-
-
-            const detailURL =
-                `anime-detail.html?id=${
-                    encodeURIComponent(
-                        anime.id
-                    )
-                }`;
-
-
-            let tagsHTML = "";
-
-
-            /* Status */
-
-            const statusText =
-                formatStatus(
-                    anime.status
-                );
-
-            if (statusText) {
-
-                tagsHTML += `
-                    <span class="meta-tag">
-                        ${escapeHTML(
-                            statusText
-                        )}
-                    </span>
-                `;
-
-            }
-
-
-            /* Format */
-
-            const formatText =
-                formatFormat(
-                    anime.format
-                );
-
-            if (formatText) {
-
-                tagsHTML += `
-                    <span class="meta-tag">
-                        ${escapeHTML(
-                            formatText
-                        )}
-                    </span>
-                `;
-
-            }
-
-
-            /* Year */
-
-            if (anime.season_year) {
-
-                tagsHTML += `
-                    <span class="meta-tag">
-                        ${escapeHTML(
-                            anime.season_year
-                        )}年
-                    </span>
-                `;
-
-            }
-
-
-            /* Season */
-
-            const seasonText =
-                formatSeason(
-                    anime.season
-                );
-
-            if (seasonText) {
-
-                tagsHTML += `
-                    <span class="meta-tag">
-                        ${escapeHTML(
-                            seasonText
-                        )}
-                    </span>
-                `;
-
-            }
-
-
-            /* Genres */
-
-            genres
-                .slice(0, 4)
-                .forEach(genre => {
-
-                    tagsHTML += `
-                        <span class="meta-tag genre-tag">
-                            ${escapeHTML(
-                                genre.name
-                            )}
-                        </span>
-                    `;
-
-                });
-
-
-            const description =
-                anime.description
-                    ? anime.description
-                    : "作品情報は準備中です。";
-
-
-            const imageHTML =
-                coverImage
-
-                    ? `
-                        <img
-                            src="${escapeHTML(
-                                coverImage
-                            )}"
-                            alt="${escapeHTML(
-                                title
-                            )}のキービジュアル"
-                            loading="lazy"
-                            onerror="
-                                this.style.display='none';
-                                this.nextElementSibling.style.display='flex';
-                            "
-                        >
-
-                        <div
-                            class="image-placeholder"
-                            style="display:none;"
-                        >
-                            画像なし
-                        </div>
-                    `
-
-                    : `
-                        <div class="image-placeholder">
-                            画像なし
-                        </div>
-                    `;
-
-
-            return `
-                <article class="anime-card">
-
-                    <div class="anime-card-image">
-
-                        ${imageHTML}
-
-                        ${
-                            anime.average_score !==
-                            null &&
-                            anime.average_score !==
-                            undefined
-                                ? `
-                                    <div class="score-badge">
-                                        ★
-                                        ${escapeHTML(
-                                            formatScore(
-                                                anime.average_score
-                                            )
-                                        )}
-                                    </div>
-                                `
-                                : ""
-                        }
-
-                    </div>
-
-
-                    <div class="anime-card-body">
-
-                        <h2
-                            class="anime-card-title"
-                        >
-
-                            <a
-                                href="${detailURL}"
-                            >
-                                ${escapeHTML(
-                                    title
-                                )}
-                            </a>
-
-                        </h2>
-
-
-                        ${
-                            subTitle
-                                ? `
-                                    <p
-                                        class="anime-card-subtitle"
-                                    >
-                                        ${escapeHTML(
-                                            subTitle
-                                        )}
-                                    </p>
-                                `
-                                : ""
-                        }
-
-
-                        <div
-                            class="meta-tags"
-                        >
-                            ${tagsHTML}
-                        </div>
-
-
-                        <p
-                            class="anime-description"
-                        >
-                            ${escapeHTML(
-                                description
-                            )}
-                        </p>
-
-
-                        <div
-                            class="anime-stats"
-                        >
-
-                            <div
-                                class="anime-stat"
-                            >
-
-                                <span
-                                    class="anime-stat-label"
-                                >
-                                    評価
-                                </span>
-
-                                <span
-                                    class="anime-stat-value"
-                                >
-                                    ${
-                                        anime.average_score !==
-                                        null &&
-                                        anime.average_score !==
-                                        undefined
-                                            ? `★ ${escapeHTML(
-                                                formatScore(
-                                                    anime.average_score
-                                                )
-                                            )}`
-                                            : "—"
-                                    }
-                                </span>
-
-                            </div>
-
-
-                            <div
-                                class="anime-stat"
-                            >
-
-                                <span
-                                    class="anime-stat-label"
-                                >
-                                    人気度
-                                </span>
-
-                                <span
-                                    class="anime-stat-value"
-                                >
-                                    ${escapeHTML(
-                                        formatNumber(
-                                            anime.popularity
-                                        )
-                                    )}
-                                </span>
-
-                            </div>
-
-                        </div>
-
-
-                        <a
-                            class="detail-link"
-                            href="${detailURL}"
-                        >
-                            詳細を見る
-                        </a>
-
-                    </div>
-
-                </article>
+            tagsHTML += `
+                <span class="meta-tag">
+                    ${escapeHTML(statusText)}
+                </span>
             `;
 
         }
 
 
-        /* =========================================
-           Reset
-        ========================================== */
+        const formatText =
+            formatFormat(
+                anime.format
+            );
 
-        function resetFilters() {
 
-            searchInput.value = "";
+        if (formatText) {
 
-            yearFilter.value = "";
-
-            seasonFilter.value = "";
-
-            statusFilter.value = "";
-
-            formatFilter.value = "";
-
-            genreFilter.value = "";
-
-            sortFilter.value =
-                "default";
-
-            applyFilters();
+            tagsHTML += `
+                <span class="meta-tag">
+                    ${escapeHTML(formatText)}
+                </span>
+            `;
 
         }
 
 
-        /* =========================================
-           Events
-        ========================================== */
+        if (anime.season_year) {
 
-        searchButton.addEventListener(
-            "click",
-            applyFilters
-        );
+            tagsHTML += `
+                <span class="meta-tag">
+                    ${escapeHTML(
+                        anime.season_year
+                    )}年
+                </span>
+            `;
+
+        }
 
 
-        searchInput.addEventListener(
-            "keydown",
-            event => {
+        const seasonText =
+            formatSeason(
+                anime.season
+            );
 
-                if (
-                    event.key === "Enter"
-                ) {
-                    applyFilters();
-                }
 
+        if (seasonText) {
+
+            tagsHTML += `
+                <span class="meta-tag">
+                    ${escapeHTML(seasonText)}
+                </span>
+            `;
+
+        }
+
+
+        genres
+            .slice(0, 4)
+            .forEach(genre => {
+
+                tagsHTML += `
+                    <span class="meta-tag genre-tag">
+                        ${escapeHTML(
+                            genre.name
+                        )}
+                    </span>
+                `;
+
+            });
+
+
+        const description =
+            anime.description
+                ? anime.description
+                : "作品情報は準備中です。";
+
+
+        const imageHTML =
+            coverImage
+
+                ? `
+                    <img
+                        src="${escapeHTML(
+                            coverImage
+                        )}"
+                        alt="${escapeHTML(
+                            title
+                        )}のキービジュアル"
+                        loading="lazy"
+                        onerror="
+                            this.style.display='none';
+                            this.nextElementSibling.style.display='flex';
+                        "
+                    >
+
+                    <div
+                        class="image-placeholder"
+                        style="display:none;"
+                    >
+                        画像なし
+                    </div>
+                `
+
+                : `
+                    <div class="image-placeholder">
+                        画像なし
+                    </div>
+                `;
+
+
+        const scoreHTML =
+            anime.average_score !== null &&
+            anime.average_score !== undefined
+                ? `
+                    <div class="score-badge">
+                        ★
+                        ${escapeHTML(
+                            formatScore(
+                                anime.average_score
+                            )
+                        )}
+                    </div>
+                `
+                : "";
+
+
+        return `
+            <article class="anime-card">
+
+                <div class="anime-card-image">
+
+                    ${imageHTML}
+
+                    ${scoreHTML}
+
+                </div>
+
+
+                <div class="anime-card-body">
+
+                    <h2 class="anime-card-title">
+
+                        <a
+                            href="${detailURL}"
+                        >
+                            ${escapeHTML(title)}
+                        </a>
+
+                    </h2>
+
+
+                    ${
+                        subTitle
+                            ? `
+                                <p
+                                    class="anime-card-subtitle"
+                                >
+                                    ${escapeHTML(
+                                        subTitle
+                                    )}
+                                </p>
+                            `
+                            : ""
+                    }
+
+
+                    <div class="meta-tags">
+                        ${tagsHTML}
+                    </div>
+
+
+                    <p class="anime-description">
+                        ${escapeHTML(
+                            description
+                        )}
+                    </p>
+
+
+                    <div class="anime-stats">
+
+                        <div class="anime-stat">
+
+                            <span
+                                class="anime-stat-label"
+                            >
+                                評価
+                            </span>
+
+                            <span
+                                class="anime-stat-value"
+                            >
+                                ${
+                                    anime.average_score !== null &&
+                                    anime.average_score !== undefined
+                                        ? `★ ${escapeHTML(
+                                            formatScore(
+                                                anime.average_score
+                                            )
+                                        )}`
+                                        : "—"
+                                }
+                            </span>
+
+                        </div>
+
+
+                        <div class="anime-stat">
+
+                            <span
+                                class="anime-stat-label"
+                            >
+                                人気度
+                            </span>
+
+                            <span
+                                class="anime-stat-value"
+                            >
+                                ${escapeHTML(
+                                    formatNumber(
+                                        anime.popularity
+                                    )
+                                )}
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <a
+                        class="detail-link"
+                        href="${detailURL}"
+                    >
+                        詳細を見る
+                    </a>
+
+                </div>
+
+            </article>
+        `;
+
+    }
+
+
+    function resetFilters() {
+
+        searchInput.value = "";
+
+        yearFilter.value = "";
+
+        seasonFilter.value = "";
+
+        statusFilter.value = "";
+
+        formatFilter.value = "";
+
+        genreFilter.value = "";
+
+        sortFilter.value =
+            "default";
+
+
+        applyFilters();
+
+    }
+
+
+    searchButton.addEventListener(
+        "click",
+        applyFilters
+    );
+
+
+    searchInput.addEventListener(
+        "keydown",
+        event => {
+
+            if (
+                event.key === "Enter"
+            ) {
+                applyFilters();
             }
-        );
+
+        }
+    );
 
 
-        yearFilter.addEventListener(
-            "change",
-            applyFilters
-        );
+    yearFilter.addEventListener(
+        "change",
+        applyFilters
+    );
 
 
-        seasonFilter.addEventListener(
-            "change",
-            applyFilters
-        );
+    seasonFilter.addEventListener(
+        "change",
+        applyFilters
+    );
 
 
-        statusFilter.addEventListener(
-            "change",
-            applyFilters
-        );
+    statusFilter.addEventListener(
+        "change",
+        applyFilters
+    );
 
 
-        formatFilter.addEventListener(
-            "change",
-            applyFilters
-        );
+    formatFilter.addEventListener(
+        "change",
+        applyFilters
+    );
 
 
-        genreFilter.addEventListener(
-            "change",
-            applyFilters
-        );
+    genreFilter.addEventListener(
+        "change",
+        applyFilters
+    );
 
 
-        sortFilter.addEventListener(
-            "change",
-            applyFilters
-        );
+    sortFilter.addEventListener(
+        "change",
+        applyFilters
+    );
 
 
-        resetButton.addEventListener(
-            "click",
-            resetFilters
-        );
+    resetButton.addEventListener(
+        "click",
+        resetFilters
+    );
 
 
-        /* =========================================
-           Start
-        ========================================== */
+    loadAnime();
+</script>
 
-        loadAnime();
-
-    </script>
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": "アニメ一覧 | Animecia",
+    "description": "Animeciaのアニメ一覧。作品名、ジャンル、放送年、シーズン、放送状況、評価、人気度などからアニメを検索できます。",
+    "url": "https://media-mania.github.io/Animecia/anime.html",
+    "isPartOf": {
+        "@type": "WebSite",
+        "name": "Animecia",
+        "url": "https://media-mania.github.io/Animecia/"
+    }
+}
+</script>
 
 </body>
 </html>
-```
