@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="ja">
 
@@ -5,151 +6,268 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>プライバシーポリシー | Just An Anime Review</title>
+<title>プライバシーポリシー | Animecia</title>
 
-<meta name="description" content="Just An Anime Reviewのプライバシーポリシーです。">
+<meta
+    name="description"
+    content="Animeciaのプライバシーポリシーです。"
+>
 
 <style>
 
 * {
-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
 }
 
 body {
-margin: 0;
-font-family:
--apple-system,
-BlinkMacSystemFont,
-"Segoe UI",
-"Hiragino Kaku Gothic ProN",
-"Yu Gothic",
-Meiryo,
-sans-serif;
+    margin: 0;
 
-background: #f7f7f7;
-color: #222;
-line-height: 1.8;
+    font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        "Hiragino Kaku Gothic ProN",
+        "Yu Gothic",
+        Meiryo,
+        sans-serif;
+
+    background: #f5f6f8;
+    color: #171717;
+
+    line-height: 1.8;
+}
+
+a {
+    color: inherit;
 }
 
 header {
-background: #111;
-color: white;
+    background: #111;
+    color: #fff;
+
+    border-bottom: 1px solid rgba(255,255,255,.08);
 }
 
 .header-inner {
-max-width: 900px;
-margin: auto;
-padding: 20px;
+    width: min(1180px, calc(100% - 40px));
+
+    min-height: 72px;
+
+    margin: auto;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
 .logo {
-color: white;
-text-decoration: none;
-font-size: 21px;
-font-weight: bold;
+    color: #fff;
+
+    text-decoration: none;
+
+    font-size: 22px;
+    font-weight: 800;
+
+    letter-spacing: -0.8px;
 }
 
 .logo:hover {
-opacity: .85;
+    opacity: .8;
 }
 
 main {
-max-width: 900px;
-margin: auto;
-padding: 45px 20px;
+    width: min(900px, calc(100% - 40px));
+
+    margin: auto;
+
+    padding: 55px 0 80px;
 }
 
 .policy-box {
-background: white;
-padding: 40px;
-border-radius: 12px;
-box-shadow:
-0 3px 15px rgba(0,0,0,.08);
+    background: #fff;
+
+    padding: 45px;
+
+    border: 1px solid #ececef;
+    border-radius: 14px;
+
+    box-shadow:
+        0 5px 25px rgba(0,0,0,.05);
 }
 
 h1 {
-font-size: 36px;
-line-height: 1.4;
-margin-top: 0;
-margin-bottom: 10px;
+    margin: 0 0 10px;
+
+    font-size: 38px;
+    line-height: 1.35;
+
+    letter-spacing: -1px;
 }
 
 .updated {
-color: #888;
-font-size: 13px;
-margin-bottom: 40px;
+    margin: 0 0 45px;
+
+    color: #888;
+
+    font-size: 13px;
 }
 
 h2 {
-font-size: 22px;
-margin-top: 38px;
-padding-bottom: 8px;
-border-bottom: 2px solid #eee;
+    margin: 42px 0 15px;
+
+    padding-bottom: 8px;
+
+    border-bottom: 2px solid #eee;
+
+    font-size: 21px;
+    line-height: 1.5;
 }
 
 p {
-color: #444;
+    color: #444;
+
+    font-size: 14px;
 }
 
 ul {
-color: #444;
-padding-left: 25px;
+    margin: 15px 0;
+
+    padding-left: 25px;
+
+    color: #444;
+
+    font-size: 14px;
+}
+
+li {
+    margin-bottom: 7px;
 }
 
 .back {
-display: inline-block;
-margin-top: 35px;
-color: #666;
-text-decoration: none;
+    display: inline-flex;
+
+    margin-top: 35px;
+
+    color: #555;
+
+    text-decoration: none;
+
+    font-size: 14px;
+    font-weight: 600;
 }
 
 .back:hover {
-text-decoration: underline;
+    text-decoration: underline;
 }
 
 footer {
-margin-top: 70px;
-background: #111;
-color: white;
-padding: 35px 20px;
+    background: #111;
+
+    color: #fff;
 }
 
 .footer-inner {
-max-width: 900px;
-margin: auto;
+    width: min(900px, calc(100% - 40px));
+
+    margin: auto;
+
+    padding: 55px 0;
 }
 
-.footer-inner p {
-color: #bbb;
-font-size: 13px;
+.footer-brand {
+    margin: 0 0 10px;
+
+    color: #fff;
+
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.footer-description {
+    margin: 0;
+
+    color: #aaa;
+
+    font-size: 13px;
+}
+
+.footer-links {
+    display: flex;
+    flex-wrap: wrap;
+
+    gap: 10px;
+
+    margin-top: 22px;
 }
 
 .footer-links a {
-color: #bbb;
-text-decoration: none;
+    color: #aaa;
+
+    text-decoration: none;
+
+    font-size: 12px;
 }
 
 .footer-links a:hover {
-color: white;
+    color: #fff;
+}
+
+.copyright {
+    margin-top: 30px;
+
+    color: #777;
+
+    font-size: 11px;
 }
 
 @media (max-width: 600px) {
 
-main {
-padding: 30px 15px;
-}
+    .header-inner {
+        width: calc(100% - 30px);
 
-.policy-box {
-padding: 25px 20px;
-}
+        min-height: 64px;
+    }
 
-h1 {
-font-size: 30px;
-}
+    .logo {
+        font-size: 20px;
+    }
 
-h2 {
-font-size: 20px;
-}
+    main {
+        width: calc(100% - 30px);
+
+        padding: 30px 0 60px;
+    }
+
+    .policy-box {
+        padding: 28px 20px;
+
+        border-radius: 10px;
+    }
+
+    h1 {
+        font-size: 30px;
+    }
+
+    h2 {
+        margin-top: 35px;
+
+        font-size: 19px;
+    }
+
+    p,
+    ul {
+        font-size: 13px;
+    }
+
+    .footer-inner {
+        width: calc(100% - 30px);
+
+        padding: 45px 0;
+    }
 
 }
 
@@ -163,12 +281,13 @@ font-size: 20px;
 <div class="header-inner">
 
 <a href="index.html" class="logo">
-Just An Anime Review
+Animecia
 </a>
 
 </div>
 
 </header>
+
 
 <main>
 
@@ -179,16 +298,18 @@ Just An Anime Review
 </h1>
 
 <p class="updated">
-最終更新日：2026年8月14日
+最終更新日：2026年9月26日
 </p>
+
 
 <h2>
 1. 基本方針
 </h2>
 
 <p>
-Just An Anime Review（以下「当サイト」といいます。）は、利用者の情報を適切に取り扱い、個人情報の保護に努めます。
+Animecia（以下「当サイト」といいます。）は、利用者の情報を適切に取り扱い、個人情報の保護に努めます。
 </p>
+
 
 <h2>
 2. 取得する情報
@@ -199,17 +320,21 @@ Just An Anime Review（以下「当サイト」といいます。）は、利用
 </p>
 
 <ul>
-<li>コメント投稿時に入力されたニックネーム</li>
-<li>投稿されたコメントの内容</li>
-<li>コメントの投稿日時</li>
-<li>「いいね」の利用状況</li>
-<li>「いいね」の重複を防止するためにブラウザに保存される識別情報</li>
+<li>アカウント登録時に入力されたメールアドレス</li>
+<li>プロフィールに登録されたユーザー名、表示名、プロフィール画像、自己紹介等の情報</li>
+<li>お気に入りに登録したアニメ作品に関する情報</li>
+<li>アニメ作品の視聴状況および視聴進捗に関する情報</li>
+<li>アニメ作品に対して登録した評価</li>
+<li>投稿されたレビューの内容、タイトル、評価、投稿日時等</li>
+<li>レビューへの「いいね」に関する情報</li>
 <li>サービスの利用時にブラウザ等から送信される情報</li>
+<li>不正利用やサービスの安全性確保のために必要となる情報</li>
 </ul>
 
 <p>
-コメントの投稿にあたって、氏名、住所、電話番号等の入力を必須としていません。
+当サイトでは、サービスの利用に必要な場合を除き、氏名、住所、電話番号等の情報の入力を必須としていません。
 </p>
+
 
 <h2>
 3. 情報の利用目的
@@ -220,88 +345,129 @@ Just An Anime Review（以下「当サイト」といいます。）は、利用
 </p>
 
 <ul>
-<li>コメントをサイト上に表示するため</li>
-<li>「いいね」機能を提供するため</li>
-<li>「いいね」の重複を防止するため</li>
+<li>アカウントを作成・管理するため</li>
+<li>ログインおよび認証機能を提供するため</li>
+<li>プロフィール機能を提供するため</li>
+<li>お気に入り機能を提供するため</li>
+<li>アニメ作品の視聴状況および視聴進捗を管理するため</li>
+<li>作品への評価機能を提供するため</li>
+<li>レビュー機能を提供するため</li>
+<li>レビューへの「いいね」機能を提供するため</li>
 <li>サービスの運営および改善のため</li>
 <li>不正利用や迷惑行為への対応のため</li>
 <li>サイトの安全性を維持するため</li>
 </ul>
 
+
 <h2>
-4. コメントについて
+4. アカウント情報について
 </h2>
 
 <p>
-利用者が投稿したコメントは、当サイト上で他の利用者に公開されます。
+利用者がアカウントを登録した場合、登録されたメールアドレス等の情報は、ログイン、認証その他のアカウント管理のために利用されます。
 </p>
 
 <p>
-そのため、コメントには、氏名、住所、電話番号、メールアドレス、学校名など、本人または第三者を特定できる情報を投稿しないでください。
+プロフィールに登録された表示名、ユーザー名、プロフィール画像、自己紹介等の情報については、利用者が公開する設定または機能を利用した場合、他の利用者に表示されることがあります。
 </p>
 
 <p>
-投稿されたコメントが利用規約に違反すると判断された場合、管理者が削除することがあります。
+利用者は、プロフィール等に氏名、住所、電話番号、学校名その他の本人を特定できる情報を必要以上に登録しないよう注意してください。
 </p>
+
 
 <h2>
-5. ブラウザへの情報保存について
+5. レビューその他の投稿について
 </h2>
 
 <p>
-当サイトでは、「いいね」機能の提供および同一ブラウザからの重複した「いいね」を防止するため、ブラウザのローカルストレージ等を利用して識別情報を保存する場合があります。
+利用者が投稿したレビューその他の公開コンテンツは、当サイト上で他の利用者に公開される場合があります。
 </p>
 
 <p>
-この情報は、当サイト上で利用者本人を直接特定することを目的としたものではありません。
+レビュー等には、氏名、住所、電話番号、メールアドレス、学校名など、本人または第三者を特定できる情報を投稿しないでください。
 </p>
+
+<p>
+投稿されたコンテンツが利用規約に違反すると判断された場合、管理者が削除または非公開とすることがあります。
+</p>
+
 
 <h2>
 6. 外部サービスについて
 </h2>
 
 <p>
-当サイトでは、データの保存、認証その他のサービス提供のため、Supabase等の外部サービスを利用しています。
+当サイトでは、アカウント認証、データの保存その他のサービス提供のため、Supabase等の外部サービスを利用しています。
 </p>
 
 <p>
-また、広告を掲載する場合、広告の表示や広告リンクへのアクセスに伴い、広告サービスまたは広告主が情報を取得する場合があります。
+Supabase等の外部サービスにおいて、利用者の情報が取り扱われる場合があります。各外部サービスにおける情報の取り扱いについては、それぞれのサービス提供者が定めるプライバシーポリシー等をご確認ください。
 </p>
 
 <p>
-これらの外部サービスによる情報の取り扱いについては、それぞれのサービス提供者が定めるプライバシーポリシー等をご確認ください。
+また、当サイトでは、将来的に広告またはアフィリエイトプログラムを利用する場合があります。この場合、広告の表示や広告リンクへのアクセスに伴い、広告サービスまたは広告主が情報を取得することがあります。
 </p>
+
 
 <h2>
-7. 個人情報の第三者提供
+7. Cookie等について
+</h2>
+
+<p>
+当サイトでは、ログイン状態の維持、サービスの提供、利用状況の確認その他の機能のため、Cookie、ローカルストレージその他のブラウザ機能を利用する場合があります。
+</p>
+
+<p>
+これらの情報には、サービスの利用に必要な識別情報等が含まれる場合があります。
+</p>
+
+
+<h2>
+8. 個人情報の第三者提供
 </h2>
 
 <p>
 当サイトは、法令に基づく場合などを除き、本人の同意なく取得した個人情報を第三者に提供しません。
 </p>
 
+<p>
+ただし、サービスの提供に必要な範囲で、当サイトが利用する外部サービス提供者に情報が送信される場合があります。
+</p>
+
+
 <h2>
-8. 情報の管理
+9. 情報の管理
 </h2>
 
 <p>
 当サイトは、取得した情報について、不正アクセス、漏えい、紛失等を防止するため、適切な管理に努めます。
 </p>
 
+<p>
+また、当サイトでは、利用者の情報を保護するため、アクセス制御その他の必要な安全対策を講じるよう努めます。
+</p>
+
+
 <h2>
-9. コメントの削除について
+10. 利用者による情報の確認・削除
 </h2>
 
 <p>
-利用者本人から、自身が投稿したコメントの削除を希望する申し出があった場合、可能な範囲で対応します。
+利用者は、当サイトが提供する機能を通じて、自身のプロフィール、お気に入り、視聴状況、評価、レビュー等を確認または変更できる場合があります。
 </p>
 
 <p>
-ただし、本人であることを確認できない場合など、削除に対応できないことがあります。
+自身の情報の削除を希望する場合は、当サイトに掲載しているお問い合わせ方法からご連絡ください。
 </p>
 
+<p>
+本人であることを確認できない場合や、法令上保存が必要な情報がある場合などには、削除等のご希望に対応できないことがあります。
+</p>
+
+
 <h2>
-10. プライバシーポリシーの変更
+11. プライバシーポリシーの変更
 </h2>
 
 <p>
@@ -312,13 +478,15 @@ Just An Anime Review（以下「当サイト」といいます。）は、利用
 変更後のプライバシーポリシーは、当サイト上に掲載した時点から適用されるものとします。
 </p>
 
+
 <h2>
-11. お問い合わせ
+12. お問い合わせ
 </h2>
 
 <p>
 当サイトに関するお問い合わせについては、当サイトに掲載しているお問い合わせ方法からご連絡ください。
 </p>
+
 
 <a href="index.html" class="back">
 ← ホームへ戻る
@@ -328,22 +496,35 @@ Just An Anime Review（以下「当サイト」といいます。）は、利用
 
 </main>
 
+
 <footer>
 
 <div class="footer-inner">
 
-<p>
-Just An Anime Review
+<p class="footer-brand">
+Animecia
 </p>
 
-<p class="footer-links">
-<a href="terms.html">利用規約</a>
-｜
-<a href="privacy.html">プライバシーポリシー</a>
+<p class="footer-description">
+アニメをもっと探しやすく、もっと楽しめる。
 </p>
 
-<p>
-© 2026 Just An Anime Review
+<div class="footer-links">
+
+<a href="terms.html">
+利用規約
+</a>
+
+<span>｜</span>
+
+<a href="privacy.html">
+プライバシーポリシー
+</a>
+
+</div>
+
+<p class="copyright">
+© 2026 Animecia
 </p>
 
 </div>
@@ -352,3 +533,4 @@ Just An Anime Review
 
 </body>
 </html>
+```
