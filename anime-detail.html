@@ -89,7 +89,6 @@
         }
 
         body {
-
             margin: 0;
 
             font-family:
@@ -109,8 +108,11 @@
         }
 
 
-        .site-header {
+        /* ===============================
+           Header
+        =============================== */
 
+        .site-header {
             background: #111;
 
             color: #fff;
@@ -120,7 +122,6 @@
         }
 
         .header-inner {
-
             max-width: 1200px;
 
             margin: 0 auto;
@@ -137,7 +138,6 @@
         }
 
         .logo {
-
             color: #fff;
 
             text-decoration: none;
@@ -152,7 +152,6 @@
         }
 
         .site-nav {
-
             display: flex;
 
             flex-wrap: wrap;
@@ -163,7 +162,6 @@
         }
 
         .site-nav a {
-
             color: #ddd;
 
             text-decoration: none;
@@ -172,13 +170,15 @@
         }
 
         .site-nav a:hover {
-
             color: #fff;
         }
 
 
-        main {
+        /* ===============================
+           Main
+        =============================== */
 
+        main {
             max-width: 1200px;
 
             margin: 0 auto;
@@ -187,8 +187,11 @@
         }
 
 
-        .breadcrumb {
+        /* ===============================
+           Breadcrumb
+        =============================== */
 
+        .breadcrumb {
             display: flex;
 
             flex-wrap: wrap;
@@ -203,20 +206,21 @@
         }
 
         .breadcrumb a {
-
             color: inherit;
 
             text-decoration: none;
         }
 
         .breadcrumb a:hover {
-
             text-decoration: underline;
         }
 
 
-        .status {
+        /* ===============================
+           Loading / Error
+        =============================== */
 
+        .status {
             padding: 80px 20px;
 
             text-align: center;
@@ -224,12 +228,11 @@
             color: #777;
         }
 
-
         .error-box {
-
             background: #fff;
 
-            border: 1px solid #e5e5e5;
+            border:
+                1px solid #e5e5e5;
 
             border-radius: 16px;
 
@@ -242,18 +245,20 @@
         }
 
         .error-box h1 {
-
             margin-top: 0;
         }
 
 
-        .anime-hero {
+        /* ===============================
+           Hero
+        =============================== */
 
+        .anime-hero {
             position: relative;
 
             overflow: hidden;
 
-            min-height: 420px;
+            min-height: 440px;
 
             border-radius: 20px;
 
@@ -265,7 +270,6 @@
         }
 
         .hero-background {
-
             position: absolute;
 
             inset: 0;
@@ -278,11 +282,10 @@
 
             filter: blur(2px);
 
-            transform: scale(1.04);
+            transform: scale(1.05);
         }
 
         .hero-overlay {
-
             position: absolute;
 
             inset: 0;
@@ -290,21 +293,21 @@
             background:
                 linear-gradient(
                     90deg,
-                    rgba(0,0,0,.94),
-                    rgba(0,0,0,.75),
-                    rgba(0,0,0,.42)
+                    rgba(0,0,0,.95),
+                    rgba(0,0,0,.78),
+                    rgba(0,0,0,.45)
                 );
         }
 
         .hero-content {
-
             position: relative;
 
             z-index: 1;
 
             display: grid;
 
-            grid-template-columns: 240px minmax(0,1fr);
+            grid-template-columns:
+                240px minmax(0,1fr);
 
             gap: 30px;
 
@@ -314,7 +317,6 @@
         }
 
         .hero-cover {
-
             width: 240px;
 
             aspect-ratio: 3 / 4;
@@ -330,7 +332,6 @@
         }
 
         .hero-cover img {
-
             width: 100%;
 
             height: 100%;
@@ -341,7 +342,6 @@
         }
 
         .hero-cover-placeholder {
-
             width: 100%;
 
             height: 100%;
@@ -358,16 +358,15 @@
         }
 
         .hero-info h1 {
-
             margin: 0 0 8px;
 
-            font-size: clamp(28px, 4vw, 46px);
+            font-size:
+                clamp(28px, 4vw, 46px);
 
             line-height: 1.25;
         }
 
         .hero-subtitle {
-
             margin: 0 0 18px;
 
             color: #ccc;
@@ -376,7 +375,6 @@
         }
 
         .hero-description {
-
             max-width: 850px;
 
             margin: 20px 0;
@@ -389,7 +387,6 @@
         }
 
         .genre-list {
-
             display: flex;
 
             flex-wrap: wrap;
@@ -400,14 +397,14 @@
         }
 
         .genre-tag {
-
             display: inline-flex;
 
             padding: 5px 10px;
 
             border-radius: 999px;
 
-            background: rgba(255,255,255,.13);
+            background:
+                rgba(255,255,255,.13);
 
             border:
                 1px solid rgba(255,255,255,.16);
@@ -416,7 +413,6 @@
         }
 
         .hero-stats {
-
             display: flex;
 
             flex-wrap: wrap;
@@ -427,18 +423,17 @@
         }
 
         .hero-stat {
-
-            min-width: 100px;
+            min-width: 105px;
 
             padding: 10px 13px;
 
             border-radius: 9px;
 
-            background: rgba(255,255,255,.1);
+            background:
+                rgba(255,255,255,.1);
         }
 
         .hero-stat-label {
-
             display: block;
 
             color: #bbb;
@@ -447,15 +442,17 @@
         }
 
         .hero-stat-value {
-
             font-weight: 800;
 
             font-size: 15px;
         }
 
 
-        .action-area {
+        /* ===============================
+           Actions
+        =============================== */
 
+        .action-area {
             display: flex;
 
             flex-wrap: wrap;
@@ -466,7 +463,6 @@
         }
 
         .action-button {
-
             min-height: 42px;
 
             padding: 9px 16px;
@@ -488,16 +484,17 @@
 
             text-decoration: none;
 
-            transition: .2s ease;
+            transition:
+                background .2s ease,
+                opacity .2s ease,
+                transform .2s ease;
         }
 
         .action-button:hover {
-
             background: #f0f0f0;
         }
 
         .action-button.active {
-
             background: #222;
 
             color: #fff;
@@ -506,15 +503,27 @@
         }
 
         .action-button:disabled {
-
             opacity: .5;
 
             cursor: default;
         }
 
+        .share-message {
+            min-height: 20px;
+
+            margin: 5px 0 0;
+
+            color: #bbb;
+
+            font-size: 11px;
+        }
+
+
+        /* ===============================
+           Layout
+        =============================== */
 
         .content-layout {
-
             display: grid;
 
             grid-template-columns:
@@ -526,13 +535,15 @@
 
         .main-column,
         .side-column {
-
             min-width: 0;
         }
 
 
-        .content-section {
+        /* ===============================
+           Sections
+        =============================== */
 
+        .content-section {
             background: #fff;
 
             border:
@@ -549,19 +560,30 @@
         }
 
         .content-section h2 {
-
             margin: 0 0 18px;
 
             padding-bottom: 10px;
 
-            border-bottom: 2px solid #eee;
+            border-bottom:
+                2px solid #eee;
 
             font-size: 21px;
         }
 
 
-        .description {
+        /* ===============================
+           Description / Editorial
+        =============================== */
 
+        .description {
+            white-space: pre-wrap;
+
+            color: #444;
+
+            line-height: 2;
+        }
+
+        .editorial-review {
             white-space: pre-wrap;
 
             color: #444;
@@ -570,31 +592,34 @@
         }
 
 
-        .info-table {
+        /* ===============================
+           Information
+        =============================== */
 
+        .info-table {
             display: grid;
 
-            grid-template-columns: 140px minmax(0,1fr);
+            grid-template-columns:
+                140px minmax(0,1fr);
 
-            border-top: 1px solid #eee;
+            border-top:
+                1px solid #eee;
         }
 
         .info-row {
-
             display: contents;
         }
 
         .info-label,
         .info-value {
+            padding:
+                11px 8px;
 
-            padding: 11px 8px;
-
-            border-bottom: 1px solid #eee;
-
+            border-bottom:
+                1px solid #eee;
         }
 
         .info-label {
-
             color: #777;
 
             font-size: 13px;
@@ -603,7 +628,6 @@
         }
 
         .info-value {
-
             color: #333;
 
             font-size: 14px;
@@ -612,17 +636,19 @@
         }
 
         .info-value a {
-
             color: #06c;
         }
 
 
-        .item-list {
+        /* ===============================
+           Items
+        =============================== */
 
+        .item-list {
             display: grid;
 
             grid-template-columns:
-                repeat(2, minmax(0, 1fr));
+                repeat(2, minmax(0,1fr));
 
             gap: 12px;
         }
@@ -630,7 +656,6 @@
         .person-item,
         .studio-item,
         .related-item {
-
             display: flex;
 
             gap: 12px;
@@ -646,7 +671,6 @@
         }
 
         .person-image {
-
             width: 55px;
 
             height: 70px;
@@ -661,7 +685,6 @@
         }
 
         .person-placeholder {
-
             width: 55px;
 
             height: 70px;
@@ -681,10 +704,11 @@
             color: #999;
 
             font-size: 10px;
+
+            text-align: center;
         }
 
         .item-name {
-
             margin: 0 0 3px;
 
             font-size: 14px;
@@ -693,19 +717,16 @@
         }
 
         .item-name a {
-
             color: #222;
 
             text-decoration: none;
         }
 
         .item-name a:hover {
-
             text-decoration: underline;
         }
 
         .item-role {
-
             margin: 0;
 
             color: #777;
@@ -714,13 +735,15 @@
         }
 
 
-        .related-item {
+        /* ===============================
+           Related
+        =============================== */
 
+        .related-item {
             align-items: center;
         }
 
         .related-item a {
-
             color: #222;
 
             text-decoration: none;
@@ -729,12 +752,10 @@
         }
 
         .related-item a:hover {
-
             text-decoration: underline;
         }
 
         .related-type {
-
             display: inline-block;
 
             margin-top: 3px;
@@ -745,8 +766,289 @@
         }
 
 
-        .official-button {
+        /* ===============================
+           User features
+        =============================== */
 
+        .status-form,
+        .rating-area {
+            display: grid;
+
+            gap: 12px;
+        }
+
+        .status-form select,
+        .status-form input,
+        .rating-select {
+            width: 100%;
+
+            height: 42px;
+
+            padding:
+                0 11px;
+
+            border:
+                1px solid #ccc;
+
+            border-radius: 8px;
+
+            background: #fff;
+
+            font-family: inherit;
+        }
+
+        .status-save,
+        .rating-save {
+            min-height: 42px;
+
+            border: 0;
+
+            border-radius: 8px;
+
+            background: #222;
+
+            color: #fff;
+
+            cursor: pointer;
+
+            font-weight: 700;
+        }
+
+        .status-save:disabled,
+        .rating-save:disabled {
+            opacity: .5;
+
+            cursor: default;
+        }
+
+        .status-message {
+            min-height: 20px;
+
+            margin: 0;
+
+            color: #777;
+
+            font-size: 12px;
+        }
+
+
+        /* ===============================
+           Spoiler
+        =============================== */
+
+        .spoiler {
+            padding: 10px;
+
+            border-radius: 8px;
+
+            background: #f3f3f3;
+
+            color: #777;
+
+            font-size: 12px;
+        }
+
+        .review-spoiler-box {
+            padding: 14px;
+
+            border-radius: 10px;
+
+            background: #f3f3f3;
+
+            color: #777;
+        }
+
+        .show-spoiler-button {
+            margin-top: 8px;
+
+            padding:
+                6px 10px;
+
+            border:
+                1px solid #ccc;
+
+            border-radius: 6px;
+
+            background: #fff;
+
+            cursor: pointer;
+        }
+
+
+        /* ===============================
+           Reviews
+        =============================== */
+
+        .review-form {
+            display: grid;
+
+            gap: 12px;
+
+            margin-bottom: 30px;
+        }
+
+        .review-form input,
+        .review-form textarea,
+        .review-form select {
+            width: 100%;
+
+            padding: 11px;
+
+            border:
+                1px solid #ccc;
+
+            border-radius: 8px;
+
+            font-family: inherit;
+        }
+
+        .review-form textarea {
+            min-height: 150px;
+
+            resize: vertical;
+
+            line-height: 1.7;
+        }
+
+        .review-form button[type="submit"] {
+            min-height: 42px;
+
+            border: 0;
+
+            border-radius: 8px;
+
+            background: #222;
+
+            color: #fff;
+
+            cursor: pointer;
+
+            font-weight: 700;
+        }
+
+        .review-form button:disabled {
+            opacity: .5;
+
+            cursor: default;
+        }
+
+        .review-item {
+            padding:
+                18px 0;
+
+            border-top:
+                1px solid #eee;
+        }
+
+        .review-header {
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 10px;
+        }
+
+        .review-user {
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 8px;
+
+            font-weight: 800;
+        }
+
+        .review-avatar {
+            width: 30px;
+
+            height: 30px;
+
+            border-radius: 50%;
+
+            object-fit: cover;
+
+            background: #e5e5e5;
+        }
+
+        .review-date {
+            color: #999;
+
+            font-size: 11px;
+        }
+
+        .review-title {
+            margin:
+                8px 0;
+
+            font-size: 17px;
+        }
+
+        .review-rating {
+            margin-bottom: 8px;
+
+            font-weight: 800;
+        }
+
+        .review-content {
+            white-space: pre-wrap;
+
+            color: #444;
+
+            line-height: 1.8;
+        }
+
+        .review-actions {
+            margin-top: 10px;
+
+            display: flex;
+
+            flex-wrap: wrap;
+
+            gap: 8px;
+        }
+
+        .review-like-button {
+            border:
+                1px solid #ddd;
+
+            background: #fff;
+
+            padding:
+                6px 10px;
+
+            border-radius: 7px;
+
+            cursor: pointer;
+
+            font-size: 12px;
+        }
+
+        .review-like-button:hover {
+            background: #f2f2f2;
+        }
+
+        .review-like-button.active {
+            background: #222;
+
+            color: #fff;
+
+            border-color: #222;
+        }
+
+        .review-like-button:disabled {
+            opacity: .5;
+
+            cursor: default;
+        }
+
+
+        /* ===============================
+           Official
+        =============================== */
+
+        .official-button {
             display: inline-flex;
 
             align-items: center;
@@ -771,328 +1073,21 @@
         }
 
         .official-button:hover {
-
             opacity: .85;
         }
 
 
-        .status-form {
-
-            display: grid;
-
-            gap: 12px;
-        }
-
-        .status-form select,
-        .status-form input {
-
-            width: 100%;
-
-            height: 42px;
-
-            padding: 0 11px;
-
-            border:
-                1px solid #ccc;
-
-            border-radius: 8px;
-
-            background: #fff;
-
-            font-family: inherit;
-        }
-
-        .status-save {
-
-            min-height: 42px;
-
-            border: 0;
-
-            border-radius: 8px;
-
-            background: #222;
-
-            color: #fff;
-
-            cursor: pointer;
-
-            font-weight: 700;
-        }
-
-        .status-save:disabled {
-
-            opacity: .5;
-
-            cursor: default;
-        }
-
-        .status-message {
-
-            min-height: 20px;
-
-            margin: 0;
-
-            color: #777;
-
-            font-size: 12px;
-        }
-
-
-        .rating-area {
-
-            display: grid;
-
-            gap: 12px;
-        }
-
-        .rating-select {
-
-            width: 100%;
-
-            height: 42px;
-
-            padding: 0 11px;
-
-            border:
-                1px solid #ccc;
-
-            border-radius: 8px;
-
-            background: #fff;
-        }
-
-        .rating-save {
-
-            min-height: 42px;
-
-            border: 0;
-
-            border-radius: 8px;
-
-            background: #222;
-
-            color: #fff;
-
-            cursor: pointer;
-
-            font-weight: 700;
-        }
-
-        .rating-save:disabled {
-
-            opacity: .5;
-
-            cursor: default;
-        }
-
-
-        .review-form {
-
-            display: grid;
-
-            gap: 12px;
-
-            margin-bottom: 30px;
-        }
-
-        .review-form input,
-        .review-form textarea,
-        .review-form select {
-
-            width: 100%;
-
-            padding: 11px;
-
-            border:
-                1px solid #ccc;
-
-            border-radius: 8px;
-
-            font-family: inherit;
-        }
-
-        .review-form textarea {
-
-            min-height: 150px;
-
-            resize: vertical;
-
-            line-height: 1.7;
-        }
-
-        .review-form button {
-
-            min-height: 42px;
-
-            border: 0;
-
-            border-radius: 8px;
-
-            background: #222;
-
-            color: #fff;
-
-            cursor: pointer;
-
-            font-weight: 700;
-        }
-
-        .review-form button:disabled {
-
-            opacity: .5;
-
-            cursor: default;
-        }
-
-        .review-item {
-
-            padding: 18px 0;
-
-            border-top: 1px solid #eee;
-        }
-
-        .review-header {
-
-            display: flex;
-
-            align-items: center;
-
-            justify-content: space-between;
-
-            gap: 10px;
-        }
-
-        .review-user {
-
-            font-weight: 800;
-        }
-
-        .review-date {
-
-            color: #999;
-
-            font-size: 11px;
-        }
-
-        .review-title {
-
-            margin: 7px 0;
-
-            font-size: 17px;
-        }
-
-        .review-rating {
-
-            margin-bottom: 8px;
-
-            font-weight: 800;
-        }
-
-        .review-content {
-
-            white-space: pre-wrap;
-
-            color: #444;
-
-            line-height: 1.8;
-        }
-
-        .spoiler {
-
-            padding: 10px;
-
-            border-radius: 8px;
-
-            background: #f3f3f3;
-
-            color: #777;
-
-            font-size: 12px;
-        }
-
-        .review-spoiler-box {
-
-            padding: 14px;
-
-            border-radius: 10px;
-
-            background: #f3f3f3;
-        }
-
-        .show-spoiler-button {
-
-            margin-top: 8px;
-
-            padding: 6px 10px;
-
-            border:
-                1px solid #ccc;
-
-            border-radius: 6px;
-
-            background: #fff;
-
-            cursor: pointer;
-        }
-
-        .review-actions {
-
-            margin-top: 10px;
-
-            display: flex;
-
-            flex-wrap: wrap;
-
-            gap: 8px;
-        }
-
-        .review-like-button {
-
-            border:
-                1px solid #ddd;
-
-            background: #fff;
-
-            padding: 6px 10px;
-
-            border-radius: 7px;
-
-            cursor: pointer;
-
-            font-size: 12px;
-        }
-
-        .review-like-button:hover {
-
-            background: #f2f2f2;
-        }
-
-        .review-like-button.active {
-
-            background: #222;
-
-            color: #fff;
-
-            border-color: #222;
-        }
-
-        .review-like-button:disabled {
-
-            opacity: .5;
-
-            cursor: default;
-        }
-
+        /* ===============================
+           Advertisement
+        =============================== */
 
         .ad-section {
-
             display: none;
 
             margin-bottom: 24px;
         }
 
         .ad-label {
-
             margin-bottom: 7px;
 
             text-align: center;
@@ -1105,7 +1100,6 @@
         }
 
         .ad-box {
-
             padding: 18px;
 
             background: #fff;
@@ -1119,34 +1113,31 @@
         }
 
         .ad-box img {
-
             display: block;
 
             max-width: 100%;
 
             max-height: 180px;
 
-            margin: 0 auto 10px;
+            margin:
+                0 auto 10px;
 
             border-radius: 8px;
         }
 
         .ad-company {
-
             color: #888;
 
             font-size: 11px;
         }
 
         .ad-title {
-
             margin-top: 4px;
 
             font-weight: 800;
         }
 
         .ad-description {
-
             margin-top: 5px;
 
             color: #666;
@@ -1155,12 +1146,12 @@
         }
 
         .ad-button {
-
             display: inline-block;
 
             margin-top: 10px;
 
-            padding: 7px 14px;
+            padding:
+                7px 14px;
 
             border-radius: 7px;
 
@@ -1174,8 +1165,11 @@
         }
 
 
-        .back-link {
+        /* ===============================
+           Back
+        =============================== */
 
+        .back-link {
             display: inline-block;
 
             margin-top: 5px;
@@ -1188,53 +1182,40 @@
         }
 
         .back-link:hover {
-
             text-decoration: underline;
         }
 
 
-        .share-message {
-
-            min-height: 20px;
-
-            margin: 3px 0 0;
-
-            color: #777;
-
-            font-size: 11px;
-        }
-
+        /* ===============================
+           Footer
+        =============================== */
 
         .site-footer {
-
             background: #111;
 
             color: #fff;
 
-            padding: 35px 20px;
+            padding:
+                35px 20px;
         }
 
         .footer-inner {
-
             max-width: 1200px;
 
             margin: 0 auto;
         }
 
         .footer-inner h2 {
-
             margin-top: 0;
         }
 
         .footer-inner p {
-
             color: #aaa;
 
             font-size: 13px;
         }
 
         .footer-links {
-
             display: flex;
 
             flex-wrap: wrap;
@@ -1243,7 +1224,6 @@
         }
 
         .footer-links a {
-
             color: #bbb;
 
             text-decoration: none;
@@ -1252,13 +1232,15 @@
         }
 
         .footer-links a:hover {
-
             color: #fff;
         }
 
 
-        .admin-link {
+        /* ===============================
+           Admin
+        =============================== */
 
+        .admin-link {
             position: fixed;
 
             right: 12px;
@@ -1277,10 +1259,13 @@
         }
 
 
+        /* ===============================
+           Responsive
+        =============================== */
+
         @media (max-width: 900px) {
 
             .content-layout {
-
                 grid-template-columns: 1fr;
             }
 
@@ -1290,76 +1275,69 @@
         @media (max-width: 700px) {
 
             .header-inner {
-
                 align-items: flex-start;
 
                 flex-direction: column;
             }
 
             .site-nav {
-
                 gap: 12px;
             }
 
             main {
-
                 padding:
                     22px 14px 50px;
             }
 
             .hero-content {
-
                 grid-template-columns: 1fr;
 
                 padding: 24px;
             }
 
             .hero-cover {
-
                 width: 180px;
 
                 margin: 0 auto;
             }
 
             .hero-info h1 {
-
                 text-align: center;
             }
 
             .hero-subtitle {
-
                 text-align: center;
             }
 
             .hero-description {
-
                 font-size: 13px;
             }
 
             .hero-stats {
-
                 justify-content: center;
             }
 
             .genre-list {
-
                 justify-content: center;
             }
 
             .item-list {
-
                 grid-template-columns: 1fr;
             }
 
             .content-section {
-
                 padding: 19px;
             }
 
             .info-table {
-
                 grid-template-columns:
-                    110px 1fr;
+                    110px minmax(0,1fr);
+            }
+
+            .review-header {
+                align-items: flex-start;
+
+                flex-direction: column;
             }
 
         }
@@ -1590,6 +1568,22 @@
                         <div class="hero-stat">
 
                             <span class="hero-stat-label">
+                                お気に入り
+                            </span>
+
+                            <span
+                                id="hero-favourites"
+                                class="hero-stat-value"
+                            >
+                                —
+                            </span>
+
+                        </div>
+
+
+                        <div class="hero-stat">
+
+                            <span class="hero-stat-label">
                                 話数
                             </span>
 
@@ -1670,6 +1664,24 @@
                 </section>
 
 
+                <section
+                    id="editorial-review-section"
+                    class="content-section"
+                    style="display:none;"
+                >
+
+                    <h2>
+                        Animeciaレビュー
+                    </h2>
+
+                    <div
+                        id="editorial-review"
+                        class="editorial-review"
+                    ></div>
+
+                </section>
+
+
                 <section class="content-section">
 
                     <h2>
@@ -1688,6 +1700,22 @@
 
                             <div
                                 id="info-title"
+                                class="info-value"
+                            >
+                                —
+                            </div>
+
+                        </div>
+
+
+                        <div class="info-row">
+
+                            <div class="info-label">
+                                英語タイトル
+                            </div>
+
+                            <div
+                                id="info-english-title"
                                 class="info-value"
                             >
                                 —
@@ -1904,14 +1932,14 @@
                 <section class="content-section">
 
                     <h2>
-                        Animeciaレビュー
+                        ユーザーレビュー
                     </h2>
 
 
                     <div
                         id="review-login-message"
-                        style="display:none;"
                         class="spoiler"
+                        style="display:none;"
                     >
                         レビューを投稿するにはログインしてください。
                     </div>
@@ -1934,47 +1962,7 @@
                         <select id="review-rating">
 
                             <option value="">
-                                評価を選択
-                            </option>
-
-                            <option value="10">
-                                10 / 10
-                            </option>
-
-                            <option value="9">
-                                9 / 10
-                            </option>
-
-                            <option value="8">
-                                8 / 10
-                            </option>
-
-                            <option value="7">
-                                7 / 10
-                            </option>
-
-                            <option value="6">
-                                6 / 10
-                            </option>
-
-                            <option value="5">
-                                5 / 10
-                            </option>
-
-                            <option value="4">
-                                4 / 10
-                            </option>
-
-                            <option value="3">
-                                3 / 10
-                            </option>
-
-                            <option value="2">
-                                2 / 10
-                            </option>
-
-                            <option value="1">
-                                1 / 10
+                                評価なし
                             </option>
 
                         </select>
@@ -2014,7 +2002,9 @@
                     </form>
 
 
-                    <div id="review-list">
+                    <div
+                        id="review-list"
+                    >
 
                         <p class="status">
                             レビューを読み込んでいます……
@@ -2116,7 +2106,7 @@
                         id="rating-login-message"
                         class="spoiler"
                     >
-                        ログインすると作品を1〜10点で評価できます。
+                        ログインすると作品を評価できます。
                     </div>
 
 
@@ -2129,53 +2119,7 @@
                         <select
                             id="user-rating"
                             class="rating-select"
-                        >
-
-                            <option value="">
-                                評価を選択
-                            </option>
-
-                            <option value="10">
-                                10 / 10
-                            </option>
-
-                            <option value="9">
-                                9 / 10
-                            </option>
-
-                            <option value="8">
-                                8 / 10
-                            </option>
-
-                            <option value="7">
-                                7 / 10
-                            </option>
-
-                            <option value="6">
-                                6 / 10
-                            </option>
-
-                            <option value="5">
-                                5 / 10
-                            </option>
-
-                            <option value="4">
-                                4 / 10
-                            </option>
-
-                            <option value="3">
-                                3 / 10
-                            </option>
-
-                            <option value="2">
-                                2 / 10
-                            </option>
-
-                            <option value="1">
-                                1 / 10
-                            </option>
-
-                        </select>
+                        ></select>
 
 
                         <button
@@ -2296,19 +2240,19 @@
     const SUPABASE_URL =
         "https://bhgdjuwlxvbaeraaivmh.supabase.co";
 
-    const SUPABASE_KEY =
+    const SUPABASE_ANON_KEY =
         "sb_publishable_-rZ4HusVezs5IlZQnUQ-Kw_SLUd8R0c";
 
 
     const supabaseClient =
         window.supabase.createClient(
             SUPABASE_URL,
-            SUPABASE_KEY
+            SUPABASE_ANON_KEY
         );
 
 
     /* =========================================
-       URL / state
+       State
     ========================================= */
 
     const params =
@@ -2321,11 +2265,12 @@
         params.get("id");
 
 
-    let currentAnime = null;
+    let currentAnime =
+        null;
 
-    let currentUser = null;
 
-    let authSubscription = null;
+    let currentUser =
+        null;
 
 
     /* =========================================
@@ -2333,13 +2278,21 @@
     ========================================= */
 
     const loadingElement =
-        document.getElementById("loading");
+        document.getElementById(
+            "loading"
+        );
+
 
     const errorElement =
-        document.getElementById("error");
+        document.getElementById(
+            "error"
+        );
+
 
     const detailElement =
-        document.getElementById("detail");
+        document.getElementById(
+            "detail"
+        );
 
 
     /* =========================================
@@ -2355,11 +2308,16 @@
             return "";
         }
 
+
         const div =
-            document.createElement("div");
+            document.createElement(
+                "div"
+            );
+
 
         div.textContent =
             String(value);
+
 
         return div.innerHTML;
     }
@@ -2371,6 +2329,7 @@
             return "";
         }
 
+
         try {
 
             const url =
@@ -2379,17 +2338,21 @@
                     window.location.href
                 );
 
+
             if (
                 url.protocol === "http:" ||
                 url.protocol === "https:"
             ) {
+
                 return url.href;
             }
+
 
         } catch (error) {
 
             return "";
         }
+
 
         return "";
     }
@@ -2402,6 +2365,7 @@
             anime?.title_native ||
             anime?.title_romaji ||
             anime?.title_english ||
+            anime?.english_title ||
             anime?.title ||
             "タイトル未設定"
         );
@@ -2417,6 +2381,8 @@
         const candidates = [
 
             anime?.title_english,
+
+            anime?.english_title,
 
             anime?.title_romaji,
 
@@ -2437,12 +2403,56 @@
                 title &&
                 title !== main
             ) {
+
                 return title;
             }
         }
 
 
         return "";
+    }
+
+
+    function getPersonName(person) {
+
+        return (
+
+            person?.name_native ||
+
+            [
+                person?.name_first,
+                person?.name_last
+            ]
+                .filter(Boolean)
+                .join(" ") ||
+
+            "名前未設定"
+        );
+    }
+
+
+    function cleanText(value) {
+
+        if (!value) {
+            return "";
+        }
+
+
+        const div =
+            document.createElement(
+                "div"
+            );
+
+
+        div.innerHTML =
+            String(value);
+
+
+        return (
+            div.textContent ||
+            div.innerText ||
+            ""
+        );
     }
 
 
@@ -2453,6 +2463,7 @@
             value === undefined ||
             value === ""
         ) {
+
             return "—";
         }
 
@@ -2462,8 +2473,11 @@
 
 
         if (
-            Number.isNaN(number)
+            Number.isNaN(
+                number
+            )
         ) {
+
             return "—";
         }
 
@@ -2481,6 +2495,7 @@
             value === undefined ||
             value === ""
         ) {
+
             return "—";
         }
 
@@ -2490,8 +2505,11 @@
 
 
         if (
-            Number.isNaN(number)
+            Number.isNaN(
+                number
+            )
         ) {
+
             return "—";
         }
 
@@ -2516,6 +2534,7 @@
                 date.getTime()
             )
         ) {
+
             return "—";
         }
 
@@ -2542,6 +2561,7 @@
                 date.getTime()
             )
         ) {
+
             return "";
         }
 
@@ -2684,69 +2704,137 @@
     }
 
 
-    function getPersonName(person) {
+    function hideSection(id) {
 
-        return (
+        const element =
+            document.getElementById(
+                id
+            );
 
-            person?.name_native ||
 
-            [
-                person?.name_first,
-                person?.name_last
-            ]
-                .filter(Boolean)
-                .join(" ") ||
+        if (element) {
+            element.style.display =
+                "none";
+        }
+    }
 
-            "名前未設定"
+
+    function showSection(id) {
+
+        const element =
+            document.getElementById(
+                id
+            );
+
+
+        if (element) {
+            element.style.display =
+                "block";
+        }
+    }
+
+
+    /* =========================================
+       Rating options
+    ========================================= */
+
+    function createRatingOptions() {
+
+        const selects = [
+
+            document.getElementById(
+                "user-rating"
+            ),
+
+            document.getElementById(
+                "review-rating"
+            )
+
+        ];
+
+
+        selects.forEach(
+            select => {
+
+                if (!select) {
+                    return;
+                }
+
+
+                select.innerHTML =
+                    "";
+
+
+                const emptyOption =
+                    document.createElement(
+                        "option"
+                    );
+
+
+                emptyOption.value =
+                    "";
+
+
+                emptyOption.textContent =
+                    select.id ===
+                    "review-rating"
+
+                        ? "評価なし"
+
+                        : "評価を選択";
+
+
+                select.appendChild(
+                    emptyOption
+                );
+
+
+                for (
+                    let value = 10;
+                    value >= 1;
+                    value -= 0.5
+                ) {
+
+                    const option =
+                        document.createElement(
+                            "option"
+                        );
+
+
+                    option.value =
+                        value.toFixed(1);
+
+
+                    option.textContent =
+                        `${value.toFixed(1)} / 10`;
+
+
+                    select.appendChild(
+                        option
+                    );
+
+                }
+
+            }
         );
     }
 
 
-    function cleanDescription(value) {
-
-        if (!value) {
-            return "";
-        }
-
-
-        const temporary =
-            document.createElement(
-                "div"
-            );
-
-
-        temporary.innerHTML =
-            String(value);
-
-
-        return temporary.textContent ||
-            temporary.innerText ||
-            "";
-    }
-
+    /* =========================================
+       Error
+    ========================================= */
 
     function showError() {
 
         loadingElement.style.display =
             "none";
 
-        detailElement.style.display =
-            "none";
-
-        errorElement.style.display =
-            "block";
-    }
-
-
-    function showDetail() {
-
-        loadingElement.style.display =
-            "none";
-
-        errorElement.style.display =
-            "none";
 
         detailElement.style.display =
+            "none";
+
+
+        errorElement.style.display =
             "block";
     }
 
@@ -2758,16 +2846,21 @@
     function updateSEO(anime) {
 
         const title =
-            getMainTitle(anime);
+            getMainTitle(
+                anime
+            );
 
 
         const description =
-            cleanDescription(
+            cleanText(
                 anime.description
             )
-            .replace(/\s+/g, " ")
-            .trim()
-            .slice(0, 155) ||
+                .replace(/\s+/g, " ")
+                .trim()
+                .slice(
+                    0,
+                    155
+                ) ||
 
             `${title}のあらすじ・作品情報・レビューを紹介しています。`;
 
@@ -2858,7 +2951,6 @@
             ogImage.removeAttribute(
                 "content"
             );
-
         }
 
 
@@ -2874,7 +2966,6 @@
             Array.isArray(
                 anime.anime_genres
             )
-
                 ? anime.anime_genres
                     .map(
                         item =>
@@ -2914,39 +3005,23 @@
                     : undefined,
 
             "dateCreated":
-                anime.start_date ||
+                anime.created_at ||
                 undefined,
 
-            "aggregateRating":
-                anime.average_score !== null &&
-                anime.average_score !== undefined
-                    ? {
-                        "@type":
-                            "AggregateRating",
-
-                        "ratingValue":
-                            Number(
-                                anime.average_score
-                            ),
-
-                        "bestRating":
-                            10,
-
-                        "worstRating":
-                            1
-                    }
-                    : undefined
+            "dateModified":
+                anime.updated_at ||
+                undefined
         };
 
 
-        const existing =
+        const oldSchema =
             document.getElementById(
                 "anime-schema"
             );
 
 
-        if (existing) {
-            existing.remove();
+        if (oldSchema) {
+            oldSchema.remove();
         }
 
 
@@ -2959,8 +3034,10 @@
         script.id =
             "anime-schema";
 
+
         script.type =
             "application/ld+json";
+
 
         script.textContent =
             JSON.stringify(
@@ -2975,14 +3052,16 @@
 
 
     /* =========================================
-       Load core anime
+       Load anime
     ========================================= */
 
     async function loadAnime() {
 
         if (
             !currentAnimeId ||
-            currentAnimeId.length > 200
+            !/^\d+$/.test(
+                currentAnimeId
+            )
         ) {
 
             showError();
@@ -3004,11 +3083,19 @@
                     .select(`
                         id,
                         title,
+                        genre,
+                        description,
+                        review,
+                        official_url,
+                        english_title,
+                        recommended,
+                        recommended_start_at,
+                        recommended_end_at,
+                        external_id,
                         title_romaji,
                         title_english,
                         title_native,
                         title_japanese,
-                        description,
                         cover_image,
                         banner_image,
                         start_date,
@@ -3024,27 +3111,26 @@
                         popularity,
                         favourites_count,
                         site_url,
-                        updated_at
+                        updated_at,
+                        created_at
                     `)
 
                     .eq(
                         "id",
-                        currentAnimeId
+                        Number(
+                            currentAnimeId
+                        )
                     )
 
                     .maybeSingle();
 
 
-            if (
-                error
-            ) {
+            if (error) {
                 throw error;
             }
 
 
-            if (
-                !data
-            ) {
+            if (!data) {
 
                 showError();
 
@@ -3058,9 +3144,11 @@
 
             await loadGenres();
 
+
             updateSEO(
                 currentAnime
             );
+
 
             renderAnime(
                 currentAnime
@@ -3086,10 +3174,16 @@
 
             await loadAuth();
 
+
             await loadUserState();
 
 
-            showDetail();
+            loadingElement.style.display =
+                "none";
+
+
+            detailElement.style.display =
+                "block";
 
 
         } catch (error) {
@@ -3098,6 +3192,7 @@
                 "Anime読み込みエラー:",
                 error
             );
+
 
             showError();
         }
@@ -3125,6 +3220,7 @@
                     .from("anime_genres")
 
                     .select(`
+                        genre_id,
                         genres (
                             id,
                             name
@@ -3133,7 +3229,9 @@
 
                     .eq(
                         "anime_id",
-                        currentAnimeId
+                        Number(
+                            currentAnimeId
+                        )
                     );
 
 
@@ -3154,7 +3252,6 @@
                 "ジャンル取得エラー:",
                 error
             );
-
         }
 
 
@@ -3170,7 +3267,7 @@
             );
 
 
-        const genres =
+        const relationGenres =
             Array.isArray(
                 currentAnime?.anime_genres
             )
@@ -3185,13 +3282,49 @@
                 : [];
 
 
-        container.innerHTML =
-            genres
+        const names =
+            relationGenres
                 .map(
                     genre =>
+                        genre.name
+                )
+                .filter(Boolean);
+
+
+        if (
+            names.length === 0 &&
+            currentAnime?.genre
+        ) {
+
+            names.push(
+                ...String(
+                    currentAnime.genre
+                )
+                    .split(",")
+                    .map(
+                        item =>
+                            item.trim()
+                    )
+                    .filter(Boolean)
+            );
+        }
+
+
+        const uniqueNames =
+            [
+                ...new Set(
+                    names
+                )
+            ];
+
+
+        container.innerHTML =
+            uniqueNames
+                .map(
+                    name =>
                         `<span class="genre-tag">
                             ${escapeHTML(
-                                genre.name
+                                name
                             )}
                         </span>`
                 )
@@ -3200,17 +3333,21 @@
 
 
     /* =========================================
-       Render core anime
+       Render anime
     ========================================= */
 
     function renderAnime(anime) {
 
         const title =
-            getMainTitle(anime);
+            getMainTitle(
+                anime
+            );
 
 
         const subtitle =
-            getSubTitle(anime);
+            getSubTitle(
+                anime
+            );
 
 
         document
@@ -3243,12 +3380,53 @@
                 "hero-description"
             )
             .textContent =
-            cleanDescription(
+            cleanText(
                 anime.description
             )
-                .slice(0, 300) ||
+                .slice(
+                    0,
+                    300
+                ) ||
             "作品情報は準備中です。";
 
+
+        /* =====================================
+           Editorial review
+        ===================================== */
+
+        const editorialSection =
+            document.getElementById(
+                "editorial-review-section"
+            );
+
+
+        const editorialReview =
+            document.getElementById(
+                "editorial-review"
+            );
+
+
+        if (
+            anime.review
+        ) {
+
+            editorialReview.textContent =
+                anime.review;
+
+
+            editorialSection.style.display =
+                "block";
+
+        } else {
+
+            editorialSection.style.display =
+                "none";
+        }
+
+
+        /* =====================================
+           Cover
+        ===================================== */
 
         const cover =
             document.getElementById(
@@ -3286,10 +3464,24 @@
                 >
                     画像なし
                 </div>
+
             `;
 
+        } else {
+
+            cover.innerHTML = `
+
+                <div class="hero-cover-placeholder">
+                    画像なし
+                </div>
+
+            `;
         }
 
+
+        /* =====================================
+           Background
+        ===================================== */
 
         const background =
             document.getElementById(
@@ -3307,18 +3499,23 @@
         if (bannerURL) {
 
             background.style.backgroundImage =
-                `url(${JSON.stringify(
+                `url("${escapeURLForCSS(
                     bannerURL
-                )})`;
+                )}")`;
 
         }
 
+
+        /* =====================================
+           Stats
+        ===================================== */
 
         document
             .getElementById(
                 "hero-score"
             )
             .textContent =
+
             anime.average_score !== null &&
             anime.average_score !== undefined
 
@@ -3341,6 +3538,16 @@
 
         document
             .getElementById(
+                "hero-favourites"
+            )
+            .textContent =
+            formatNumber(
+                anime.favourites_count
+            );
+
+
+        document
+            .getElementById(
                 "hero-episodes"
             )
             .textContent =
@@ -3349,12 +3556,26 @@
                 : "—";
 
 
+        /* =====================================
+           Information
+        ===================================== */
+
         document
             .getElementById(
                 "info-title"
             )
             .textContent =
             title;
+
+
+        document
+            .getElementById(
+                "info-english-title"
+            )
+            .textContent =
+            anime.title_english ||
+            anime.english_title ||
+            "—";
 
 
         document
@@ -3392,10 +3613,12 @@
                 "info-season"
             )
             .textContent =
+
             anime.season_year
                 ? `${anime.season_year}年 ${formatSeason(
                     anime.season
                 )}`
+
                 : formatSeason(
                     anime.season
                 );
@@ -3440,8 +3663,13 @@
                 : "—";
 
 
+        /* =====================================
+           Official site
+        ===================================== */
+
         const officialURL =
             safeURL(
+                anime.official_url ||
                 anime.site_url
             );
 
@@ -3469,6 +3697,7 @@
             heroOfficial.href =
                 officialURL;
 
+
             heroOfficial.style.display =
                 "inline-flex";
 
@@ -3485,12 +3714,27 @@
             heroOfficial.style.display =
                 "none";
 
+
             officialSection.style.display =
                 "none";
         }
 
 
         renderGenres();
+    }
+
+
+    function escapeURLForCSS(value) {
+
+        return String(value)
+            .replace(
+                /\\/g,
+                "\\\\"
+            )
+            .replace(
+                /"/g,
+                '\\"'
+            );
     }
 
 
@@ -3504,6 +3748,7 @@
             document.getElementById(
                 "studio-section"
             );
+
 
         const list =
             document.getElementById(
@@ -3522,17 +3767,21 @@
                     .from("anime_studios")
 
                     .select(`
+                        studio_id,
                         studios (
                             id,
                             external_id,
                             name,
-                            site_url
+                            site_url,
+                            created_at
                         )
                     `)
 
                     .eq(
                         "anime_id",
-                        currentAnimeId
+                        Number(
+                            currentAnimeId
+                        )
                     );
 
 
@@ -3544,8 +3793,8 @@
             const studios =
                 (data || [])
                     .map(
-                        item =>
-                            item?.studios
+                        row =>
+                            row?.studios
                     )
                     .filter(Boolean);
 
@@ -3554,15 +3803,17 @@
                 studios.length === 0
             ) {
 
-                section.style.display =
-                    "none";
+                hideSection(
+                    "studio-section"
+                );
 
                 return;
             }
 
 
-            section.style.display =
-                "block";
+            showSection(
+                "studio-section"
+            );
 
 
             list.innerHTML =
@@ -3570,19 +3821,19 @@
                     .map(
                         studio => {
 
-                            const site =
+                            const url =
                                 safeURL(
                                     studio.site_url
                                 );
 
 
                             const nameHTML =
-                                site
+                                url
 
                                     ? `
                                         <a
                                             href="${escapeHTML(
-                                                site
+                                                url
                                             )}"
                                             target="_blank"
                                             rel="noopener noreferrer"
@@ -3623,6 +3874,7 @@
                                     </div>
 
                                 </div>
+
                             `;
                         }
                     )
@@ -3636,8 +3888,9 @@
                 error
             );
 
-            section.style.display =
-                "none";
+            hideSection(
+                "studio-section"
+            );
         }
     }
 
@@ -3652,6 +3905,7 @@
             document.getElementById(
                 "character-section"
             );
+
 
         const list =
             document.getElementById(
@@ -3670,20 +3924,25 @@
                     .from("anime_characters")
 
                     .select(`
+                        character_id,
                         role,
                         characters (
                             id,
+                            external_id,
                             name_first,
                             name_last,
                             name_native,
                             image,
-                            description
+                            description,
+                            created_at
                         )
                     `)
 
                     .eq(
                         "anime_id",
-                        currentAnimeId
+                        Number(
+                            currentAnimeId
+                        )
                     );
 
 
@@ -3695,25 +3954,23 @@
             const characters =
                 (data || [])
                     .map(
-                        item => ({
+                        row => ({
 
-                            ...(
-                                item?.characters ||
-                                {}
-                            ),
+                            character:
+                                row?.characters,
 
                             role:
-                                item?.role
+                                row?.role
 
                         })
                     )
                     .filter(
                         item =>
-                            item.id
+                            item.character
                     )
                     .slice(
                         0,
-                        30
+                        40
                     );
 
 
@@ -3721,31 +3978,37 @@
                 characters.length === 0
             ) {
 
-                section.style.display =
-                    "none";
+                hideSection(
+                    "character-section"
+                );
 
                 return;
             }
 
 
-            section.style.display =
-                "block";
+            showSection(
+                "character-section"
+            );
 
 
             list.innerHTML =
                 characters
                     .map(
-                        character => {
+                        item => {
 
-                            const image =
-                                safeURL(
-                                    character.image
-                                );
+                            const character =
+                                item.character;
 
 
                             const name =
                                 getPersonName(
                                     character
+                                );
+
+
+                            const image =
+                                safeURL(
+                                    character.image
                                 );
 
 
@@ -3762,9 +4025,6 @@
                                                 name
                                             )}"
                                             loading="lazy"
-                                            onerror="
-                                                this.style.display='none';
-                                            "
                                         >
                                     `
 
@@ -3799,7 +4059,7 @@
                                             class="item-role"
                                         >
                                             ${escapeHTML(
-                                                character.role ||
+                                                item.role ||
                                                 "キャラクター"
                                             )}
                                         </p>
@@ -3807,6 +4067,7 @@
                                     </div>
 
                                 </div>
+
                             `;
                         }
                     )
@@ -3820,8 +4081,9 @@
                 error
             );
 
-            section.style.display =
-                "none";
+            hideSection(
+                "character-section"
+            );
         }
     }
 
@@ -3836,6 +4098,7 @@
             document.getElementById(
                 "staff-section"
             );
+
 
         const list =
             document.getElementById(
@@ -3854,20 +4117,25 @@
                     .from("anime_staff")
 
                     .select(`
+                        staff_id,
                         role,
                         staff (
                             id,
+                            external_id,
                             name_first,
                             name_last,
                             name_native,
                             image,
-                            description
+                            description,
+                            created_at
                         )
                     `)
 
                     .eq(
                         "anime_id",
-                        currentAnimeId
+                        Number(
+                            currentAnimeId
+                        )
                     );
 
 
@@ -3879,21 +4147,19 @@
             const staff =
                 (data || [])
                     .map(
-                        item => ({
+                        row => ({
 
-                            ...(
-                                item?.staff ||
-                                {}
-                            ),
+                            staff:
+                                row?.staff,
 
                             role:
-                                item?.role
+                                row?.role
 
                         })
                     )
                     .filter(
                         item =>
-                            item.id
+                            item.staff
                     )
                     .slice(
                         0,
@@ -3905,31 +4171,37 @@
                 staff.length === 0
             ) {
 
-                section.style.display =
-                    "none";
+                hideSection(
+                    "staff-section"
+                );
 
                 return;
             }
 
 
-            section.style.display =
-                "block";
+            showSection(
+                "staff-section"
+            );
 
 
             list.innerHTML =
                 staff
                     .map(
-                        person => {
+                        item => {
 
-                            const image =
-                                safeURL(
-                                    person.image
-                                );
+                            const person =
+                                item.staff;
 
 
                             const name =
                                 getPersonName(
                                     person
+                                );
+
+
+                            const image =
+                                safeURL(
+                                    person.image
                                 );
 
 
@@ -3946,9 +4218,6 @@
                                                 name
                                             )}"
                                             loading="lazy"
-                                            onerror="
-                                                this.style.display='none';
-                                            "
                                         >
                                     `
 
@@ -3983,7 +4252,7 @@
                                             class="item-role"
                                         >
                                             ${escapeHTML(
-                                                person.role ||
+                                                item.role ||
                                                 "スタッフ"
                                             )}
                                         </p>
@@ -3991,6 +4260,7 @@
                                     </div>
 
                                 </div>
+
                             `;
                         }
                     )
@@ -4004,8 +4274,9 @@
                 error
             );
 
-            section.style.display =
-                "none";
+            hideSection(
+                "staff-section"
+            );
         }
     }
 
@@ -4020,6 +4291,7 @@
             document.getElementById(
                 "related-section"
             );
+
 
         const list =
             document.getElementById(
@@ -4038,13 +4310,16 @@
                     .from("anime_relations")
 
                     .select(`
-                        relation_type,
-                        related_anime_id
+                        anime_id,
+                        related_anime_id,
+                        relation_type
                     `)
 
                     .eq(
                         "anime_id",
-                        currentAnimeId
+                        Number(
+                            currentAnimeId
+                        )
                     );
 
 
@@ -4054,20 +4329,21 @@
 
 
             const relationRows =
-                Array.isArray(data)
-                    ? data.filter(
+                (data || [])
+                    .filter(
                         row =>
-                            row?.related_anime_id
-                    )
-                    : [];
+                            row?.related_anime_id !== null &&
+                            row?.related_anime_id !== undefined
+                    );
 
 
             if (
                 relationRows.length === 0
             ) {
 
-                section.style.display =
-                    "none";
+                hideSection(
+                    "related-section"
+                );
 
                 return;
             }
@@ -4078,7 +4354,9 @@
                     ...new Set(
                         relationRows.map(
                             row =>
-                                row.related_anime_id
+                                Number(
+                                    row.related_anime_id
+                                )
                         )
                     )
                 ];
@@ -4086,7 +4364,7 @@
 
             const {
                 data: relatedAnime,
-                error: animeError
+                error: relatedError
             } =
                 await supabaseClient
 
@@ -4099,6 +4377,7 @@
                         title_english,
                         title_native,
                         title_japanese,
+                        english_title,
                         cover_image
                     `)
 
@@ -4108,8 +4387,8 @@
                     );
 
 
-            if (animeError) {
-                throw animeError;
+            if (relatedError) {
+                throw relatedError;
             }
 
 
@@ -4133,9 +4412,10 @@
                     .map(
                         relation => ({
 
-                            ...relation,
+                            relation:
+                                relation,
 
-                            relatedAnime:
+                            anime:
                                 animeMap.get(
                                     String(
                                         relation.related_anime_id
@@ -4145,8 +4425,8 @@
                         })
                     )
                     .filter(
-                        relation =>
-                            relation.relatedAnime
+                        item =>
+                            item.anime
                     );
 
 
@@ -4154,24 +4434,26 @@
                 relations.length === 0
             ) {
 
-                section.style.display =
-                    "none";
+                hideSection(
+                    "related-section"
+                );
 
                 return;
             }
 
 
-            section.style.display =
-                "block";
+            showSection(
+                "related-section"
+            );
 
 
             list.innerHTML =
                 relations
                     .map(
-                        relation => {
+                        item => {
 
                             const anime =
-                                relation.relatedAnime;
+                                item.anime;
 
 
                             return `
@@ -4199,7 +4481,8 @@
                                         >
                                             ${escapeHTML(
                                                 relationLabel(
-                                                    relation.relation_type
+                                                    item.relation
+                                                        .relation_type
                                                 )
                                             )}
                                         </div>
@@ -4207,6 +4490,7 @@
                                     </div>
 
                                 </div>
+
                             `;
                         }
                     )
@@ -4220,8 +4504,9 @@
                 error
             );
 
-            section.style.display =
-                "none";
+            hideSection(
+                "related-section"
+            );
         }
     }
 
@@ -4256,15 +4541,20 @@
         } catch (error) {
 
             console.error(
-                "ユーザー取得エラー:",
+                "認証情報取得エラー:",
                 error
             );
+
 
             currentUser =
                 null;
         }
     }
 
+
+    /* =========================================
+       User state
+    ========================================= */
 
     async function loadUserState() {
 
@@ -4273,25 +4563,30 @@
                 "status-login-message"
             );
 
+
         const statusForm =
             document.getElementById(
                 "status-form"
             );
+
 
         const ratingLoginMessage =
             document.getElementById(
                 "rating-login-message"
             );
 
+
         const ratingArea =
             document.getElementById(
                 "rating-area"
             );
 
+
         const reviewLoginMessage =
             document.getElementById(
                 "review-login-message"
             );
+
 
         const reviewForm =
             document.getElementById(
@@ -4304,12 +4599,14 @@
             statusLoginMessage.style.display =
                 "block";
 
+
             statusForm.style.display =
                 "none";
 
 
             ratingLoginMessage.style.display =
                 "block";
+
 
             ratingArea.style.display =
                 "none";
@@ -4318,11 +4615,13 @@
             reviewLoginMessage.style.display =
                 "block";
 
+
             reviewForm.style.display =
                 "none";
 
 
             await loadFavorite();
+
 
             return;
         }
@@ -4331,6 +4630,7 @@
         statusLoginMessage.style.display =
             "none";
 
+
         statusForm.style.display =
             "grid";
 
@@ -4338,12 +4638,14 @@
         ratingLoginMessage.style.display =
             "none";
 
+
         ratingArea.style.display =
             "grid";
 
 
         reviewLoginMessage.style.display =
             "none";
+
 
         reviewForm.style.display =
             "grid";
@@ -4379,8 +4681,10 @@
                 "active"
             );
 
+
             button.textContent =
                 "☆ お気に入り";
+
 
             return;
         }
@@ -4407,7 +4711,9 @@
 
                     .eq(
                         "anime_id",
-                        currentAnimeId
+                        Number(
+                            currentAnimeId
+                        )
                     )
 
                     .maybeSingle();
@@ -4424,6 +4730,7 @@
                     "active"
                 );
 
+
                 button.textContent =
                     "★ お気に入り済み";
 
@@ -4432,6 +4739,7 @@
                 button.classList.remove(
                     "active"
                 );
+
 
                 button.textContent =
                     "☆ お気に入り";
@@ -4491,7 +4799,9 @@
 
                     .eq(
                         "anime_id",
-                        currentAnimeId
+                        Number(
+                            currentAnimeId
+                        )
                     )
 
                     .maybeSingle();
@@ -4505,7 +4815,8 @@
             if (data) {
 
                 const {
-                    error: deleteError
+                    error:
+                        deleteError
                 } =
                     await supabaseClient
 
@@ -4520,7 +4831,9 @@
 
                         .eq(
                             "anime_id",
-                            currentAnimeId
+                            Number(
+                                currentAnimeId
+                            )
                         );
 
 
@@ -4531,7 +4844,8 @@
             } else {
 
                 const {
-                    error: insertError
+                    error:
+                        insertError
                 } =
                     await supabaseClient
 
@@ -4543,7 +4857,9 @@
                                 currentUser.id,
 
                             anime_id:
-                                currentAnimeId
+                                Number(
+                                    currentAnimeId
+                                )
 
                         });
 
@@ -4564,9 +4880,11 @@
                 error
             );
 
+
             alert(
                 "お気に入りの更新に失敗しました。"
             );
+
 
         } finally {
 
@@ -4608,7 +4926,9 @@
 
                     .eq(
                         "anime_id",
-                        currentAnimeId
+                        Number(
+                            currentAnimeId
+                        )
                     )
 
                     .maybeSingle();
@@ -4638,7 +4958,8 @@
                     "watch-progress"
                 )
                 .value =
-                data.progress ?? 0;
+                data.progress ??
+                0;
 
 
         } catch (error) {
@@ -4658,29 +4979,18 @@
         }
 
 
-        const select =
-            document.getElementById(
-                "watch-status"
-            );
+        const status =
+            document
+                .getElementById(
+                    "watch-status"
+                )
+                .value;
+
 
         const progressInput =
             document.getElementById(
                 "watch-progress"
             );
-
-        const button =
-            document.getElementById(
-                "status-save"
-            );
-
-        const message =
-            document.getElementById(
-                "status-message"
-            );
-
-
-        const status =
-            select.value;
 
 
         const progressText =
@@ -4695,6 +5005,18 @@
                 );
 
 
+        const button =
+            document.getElementById(
+                "status-save"
+            );
+
+
+        const message =
+            document.getElementById(
+                "status-message"
+            );
+
+
         if (
             !Number.isInteger(
                 progress
@@ -4703,14 +5025,16 @@
         ) {
 
             message.textContent =
-                "視聴話数には0以上の整数を入力してください。";
+                "視聴済み話数には0以上の整数を入力してください。";
+
 
             return;
         }
 
 
         if (
-            currentAnime?.episodes &&
+            currentAnime?.episodes !== null &&
+            currentAnime?.episodes !== undefined &&
             progress >
             Number(
                 currentAnime.episodes
@@ -4720,12 +5044,14 @@
             message.textContent =
                 `視聴済み話数は${currentAnime.episodes}話以下で入力してください。`;
 
+
             return;
         }
 
 
         button.disabled =
             true;
+
 
         message.textContent =
             "保存しています……";
@@ -4746,7 +5072,9 @@
                             currentUser.id,
 
                         anime_id:
-                            currentAnimeId,
+                            Number(
+                                currentAnimeId
+                            ),
 
                         status:
                             status,
@@ -4777,8 +5105,10 @@
                 error
             );
 
+
             message.textContent =
-                "保存に失敗しました。";
+                "視聴状況の保存に失敗しました。";
+
 
         } finally {
 
@@ -4789,7 +5119,7 @@
 
 
     /* =========================================
-       Rating
+       User rating
     ========================================= */
 
     async function loadUserRating() {
@@ -4820,7 +5150,9 @@
 
                     .eq(
                         "anime_id",
-                        currentAnimeId
+                        Number(
+                            currentAnimeId
+                        )
                     )
 
                     .maybeSingle();
@@ -4838,11 +5170,9 @@
                         "user-rating"
                     )
                     .value =
-                    String(
-                        Number(
-                            data.rating
-                        )
-                    );
+                    Number(
+                        data.rating
+                    ).toFixed(1);
             }
 
 
@@ -4863,18 +5193,12 @@
         }
 
 
-        const rating =
+        const ratingText =
             document
                 .getElementById(
                     "user-rating"
                 )
                 .value;
-
-
-        const button =
-            document.getElementById(
-                "rating-save"
-            );
 
 
         const message =
@@ -4883,31 +5207,37 @@
             );
 
 
-        if (!rating) {
+        const button =
+            document.getElementById(
+                "rating-save"
+            );
+
+
+        if (!ratingText) {
 
             message.textContent =
                 "評価を選択してください。";
+
 
             return;
         }
 
 
-        const numericRating =
+        const rating =
             Number(
-                rating
+                ratingText
             );
 
 
         if (
-            !Number.isInteger(
-                numericRating
-            ) ||
-            numericRating < 1 ||
-            numericRating > 10
+            Number.isNaN(rating) ||
+            rating < 1 ||
+            rating > 10
         ) {
 
             message.textContent =
-                "評価は1〜10で入力してください。";
+                "評価は1.0〜10.0の範囲で入力してください。";
+
 
             return;
         }
@@ -4915,6 +5245,7 @@
 
         button.disabled =
             true;
+
 
         message.textContent =
             "保存しています……";
@@ -4935,10 +5266,12 @@
                             currentUser.id,
 
                         anime_id:
-                            currentAnimeId,
+                            Number(
+                                currentAnimeId
+                            ),
 
                         rating:
-                            numericRating,
+                            rating,
 
                         updated_at:
                             new Date()
@@ -4963,8 +5296,10 @@
                 error
             );
 
+
             message.textContent =
                 "評価の保存に失敗しました。";
+
 
         } finally {
 
@@ -4991,6 +5326,7 @@
             <p class="status">
                 レビューを読み込んでいます……
             </p>
+
         `;
 
 
@@ -5006,24 +5342,29 @@
 
                     .select(`
                         id,
+                        user_id,
+                        anime_id,
                         title,
                         content,
                         rating,
                         spoiler,
                         likes_count,
                         created_at,
-                        user_id
+                        updated_at
                     `)
 
                     .eq(
                         "anime_id",
-                        currentAnimeId
+                        Number(
+                            currentAnimeId
+                        )
                     )
 
                     .order(
                         "created_at",
                         {
-                            ascending: false
+                            ascending:
+                                false
                         }
                     );
 
@@ -5048,7 +5389,9 @@
                     <p class="status">
                         まだレビューはありません。
                     </p>
+
                 `;
+
 
                 return;
             }
@@ -5078,15 +5421,19 @@
                 try {
 
                     const {
-                        data: profiles
+                        data:
+                            profiles
                     } =
                         await supabaseClient
 
                             .from("profiles")
 
-                            .select(
-                                "id,display_name"
-                            )
+                            .select(`
+                                id,
+                                username,
+                                display_name,
+                                avatar_url
+                            `)
 
                             .in(
                                 "id",
@@ -5120,6 +5467,81 @@
             }
 
 
+            /* =================================
+               Like counts
+            ================================= */
+
+            const reviewIds =
+                reviews.map(
+                    review =>
+                        review.id
+                );
+
+
+            const likeCounts =
+                new Map();
+
+
+            if (
+                reviewIds.length > 0
+            ) {
+
+                try {
+
+                    const {
+                        data:
+                            likes
+                    } =
+                        await supabaseClient
+
+                            .from("review_likes")
+
+                            .select(
+                                "review_id"
+                            )
+
+                            .in(
+                                "review_id",
+                                reviewIds
+                            );
+
+
+                    (
+                        likes || []
+                    ).forEach(
+                        like => {
+
+                            const id =
+                                String(
+                                    like.review_id
+                                );
+
+
+                            likeCounts.set(
+                                id,
+                                (
+                                    likeCounts.get(
+                                        id
+                                    ) ||
+                                    0
+                                ) + 1
+                            );
+
+                        }
+                    );
+
+
+                } catch (likeError) {
+
+                    console.error(
+                        "レビューいいね数取得エラー:",
+                        likeError
+                    );
+
+                }
+            }
+
+
             container.innerHTML =
                 "";
 
@@ -5145,9 +5567,27 @@
                         );
 
 
-                    const username =
+                    const displayName =
                         profile?.display_name ||
+                        profile?.username ||
                         "Animeciaユーザー";
+
+
+                    const avatarURL =
+                        safeURL(
+                            profile?.avatar_url
+                        );
+
+
+                    const likeCount =
+                        likeCounts.get(
+                            String(
+                                review.id
+                            )
+                        ) ??
+                        Number(
+                            review.likes_count || 0
+                        );
 
 
                     const rating =
@@ -5161,17 +5601,112 @@
                             : "";
 
 
-                    const reviewHTML = `
+                    const avatarHTML =
+                        avatarURL
 
-                        <div class="review-header">
+                            ? `
 
-                            <span class="review-user">
+                                <img
+                                    class="review-avatar"
+                                    src="${escapeHTML(
+                                        avatarURL
+                                    )}"
+                                    alt=""
+                                    loading="lazy"
+                                >
+
+                            `
+
+                            : "";
+
+
+                    let contentHTML =
+                        "";
+
+
+                    if (
+                        review.spoiler
+                    ) {
+
+                        contentHTML = `
+
+                            <div
+                                class="
+                                    review-spoiler-box
+                                "
+                            >
+
+                                このレビューには
+                                ネタバレが含まれています。
+
+                                <br>
+
+                                <button
+                                    type="button"
+                                    class="show-spoiler-button"
+                                >
+                                    ネタバレを表示
+                                </button>
+
+
+                                <div
+                                    class="
+                                        review-spoiler-content
+                                    "
+                                    style="
+                                        display:none;
+                                        margin-top:10px;
+                                    "
+                                >
+
+                                    ${escapeHTML(
+                                        review.content
+                                    )}
+
+                                </div>
+
+                            </div>
+
+                        `;
+
+                    } else {
+
+                        contentHTML = `
+
+                            <div
+                                class="review-content"
+                            >
                                 ${escapeHTML(
-                                    username
+                                    review.content
                                 )}
+                            </div>
+
+                        `;
+                    }
+
+
+                    item.innerHTML = `
+
+                        <div
+                            class="review-header"
+                        >
+
+                            <span
+                                class="review-user"
+                            >
+
+                                ${avatarHTML}
+
+                                ${escapeHTML(
+                                    displayName
+                                )}
+
                             </span>
 
-                            <span class="review-date">
+
+                            <span
+                                class="review-date"
+                            >
                                 ${escapeHTML(
                                     formatDateTime(
                                         review.created_at
@@ -5185,11 +5720,17 @@
                         ${
                             review.title
                                 ? `
-                                    <h3 class="review-title">
+
+                                    <h3
+                                        class="review-title"
+                                    >
+
                                         ${escapeHTML(
                                             review.title
                                         )}
+
                                     </h3>
+
                                 `
                                 : ""
                         }
@@ -5198,80 +5739,46 @@
                         ${
                             rating
                                 ? `
+
                                     <div
-                                        class="review-rating"
+                                        class="
+                                            review-rating
+                                        "
                                     >
+
                                         ${escapeHTML(
                                             rating
                                         )}
+
                                     </div>
+
                                 `
                                 : ""
                         }
 
 
-                        ${
-                            review.spoiler
-
-                                ? `
-
-                                    <div
-                                        class="review-spoiler-box"
-                                    >
-
-                                        このレビューには
-                                        ネタバレが含まれています。
-
-                                        <br>
-
-                                        <button
-                                            type="button"
-                                            class="show-spoiler-button"
-                                        >
-                                            ネタバレを表示
-                                        </button>
-
-                                        <div
-                                            class="review-spoiler-content"
-                                            style="
-                                                display:none;
-                                                margin-top:10px;
-                                            "
-                                        >
-                                            ${escapeHTML(
-                                                review.content
-                                            )}
-                                        </div>
-
-                                    </div>
-                                `
-
-                                : `
-
-                                    <div
-                                        class="review-content"
-                                    >
-                                        ${escapeHTML(
-                                            review.content
-                                        )}
-                                    </div>
-                                `
-                        }
+                        ${contentHTML}
 
 
-                        <div class="review-actions">
+                        <div
+                            class="review-actions"
+                        >
 
                             <button
                                 type="button"
-                                class="review-like-button"
+                                class="
+                                    review-like-button
+                                "
                                 data-review-id="${escapeHTML(
                                     review.id
                                 )}"
                             >
+
                                 ♡ 参考になった
                                 ${formatNumber(
-                                    review.likes_count || 0
+                                    likeCount
                                 )}
+
                             </button>
 
 
@@ -5292,19 +5799,19 @@
                                                 review.id
                                             )}"
                                         >
+
                                             削除
+
                                         </button>
 
                                     `
+
                                     : ""
                             }
 
                         </div>
+
                     `;
-
-
-                    item.innerHTML =
-                        reviewHTML;
 
 
                     const spoilerButton =
@@ -5327,21 +5834,27 @@
                                     );
 
 
-                                const visible =
-                                    content.style.display !==
-                                    "none";
+                                if (
+                                    content.style.display ===
+                                    "none"
+                                ) {
+
+                                    content.style.display =
+                                        "block";
 
 
-                                content.style.display =
-                                    visible
-                                        ? "none"
-                                        : "block";
+                                    spoilerButton.textContent =
+                                        "ネタバレを隠す";
+
+                                } else {
+
+                                    content.style.display =
+                                        "none";
 
 
-                                spoilerButton.textContent =
-                                    visible
-                                        ? "ネタバレを表示"
-                                        : "ネタバレを隠す";
+                                    spoilerButton.textContent =
+                                        "ネタバレを表示";
+                                }
 
                             }
                         );
@@ -5412,6 +5925,7 @@
                 <p class="status">
                     レビューを取得できませんでした。
                 </p>
+
             `;
         }
     }
@@ -5423,7 +5937,6 @@
 
 
         if (!currentUser) {
-
             return;
         }
 
@@ -5446,7 +5959,7 @@
                 .trim();
 
 
-        const rating =
+        const ratingText =
             document
                 .getElementById(
                     "review-rating"
@@ -5479,6 +5992,7 @@
             message.textContent =
                 "レビュー内容を入力してください。";
 
+
             return;
         }
 
@@ -5491,12 +6005,43 @@
             message.textContent =
                 "レビューは5000文字以内で入力してください。";
 
+
             return;
+        }
+
+
+        let rating =
+            null;
+
+
+        if (ratingText) {
+
+            rating =
+                Number(
+                    ratingText
+                );
+
+
+            if (
+                Number.isNaN(
+                    rating
+                ) ||
+                rating < 1 ||
+                rating > 10
+            ) {
+
+                message.textContent =
+                    "評価は1.0〜10.0の範囲で選択してください。";
+
+
+                return;
+            }
         }
 
 
         button.disabled =
             true;
+
 
         message.textContent =
             "投稿しています……";
@@ -5517,20 +6062,19 @@
                             currentUser.id,
 
                         anime_id:
-                            currentAnimeId,
+                            Number(
+                                currentAnimeId
+                            ),
 
                         title:
-                            title || null,
+                            title ||
+                            null,
 
                         content:
                             content,
 
                         rating:
-                            rating
-                                ? Number(
-                                    rating
-                                )
-                                : null,
+                            rating,
 
                         spoiler:
                             spoiler
@@ -5589,8 +6133,10 @@
                 error
             );
 
+
             message.textContent =
                 "レビューの投稿に失敗しました。";
+
 
         } finally {
 
@@ -5613,6 +6159,7 @@
             alert(
                 "レビューへのリアクションにはログインしてください。"
             );
+
 
             return;
         }
@@ -5639,7 +6186,9 @@
 
                     .eq(
                         "review_id",
-                        reviewId
+                        Number(
+                            reviewId
+                        )
                     )
 
                     .maybeSingle();
@@ -5653,7 +6202,8 @@
             if (data) {
 
                 const {
-                    error: deleteError
+                    error:
+                        deleteError
                 } =
                     await supabaseClient
 
@@ -5668,7 +6218,9 @@
 
                         .eq(
                             "review_id",
-                            reviewId
+                            Number(
+                                reviewId
+                            )
                         );
 
 
@@ -5679,7 +6231,8 @@
             } else {
 
                 const {
-                    error: insertError
+                    error:
+                        insertError
                 } =
                     await supabaseClient
 
@@ -5691,7 +6244,9 @@
                                 currentUser.id,
 
                             review_id:
-                                reviewId
+                                Number(
+                                    reviewId
+                                )
 
                         });
 
@@ -5708,9 +6263,10 @@
         } catch (error) {
 
             console.error(
-                "レビューいいね更新エラー:",
+                "レビューリアクション更新エラー:",
                 error
             );
+
 
             alert(
                 "リアクションの更新に失敗しました。"
@@ -5786,6 +6342,7 @@
                                 "active"
                             );
 
+
                             button.textContent =
                                 button.textContent
                                     .replace(
@@ -5802,7 +6359,7 @@
         } catch (error) {
 
             console.error(
-                "レビューいいね状態取得エラー:",
+                "レビューリアクション状態取得エラー:",
                 error
             );
         }
@@ -5842,7 +6399,9 @@
 
                     .eq(
                         "id",
-                        reviewId
+                        Number(
+                            reviewId
+                        )
                     )
 
                     .eq(
@@ -5866,6 +6425,7 @@
                 error
             );
 
+
             alert(
                 "レビューの削除に失敗しました。"
             );
@@ -5883,6 +6443,7 @@
             document.getElementById(
                 "ad-section"
             );
+
 
         const container =
             document.getElementById(
@@ -5917,11 +6478,14 @@
                     .order(
                         "id",
                         {
-                            ascending: true
+                            ascending:
+                                true
                         }
                     )
 
-                    .limit(1);
+                    .limit(
+                        1
+                    );
 
 
             if (error) {
@@ -5942,13 +6506,13 @@
                 data[0];
 
 
-            const image =
+            const imageURL =
                 safeURL(
                     ad.image_url
                 );
 
 
-            const link =
+            const linkURL =
                 safeURL(
                     ad.link_url
                 );
@@ -5958,13 +6522,13 @@
                 "";
 
 
-            if (image) {
+            if (imageURL) {
 
                 html += `
 
                     <img
                         src="${escapeHTML(
-                            image
+                            imageURL
                         )}"
                         alt="${escapeHTML(
                             ad.title ||
@@ -5972,6 +6536,7 @@
                         )}"
                         loading="lazy"
                     >
+
                 `;
             }
 
@@ -5985,6 +6550,7 @@
                             ad.company_name
                         )}
                     </div>
+
                 `;
             }
 
@@ -5998,6 +6564,7 @@
                             ad.title
                         )}
                     </div>
+
                 `;
             }
 
@@ -6011,24 +6578,26 @@
                             ad.description
                         )}
                     </div>
+
                 `;
             }
 
 
-            if (link) {
+            if (linkURL) {
 
                 html += `
 
                     <a
                         class="ad-button"
                         href="${escapeHTML(
-                            link
+                            linkURL
                         )}"
                         target="_blank"
                         rel="noopener noreferrer nofollow"
                     >
                         詳しくはこちら
                     </a>
+
                 `;
             }
 
@@ -6040,6 +6609,7 @@
 
             container.innerHTML =
                 html;
+
 
             section.style.display =
                 "block";
@@ -6098,11 +6668,13 @@
 
                     url:
                         url
+
                 });
 
 
                 message.textContent =
                     "共有しました。";
+
 
                 return;
             }
@@ -6121,6 +6693,7 @@
                 message.textContent =
                     "ページURLをコピーしました。";
 
+
                 return;
             }
 
@@ -6135,6 +6708,7 @@
                 error?.name ===
                 "AbortError"
             ) {
+
                 return;
             }
 
@@ -6143,6 +6717,7 @@
                 "共有エラー:",
                 error
             );
+
 
             message.textContent =
                 "共有に失敗しました。";
@@ -6205,61 +6780,52 @@
 
 
     /* =========================================
-       Auth state listener
+       Auth listener
     ========================================= */
 
-    const authState =
-        supabaseClient
-            .auth
-            .onAuthStateChange(
-                async (
-                    event,
-                    session
-                ) => {
+    supabaseClient
+        .auth
+        .onAuthStateChange(
+            async (
+                event,
+                session
+            ) => {
 
-                    currentUser =
-                        session?.user ||
-                        null;
-
-
-                    await loadUserState();
+                currentUser =
+                    session?.user ||
+                    null;
 
 
-                    if (
-                        currentAnime &&
-                        (
-                            event ===
-                            "SIGNED_IN" ||
+                await loadUserState();
 
-                            event ===
-                            "SIGNED_OUT" ||
 
-                            event ===
-                            "TOKEN_REFRESHED"
-                        )
-                    ) {
+                if (
+                    event ===
+                    "SIGNED_IN" ||
 
-                        await loadReviews();
-                    }
+                    event ===
+                    "SIGNED_OUT" ||
 
+                    event ===
+                    "TOKEN_REFRESHED"
+                ) {
+
+                    await loadReviews();
                 }
-            );
 
-
-    authSubscription =
-        authState?.data?.subscription ||
-        null;
+            }
+        );
 
 
     /* =========================================
        Start
     ========================================= */
 
+    createRatingOptions();
+
     loadAnime();
 
 </script>
 
-
 </body>
-
 </html>
