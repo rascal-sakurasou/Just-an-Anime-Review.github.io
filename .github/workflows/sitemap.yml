@@ -20,9 +20,6 @@ concurrency:
 
 jobs:
   sitemap:
-    # GitHub Actions自身がsitemapをpushした場合は再実行しない
-    if: github.actor != 'github-actions[bot]'
-
     runs-on: ubuntu-latest
 
     steps:
@@ -45,7 +42,6 @@ jobs:
           SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
 
         run: |
-
           python3 - <<'PY'
 
           import json
@@ -55,22 +51,20 @@ jobs:
           import urllib.request
           import xml.etree.ElementTree as ET
           from pathlib import Path
-          from datetime import datetime, timezone
 
 
           # =================================================
           # Configuration
           # =================================================
 
-          SUPABASE_URL = (
-              os.environ
-              .get("SUPABASE_URL", "")
-              .rstrip("/")
-          )
+          SUPABASE_URL = os.environ.get(
+              "SUPABASE_URL",
+              ""
+          ).rstrip("/")
 
-          SUPABASE_KEY = (
-              os.environ
-              .get("SUPABASE_KEY", "")
+          SUPABASE_KEY = os.environ.get(
+              "SUPABASE_KEY",
+              ""
           )
 
           BASE_URL = (
@@ -81,7 +75,7 @@ jobs:
 
           SITEMAP_URL_LIMIT = 50000
 
-          SITEMAP_NAMESPACE = (
+          XML_NAMESPACE = (
               "http://www.sitemaps.org/schemas/"
               "sitemap/0.9"
           )
@@ -103,17 +97,17 @@ jobs:
 
 
           # =================================================
-          # Register XML namespace
+          # XML namespace
           # =================================================
 
           ET.register_namespace(
               "",
-              SITEMAP_NAMESPACE
+              XML_NAMESPACE
           )
 
 
           # =================================================
-          # HTTP helper
+          # Supabase REST request
           # =================================================
 
           def fetch_json(url):
@@ -123,13 +117,12 @@ jobs:
                   method="GET",
                   headers={
                       "apikey": SUPABASE_KEY,
-                      "Authorization":
-                          f"Bearer {SUPABASE_KEY}",
-                      "Accept":
-                          "application/json"
+                      "Authorization": (
+                          f"Bearer {SUPABASE_KEY}"
+                      ),
+                      "Accept": "application/json"
                   }
               )
-
 
               try:
 
@@ -138,22 +131,21 @@ jobs:
                       timeout=60
                   ) as response:
 
-                      body =
-                          response.read().decode(
-                              "utf-8"
-                          )
+                      body = response.read().decode(
+                          "utf-8"
+                      )
 
                       return json.loads(body)
 
               except urllib.error.HTTPError as error:
 
-                  body = error.read().decode(
+                  error_body = error.read().decode(
                       "utf-8",
                       errors="replace"
                   )
 
                   print(
-                      "Supabase HTTP error:"
+                      "Supabase HTTP error"
                   )
 
                   print(
@@ -161,7 +153,7 @@ jobs:
                   )
 
                   print(
-                      f"Response: {body}"
+                      f"Response: {error_body}"
                   )
 
                   raise
@@ -169,7 +161,7 @@ jobs:
               except urllib.error.URLError as error:
 
                   print(
-                      "Supabase connection error:"
+                      "Supabase connection error"
                   )
 
                   print(
@@ -180,101 +172,72 @@ jobs:
 
 
           # =================================================
-          # Fetch anime records in pages
+          # Fetch anime
           # =================================================
 
           anime_records = []
 
           offset = 0
 
-
           while True:
 
               params = urllib.parse.urlencode({
-
-                  "select":
-                      "id,updated_at",
-
-                  "order":
-                      "id.asc",
-
-                  "limit":
-                      PAGE_SIZE,
-
-                  "offset":
-                      offset
-
+                  "select": "id,updated_at",
+                  "order": "id.asc",
+                  "limit": str(PAGE_SIZE),
+                  "offset": str(offset)
               })
-
 
               api_url = (
                   f"{SUPABASE_URL}/rest/v1/anime?"
                   f"{params}"
               )
 
-
               print(
-                  f"Fetching anime records "
-                  f"offset={offset} ..."
+                  f"Fetching anime records: "
+                  f"offset={offset}"
               )
-
 
               page = fetch_json(
                   api_url
               )
 
-
-              if not isinstance(
-                  page,
-                  list
-              ):
+              if not isinstance(page, list):
 
                   raise RuntimeError(
-                      "Supabase returned an unexpected response."
+                      "Unexpected Supabase response."
                   )
 
-
               if not page:
-
                   break
-
 
               anime_records.extend(
                   page
               )
 
-
               print(
-                  f"Fetched {len(page)} records. "
-                  f"Total={len(anime_records)}"
+                  f"Fetched {len(page)} records "
+                  f"(total: {len(anime_records)})"
               )
 
-
               if len(page) < PAGE_SIZE:
-
                   break
-
 
               offset += PAGE_SIZE
 
 
           # =================================================
-          # Remove duplicate IDs
+          # Remove invalid and duplicate IDs
           # =================================================
 
           anime_map = {}
 
-
           for anime in anime_records:
 
-              anime_id =
-                  anime.get("id")
-
+              anime_id = anime.get("id")
 
               if anime_id is None:
-
                   continue
-
 
               anime_map[
                   str(anime_id)
@@ -287,8 +250,9 @@ jobs:
 
 
           anime_records.sort(
-              key=lambda item:
-                  int(item["id"])
+              key=lambda item: int(
+                  item["id"]
+              )
           )
 
 
@@ -299,20 +263,20 @@ jobs:
 
 
           # =================================================
-          # Helpers
+          # XML helpers
           # =================================================
 
           def create_urlset():
 
               return ET.Element(
-                  f"{{{SITEMAP_NAMESPACE}}}urlset"
+                  f"{{{XML_NAMESPACE}}}urlset"
               )
 
 
           def create_sitemap_index():
 
               return ET.Element(
-                  f"{{{SITEMAP_NAMESPACE}}}sitemapindex"
+                  f"{{{XML_NAMESPACE}}}sitemapindex"
               )
 
 
@@ -324,29 +288,21 @@ jobs:
 
               url_element = ET.SubElement(
                   urlset,
-                  f"{{{SITEMAP_NAMESPACE}}}url"
+                  f"{{{XML_NAMESPACE}}}url"
               )
-
 
               loc_element = ET.SubElement(
                   url_element,
-                  f"{{{SITEMAP_NAMESPACE}}}loc"
+                  f"{{{XML_NAMESPACE}}}loc"
               )
-
 
               loc_element.text = loc
 
-
               if lastmod:
 
-                  lastmod_text = (
-                      str(lastmod)
-                      .replace(
-                          "Z",
-                          ""
-                      )
+                  lastmod_text = str(
+                      lastmod
                   )
-
 
                   if "T" in lastmod_text:
 
@@ -361,16 +317,16 @@ jobs:
                           lastmod_text[:10]
                       )
 
+                  if len(lastmod_text) == 10:
 
-                  lastmod_element = ET.SubElement(
-                      url_element,
-                      f"{{{SITEMAP_NAMESPACE}}}lastmod"
-                  )
+                      lastmod_element = ET.SubElement(
+                          url_element,
+                          f"{{{XML_NAMESPACE}}}lastmod"
+                      )
 
-
-                  lastmod_element.text = (
-                      lastmod_text
-                  )
+                      lastmod_element.text = (
+                          lastmod_text
+                      )
 
 
           def add_sitemap(
@@ -380,15 +336,13 @@ jobs:
 
               sitemap_element = ET.SubElement(
                   sitemap_index,
-                  f"{{{SITEMAP_NAMESPACE}}}sitemap"
+                  f"{{{XML_NAMESPACE}}}sitemap"
               )
-
 
               loc_element = ET.SubElement(
                   sitemap_element,
-                  f"{{{SITEMAP_NAMESPACE}}}loc"
+                  f"{{{XML_NAMESPACE}}}loc"
               )
-
 
               loc_element.text = loc
 
@@ -398,9 +352,9 @@ jobs:
               filename
           ):
 
-              tree =
-                  ET.ElementTree(root)
-
+              tree = ET.ElementTree(
+                  root
+              )
 
               try:
 
@@ -413,7 +367,6 @@ jobs:
 
                   pass
 
-
               tree.write(
                   filename,
                   encoding="utf-8",
@@ -422,7 +375,7 @@ jobs:
 
 
           # =================================================
-          # Remove old generated anime sitemaps
+          # Remove old anime sitemap files
           # =================================================
 
           for file_path in Path(".").glob(
@@ -430,7 +383,7 @@ jobs:
           ):
 
               print(
-                  f"Removing old file: "
+                  f"Removing old sitemap: "
                   f"{file_path}"
               )
 
@@ -438,133 +391,110 @@ jobs:
 
 
           # =================================================
-          # Static public pages
+          # Static pages
           # =================================================
 
           static_pages = [
 
-              (
-                  f"{BASE_URL}/",
-                  None
-              ),
+              f"{BASE_URL}/",
 
-              (
-                  f"{BASE_URL}/anime.html",
-                  None
-              ),
+              f"{BASE_URL}/anime.html",
 
-              (
-                  f"{BASE_URL}/terms.html",
-                  None
-              ),
+              f"{BASE_URL}/terms.html",
 
-              (
-                  f"{BASE_URL}/privacy.html",
-                  None
-              )
+              f"{BASE_URL}/privacy.html"
 
           ]
 
 
           # =================================================
-          # Static pages sitemap
+          # Generate static page sitemap
           # =================================================
 
-          pages_filename =
-              "sitemap-pages.xml"
+          pages_urlset = create_urlset()
 
 
-          pages_urlset =
-              create_urlset()
-
-
-          for page_url, lastmod in static_pages:
+          for page_url in static_pages:
 
               add_url(
                   pages_urlset,
-                  page_url,
-                  lastmod
+                  page_url
               )
 
 
           write_xml(
               pages_urlset,
-              pages_filename
+              "sitemap-pages.xml"
           )
 
 
           print(
-              f"Generated {pages_filename}"
+              "Generated sitemap-pages.xml"
           )
 
 
           # =================================================
-          # Anime sitemap files
+          # Generate anime sitemaps
           # =================================================
 
           anime_sitemap_files = []
 
 
+          total_anime = len(
+              anime_records
+          )
+
+
           for start in range(
               0,
-              len(anime_records),
+              total_anime,
               SITEMAP_URL_LIMIT
           ):
 
-              chunk =
-                  anime_records[
-                      start:
-                      start + SITEMAP_URL_LIMIT
-                  ]
+              chunk = anime_records[
+                  start:
+                  start + SITEMAP_URL_LIMIT
+              ]
 
+              sitemap_number = (
+                  len(anime_sitemap_files)
+                  + 1
+              )
 
-              sitemap_number =
-                  (
-                      len(
-                          anime_sitemap_files
-                      )
-                      + 1
-                  )
+              filename = (
+                  f"sitemap-anime-"
+                  f"{sitemap_number}.xml"
+              )
 
-
-              filename =
-                  f"sitemap-anime-{sitemap_number}.xml"
-
-
-              urlset =
-                  create_urlset()
+              urlset = create_urlset()
 
 
               for anime in chunk:
 
-                  anime_id =
-                      anime.get("id")
-
+                  anime_id = anime.get(
+                      "id"
+                  )
 
                   if anime_id is None:
-
                       continue
 
+                  encoded_id = urllib.parse.quote(
+                      str(anime_id),
+                      safe=""
+                  )
 
-                  encoded_id =
-                      urllib.parse.quote(
-                          str(anime_id),
-                          safe=""
-                      )
-
-
-                  detail_url =
-                      (
-                          f"{BASE_URL}/"
-                          f"anime-detail.html"
-                          f"?id={encoded_id}"
-                      )
-
+                  detail_url = (
+                      f"{BASE_URL}/"
+                      f"anime-detail.html"
+                      f"?id={encoded_id}"
+                  )
 
                   add_url(
                       urlset,
                       detail_url,
-                      anime.get("updated_at")
+                      anime.get(
+                          "updated_at"
+                      )
                   )
 
 
@@ -586,36 +516,31 @@ jobs:
 
 
           # =================================================
-          # Main sitemap index
+          # Generate main sitemap index
           # =================================================
 
-          sitemap_index =
-              create_sitemap_index()
+          sitemap_index = create_sitemap_index()
 
 
-          # Static pages sitemap
+          # Static pages
 
           add_sitemap(
               sitemap_index,
-              f"{BASE_URL}/"
-              f"{pages_filename}"
+              f"{BASE_URL}/sitemap-pages.xml"
           )
 
 
-          # Anime sitemaps
+          # Anime pages
 
           for filename in anime_sitemap_files:
 
               add_sitemap(
                   sitemap_index,
-                  f"{BASE_URL}/"
-                  f"{filename}"
+                  f"{BASE_URL}/{filename}"
               )
 
 
-          # =================================================
           # Write main sitemap
-          # =================================================
 
           write_xml(
               sitemap_index,
@@ -637,27 +562,19 @@ jobs:
           print(
               "======================================"
           )
-
           print(
-              f"Anime records: "
-              f"{len(anime_records)}"
+              f"Anime records: {total_anime}"
           )
-
           print(
               f"Anime sitemap files: "
               f"{len(anime_sitemap_files)}"
           )
-
           print(
-              "Static sitemap: "
-              "sitemap-pages.xml"
+              "Static sitemap: sitemap-pages.xml"
           )
-
           print(
-              "Main sitemap: "
-              "sitemap.xml"
+              "Main sitemap: sitemap.xml"
           )
-
           print(
               "======================================"
           )
@@ -666,64 +583,58 @@ jobs:
 
 
       # =====================================================
-      # Validate XML
+      # Validate sitemap XML
       # =====================================================
 
       - name: Validate sitemap
         run: |
-
           python3 - <<'PY'
 
           from pathlib import Path
           import xml.etree.ElementTree as ET
 
 
-          files = sorted(
+          sitemap_files = sorted(
               Path(".").glob(
                   "sitemap*.xml"
               )
           )
 
 
-          if not files:
+          if not sitemap_files:
 
               raise RuntimeError(
                   "No sitemap files were generated."
               )
 
 
-          for file_path in files:
+          for sitemap_file in sitemap_files:
 
               print(
-                  f"Validating: "
-                  f"{file_path}"
+                  f"Validating: {sitemap_file}"
               )
 
               ET.parse(
-                  file_path
+                  sitemap_file
               )
 
 
+          print("")
           print(
               f"Successfully validated "
-              f"{len(files)} sitemap files."
+              f"{len(sitemap_files)} sitemap files."
           )
 
           PY
 
 
       # =====================================================
-      # Git status
+      # Show generated files
       # =====================================================
 
-      - name: Check changes
+      - name: Show sitemap files
         run: |
-
-          git status --short
-
-          echo ""
           echo "Generated sitemap files:"
-
           ls -lh sitemap*.xml
 
 
@@ -743,20 +654,18 @@ jobs:
             "41898282+github-actions[bot]@users.noreply.github.com"
 
 
-          git add sitemap.xml
-          git add sitemap-pages.xml
-          git add sitemap-anime-*.xml
+          git add -A sitemap*.xml
 
 
           if git diff --cached --quiet; then
 
-              echo "No sitemap changes."
+            echo "No sitemap changes."
 
           else
 
-              git commit \
-                -m "chore: update sitemap.xml [skip ci]"
+            git commit \
+              -m "chore: update sitemap.xml [skip ci]"
 
-              git push origin HEAD:main
+            git push origin HEAD:main
 
           fi
