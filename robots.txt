@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://just-an-anime-review.github.io/sitemap.xml
+Sitemap: https://media-mania.github.io/Animecia/sitemap.xml
