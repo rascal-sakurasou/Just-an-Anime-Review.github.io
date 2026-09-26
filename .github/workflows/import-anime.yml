@@ -1,0 +1,906 @@
+name: Import Anime Metadata
+
+on:
+  workflow_dispatch:
+    inputs:
+      max_records:
+        description: "Import at most this many records. 0 = all"
+        required: false
+        default: "10"
+      dry_run:
+        description: "Test only without writing to Supabase"
+        required: false
+        default: "true"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: anime-import
+  cancel-in-progress: false
+
+jobs:
+  import:
+    runs-on: ubuntu-latest
+
+    env:
+      SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+      SUPABASE_SECRET_KEY: ${{ secrets.SUPABASE_SECRET_KEY }}
+
+      DATASET_URL: https://github.com/manami-project/anime-offline-database/releases/download/latest/anime-offline-database.jsonl
+
+      MAX_RECORDS: ${{ inputs.max_records || '10' }}
+      DRY_RUN: ${{ inputs.dry_run || 'true' }}
+
+    steps:
+
+      # ----------------------------------------
+      # 1. Secret確認
+      # ----------------------------------------
+      - name: Check required secrets
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          if [ -z "${SUPABASE_URL:-}" ]; then
+            echo "::error::SUPABASE_URL is not configured."
+            exit 1
+          fi
+
+          if [ -z "${SUPABASE_SECRET_KEY:-}" ]; then
+            echo "::error::SUPABASE_SECRET_KEY is not configured."
+            exit 1
+          fi
+
+          echo "Supabase configuration is present."
+
+      # ----------------------------------------
+      # 2. データセット取得
+      # ----------------------------------------
+      - name: Download anime dataset
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          mkdir -p /tmp/anime-import
+
+          echo "Downloading anime dataset..."
+
+          curl \
+            --location \
+            --fail \
+            --retry 3 \
+            --retry-delay 3 \
+            --connect-timeout 20 \
+            --max-time 600 \
+            "${DATASET_URL}" \
+            --output /tmp/anime-import/anime-offline-database.jsonl
+
+          echo "Download completed."
+
+          ls -lh /tmp/anime-import/anime-offline-database.jsonl
+
+      # ----------------------------------------
+      # 3. Supabaseへ登録
+      # ----------------------------------------
+      - name: Import anime metadata
+        shell: bash
+        run: |
+          python3 <<'PY'
+
+          import json
+          import os
+          import re
+          import urllib.error
+          import urllib.request
+
+          # ============================================
+          # Environment
+          # ============================================
+
+          SUPABASE_URL = os.environ["SUPABASE_URL"].rstrip("/")
+          SUPABASE_SECRET_KEY = os.environ["SUPABASE_SECRET_KEY"]
+
+          DATASET = "/tmp/anime-import/anime-offline-database.jsonl"
+
+          MAX_RECORDS = int(
+              os.environ.get("MAX_RECORDS", "10")
+          )
+
+          DRY_RUN = (
+              os.environ.get("DRY_RUN", "true").lower()
+              == "true"
+          )
+
+          BATCH_SIZE = 500
+
+          # ============================================
+          # Regex
+          # ============================================
+
+          JAPANESE_RE = re.compile(
+              r"[\u3040-\u30ff\u3400-\u9fff]"
+          )
+
+          MAL_RE = re.compile(
+              r"myanimelist\.net/anime/(\d+)",
+              re.IGNORECASE
+          )
+
+          # ============================================
+          # Genre mapping
+          # ============================================
+
+          GENRE_MAP = {
+              "action": "Action",
+              "adventure": "Adventure",
+              "comedy": "Comedy",
+              "drama": "Drama",
+              "ecchi": "Ecchi",
+              "fantasy": "Fantasy",
+              "horror": "Horror",
+              "mahou shoujo": "Mahou Shoujo",
+              "mecha": "Mecha",
+              "music": "Music",
+              "mystery": "Mystery",
+              "psychological": "Psychological",
+              "romance": "Romance",
+              "sci-fi": "Sci-Fi",
+              "slice of life": "Slice of Life",
+              "sports": "Sports",
+              "supernatural": "Supernatural",
+              "thriller": "Thriller",
+          }
+
+          # ============================================
+          # Helpers
+          # ============================================
+
+          def has_japanese(value):
+              if not value:
+                  return False
+
+              return bool(
+                  JAPANESE_RE.search(str(value))
+              )
+
+
+          def clean_text(value):
+              if value is None:
+                  return None
+
+              value = str(value).strip()
+
+              if not value:
+                  return None
+
+              return value
+
+
+          def extract_mal_id(sources):
+              """
+              Extract MyAnimeList numeric ID from sources.
+              """
+
+              for source in sources or []:
+
+                  source = str(source)
+
+                  match = MAL_RE.search(source)
+
+                  if match:
+                      return int(match.group(1))
+
+              return None
+
+
+          def pick_japanese_title(main_title, synonyms):
+              """
+              Try to find a Japanese title.
+              """
+
+              main_title = clean_text(main_title)
+
+              if main_title and has_japanese(main_title):
+                  return main_title
+
+              for value in synonyms:
+
+                  value = clean_text(value)
+
+                  if not value:
+                      continue
+
+                  if has_japanese(value):
+                      return value
+
+              return None
+
+
+          def pick_latin_title(main_title, synonyms):
+              """
+              Try to find a non-Japanese title.
+              """
+
+              main_title = clean_text(main_title)
+
+              if main_title and not has_japanese(main_title):
+                  return main_title
+
+              for value in synonyms:
+
+                  value = clean_text(value)
+
+                  if not value:
+                      continue
+
+                  if not has_japanese(value):
+                      return value
+
+              return None
+
+
+          def map_season(value):
+              """
+              Convert dataset season to Animecia format.
+              """
+
+              if not value:
+                  return None
+
+              value = str(value).upper().strip()
+
+              allowed = {
+                  "SPRING",
+                  "SUMMER",
+                  "FALL",
+                  "WINTER",
+                  "UNDEFINED"
+              }
+
+              if value in allowed:
+                  return value
+
+              return None
+
+
+          def map_status(value):
+              """
+              Dataset:
+                FINISHED
+                ONGOING
+                UPCOMING
+                UNKNOWN
+              """
+
+              if not value:
+                  return None
+
+              value = str(value).upper().strip()
+
+              allowed = {
+                  "FINISHED",
+                  "ONGOING",
+                  "UPCOMING",
+                  "UNKNOWN"
+              }
+
+              if value in allowed:
+                  return value
+
+              return "UNKNOWN"
+
+
+          def map_format(value):
+              """
+              Dataset:
+                TV
+                MOVIE
+                OVA
+                ONA
+                SPECIAL
+                UNKNOWN
+              """
+
+              if not value:
+                  return None
+
+              value = str(value).upper().strip()
+
+              allowed = {
+                  "TV",
+                  "MOVIE",
+                  "OVA",
+                  "ONA",
+                  "SPECIAL",
+                  "UNKNOWN"
+              }
+
+              if value in allowed:
+                  return value
+
+              return "UNKNOWN"
+
+
+          def map_duration(duration):
+              """
+              Dataset duration is stored in seconds.
+              Animecia duration is stored in minutes.
+              """
+
+              if not duration:
+                  return None
+
+              if not isinstance(duration, dict):
+                  return None
+
+              value = duration.get("value")
+
+              if not isinstance(value, (int, float)):
+                  return None
+
+              if value <= 0:
+                  return None
+
+              minutes = round(
+                  float(value) / 60
+              )
+
+              return max(1, minutes)
+
+
+          def map_score(score):
+              """
+              Dataset score is 1-10.
+              """
+
+              if not score:
+                  return None
+
+              if not isinstance(score, dict):
+                  return None
+
+              value = score.get(
+                  "arithmeticMean"
+              )
+
+              if not isinstance(value, (int, float)):
+                  return None
+
+              if value < 1 or value > 10:
+                  return None
+
+              return round(
+                  float(value),
+                  2
+              )
+
+
+          def map_genres(tags):
+              """
+              Animecia currently stores the legacy genre field
+              as comma-separated text.
+
+              Only known genre-like tags are used.
+              """
+
+              result = []
+
+              for tag in tags or []:
+
+                  tag = clean_text(tag)
+
+                  if not tag:
+                      continue
+
+                  key = tag.lower()
+
+                  mapped = GENRE_MAP.get(key)
+
+                  if mapped and mapped not in result:
+                      result.append(mapped)
+
+              return result
+
+
+          # ============================================
+          # Build Animecia record
+          # ============================================
+
+          def build_record(item):
+
+              if not isinstance(item, dict):
+                  return None
+
+              sources = item.get("sources") or []
+
+              mal_id = extract_mal_id(
+                  sources
+              )
+
+              # Animecia external_id is unique.
+              # A separate numeric range is used here so
+              # existing external IDs are less likely to collide.
+              if mal_id is None:
+                  return None
+
+              external_id = (
+                  1_000_000_000
+                  + mal_id
+              )
+
+              main_title = clean_text(
+                  item.get("title")
+              )
+
+              synonyms = []
+
+              for value in (
+                  item.get("synonyms") or []
+              ):
+
+                  value = clean_text(value)
+
+                  if value:
+                      synonyms.append(value)
+
+              japanese_title = (
+                  pick_japanese_title(
+                      main_title,
+                      synonyms
+                  )
+              )
+
+              latin_title = (
+                  pick_latin_title(
+                      main_title,
+                      synonyms
+                  )
+              )
+
+              title = (
+                  japanese_title
+                  or main_title
+                  or latin_title
+              )
+
+              if not title:
+                  return None
+
+              season_data = (
+                  item.get("animeSeason")
+                  or {}
+              )
+
+              season = map_season(
+                  season_data.get("season")
+              )
+
+              season_year = season_data.get(
+                  "year"
+              )
+
+              if not isinstance(
+                  season_year,
+                  int
+              ):
+                  season_year = None
+
+              episodes = item.get(
+                  "episodes"
+              )
+
+              if not isinstance(
+                  episodes,
+                  int
+              ):
+                  episodes = None
+
+              if episodes is not None:
+                  if episodes < 0:
+                      episodes = None
+
+              anime_status = map_status(
+                  item.get("status")
+              )
+
+              anime_format = map_format(
+                  item.get("type")
+              )
+
+              duration_minutes = (
+                  map_duration(
+                      item.get("duration")
+                  )
+              )
+
+              average_score = map_score(
+                  item.get("score")
+              )
+
+              genres = map_genres(
+                  item.get("tags")
+              )
+
+              # Main image
+              picture = clean_text(
+                  item.get("picture")
+              )
+
+              # Thumbnail is not used as banner.
+              # Animecia can assign banner images separately later.
+              cover_image = picture
+
+              # ========================================
+              # Animecia row
+              # ========================================
+
+              record = {
+                  "external_id": external_id,
+
+                  "title": title,
+
+                  "title_romaji": latin_title,
+
+                  "title_english": (
+                      main_title
+                      if (
+                          main_title
+                          and not has_japanese(
+                              main_title
+                          )
+                      )
+                      else latin_title
+                  ),
+
+                  "title_native": japanese_title,
+
+                  "title_japanese": japanese_title,
+
+                  "cover_image": cover_image,
+
+                  "banner_image": None,
+
+                  "episodes": episodes,
+
+                  "duration": duration_minutes,
+
+                  "status": anime_status,
+
+                  "format": anime_format,
+
+                  "season": season,
+
+                  "season_year": season_year,
+
+                  "source": (
+                      "anime-offline-database"
+                  ),
+
+                  "average_score": average_score,
+
+                  "site_url": (
+                      f"https://myanimelist.net/"
+                      f"anime/{mal_id}"
+                  ),
+
+                  "genre": (
+                      ", ".join(genres)
+                      if genres
+                      else None
+                  ),
+              }
+
+              return record
+
+
+          # ============================================
+          # Supabase Upsert
+          # ============================================
+
+          def upsert_batch(records):
+
+              if not records:
+                  return
+
+              endpoint = (
+                  f"{SUPABASE_URL}"
+                  f"/rest/v1/anime"
+                  f"?on_conflict=external_id"
+              )
+
+              payload = json.dumps(
+                  records,
+                  ensure_ascii=False
+              ).encode("utf-8")
+
+              request = urllib.request.Request(
+                  endpoint,
+                  data=payload,
+                  method="POST",
+                  headers={
+                      "apikey": (
+                          SUPABASE_SECRET_KEY
+                      ),
+
+                      "Authorization": (
+                          "Bearer "
+                          + SUPABASE_SECRET_KEY
+                      ),
+
+                      "Content-Type": (
+                          "application/json"
+                      ),
+
+                      "Accept": (
+                          "application/json"
+                      ),
+
+                      "Prefer": (
+                          "resolution=merge-duplicates,"
+                          "return=minimal"
+                      ),
+                  }
+              )
+
+              try:
+
+                  with urllib.request.urlopen(
+                      request,
+                      timeout=120
+                  ) as response:
+
+                      if response.status not in (
+                          200,
+                          201,
+                          204
+                      ):
+
+                          body = (
+                              response.read()
+                              .decode(
+                                  "utf-8",
+                                  errors="replace"
+                              )
+                          )
+
+                          raise RuntimeError(
+                              "Supabase returned "
+                              f"HTTP {response.status}: "
+                              f"{body[:2000]}"
+                          )
+
+              except urllib.error.HTTPError as exc:
+
+                  body = (
+                      exc.read()
+                      .decode(
+                          "utf-8",
+                          errors="replace"
+                      )
+                  )
+
+                  raise RuntimeError(
+                      "Supabase returned "
+                      f"HTTP {exc.code}: "
+                      f"{body[:2000]}"
+                  ) from exc
+
+
+          # ============================================
+          # Read JSONL
+          # ============================================
+
+          total_seen = 0
+
+          total_selected = 0
+
+          batch = []
+
+          # --------------------------------------------
+          # Dataset open
+          # --------------------------------------------
+
+          with open(
+              DATASET,
+              "r",
+              encoding="utf-8"
+          ) as file:
+
+              # First line is dataset metadata
+              first_line = file.readline()
+
+              if not first_line:
+
+                  raise RuntimeError(
+                      "Dataset is empty."
+                  )
+
+              metadata = json.loads(
+                  first_line
+              )
+
+              print(
+                  "================================"
+              )
+
+              print(
+                  "Dataset information"
+              )
+
+              print(
+                  "lastUpdate:",
+                  metadata.get(
+                      "lastUpdate",
+                      "unknown"
+                  )
+              )
+
+              license_data = (
+                  metadata.get(
+                      "license"
+                  )
+                  or {}
+              )
+
+              print(
+                  "license:",
+                  license_data.get(
+                      "name",
+                      "unknown"
+                  )
+              )
+
+              print(
+                  "================================"
+              )
+
+              # ----------------------------------------
+              # Anime records
+              # ----------------------------------------
+
+              for line in file:
+
+                  line = line.strip()
+
+                  if not line:
+                      continue
+
+                  try:
+
+                      item = json.loads(
+                          line
+                      )
+
+                  except json.JSONDecodeError as exc:
+
+                      print(
+                          "::warning::"
+                          "Invalid JSON line: "
+                          f"{exc}"
+                      )
+
+                      continue
+
+                  total_seen += 1
+
+                  record = build_record(
+                      item
+                  )
+
+                  if record is None:
+                      continue
+
+                  batch.append(record)
+
+                  total_selected += 1
+
+                  # ------------------------------------
+                  # Batch
+                  # ------------------------------------
+
+                  if len(batch) >= BATCH_SIZE:
+
+                      if DRY_RUN:
+
+                          print(
+                              "[DRY RUN] "
+                              f"Prepared "
+                              f"{total_selected} "
+                              "records."
+                          )
+
+                      else:
+
+                          upsert_batch(
+                              batch
+                          )
+
+                          print(
+                              "Imported/updated "
+                              f"{total_selected} "
+                              "records."
+                          )
+
+                      batch.clear()
+
+                  # ------------------------------------
+                  # Max records
+                  # ------------------------------------
+
+                  if (
+                      MAX_RECORDS > 0
+                      and total_selected
+                      >= MAX_RECORDS
+                  ):
+
+                      break
+
+          # ============================================
+          # Remaining records
+          # ============================================
+
+          if batch:
+
+              if DRY_RUN:
+
+                  print(
+                      "[DRY RUN] "
+                      f"Prepared "
+                      f"{total_selected} "
+                      "records."
+                  )
+
+              else:
+
+                  upsert_batch(
+                      batch
+                  )
+
+          # ============================================
+          # Result
+          # ============================================
+
+          print()
+          print(
+              "================================"
+          )
+
+          print(
+              "Import result"
+          )
+
+          print(
+              "Dataset records examined:",
+              total_seen
+          )
+
+          print(
+              "Records selected:",
+              total_selected
+          )
+
+          print(
+              "Dry run:",
+              DRY_RUN
+          )
+
+          if DRY_RUN:
+
+              print(
+                  "No records were written "
+                  "to Supabase."
+              )
+
+          else:
+
+              print(
+                  "Anime import completed "
+                  "successfully."
+              )
+
+          print(
+              "================================"
+          )
+
+          PY
