@@ -1,102 +1,108 @@
 name: Generate Sitemap
 
 on:
-workflow_dispatch:
-push:
-branches:
-- main
+  workflow_dispatch:
+  schedule:
+    # 毎日夜中に自動更新したい場合は以下を有効化（例: 毎日午前0時 UTC）
+    # - cron: '0 0 * * *'
+  push:
+    branches:
+      - main
 
 permissions:
-contents: write
+  contents: write
 
 jobs:
-sitemap:
-runs-on: ubuntu-latest
+  sitemap:
+    runs-on: ubuntu-latest
 
-```
-steps:
-  - name: Checkout
-    uses: actions/checkout@v4
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
 
-  - name: Generate sitemap
-    env:
-      SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
-      SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
-    run: |
-      python3 - <<'PY'
-      import os
-      import json
-      import urllib.request
-      import xml.etree.ElementTree as ET
+      - name: Generate sitemap
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
+        run: |
+          python3 - <<'PY'
+          import os
+          import json
+          import urllib.request
+          import xml.etree.ElementTree as ET
 
-      supabase_url = os.environ["SUPABASE_URL"].rstrip("/")
-      supabase_key = os.environ["SUPABASE_KEY"]
+          supabase_url = os.environ.get("SUPABASE_URL", "").rstrip("/")
+          supabase_key = os.environ.get("SUPABASE_KEY", "")
 
-      base_url = "https://media-mania.github.io/Animecia"
+          if not supabase_url:
+              raise RuntimeError("SUPABASE_URL is not configured.")
 
-      url = supabase_url + "/rest/v1/anime?select=id&order=id.asc"
+          if not supabase_key:
+              raise RuntimeError("SUPABASE_KEY is not configured.")
 
-      request = urllib.request.Request(
-          url,
-          headers={
-              "apikey": supabase_key,
-              "Authorization": "Bearer " + supabase_key
-          }
-      )
+          base_url = "https://media-mania.github.io/Animecia"
 
-      with urllib.request.urlopen(request) as response:
-          anime_list = json.load(response)
+          api_url = f"{supabase_url}/rest/v1/anime?select=id&order=id.asc"
 
-      urls = [
-          base_url + "/",
-          base_url + "/anime.html"
-      ]
+          request = urllib.request.Request(
+              api_url,
+              headers={
+                  "apikey": supabase_key,
+                  "Authorization": f"Bearer {supabase_key}",
+                  "Accept": "application/json"
+              }
+          )
 
-      for anime in anime_list:
-          anime_id = anime.get("id")
+          with urllib.request.urlopen(request, timeout=30) as response:
+              anime_list = json.load(response)
 
-          if anime_id is not None:
-              urls.append(
-                  base_url
-                  + "/anime-detail.html?id="
-                  + str(anime_id)
-              )
+          urls = [
+              f"{base_url}/",
+              f"{base_url}/anime.html"
+          ]
 
-      urlset = ET.Element(
-          "urlset",
-          {
-              "xmlns": "http://www.sitemaps.org/schemas/sitemap/0.9"
-          }
-      )
+          for anime in anime_list:
+              anime_id = anime.get("id")
+              if anime_id is not None:
+                  urls.append(f"{base_url}/anime-detail.html?id={anime_id}")
 
-      for page_url in urls:
-          item = ET.SubElement(urlset, "url")
-          loc = ET.SubElement(item, "loc")
-          loc.text = page_url
+          # 重複を除去
+          urls = list(dict.fromkeys(urls))
 
-      tree = ET.ElementTree(urlset)
+          urlset = ET.Element(
+              "urlset",
+              {"xmlns": "http://www.sitemaps.org/schemas/sitemap/0.9"}
+          )
 
-      ET.indent(tree, space="  ")
+          for page_url in urls:
+              url_element = ET.SubElement(urlset, "url")
+              loc = ET.SubElement(url_element, "loc")
+              loc.text = page_url
 
-      tree.write(
-          "sitemap.xml",
-          encoding="utf-8",
-          xml_declaration=True
-      )
+          tree = ET.ElementTree(urlset)
 
-      print("Sitemap generated:", len(urls), "URLs")
-      PY
+          # ElementTreeのindent処理 (Python 3.9+)
+          ET.indent(tree, space="  ")
 
-  - name: Commit sitemap
-    run: |
-      git config user.name "github-actions[bot]"
-      git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          tree.write(
+              "sitemap.xml",
+              encoding="utf-8",
+              xml_declaration=True
+          )
 
-      git add sitemap.xml
+          print(f"Sitemap generated: {len(urls)} URLs")
+          PY
 
-      if git diff --cached --quiet; then
-        echo "No changes"
-      else
-        git commit -m "Update sitemap"
-        git push
-      fi
+      - name: Commit and push sitemap
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add sitemap.xml
+
+          if git diff --cached --quiet; then
+            echo "No changes detected in sitemap.xml"
+          else
+            git commit -m "chore: update sitemap.xml [skip ci]"
+            git push origin HEAD:main
+          fi
