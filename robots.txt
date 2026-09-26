@@ -1,4 +1,8 @@
 User-agent: *
+
 Allow: /
+
+Disallow: /Animecia/admin.html
+Disallow: /Animecia/admin-dashboard.html
 
 Sitemap: https://media-mania.github.io/Animecia/sitemap.xml
