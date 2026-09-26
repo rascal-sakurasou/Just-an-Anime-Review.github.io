@@ -1,141 +1,168 @@
 name: Generate Sitemap
 
 on:
-  push:
-    branches:
-      - main
+push:
+branches:
+- main
 
-  schedule:
-    - cron: "0 * * * *"
+schedule:
+- cron: "0 * * * *"
 
-  workflow_dispatch:
+workflow_dispatch:
 
 permissions:
-  contents: write
+contents: write
 
 jobs:
-  sitemap:
-    runs-on: ubuntu-latest
+sitemap:
+runs-on: ubuntu-latest
 
-    steps:
+```
+steps:
 
-      - name: Checkout
-        uses: actions/checkout@v4
+  - name: Checkout
+    uses: actions/checkout@v4
 
-      - name: Generate sitemap
-        env:
-          SUPABASE_URL: https://bhgdjuwlxvbaeraaivmh.supabase.co
-          SUPABASE_KEY: sb_publishable_-rZ4HusVezs5IlZQnUQ-Kw_SLUd8R0c
-        run: |
+  - name: Generate sitemap
+    env:
+      SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+      SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
+    run: |
 
-          python3 <<'PY'
-          import os
-          import json
-          import urllib.request
-          import xml.etree.ElementTree as ET
+      python3 <<'PY'
+      import os
+      import json
+      import urllib.request
+      import urllib.parse
+      import xml.etree.ElementTree as ET
 
-          SUPABASE_URL = os.environ["SUPABASE_URL"]
-          SUPABASE_KEY = os.environ["SUPABASE_KEY"]
+      SUPABASE_URL = os.environ.get("SUPABASE_URL", "").rstrip("/")
+      SUPABASE_KEY = os.environ.get("SUPABASE_KEY", "")
 
-          BASE_URL = "https://just-an-anime-review.github.io"
+      if not SUPABASE_URL:
+          raise RuntimeError("SUPABASE_URL is not configured.")
 
-          headers = {
-              "apikey": SUPABASE_KEY,
-              "Authorization": f"Bearer {SUPABASE_KEY}"
+      if not SUPABASE_KEY:
+          raise RuntimeError("SUPABASE_KEY is not configured.")
+
+      BASE_URL = "https://media-mania.github.io/Animecia"
+
+      headers = {
+          "apikey": SUPABASE_KEY,
+          "Authorization": f"Bearer {SUPABASE_KEY}",
+          "Accept": "application/json"
+      }
+
+      url = (
+          SUPABASE_URL
+          + "/rest/v1/anime"
+          + "?select=id"
+          + "&order=id.asc"
+      )
+
+      request = urllib.request.Request(
+          url,
+          headers=headers
+      )
+
+      with urllib.request.urlopen(
+          request,
+          timeout=30
+      ) as response:
+          data = json.load(response)
+
+      if not isinstance(data, list):
+          raise RuntimeError(
+              "Unexpected response from Supabase."
+          )
+
+      urls = []
+
+      # トップページ
+      urls.append(
+          f"{BASE_URL}/"
+      )
+
+      # アニメ一覧
+      urls.append(
+          f"{BASE_URL}/anime.html"
+      )
+
+      # アニメ詳細ページ
+      for anime in data:
+          anime_id = anime.get("id")
+
+          if anime_id is None:
+              continue
+
+          detail_url = (
+              f"{BASE_URL}/anime-detail.html?id="
+              + urllib.parse.quote(
+                  str(anime_id),
+                  safe=""
+              )
+          )
+
+          urls.append(detail_url)
+
+      # 重複URLを削除
+      urls = list(dict.fromkeys(urls))
+
+      # sitemap.xml
+      urlset = ET.Element(
+          "urlset",
+          {
+              "xmlns":
+              "http://www.sitemaps.org/schemas/sitemap/0.9"
           }
+      )
 
-          url = (
-              SUPABASE_URL
-              + "/rest/v1/anime"
-              + "?select=id"
-              + "&order=id.asc"
+      for page_url in urls:
+
+          url_element = ET.SubElement(
+              urlset,
+              "url"
           )
 
-          request = urllib.request.Request(
-              url,
-              headers=headers
+          loc = ET.SubElement(
+              url_element,
+              "loc"
           )
 
-          with urllib.request.urlopen(request) as response:
-              data = json.load(response)
+          loc.text = page_url
 
-          urls = []
+      tree = ET.ElementTree(urlset)
 
-          # トップページ
-          urls.append(
-              f"{BASE_URL}/"
-          )
+      ET.indent(
+          tree,
+          space="  "
+      )
 
-          # アニメ一覧
-          urls.append(
-              f"{BASE_URL}/anime.html"
-          )
+      tree.write(
+          "sitemap.xml",
+          encoding="utf-8",
+          xml_declaration=True
+      )
 
-          # アニメ詳細ページ
-          for anime in data:
-              anime_id = anime.get("id")
+      print(
+          f"Sitemap generated: {len(urls)} URLs"
+      )
 
-              if anime_id is None:
-                  continue
+      PY
 
-              urls.append(
-                  f"{BASE_URL}/anime-detail.html?id={anime_id}"
-              )
+  - name: Commit sitemap
+    run: |
 
-          # sitemap.xml
-          urlset = ET.Element(
-              "urlset",
-              {
-                  "xmlns":
-                  "http://www.sitemaps.org/schemas/sitemap/0.9"
-              }
-          )
+      git config user.name "github-actions[bot]"
+      git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-          for page_url in urls:
+      git add sitemap.xml
 
-              url_element = ET.SubElement(
-                  urlset,
-                  "url"
-              )
+      if git diff --cached --quiet; then
+        echo "No changes to sitemap.xml"
+        exit 0
+      fi
 
-              loc = ET.SubElement(
-                  url_element,
-                  "loc"
-              )
-
-              loc.text = page_url
-
-          tree = ET.ElementTree(urlset)
-
-          ET.indent(
-              tree,
-              space="  "
-          )
-
-          tree.write(
-              "sitemap.xml",
-              encoding="utf-8",
-              xml_declaration=True
-          )
-
-          print(
-              f"Sitemap generated: {len(urls)} URLs"
-          )
-
-          PY
-
-      - name: Commit sitemap
-        run: |
-
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-
-          git add sitemap.xml
-
-          if git diff --cached --quiet; then
-            echo "No changes to sitemap.xml"
-            exit 0
-          fi
-
-          git commit -m "Update sitemap"
-          git push
+      git commit -m "Update sitemap"
+      git push
+```
