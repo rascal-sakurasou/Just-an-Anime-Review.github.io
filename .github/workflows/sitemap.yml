@@ -17,7 +17,6 @@ jobs:
 sitemap:
 runs-on: ubuntu-latest
 
-```
 steps:
   - name: Checkout
     uses: actions/checkout@v4
@@ -34,28 +33,26 @@ steps:
       import urllib.parse
       import xml.etree.ElementTree as ET
 
-      SUPABASE_URL = os.environ.get("SUPABASE_URL", "").rstrip("/")
-      SUPABASE_KEY = os.environ.get("SUPABASE_KEY", "")
+      supabase_url = os.environ.get("SUPABASE_URL", "").rstrip("/")
+      supabase_key = os.environ.get("SUPABASE_KEY", "")
 
-      if not SUPABASE_URL:
+      if not supabase_url:
           raise RuntimeError("SUPABASE_URL is not configured.")
 
-      if not SUPABASE_KEY:
+      if not supabase_key:
           raise RuntimeError("SUPABASE_KEY is not configured.")
 
-      BASE_URL = "https://media-mania.github.io/Animecia"
+      base_url = "https://media-mania.github.io/Animecia"
 
       headers = {
-          "apikey": SUPABASE_KEY,
-          "Authorization": f"Bearer {SUPABASE_KEY}",
+          "apikey": supabase_key,
+          "Authorization": f"Bearer {supabase_key}",
           "Accept": "application/json"
       }
 
       api_url = (
-          SUPABASE_URL
-          + "/rest/v1/anime"
-          + "?select=id"
-          + "&order=id.asc"
+          f"{supabase_url}/rest/v1/anime"
+          "?select=id&order=id.asc"
       )
 
       request = urllib.request.Request(
@@ -63,15 +60,20 @@ steps:
           headers=headers
       )
 
-      with urllib.request.urlopen(request, timeout=30) as response:
+      with urllib.request.urlopen(
+          request,
+          timeout=30
+      ) as response:
           data = json.load(response)
 
       if not isinstance(data, list):
-          raise RuntimeError("Unexpected response from Supabase.")
+          raise RuntimeError(
+              "Unexpected response from Supabase."
+          )
 
       urls = [
-          f"{BASE_URL}/",
-          f"{BASE_URL}/anime.html"
+          f"{base_url}/",
+          f"{base_url}/anime.html"
       ]
 
       for anime in data:
@@ -81,8 +83,11 @@ steps:
               continue
 
           detail_url = (
-              f"{BASE_URL}/anime-detail.html?id="
-              + urllib.parse.quote(str(anime_id), safe="")
+              f"{base_url}/anime-detail.html?id="
+              + urllib.parse.quote(
+                  str(anime_id),
+                  safe=""
+              )
           )
 
           urls.append(detail_url)
@@ -98,13 +103,24 @@ steps:
       )
 
       for page_url in urls:
-          url_element = ET.SubElement(urlset, "url")
-          loc = ET.SubElement(url_element, "loc")
+          url_element = ET.SubElement(
+              urlset,
+              "url"
+          )
+
+          loc = ET.SubElement(
+              url_element,
+              "loc"
+          )
+
           loc.text = page_url
 
       tree = ET.ElementTree(urlset)
 
-      ET.indent(tree, space="  ")
+      ET.indent(
+          tree,
+          space="  "
+      )
 
       tree.write(
           "sitemap.xml",
@@ -112,7 +128,9 @@ steps:
           xml_declaration=True
       )
 
-      print(f"Sitemap generated: {len(urls)} URLs")
+      print(
+          f"Sitemap generated: {len(urls)} URLs"
+      )
       PY
 
   - name: Commit sitemap
@@ -129,4 +147,3 @@ steps:
 
       git commit -m "Update sitemap"
       git push
-```
