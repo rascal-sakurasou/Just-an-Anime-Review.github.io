@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="ja">
 
@@ -8,12 +9,12 @@
 <meta name="viewport"
 content="width=device-width, initial-scale=1.0">
 
-<title>アニメ詳細 | Just An Anime Review</title>
+<title>アニメ詳細 | Animecia</title>
 
 <meta
 id="meta-description"
 name="description"
-content="アニメ作品のあらすじ・作品情報・レビューをご紹介します。"
+content="Animeciaのアニメ作品詳細ページ。あらすじ、ジャンル、放送情報、制作会社、キャラクター、スタッフ、関連作品、レビューなどを確認できます。"
 >
 
 <meta
@@ -23,8 +24,7 @@ content="index, follow">
 <link
 id="canonical"
 rel="canonical"
-href="https://just-an-anime-review.github.io/anime-detail.html"
->
+href="https://media-mania.github.io/Animecia/anime-detail.html">
 
 <meta
 property="og:type"
@@ -32,30 +32,37 @@ content="article">
 
 <meta
 property="og:site_name"
-content="Just An Anime Review">
+content="Animecia">
 
 <meta
 id="og-title"
 property="og:title"
-content="アニメ詳細 | Just An Anime Review">
+content="アニメ詳細 | Animecia">
 
 <meta
 id="og-description"
 property="og:description"
-content="アニメ作品のあらすじ・作品情報・レビューをご紹介します。">
+content="Animeciaのアニメ作品詳細ページ。">
 
 <meta
 id="og-url"
 property="og:url"
-content="https://just-an-anime-review.github.io/anime-detail.html">
+content="https://media-mania.github.io/Animecia/anime-detail.html">
+
+<meta
+id="og-image"
+property="og:image"
+content="">
 
 <meta
 property="og:locale"
 content="ja_JP">
 
+
 <script
 src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2">
 </script>
+
 
 <style>
 
@@ -68,6 +75,7 @@ html {
 }
 
 body {
+
     margin: 0;
 
     font-family:
@@ -79,566 +87,1391 @@ body {
         Meiryo,
         sans-serif;
 
-    background: #f7f7f7;
+    background: #f6f6f6;
+
     color: #222;
 
     line-height: 1.7;
 }
 
 
-/* =========================
-   ヘッダー
-========================= */
+/* =========================================
+   Header
+========================================= */
 
-header {
+.site-header {
+
     background: #111;
-    color: white;
+
+    color: #fff;
+
+    border-bottom:
+        1px solid rgba(255,255,255,.08);
+
 }
 
 .header-inner {
-    max-width: 1000px;
-    margin: auto;
-    padding: 20px;
-}
 
-.logo {
-    color: white;
-    text-decoration: none;
-    font-size: 21px;
-    font-weight: bold;
-}
+    max-width: 1200px;
 
+    margin: 0 auto;
 
-/* =========================
-   メイン
-========================= */
+    padding:
+        18px 20px;
 
-main {
-    max-width: 900px;
-    margin: auto;
-    padding: 45px 20px;
-}
-
-
-/* =========================
-   広告
-========================= */
-
-.ad-section {
-    display: none;
-    margin-bottom: 30px;
-}
-
-.ad-label {
-    text-align: center;
-    font-size: 11px;
-    color: #999;
-    margin-bottom: 8px;
-    letter-spacing: .5px;
-}
-
-.ad-box {
-    background: white;
-
-    border: 1px solid #e5e5e5;
-    border-radius: 12px;
-
-    padding: 18px;
-
-    text-align: center;
-
-    box-shadow:
-        0 2px 10px rgba(0,0,0,.04);
-}
-
-.ad-box img {
-    display: block;
-
-    max-width: 100%;
-    max-height: 180px;
-
-    margin: 0 auto 12px;
-
-    border-radius: 8px;
-}
-
-.ad-company {
-    font-size: 12px;
-    color: #888;
-    margin-bottom: 4px;
-}
-
-.ad-title {
-    font-size: 17px;
-    font-weight: bold;
-    margin-bottom: 6px;
-}
-
-.ad-description {
-    color: #666;
-    font-size: 14px;
-    line-height: 1.7;
-}
-
-.ad-button {
-    display: inline-block;
-
-    margin-top: 10px;
-    padding: 8px 16px;
-
-    background: #111;
-    color: white;
-
-    text-decoration: none;
-
-    border-radius: 6px;
-
-    font-size: 13px;
-}
-
-.ad-button:hover {
-    opacity: .8;
-}
-
-
-/* =========================
-   詳細
-========================= */
-
-.detail-box {
-    background: white;
-
-    padding: 40px;
-
-    border-radius: 12px;
-
-    box-shadow:
-        0 3px 15px rgba(0,0,0,.08);
-}
-
-h1 {
-    font-size: 40px;
-
-    line-height: 1.3;
-
-    margin-top: 0;
-    margin-bottom: 15px;
-}
-
-.genre {
-    display: inline-block;
-
-    background: #eee;
-
-    padding: 5px 11px;
-
-    border-radius: 20px;
-
-    font-size: 13px;
-
-    color: #555;
-}
-
-section {
-    margin-top: 40px;
-}
-
-section h2 {
-    font-size: 23px;
-
-    border-bottom: 2px solid #eee;
-
-    padding-bottom: 10px;
-}
-
-section p {
-    white-space: pre-wrap;
-
-    line-height: 2;
-
-    color: #444;
-}
-
-
-/* =========================
-   公式サイト
-========================= */
-
-.official {
-    display: inline-block;
-
-    margin-top: 15px;
-
-    padding: 10px 16px;
-
-    background: #111;
-    color: white;
-
-    text-decoration: none;
-
-    border-radius: 7px;
-
-    font-weight: bold;
-}
-
-.official:hover {
-    opacity: .8;
-}
-
-
-/* =========================
-   いいね・コメント
-========================= */
-
-.interaction-section {
-    margin-top: 45px;
-
-    padding-top: 30px;
-
-    border-top: 2px solid #eee;
-}
-
-.like-area {
     display: flex;
 
     align-items: center;
 
-    gap: 12px;
+    justify-content: space-between;
 
-    flex-wrap: wrap;
+    gap: 20px;
+
 }
 
-.like-button {
-    border: 1px solid #ddd;
+.logo {
 
-    background: white;
-    color: #333;
+    color: #fff;
 
-    padding: 10px 18px;
+    text-decoration: none;
 
-    border-radius: 8px;
+    font-size: 23px;
+
+    font-weight: 800;
+
+    letter-spacing: -.5px;
+
+}
+
+.site-nav {
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 18px;
+
+}
+
+.site-nav a {
+
+    color: #ddd;
+
+    text-decoration: none;
+
+    font-size: 13px;
+
+}
+
+.site-nav a:hover {
+
+    color: #fff;
+
+}
+
+
+/* =========================================
+   Main
+========================================= */
+
+main {
+
+    max-width: 1200px;
+
+    margin: 0 auto;
+
+    padding:
+        30px 20px 70px;
+
+}
+
+
+/* =========================================
+   Breadcrumb
+========================================= */
+
+.breadcrumb {
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 8px;
+
+    margin-bottom: 20px;
+
+    font-size: 13px;
+
+    color: #777;
+
+}
+
+.breadcrumb a {
+
+    color: inherit;
+
+    text-decoration: none;
+
+}
+
+.breadcrumb a:hover {
+
+    text-decoration: underline;
+
+}
+
+
+/* =========================================
+   Loading
+========================================= */
+
+.status {
+
+    padding:
+        80px 20px;
+
+    text-align: center;
+
+    color: #777;
+
+}
+
+
+/* =========================================
+   Error
+========================================= */
+
+.error-box {
+
+    background: #fff;
+
+    border:
+        1px solid #e5e5e5;
+
+    border-radius: 16px;
+
+    padding: 50px 25px;
+
+    text-align: center;
+
+    box-shadow:
+        0 5px 20px rgba(0,0,0,.05);
+
+}
+
+.error-box h1 {
+
+    margin-top: 0;
+
+}
+
+
+/* =========================================
+   Hero
+========================================= */
+
+.anime-hero {
+
+    position: relative;
+
+    overflow: hidden;
+
+    min-height: 420px;
+
+    border-radius: 20px;
+
+    background: #222;
+
+    color: #fff;
+
+    margin-bottom: 25px;
+
+}
+
+.hero-background {
+
+    position: absolute;
+
+    inset: 0;
+
+    background-size: cover;
+
+    background-position: center;
+
+    opacity: .28;
+
+    filter: blur(2px);
+
+    transform: scale(1.04);
+
+}
+
+.hero-overlay {
+
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(0,0,0,.92),
+            rgba(0,0,0,.72),
+            rgba(0,0,0,.42)
+        );
+
+}
+
+.hero-content {
+
+    position: relative;
+
+    z-index: 1;
+
+    display: grid;
+
+    grid-template-columns:
+        240px 1fr;
+
+    gap: 30px;
+
+    padding: 38px;
+
+    align-items: center;
+
+}
+
+.hero-cover {
+
+    width: 240px;
+
+    aspect-ratio: 3 / 4;
+
+    overflow: hidden;
+
+    border-radius: 12px;
+
+    background: #333;
+
+    box-shadow:
+        0 15px 35px rgba(0,0,0,.35);
+
+}
+
+.hero-cover img {
+
+    width: 100%;
+
+    height: 100%;
+
+    object-fit: cover;
+
+    display: block;
+
+}
+
+.hero-cover-placeholder {
+
+    width: 100%;
+
+    height: 100%;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    color: #aaa;
+
+    background: #333;
+
+}
+
+.hero-info h1 {
+
+    margin:
+        0 0 8px;
+
+    font-size:
+        clamp(28px, 4vw, 46px);
+
+    line-height: 1.25;
+
+}
+
+.hero-subtitle {
+
+    margin:
+        0 0 18px;
+
+    color: #ccc;
+
+    font-size: 14px;
+
+}
+
+.hero-description {
+
+    max-width: 850px;
+
+    margin:
+        20px 0;
+
+    color: #eee;
+
+    line-height: 1.85;
+
+}
+
+.genre-list {
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 7px;
+
+    margin:
+        15px 0;
+
+}
+
+.genre-tag {
+
+    display: inline-flex;
+
+    padding:
+        5px 10px;
+
+    border-radius: 999px;
+
+    background:
+        rgba(255,255,255,.13);
+
+    border:
+        1px solid rgba(255,255,255,.16);
+
+    font-size: 12px;
+
+}
+
+.hero-stats {
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 10px;
+
+    margin-top: 18px;
+
+}
+
+.hero-stat {
+
+    min-width: 100px;
+
+    padding:
+        10px 13px;
+
+    border-radius: 9px;
+
+    background:
+        rgba(255,255,255,.1);
+
+}
+
+.hero-stat-label {
+
+    display: block;
+
+    color: #bbb;
+
+    font-size: 10px;
+
+}
+
+.hero-stat-value {
+
+    font-weight: 800;
+
+    font-size: 15px;
+
+}
+
+
+/* =========================================
+   Action buttons
+========================================= */
+
+.action-area {
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 10px;
+
+    margin-top: 22px;
+
+}
+
+.action-button {
+
+    min-height: 42px;
+
+    padding:
+        9px 16px;
+
+    border:
+        1px solid #ddd;
+
+    border-radius: 9px;
+
+    background: #fff;
+
+    color: #222;
 
     cursor: pointer;
 
-    font-size: 15px;
+    font-size: 13px;
+
+    font-weight: 700;
+
 }
 
-.like-button:hover {
-    background: #f5f5f5;
+.action-button:hover {
+
+    background: #f0f0f0;
+
 }
 
-.like-button.liked {
-    background: #111;
-    color: white;
-    border-color: #111;
+.action-button.active {
+
+    background: #222;
+
+    color: #fff;
+
+    border-color: #222;
+
 }
 
-.like-button:disabled {
-    opacity: .6;
-    cursor: not-allowed;
+
+/* =========================================
+   Layout
+========================================= */
+
+.content-layout {
+
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 1fr)
+        300px;
+
+    gap: 24px;
+
 }
 
-.like-count {
-    color: #666;
+.main-column {
+
+    min-width: 0;
+
+}
+
+.side-column {
+
+    min-width: 0;
+
+}
+
+
+/* =========================================
+   Sections
+========================================= */
+
+.content-section {
+
+    background: #fff;
+
+    border:
+        1px solid #e6e6e6;
+
+    border-radius: 16px;
+
+    padding: 25px;
+
+    margin-bottom: 22px;
+
+    box-shadow:
+        0 5px 18px rgba(0,0,0,.04);
+
+}
+
+.content-section h2 {
+
+    margin:
+        0 0 18px;
+
+    padding-bottom: 10px;
+
+    border-bottom:
+        2px solid #eee;
+
+    font-size: 21px;
+
+}
+
+.description {
+
+    white-space: pre-wrap;
+
+    color: #444;
+
+    line-height: 2;
+
+}
+
+
+/* =========================================
+   Information table
+========================================= */
+
+.info-table {
+
+    display: grid;
+
+    grid-template-columns:
+        140px 1fr;
+
+    border-top:
+        1px solid #eee;
+
+}
+
+.info-row {
+
+    display: contents;
+
+}
+
+.info-label,
+.info-value {
+
+    padding:
+        11px 8px;
+
+    border-bottom:
+        1px solid #eee;
+
+}
+
+.info-label {
+
+    color: #777;
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+}
+
+.info-value {
+
+    color: #333;
+
     font-size: 14px;
+
+}
+
+.info-value a {
+
+    color: #06c;
+
 }
 
 
-/* =========================
-   コメントフォーム
-========================= */
+/* =========================================
+   Studios / Staff / Characters
+========================================= */
 
-.comment-form {
-    margin-top: 30px;
+.item-list {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 12px;
+
 }
 
-.comment-form label {
-    display: block;
+.person-item,
+.studio-item,
+.related-item {
 
-    margin: 15px 0 7px;
+    display: flex;
 
-    font-weight: bold;
+    gap: 12px;
+
+    padding: 12px;
+
+    border:
+        1px solid #eee;
+
+    border-radius: 10px;
+
+    background: #fafafa;
+
 }
 
-.comment-form input,
-.comment-form textarea {
-    width: 100%;
+.person-image {
 
-    padding: 11px;
+    width: 55px;
 
-    border: 1px solid #ccc;
+    height: 70px;
+
+    flex: 0 0 auto;
+
+    object-fit: cover;
 
     border-radius: 7px;
 
-    font-size: 15px;
+    background: #e8e8e8;
+
+}
+
+.person-placeholder {
+
+    width: 55px;
+
+    height: 70px;
+
+    flex: 0 0 auto;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 7px;
+
+    background: #e8e8e8;
+
+    color: #999;
+
+    font-size: 10px;
+
+}
+
+.item-name {
+
+    margin: 0 0 3px;
+
+    font-size: 14px;
+
+    font-weight: 800;
+
+}
+
+.item-role {
+
+    margin: 0;
+
+    color: #777;
+
+    font-size: 12px;
+
+}
+
+
+/* =========================================
+   Related
+========================================= */
+
+.related-item {
+
+    align-items: center;
+
+}
+
+.related-item a {
+
+    color: #222;
+
+    text-decoration: none;
+
+    font-weight: 700;
+
+}
+
+.related-item a:hover {
+
+    text-decoration: underline;
+
+}
+
+.related-type {
+
+    display: inline-block;
+
+    margin-top: 3px;
+
+    color: #888;
+
+    font-size: 11px;
+
+}
+
+
+/* =========================================
+   Official
+========================================= */
+
+.official-button {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    min-height: 42px;
+
+    padding:
+        9px 16px;
+
+    border-radius: 9px;
+
+    background: #222;
+
+    color: #fff;
+
+    text-decoration: none;
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+}
+
+.official-button:hover {
+
+    opacity: .85;
+
+}
+
+
+/* =========================================
+   Watch status
+========================================= */
+
+.status-form {
+
+    display: grid;
+
+    gap: 12px;
+
+}
+
+.status-form select,
+.status-form input {
+
+    width: 100%;
+
+    height: 42px;
+
+    padding:
+        0 11px;
+
+    border:
+        1px solid #ccc;
+
+    border-radius: 8px;
+
+    background: #fff;
 
     font-family: inherit;
+
 }
 
-.comment-form input:focus,
-.comment-form textarea:focus {
-    outline: none;
+.status-save {
 
-    border-color: #555;
+    min-height: 42px;
+
+    border: 0;
+
+    border-radius: 8px;
+
+    background: #222;
+
+    color: #fff;
+
+    cursor: pointer;
+
+    font-weight: 700;
+
 }
 
-.comment-form textarea {
-    min-height: 110px;
+.status-message {
+
+    min-height: 20px;
+
+    margin: 0;
+
+    color: #777;
+
+    font-size: 12px;
+
+}
+
+
+/* =========================================
+   Rating
+========================================= */
+
+.rating-area {
+
+    display: grid;
+
+    gap: 12px;
+
+}
+
+.rating-select {
+
+    width: 100%;
+
+    height: 42px;
+
+    padding:
+        0 11px;
+
+    border:
+        1px solid #ccc;
+
+    border-radius: 8px;
+
+    background: #fff;
+
+}
+
+.rating-save {
+
+    min-height: 42px;
+
+    border: 0;
+
+    border-radius: 8px;
+
+    background: #222;
+
+    color: #fff;
+
+    cursor: pointer;
+
+    font-weight: 700;
+
+}
+
+
+/* =========================================
+   Reviews
+========================================= */
+
+.review-form {
+
+    display: grid;
+
+    gap: 12px;
+
+    margin-bottom: 30px;
+
+}
+
+.review-form input,
+.review-form textarea,
+.review-form select {
+
+    width: 100%;
+
+    padding:
+        11px;
+
+    border:
+        1px solid #ccc;
+
+    border-radius: 8px;
+
+    font-family: inherit;
+
+}
+
+.review-form textarea {
+
+    min-height: 150px;
 
     resize: vertical;
 
     line-height: 1.7;
+
 }
 
-.comment-submit {
-    margin-top: 15px;
+.review-form button {
 
-    padding: 10px 18px;
+    min-height: 42px;
 
-    border: none;
+    border: 0;
 
-    border-radius: 7px;
+    border-radius: 8px;
 
-    background: #111;
-    color: white;
+    background: #222;
+
+    color: #fff;
 
     cursor: pointer;
 
-    font-size: 14px;
+    font-weight: 700;
+
 }
 
-.comment-submit:hover {
-    opacity: .85;
+.review-item {
+
+    padding:
+        18px 0;
+
+    border-top:
+        1px solid #eee;
+
 }
 
-.comment-submit:disabled {
-    opacity: .5;
-    cursor: not-allowed;
-}
+.review-header {
 
-.comment-message {
-    margin-top: 12px;
-
-    color: #666;
-
-    font-size: 14px;
-}
-
-
-/* =========================
-   コメント一覧
-========================= */
-
-.comments {
-    margin-top: 35px;
-}
-
-.comment-item {
-    padding: 18px 0;
-
-    border-bottom: 1px solid #eee;
-}
-
-.comment-item:first-child {
-    border-top: 1px solid #eee;
-}
-
-.comment-header {
     display: flex;
-
-    justify-content: space-between;
 
     align-items: center;
 
-    gap: 15px;
+    justify-content: space-between;
+
+    gap: 10px;
+
+}
+
+.review-user {
+
+    font-weight: 800;
+
+}
+
+.review-date {
+
+    color: #999;
+
+    font-size: 11px;
+
+}
+
+.review-title {
+
+    margin:
+        7px 0;
+
+    font-size: 17px;
+
+}
+
+.review-rating {
 
     margin-bottom: 8px;
+
+    font-weight: 800;
+
 }
 
-.comment-nickname {
-    font-weight: bold;
-}
+.review-content {
 
-.comment-date {
-    color: #999;
-    font-size: 12px;
-}
-
-.comment-text {
     white-space: pre-wrap;
 
     color: #444;
 
-    word-break: break-word;
+    line-height: 1.8;
+
 }
 
-.comment-actions {
-    margin-top: 10px;
-}
+.spoiler {
 
-.comment-delete {
-    border: 1px solid #ddd;
+    padding: 10px;
 
-    background: white;
+    border-radius: 8px;
+
+    background: #f3f3f3;
 
     color: #777;
 
-    padding: 5px 10px;
+    font-size: 12px;
 
-    border-radius: 6px;
+}
+
+.review-actions {
+
+    margin-top: 10px;
+
+    display: flex;
+
+    gap: 8px;
+
+}
+
+.review-like-button {
+
+    border:
+        1px solid #ddd;
+
+    background: #fff;
+
+    padding:
+        6px 10px;
+
+    border-radius: 7px;
 
     cursor: pointer;
 
     font-size: 12px;
+
 }
 
-.comment-delete:hover {
-    background: #f3f3f3;
-    color: #222;
+.review-like-button.active {
+
+    background: #222;
+
+    color: #fff;
+
+    border-color: #222;
+
 }
 
-.no-comments {
-    color: #888;
+
+/* =========================================
+   Advertisement
+========================================= */
+
+.ad-section {
+
+    display: none;
+
+    margin-bottom: 24px;
+
 }
 
+.ad-label {
 
-/* =========================
-   読み込み・エラー
-========================= */
+    margin-bottom: 7px;
 
-.status {
     text-align: center;
 
-    padding: 60px 20px;
+    color: #999;
 
-    color: #666;
+    font-size: 10px;
+
+    letter-spacing: .5px;
+
 }
 
-.error-box {
-    background: white;
+.ad-box {
 
-    padding: 40px;
+    padding: 18px;
+
+    background: #fff;
+
+    border:
+        1px solid #e5e5e5;
 
     border-radius: 12px;
 
     text-align: center;
 
-    box-shadow:
-        0 3px 15px rgba(0,0,0,.08);
 }
 
-.error-box h1 {
-    font-size: 28px;
+.ad-box img {
+
+    display: block;
+
+    max-width: 100%;
+
+    max-height: 180px;
+
+    margin:
+        0 auto 10px;
+
+    border-radius: 8px;
+
 }
 
+.ad-company {
 
-/* =========================
-   戻るリンク
-========================= */
+    color: #888;
 
-.back {
+    font-size: 11px;
+
+}
+
+.ad-title {
+
+    margin-top: 4px;
+
+    font-weight: 800;
+
+}
+
+.ad-description {
+
+    margin-top: 5px;
+
+    color: #666;
+
+    font-size: 13px;
+
+}
+
+.ad-button {
+
     display: inline-block;
 
-    margin-top: 25px;
+    margin-top: 10px;
+
+    padding:
+        7px 14px;
+
+    border-radius: 7px;
+
+    background: #222;
+
+    color: #fff;
+
+    text-decoration: none;
+
+    font-size: 12px;
+
+}
+
+
+/* =========================================
+   Back
+========================================= */
+
+.back-link {
+
+    display: inline-block;
+
+    margin-top: 5px;
 
     color: #06c;
 
     text-decoration: none;
 
-    font-weight: bold;
+    font-weight: 700;
+
 }
 
-.back:hover {
+.back-link:hover {
+
     text-decoration: underline;
+
 }
 
 
-/* =========================
-   フッター
-========================= */
+/* =========================================
+   Footer
+========================================= */
 
-footer {
-    margin-top: 70px;
+.site-footer {
 
     background: #111;
 
-    color: white;
+    color: #fff;
 
-    padding: 35px 20px;
+    padding:
+        35px 20px;
+
 }
 
 .footer-inner {
-    max-width: 900px;
 
-    margin: auto;
+    max-width: 1200px;
+
+    margin: 0 auto;
+
+}
+
+.footer-inner h2 {
+
+    margin-top: 0;
+
 }
 
 .footer-inner p {
+
+    color: #aaa;
+
+    font-size: 13px;
+
+}
+
+.footer-links {
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 15px;
+
+}
+
+.footer-links a {
+
     color: #bbb;
+
+    text-decoration: none;
+
+    font-size: 12px;
+
+}
+
+.footer-links a:hover {
+
+    color: #fff;
+
 }
 
 
-/* =========================
-   管理画面
-========================= */
+/* =========================================
+   Admin
+========================================= */
 
 .admin-link {
+
     position: fixed;
 
     right: 12px;
 
     bottom: 10px;
 
-    font-size: 11px;
+    z-index: 1000;
 
     color: #999;
 
+    font-size: 10px;
+
     text-decoration: none;
 
-    opacity: .65;
+    opacity: .5;
 
-    z-index: 1000;
-}
-
-.admin-link:hover {
-    opacity: 1;
-
-    text-decoration: underline;
 }
 
 
-/* =========================
-   スマホ
-========================= */
+/* =========================================
+   Responsive
+========================================= */
 
-@media (max-width: 600px) {
+@media (max-width: 900px) {
 
-    main {
-        padding: 30px 15px;
+    .content-layout {
+
+        grid-template-columns: 1fr;
+
     }
 
-    .detail-box {
-        padding: 25px 20px;
-    }
+}
 
-    h1 {
-        font-size: 30px;
-    }
 
-    section h2 {
-        font-size: 21px;
-    }
+@media (max-width: 700px) {
 
-    .ad-box {
-        padding: 15px;
-    }
+    .header-inner {
 
-    .comment-header {
         align-items: flex-start;
 
         flex-direction: column;
 
-        gap: 2px;
+    }
+
+    .site-nav {
+
+        gap: 12px;
+
+    }
+
+    main {
+
+        padding:
+            22px 14px 50px;
+
+    }
+
+    .hero-content {
+
+        grid-template-columns: 1fr;
+
+        padding: 24px;
+
+    }
+
+    .hero-cover {
+
+        width: 180px;
+
+        margin: 0 auto;
+
+    }
+
+    .hero-info h1 {
+
+        text-align: center;
+
+    }
+
+    .hero-subtitle {
+
+        text-align: center;
+
+    }
+
+    .hero-description {
+
+        font-size: 13px;
+
+    }
+
+    .hero-stats {
+
+        justify-content: center;
+
+    }
+
+    .genre-list {
+
+        justify-content: center;
+
+    }
+
+    .item-list {
+
+        grid-template-columns: 1fr;
+
+    }
+
+    .content-section {
+
+        padding: 19px;
+
+    }
+
+    .info-table {
+
+        grid-template-columns:
+            110px 1fr;
+
     }
 
 }
@@ -651,7 +1484,11 @@ footer {
 <body>
 
 
-<header>
+<!-- =========================================
+     Header
+========================================= -->
+
+<header class="site-header">
 
 <div class="header-inner">
 
@@ -659,9 +1496,32 @@ footer {
 href="index.html"
 class="logo">
 
-Just An Anime Review
+Animecia
 
 </a>
+
+
+<nav
+class="site-nav"
+aria-label="メインナビゲーション">
+
+<a href="index.html">
+ホーム
+</a>
+
+<a href="anime.html">
+アニメ一覧
+</a>
+
+<a href="terms.html">
+利用規約
+</a>
+
+<a href="privacy.html">
+プライバシー
+</a>
+
+</nav>
 
 </div>
 
@@ -671,9 +1531,34 @@ Just An Anime Review
 <main>
 
 
-<!-- =========================
-     広告
-========================= -->
+<!-- =========================================
+     Breadcrumb
+========================================= -->
+
+<div class="breadcrumb">
+
+<a href="index.html">
+ホーム
+</a>
+
+<span>›</span>
+
+<a href="anime.html">
+アニメ一覧
+</a>
+
+<span>›</span>
+
+<span id="breadcrumb-title">
+作品詳細
+</span>
+
+</div>
+
+
+<!-- =========================================
+     Advertisement
+========================================= -->
 
 <section
 id="ad-section"
@@ -691,9 +1576,9 @@ class="ad-box">
 </section>
 
 
-<!-- =========================
-     読み込み
-========================= -->
+<!-- =========================================
+     Loading
+========================================= -->
 
 <div
 id="loading"
@@ -704,9 +1589,9 @@ class="status">
 </div>
 
 
-<!-- =========================
-     エラー
-========================= -->
+<!-- =========================================
+     Error
+========================================= -->
 
 <div
 id="error"
@@ -724,7 +1609,7 @@ style="display:none;">
 
 <a
 href="anime.html"
-class="back">
+class="back-link">
 
 ← アニメ一覧へ戻る
 
@@ -733,200 +1618,817 @@ class="back">
 </div>
 
 
-<!-- =========================
-     アニメ詳細
-========================= -->
+<!-- =========================================
+     Detail
+========================================= -->
 
 <article
 id="detail"
-class="detail-box"
 style="display:none;">
 
-<h1 id="title"></h1>
+
+<!-- =========================================
+     Hero
+========================================= -->
+
+<section
+class="anime-hero">
 
 <div
-id="genre"
-class="genre"
-style="display:none;">
+id="hero-background"
+class="hero-background">
+</div>
+
+<div class="hero-overlay">
 </div>
 
 
-<section>
-
-<h2>
-あらすじ
-</h2>
-
-<p id="description"></p>
-
-</section>
+<div class="hero-content">
 
 
-<section>
+<div
+id="hero-cover"
+class="hero-cover">
 
-<h2>
-レビュー
-</h2>
+<div class="hero-cover-placeholder">
+画像なし
+</div>
 
-<p id="review"></p>
-
-</section>
-
-
-<!-- =========================
-     いいね・コメント
-========================= -->
-
-<section
-class="interaction-section">
-
-<h2>
-みんなの反応
-</h2>
+</div>
 
 
-<div class="like-area">
+<div class="hero-info">
 
-<button
-type="button"
-id="like-button"
-class="like-button">
+<h1
+id="title">
+</h1>
 
-♡ いいね
 
-</button>
+<p
+id="subtitle"
+class="hero-subtitle">
+</p>
+
+
+<div
+id="genres"
+class="genre-list">
+</div>
+
+
+<p
+id="hero-description"
+class="hero-description">
+</p>
+
+
+<div
+class="hero-stats">
+
+<div class="hero-stat">
+
+<span class="hero-stat-label">
+評価
+</span>
 
 <span
-id="like-count"
-class="like-count">
-
-0件
-
+id="hero-score"
+class="hero-stat-value">
+—
 </span>
 
 </div>
 
 
-<div class="comment-form">
+<div class="hero-stat">
 
-<h2>
-コメント
-</h2>
+<span class="hero-stat-label">
+人気度
+</span>
 
+<span
+id="hero-popularity"
+class="hero-stat-value">
+—
+</span>
 
-<label
-for="comment-nickname">
-
-ニックネーム
-
-</label>
-
-<input
-type="text"
-id="comment-nickname"
-maxlength="30"
-autocomplete="nickname"
-placeholder="ニックネーム">
+</div>
 
 
-<label
-for="comment-text">
+<div class="hero-stat">
 
-コメント
+<span class="hero-stat-label">
+話数
+</span>
 
-</label>
+<span
+id="hero-episodes"
+class="hero-stat-value">
+—
+</span>
 
-<textarea
-id="comment-text"
-maxlength="1000"
-placeholder="この作品についてコメントしてください。"></textarea>
+</div>
 
+</div>
+
+
+<div class="action-area">
 
 <button
 type="button"
-id="comment-submit"
-class="comment-submit">
+id="favorite-button"
+class="action-button">
 
-コメントを投稿
+☆ お気に入り
+
+</button>
+
+
+<a
+id="official-button"
+class="action-button"
+target="_blank"
+rel="noopener noreferrer"
+style="display:none;">
+
+公式サイト
+
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =========================================
+     Content layout
+========================================= -->
+
+<div class="content-layout">
+
+
+<div class="main-column">
+
+
+<!-- =========================================
+     Description
+========================================= -->
+
+<section
+class="content-section">
+
+<h2>
+あらすじ
+</h2>
+
+<div
+id="description"
+class="description">
+</div>
+
+</section>
+
+
+<!-- =========================================
+     Basic information
+========================================= -->
+
+<section
+class="content-section">
+
+<h2>
+作品情報
+</h2>
+
+
+<div class="info-table">
+
+
+<div class="info-row">
+
+<div class="info-label">
+タイトル
+</div>
+
+<div
+id="info-title"
+class="info-value">
+—
+</div>
+
+</div>
+
+
+<div class="info-row">
+
+<div class="info-label">
+放送状況
+</div>
+
+<div
+id="info-status"
+class="info-value">
+—
+</div>
+
+</div>
+
+
+<div class="info-row">
+
+<div class="info-label">
+放送開始
+</div>
+
+<div
+id="info-start-date"
+class="info-value">
+—
+</div>
+
+</div>
+
+
+<div class="info-row">
+
+<div class="info-label">
+放送終了
+</div>
+
+<div
+id="info-end-date"
+class="info-value">
+—
+</div>
+
+</div>
+
+
+<div class="info-row">
+
+<div class="info-label">
+シーズン
+</div>
+
+<div
+id="info-season"
+class="info-value">
+—
+</div>
+
+</div>
+
+
+<div class="info-row">
+
+<div class="info-label">
+フォーマット
+</div>
+
+<div
+id="info-format"
+class="info-value">
+—
+</div>
+
+</div>
+
+
+<div class="info-row">
+
+<div class="info-label">
+原作
+</div>
+
+<div
+id="info-source"
+class="info-value">
+—
+</div>
+
+</div>
+
+
+<div class="info-row">
+
+<div class="info-label">
+話数
+</div>
+
+<div
+id="info-episodes"
+class="info-value">
+—
+</div>
+
+</div>
+
+
+<div class="info-row">
+
+<div class="info-label">
+1話の長さ
+</div>
+
+<div
+id="info-duration"
+class="info-value">
+—
+</div>
+
+</div>
+
+
+</div>
+
+</section>
+
+
+<!-- =========================================
+     Studios
+========================================= -->
+
+<section
+id="studio-section"
+class="content-section"
+style="display:none;">
+
+<h2>
+制作会社
+</h2>
+
+<div
+id="studio-list"
+class="item-list">
+</div>
+
+</section>
+
+
+<!-- =========================================
+     Characters
+========================================= -->
+
+<section
+id="character-section"
+class="content-section"
+style="display:none;">
+
+<h2>
+キャラクター
+</h2>
+
+<div
+id="character-list"
+class="item-list">
+</div>
+
+</section>
+
+
+<!-- =========================================
+     Staff
+========================================= -->
+
+<section
+id="staff-section"
+class="content-section"
+style="display:none;">
+
+<h2>
+スタッフ
+</h2>
+
+<div
+id="staff-list"
+class="item-list">
+</div>
+
+</section>
+
+
+<!-- =========================================
+     Related works
+========================================= -->
+
+<section
+id="related-section"
+class="content-section"
+style="display:none;">
+
+<h2>
+関連作品
+</h2>
+
+<div
+id="related-list"
+class="item-list">
+</div>
+
+</section>
+
+
+<!-- =========================================
+     Reviews
+========================================= -->
+
+<section
+class="content-section">
+
+<h2>
+Animeciaレビュー
+</h2>
+
+
+<div
+id="review-login-message"
+style="display:none;"
+class="spoiler">
+
+レビューを投稿するには
+ログインしてください。
+
+</div>
+
+
+<form
+id="review-form"
+class="review-form"
+style="display:none;">
+
+<input
+type="text"
+id="review-title"
+maxlength="100"
+placeholder="レビュータイトル">
+
+
+<select id="review-rating">
+
+<option value="">
+評価を選択
+</option>
+
+<option value="10">
+10 / 10
+</option>
+
+<option value="9">
+9 / 10
+</option>
+
+<option value="8">
+8 / 10
+</option>
+
+<option value="7">
+7 / 10
+</option>
+
+<option value="6">
+6 / 10
+</option>
+
+<option value="5">
+5 / 10
+</option>
+
+<option value="4">
+4 / 10
+</option>
+
+<option value="3">
+3 / 10
+</option>
+
+<option value="2">
+2 / 10
+</option>
+
+<option value="1">
+1 / 10
+</option>
+
+</select>
+
+
+<textarea
+id="review-content"
+maxlength="5000"
+placeholder="この作品についてレビューを書いてください。">
+</textarea>
+
+
+<label>
+
+<input
+type="checkbox"
+id="review-spoiler">
+
+ネタバレを含む
+
+</label>
+
+
+<button
+type="submit">
+
+レビューを投稿
 
 </button>
 
 
 <p
-id="comment-message"
-class="comment-message">
+id="review-message"
+class="status-message">
+</p>
+
+</form>
+
+
+<div
+id="review-list">
+
+<p class="status">
+レビューを読み込んでいます……
 </p>
 
 </div>
-
-
-<div class="comments">
-
-<h2>
-コメント一覧
-</h2>
-
-<div id="comment-list">
-
-<p class="no-comments">
-コメントを読み込んでいます……
-</p>
-
-</div>
-
-</div>
-
 
 </section>
 
 
-<!-- =========================
-     公式サイト
-========================= -->
+</div>
 
-<div id="official-wrapper">
 
-<a
-id="official"
-class="official"
-target="_blank"
-rel="noopener noreferrer">
+<!-- =========================================
+     Sidebar
+========================================= -->
 
-公式サイトを見る →
+<aside class="side-column">
 
-</a>
+
+<!-- Watch status -->
+
+<section
+class="content-section">
+
+<h2>
+視聴状況
+</h2>
+
+
+<div
+id="status-login-message"
+class="spoiler">
+
+ログインすると視聴状況を
+保存できます。
 
 </div>
 
 
+<div
+id="status-form"
+class="status-form"
+style="display:none;">
+
+<select
+id="watch-status">
+
+<option value="plan_to_watch">
+視聴予定
+</option>
+
+<option value="watching">
+視聴中
+</option>
+
+<option value="completed">
+視聴完了
+</option>
+
+<option value="paused">
+一時停止
+</option>
+
+<option value="dropped">
+視聴中止
+</option>
+
+</select>
+
+
+<input
+type="number"
+id="watch-progress"
+min="0"
+step="1"
+placeholder="視聴済み話数">
+
+
+<button
+type="button"
+id="status-save"
+class="status-save">
+
+保存
+
+</button>
+
+
+<p
+id="status-message"
+class="status-message">
+</p>
+
+</div>
+
+</section>
+
+
+<!-- Rating -->
+
+<section
+class="content-section">
+
+<h2>
+自分の評価
+</h2>
+
+
+<div
+id="rating-login-message"
+class="spoiler">
+
+ログインすると作品を
+1〜10点で評価できます。
+
+</div>
+
+
+<div
+id="rating-area"
+class="rating-area"
+style="display:none;">
+
+<select
+id="user-rating"
+class="rating-select">
+
+<option value="">
+評価を選択
+</option>
+
+<option value="10">
+10 / 10
+</option>
+
+<option value="9">
+9 / 10
+</option>
+
+<option value="8">
+8 / 10
+</option>
+
+<option value="7">
+7 / 10
+</option>
+
+<option value="6">
+6 / 10
+</option>
+
+<option value="5">
+5 / 10
+</option>
+
+<option value="4">
+4 / 10
+</option>
+
+<option value="3">
+3 / 10
+</option>
+
+<option value="2">
+2 / 10
+</option>
+
+<option value="1">
+1 / 10
+</option>
+
+</select>
+
+
+<button
+type="button"
+id="rating-save"
+class="rating-save">
+
+評価を保存
+
+</button>
+
+
+<p
+id="rating-message"
+class="status-message">
+</p>
+
+</div>
+
+</section>
+
+
+<!-- Official -->
+
+<section
+id="official-section"
+class="content-section"
+style="display:none;">
+
+<h2>
+公式情報
+</h2>
+
+<a
+id="official-link"
+class="official-button"
+target="_blank"
+rel="noopener noreferrer">
+
+公式サイトを見る
+
+</a>
+
+</section>
+
+
 <a
 href="anime.html"
-class="back">
+class="back-link">
 
 ← アニメ一覧へ戻る
 
 </a>
 
-</article>
 
+</aside>
+
+</div>
+
+</article>
 
 </main>
 
 
-<footer>
+<!-- =========================================
+     Footer
+========================================= -->
+
+<footer class="site-footer">
 
 <div class="footer-inner">
 
 <h2>
-Just An Anime Review
+Animecia
 </h2>
 
 <p>
-アニメをもっと深く、もっと面白く。
+次に見るアニメを見つける。
 </p>
 
+
+<div class="footer-links">
+
+<a href="index.html">
+ホーム
+</a>
+
+<a href="anime.html">
+アニメ一覧
+</a>
+
+<a href="terms.html">
+利用規約
+</a>
+
+<a href="privacy.html">
+プライバシー
+</a>
+
+</div>
+
+
 <p>
-© 2026 Just An Anime Review
+© 2026 Animecia
 </p>
 
 </div>
@@ -956,149 +2458,358 @@ const SUPABASE_KEY =
 "sb_publishable_-rZ4HusVezs5IlZQnUQ-Kw_SLUd8R0c";
 
 
-/* =========================================
-   閲覧者ID
-========================================= */
-
-function getVisitorId() {
-
-    let visitorId =
-        localStorage.getItem(
-            "anime_review_visitor_id"
-        );
-
-    if (!visitorId) {
-
-        visitorId =
-            crypto.randomUUID();
-
-        localStorage.setItem(
-            "anime_review_visitor_id",
-            visitorId
-        );
-
-    }
-
-    return visitorId;
-
-}
-
-
-const visitorId =
-    getVisitorId();
-
-
-/* =========================================
-   Supabaseクライアント
-========================================= */
-
 const supabaseClient =
-    supabase.createClient(
-        SUPABASE_URL,
-        SUPABASE_KEY,
-        {
-            global: {
-                headers: {
-                    "x-visitor-id":
-                        visitorId
-                }
-            }
-        }
-    );
+supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+);
 
 
 /* =========================================
-   HTMLエスケープ
+   Current anime ID
 ========================================= */
 
-function escapeHTML(text) {
+const currentAnimeId =
+new URLSearchParams(
+    window.location.search
+).get("id");
+
+
+/* =========================================
+   Current user
+========================================= */
+
+let currentUser = null;
+
+let currentAnime = null;
+
+
+/* =========================================
+   Utilities
+========================================= */
+
+function escapeHTML(value) {
+
+    if (
+        value === null ||
+        value === undefined
+    ) {
+        return "";
+    }
 
     const div =
         document.createElement("div");
 
     div.textContent =
-        text ?? "";
+        String(value);
 
     return div.innerHTML;
 
 }
 
 
-/* =========================================
-   URLパラメータ
-========================================= */
+function safeURL(value) {
 
-const currentAnimeId =
-    new URLSearchParams(
-        window.location.search
-    ).get("id");
-
-
-/* =========================================
-   SEO：canonical URL
-========================================= */
-
-if (currentAnimeId) {
-
-    const canonicalUrl =
-        window.location.origin +
-        window.location.pathname +
-        "?id=" +
-        encodeURIComponent(
-            currentAnimeId
-        );
-
-    document
-        .getElementById("canonical")
-        .setAttribute(
-            "href",
-            canonicalUrl
-        );
-
-    document
-        .getElementById("og-url")
-        .setAttribute(
-            "content",
-            canonicalUrl
-        );
-
-}
-
-
-/* =========================================
-   URL安全確認
-========================================= */
-
-function isSafeURL(url) {
-
-    if (!url) {
-        return false;
+    if (!value) {
+        return "";
     }
 
     try {
 
-        const parsed =
+        const url =
             new URL(
-                url,
+                value,
                 window.location.origin
             );
 
-        return (
-            parsed.protocol === "http:" ||
-            parsed.protocol === "https:"
-        );
+        if (
+            url.protocol === "http:" ||
+            url.protocol === "https:"
+        ) {
+            return url.href;
+        }
 
-    } catch {
+    } catch (error) {
 
-        return false;
+        return "";
 
     }
+
+    return "";
+
+}
+
+
+function getMainTitle(anime) {
+
+    return (
+        anime.title_japanese ||
+        anime.title_native ||
+        anime.title_romaji ||
+        anime.title_english ||
+        anime.title ||
+        "タイトル未設定"
+    );
+
+}
+
+
+function getSubTitle(anime) {
+
+    const main =
+        getMainTitle(anime);
+
+    const candidates = [
+
+        anime.title_english,
+
+        anime.title_romaji,
+
+        anime.title_native,
+
+        anime.title_japanese,
+
+        anime.title
+
+    ];
+
+    for (
+        const title of candidates
+    ) {
+
+        if (
+            title &&
+            title !== main
+        ) {
+
+            return title;
+
+        }
+
+    }
+
+    return "";
+
+}
+
+
+function getFullName(person) {
+
+    return [
+
+        person.name_first,
+
+        person.name_last
+
+    ]
+        .filter(Boolean)
+        .join(" ") ||
+
+        person.name_native ||
+
+        "名前未設定";
+
+}
+
+
+function formatNumber(value) {
+
+    if (
+        value === null ||
+        value === undefined ||
+        value === ""
+    ) {
+        return "—";
+    }
+
+    return Number(value)
+        .toLocaleString("ja-JP");
+
+}
+
+
+function formatScore(value) {
+
+    if (
+        value === null ||
+        value === undefined ||
+        value === ""
+    ) {
+        return "—";
+    }
+
+    const number =
+        Number(value);
+
+    if (
+        Number.isNaN(number)
+    ) {
+        return "—";
+    }
+
+    return number.toFixed(1);
+
+}
+
+
+function formatDate(value) {
+
+    if (!value) {
+        return "—";
+    }
+
+    const date =
+        new Date(value);
+
+    if (
+        Number.isNaN(
+            date.getTime()
+        )
+    ) {
+        return "—";
+    }
+
+    return date.toLocaleDateString(
+        "ja-JP"
+    );
+
+}
+
+
+function formatStatus(value) {
+
+    const map = {
+
+        FINISHED:
+            "放送終了",
+
+        RELEASING:
+            "放送中",
+
+        NOT_YET_RELEASED:
+            "放送前",
+
+        CANCELLED:
+            "中止",
+
+        HIATUS:
+            "休止中"
+
+    };
+
+    return (
+        map[value] ||
+        value ||
+        "—"
+    );
+
+}
+
+
+function formatSeason(value) {
+
+    const map = {
+
+        WINTER:
+            "冬",
+
+        SPRING:
+            "春",
+
+        SUMMER:
+            "夏",
+
+        FALL:
+            "秋"
+
+    };
+
+    return (
+        map[value] ||
+        value ||
+        "—"
+    );
+
+}
+
+
+function formatFormat(value) {
+
+    const map = {
+
+        TV:
+            "TV",
+
+        TV_SHORT:
+            "TVショート",
+
+        MOVIE:
+            "劇場版",
+
+        OVA:
+            "OVA",
+
+        ONA:
+            "ONA",
+
+        SPECIAL:
+            "特別編",
+
+        MUSIC:
+            "Music"
+
+    };
+
+    return (
+        map[value] ||
+        value ||
+        "—"
+    );
+
+}
+
+
+function relationLabel(value) {
+
+    const map = {
+
+        SEQUEL:
+            "続編",
+
+        PREQUEL:
+            "前編",
+
+        SIDE_STORY:
+            "外伝",
+
+        ALTERNATIVE:
+            "別作品",
+
+        SPIN_OFF:
+            "スピンオフ",
+
+        SUMMARY:
+            "総集編",
+
+        PARENT:
+            "関連作品",
+
+        OTHER:
+            "その他"
+
+    };
+
+    return (
+        map[value] ||
+        value ||
+        "関連作品"
+    );
 
 }
 
 
 /* =========================================
-   エラー表示
+   Error
 ========================================= */
 
 function showError() {
@@ -1122,7 +2833,2842 @@ function showError() {
 
 
 /* =========================================
-   広告
+   SEO
+========================================= */
+
+function updateSEO(anime) {
+
+    const title =
+        getMainTitle(anime);
+
+    const description =
+        anime.description
+            ? anime.description
+                .replace(/\s+/g, " ")
+                .trim()
+                .slice(0, 155)
+
+            : `${title}のあらすじ・作品情報・レビューを紹介しています。`;
+
+
+    const canonicalURL =
+        window.location.origin +
+        window.location.pathname +
+        "?id=" +
+        encodeURIComponent(
+            anime.id
+        );
+
+
+    document.title =
+        `${title} | Animecia`;
+
+
+    document
+        .getElementById(
+            "meta-description"
+        )
+        .setAttribute(
+            "content",
+            description
+        );
+
+
+    document
+        .getElementById(
+            "canonical"
+        )
+        .setAttribute(
+            "href",
+            canonicalURL
+        );
+
+
+    document
+        .getElementById(
+            "og-title"
+        )
+        .setAttribute(
+            "content",
+            `${title} | Animecia`
+        );
+
+
+    document
+        .getElementById(
+            "og-description"
+        )
+        .setAttribute(
+            "content",
+            description
+        );
+
+
+    document
+        .getElementById(
+            "og-url"
+        )
+        .setAttribute(
+            "content",
+            canonicalURL
+        );
+
+
+    const image =
+        safeURL(
+            anime.cover_image
+        );
+
+
+    if (image) {
+
+        document
+            .getElementById(
+                "og-image"
+            )
+            .setAttribute(
+                "content",
+                image
+            );
+
+    }
+
+
+    document
+        .getElementById(
+            "breadcrumb-title"
+        )
+        .textContent =
+        title;
+
+
+    /* JSON-LD */
+
+    const schema = {
+
+        "@context":
+            "https://schema.org",
+
+        "@type":
+            "TVSeries",
+
+        "name":
+            title,
+
+        "description":
+            description,
+
+        "url":
+            canonicalURL,
+
+        "inLanguage":
+            "ja",
+
+        "image":
+            image || undefined,
+
+        "genre":
+            anime.anime_genres
+                ?.map(
+                    item =>
+                        item?.genres?.name
+                )
+                .filter(Boolean)
+
+    };
+
+
+    const old =
+        document.getElementById(
+            "anime-schema"
+        );
+
+
+    if (old) {
+        old.remove();
+    }
+
+
+    const script =
+        document.createElement(
+            "script"
+        );
+
+
+    script.id =
+        "anime-schema";
+
+    script.type =
+        "application/ld+json";
+
+    script.textContent =
+        JSON.stringify(
+            schema
+        );
+
+
+    document.head.appendChild(
+        script
+    );
+
+}
+
+
+/* =========================================
+   Load Anime
+========================================= */
+
+async function loadAnime() {
+
+    if (!currentAnimeId) {
+
+        showError();
+
+        return;
+
+    }
+
+
+    try {
+
+        const {
+            data,
+            error
+        } =
+            await supabaseClient
+
+                .from("anime")
+
+                .select(`
+                    id,
+                    title,
+                    title_romaji,
+                    title_english,
+                    title_native,
+                    title_japanese,
+                    description,
+                    cover_image,
+                    banner_image,
+                    start_date,
+                    end_date,
+                    episodes,
+                    duration,
+                    status,
+                    format,
+                    season,
+                    season_year,
+                    source,
+                    average_score,
+                    popularity,
+                    favourites_count,
+                    site_url,
+                    updated_at,
+
+                    anime_genres (
+                        genres (
+                            id,
+                            name
+                        )
+                    ),
+
+                    anime_studios (
+                        studios (
+                            id,
+                            external_id,
+                            name,
+                            site_url
+                        )
+                    ),
+
+                    anime_characters (
+                        role,
+                        characters (
+                            id,
+                            name_first,
+                            name_last,
+                            name_native,
+                            image,
+                            description
+                        )
+                    ),
+
+                    anime_staff (
+                        role,
+                        staff (
+                            id,
+                            name_first,
+                            name_last,
+                            name_native,
+                            image,
+                            description
+                        )
+                    )
+                `)
+
+                .eq(
+                    "id",
+                    currentAnimeId
+                )
+
+                .single();
+
+
+        if (
+            error ||
+            !data
+        ) {
+
+            console.error(
+                "Anime取得エラー:",
+                error
+            );
+
+            showError();
+
+            return;
+
+        }
+
+
+        currentAnime =
+            data;
+
+
+        updateSEO(
+            currentAnime
+        );
+
+
+        renderAnime(
+            currentAnime
+        );
+
+
+        await loadRelatedAnime();
+
+        await loadUserState();
+
+        await loadReviews();
+
+        await loadAdvertisement();
+
+
+        document
+            .getElementById(
+                "loading"
+            )
+            .style.display =
+            "none";
+
+
+        document
+            .getElementById(
+                "detail"
+            )
+            .style.display =
+            "block";
+
+
+    } catch (error) {
+
+        console.error(
+            "Anime読み込みエラー:",
+            error
+        );
+
+        showError();
+
+    }
+
+}
+
+
+/* =========================================
+   Render Anime
+========================================= */
+
+function renderAnime(anime) {
+
+    const title =
+        getMainTitle(anime);
+
+    const subtitle =
+        getSubTitle(anime);
+
+
+    document
+        .getElementById(
+            "title"
+        )
+        .textContent =
+        title;
+
+
+    document
+        .getElementById(
+            "subtitle"
+        )
+        .textContent =
+        subtitle;
+
+
+    document
+        .getElementById(
+            "description"
+        )
+        .textContent =
+        anime.description ||
+        "あらすじは登録されていません。";
+
+
+    document
+        .getElementById(
+            "hero-description"
+        )
+        .textContent =
+        anime.description
+            ? anime.description
+                .replace(/<[^>]*>/g, "")
+                .slice(0, 280)
+            : "作品情報は準備中です。";
+
+
+    /* =====================================
+       Cover
+    ===================================== */
+
+    const cover =
+        document.getElementById(
+            "hero-cover"
+        );
+
+
+    const coverURL =
+        safeURL(
+            anime.cover_image
+        );
+
+
+    if (coverURL) {
+
+        cover.innerHTML = `
+
+            <img
+                src="${escapeHTML(
+                    coverURL
+                )}"
+                alt="${escapeHTML(
+                    title
+                )}のキービジュアル"
+                onerror="
+                    this.style.display='none';
+                    this.nextElementSibling.style.display='flex';
+                "
+            >
+
+            <div
+                class="hero-cover-placeholder"
+                style="display:none;">
+                画像なし
+            </div>
+
+        `;
+
+    }
+
+
+    /* =====================================
+       Background
+    ===================================== */
+
+    const bannerURL =
+        safeURL(
+            anime.banner_image ||
+            anime.cover_image
+        );
+
+
+    if (bannerURL) {
+
+        document
+            .getElementById(
+                "hero-background"
+            )
+            .style.backgroundImage =
+            `url("${bannerURL}")`;
+
+    }
+
+
+    /* =====================================
+       Genres
+    ===================================== */
+
+    const genreContainer =
+        document.getElementById(
+            "genres"
+        );
+
+
+    const genres =
+        (anime.anime_genres || [])
+            .map(
+                item =>
+                    item?.genres
+            )
+            .filter(Boolean);
+
+
+    genreContainer.innerHTML =
+        genres
+            .map(
+                genre => `
+
+                    <span class="genre-tag">
+
+                        ${escapeHTML(
+                            genre.name
+                        )}
+
+                    </span>
+
+                `
+            )
+            .join("");
+
+
+    /* =====================================
+       Hero stats
+    ===================================== */
+
+    document
+        .getElementById(
+            "hero-score"
+        )
+        .textContent =
+        anime.average_score !== null &&
+        anime.average_score !== undefined
+
+            ? `★ ${formatScore(
+                anime.average_score
+            )}`
+
+            : "—";
+
+
+    document
+        .getElementById(
+            "hero-popularity"
+        )
+        .textContent =
+        formatNumber(
+            anime.popularity
+        );
+
+
+    document
+        .getElementById(
+            "hero-episodes"
+        )
+        .textContent =
+        anime.episodes
+            ? `${anime.episodes}話`
+            : "—";
+
+
+    /* =====================================
+       Favorite button
+    ===================================== */
+
+    document
+        .getElementById(
+            "favorite-button"
+        )
+        .addEventListener(
+            "click",
+            toggleFavorite
+        );
+
+
+    /* =====================================
+       Official site
+    ===================================== */
+
+    const officialURL =
+        safeURL(
+            anime.site_url
+        );
+
+
+    if (officialURL) {
+
+        const heroOfficial =
+            document.getElementById(
+                "official-button"
+            );
+
+        heroOfficial.href =
+            officialURL;
+
+        heroOfficial.style.display =
+            "inline-flex";
+
+
+        const sideOfficial =
+            document.getElementById(
+                "official-link"
+            );
+
+        sideOfficial.href =
+            officialURL;
+
+
+        document
+            .getElementById(
+                "official-section"
+            )
+            .style.display =
+            "block";
+
+    }
+
+
+    /* =====================================
+       Basic information
+    ===================================== */
+
+    document
+        .getElementById(
+            "info-title"
+        )
+        .textContent =
+        title;
+
+
+    document
+        .getElementById(
+            "info-status"
+        )
+        .textContent =
+        formatStatus(
+            anime.status
+        );
+
+
+    document
+        .getElementById(
+            "info-start-date"
+        )
+        .textContent =
+        formatDate(
+            anime.start_date
+        );
+
+
+    document
+        .getElementById(
+            "info-end-date"
+        )
+        .textContent =
+        formatDate(
+            anime.end_date
+        );
+
+
+    document
+        .getElementById(
+            "info-season"
+        )
+        .textContent =
+        anime.season_year
+            ? `${anime.season_year}年 ${formatSeason(
+                anime.season
+            )}`
+            : formatSeason(
+                anime.season
+            );
+
+
+    document
+        .getElementById(
+            "info-format"
+        )
+        .textContent =
+        formatFormat(
+            anime.format
+        );
+
+
+    document
+        .getElementById(
+            "info-source"
+        )
+        .textContent =
+        anime.source ||
+        "—";
+
+
+    document
+        .getElementById(
+            "info-episodes"
+        )
+        .textContent =
+        anime.episodes
+            ? `${anime.episodes}話`
+            : "—";
+
+
+    document
+        .getElementById(
+            "info-duration"
+        )
+        .textContent =
+        anime.duration
+            ? `${anime.duration}分`
+            : "—";
+
+
+    renderStudios(
+        anime
+    );
+
+
+    renderCharacters(
+        anime
+    );
+
+
+    renderStaff(
+        anime
+    );
+
+}
+
+
+/* =========================================
+   Studios
+========================================= */
+
+function renderStudios(anime) {
+
+    const section =
+        document.getElementById(
+            "studio-section"
+        );
+
+    const list =
+        document.getElementById(
+            "studio-list"
+        );
+
+
+    const studios =
+        (anime.anime_studios || [])
+            .map(
+                item =>
+                    item?.studios
+            )
+            .filter(Boolean);
+
+
+    if (!studios.length) {
+
+        section.style.display =
+            "none";
+
+        return;
+
+    }
+
+
+    section.style.display =
+        "block";
+
+
+    list.innerHTML =
+        studios
+            .map(
+                studio => {
+
+                    const site =
+                        safeURL(
+                            studio.site_url
+                        );
+
+
+                    return `
+
+                        <div class="studio-item">
+
+                            <div>
+
+                                <p class="item-name">
+
+                                    ${
+                                        site
+
+                                            ? `
+                                                <a
+                                                    href="${escapeHTML(
+                                                        site
+                                                    )}"
+                                                    target="_blank"
+                                                    rel="noopener noreferrer">
+
+                                                    ${escapeHTML(
+                                                        studio.name
+                                                    )}
+
+                                                </a>
+                                            `
+
+                                            : escapeHTML(
+                                                studio.name
+                                            )
+                                    }
+
+                                </p>
+
+                                <p class="item-role">
+                                    制作会社
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                    `;
+
+                }
+            )
+            .join("");
+
+}
+
+
+/* =========================================
+   Characters
+========================================= */
+
+function renderCharacters(anime) {
+
+    const section =
+        document.getElementById(
+            "character-section"
+        );
+
+    const list =
+        document.getElementById(
+            "character-list"
+        );
+
+
+    const characters =
+        (anime.anime_characters || [])
+            .map(
+                item => ({
+
+                    ...item?.characters,
+
+                    role:
+                        item?.role
+
+                })
+            )
+            .filter(
+                item =>
+                    item.id
+            )
+            .slice(
+                0,
+                20
+            );
+
+
+    if (!characters.length) {
+
+        section.style.display =
+            "none";
+
+        return;
+
+    }
+
+
+    section.style.display =
+        "block";
+
+
+    list.innerHTML =
+        characters
+            .map(
+                character => {
+
+                    const image =
+                        safeURL(
+                            character.image
+                        );
+
+
+                    const imageHTML =
+                        image
+
+                            ? `
+                                <img
+                                    class="person-image"
+                                    src="${escapeHTML(
+                                        image
+                                    )}"
+                                    alt="${escapeHTML(
+                                        getFullName(
+                                            character
+                                        )
+                                    )}"
+                                    loading="lazy"
+                                >
+                            `
+
+                            : `
+                                <div class="person-placeholder">
+                                    画像なし
+                                </div>
+                            `;
+
+
+                    return `
+
+                        <div class="person-item">
+
+                            ${imageHTML}
+
+                            <div>
+
+                                <p class="item-name">
+
+                                    ${escapeHTML(
+                                        getFullName(
+                                            character
+                                        )
+                                    )}
+
+                                </p>
+
+                                <p class="item-role">
+
+                                    ${escapeHTML(
+                                        character.role ||
+                                        "キャラクター"
+                                    )}
+
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                    `;
+
+                }
+            )
+            .join("");
+
+}
+
+
+/* =========================================
+   Staff
+========================================= */
+
+function renderStaff(anime) {
+
+    const section =
+        document.getElementById(
+            "staff-section"
+        );
+
+    const list =
+        document.getElementById(
+            "staff-list"
+        );
+
+
+    const staff =
+        (anime.anime_staff || [])
+            .map(
+                item => ({
+
+                    ...item?.staff,
+
+                    role:
+                        item?.role
+
+                })
+            )
+            .filter(
+                item =>
+                    item.id
+            )
+            .slice(
+                0,
+                30
+            );
+
+
+    if (!staff.length) {
+
+        section.style.display =
+            "none";
+
+        return;
+
+    }
+
+
+    section.style.display =
+        "block";
+
+
+    list.innerHTML =
+        staff
+            .map(
+                person => {
+
+                    const image =
+                        safeURL(
+                            person.image
+                        );
+
+
+                    const imageHTML =
+                        image
+
+                            ? `
+                                <img
+                                    class="person-image"
+                                    src="${escapeHTML(
+                                        image
+                                    )}"
+                                    alt="${escapeHTML(
+                                        getFullName(
+                                            person
+                                        )
+                                    )}"
+                                    loading="lazy"
+                                >
+                            `
+
+                            : `
+                                <div class="person-placeholder">
+                                    画像なし
+                                </div>
+                            `;
+
+
+                    return `
+
+                        <div class="person-item">
+
+                            ${imageHTML}
+
+                            <div>
+
+                                <p class="item-name">
+
+                                    ${escapeHTML(
+                                        getFullName(
+                                            person
+                                        )
+                                    )}
+
+                                </p>
+
+                                <p class="item-role">
+
+                                    ${escapeHTML(
+                                        person.role ||
+                                        "スタッフ"
+                                    )}
+
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                    `;
+
+                }
+            )
+            .join("");
+
+}
+
+
+/* =========================================
+   Related anime
+========================================= */
+
+async function loadRelatedAnime() {
+
+    const section =
+        document.getElementById(
+            "related-section"
+        );
+
+    const list =
+        document.getElementById(
+            "related-list"
+        );
+
+
+    try {
+
+        const {
+            data,
+            error
+        } =
+            await supabaseClient
+
+                .from("anime_relations")
+
+                .select(`
+                    relation_type,
+                    related_anime:anime!anime_relations_related_anime_id_fkey (
+                        id,
+                        title,
+                        title_romaji,
+                        title_english,
+                        title_native,
+                        title_japanese,
+                        cover_image
+                    )
+                `)
+
+                .eq(
+                    "anime_id",
+                    currentAnimeId
+                );
+
+
+        if (
+            error ||
+            !data ||
+            !data.length
+        ) {
+
+            section.style.display =
+                "none";
+
+            return;
+
+        }
+
+
+        const relations =
+            data.filter(
+                item =>
+                    item.related_anime
+            );
+
+
+        if (!relations.length) {
+
+            section.style.display =
+                "none";
+
+            return;
+
+        }
+
+
+        section.style.display =
+            "block";
+
+
+        list.innerHTML =
+            relations
+                .map(
+                    relation => {
+
+                        const anime =
+                            relation.related_anime;
+
+
+                        return `
+
+                            <div class="related-item">
+
+                                <div>
+
+                                    <a
+                                        href="anime-detail.html?id=${encodeURIComponent(
+                                            anime.id
+                                        )}">
+
+                                        ${escapeHTML(
+                                            getMainTitle(
+                                                anime
+                                            )
+                                        )}
+
+                                    </a>
+
+                                    <div
+                                        class="related-type">
+
+                                        ${escapeHTML(
+                                            relationLabel(
+                                                relation.relation_type
+                                            )
+                                        )}
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        `;
+
+                    }
+                )
+                .join("");
+
+
+    } catch (error) {
+
+        console.error(
+            "関連作品取得エラー:",
+            error
+        );
+
+        section.style.display =
+            "none";
+
+    }
+
+}
+
+
+/* =========================================
+   Auth
+========================================= */
+
+async function loadAuth() {
+
+    const {
+        data
+    } =
+        await supabaseClient
+            .auth
+            .getUser();
+
+
+    currentUser =
+        data?.user ||
+        null;
+
+
+    return currentUser;
+
+}
+
+
+/* =========================================
+   User state
+========================================= */
+
+async function loadUserState() {
+
+    if (!currentUser) {
+
+        document
+            .getElementById(
+                "status-login-message"
+            )
+            .style.display =
+            "block";
+
+        document
+            .getElementById(
+                "status-form"
+            )
+            .style.display =
+            "none";
+
+
+        document
+            .getElementById(
+                "rating-login-message"
+            )
+            .style.display =
+            "block";
+
+        document
+            .getElementById(
+                "rating-area"
+            )
+            .style.display =
+            "none";
+
+
+        document
+            .getElementById(
+                "review-login-message"
+            )
+            .style.display =
+            "block";
+
+        document
+            .getElementById(
+                "review-form"
+            )
+            .style.display =
+            "none";
+
+        return;
+
+    }
+
+
+    document
+        .getElementById(
+            "status-login-message"
+        )
+        .style.display =
+        "none";
+
+
+    document
+        .getElementById(
+            "status-form"
+        )
+        .style.display =
+        "grid";
+
+
+    document
+        .getElementById(
+            "rating-login-message"
+        )
+        .style.display =
+        "none";
+
+
+    document
+        .getElementById(
+            "rating-area"
+        )
+        .style.display =
+        "grid";
+
+
+    document
+        .getElementById(
+            "review-login-message"
+        )
+        .style.display =
+        "none";
+
+
+    document
+        .getElementById(
+            "review-form"
+        )
+        .style.display =
+        "grid";
+
+
+    await loadFavorite();
+
+    await loadWatchStatus();
+
+    await loadUserRating();
+
+}
+
+
+/* =========================================
+   Favorite
+========================================= */
+
+async function loadFavorite() {
+
+    if (!currentUser) {
+        return;
+    }
+
+
+    const {
+        data,
+        error
+    } =
+        await supabaseClient
+
+            .from("favorites")
+
+            .select("anime_id")
+
+            .eq(
+                "user_id",
+                currentUser.id
+            )
+
+            .eq(
+                "anime_id",
+                currentAnimeId
+            )
+
+            .maybeSingle();
+
+
+    if (error) {
+
+        console.error(
+            "お気に入り取得エラー:",
+            error
+        );
+
+        return;
+
+    }
+
+
+    const button =
+        document.getElementById(
+            "favorite-button"
+        );
+
+
+    if (data) {
+
+        button.classList.add(
+            "active"
+        );
+
+        button.textContent =
+            "★ お気に入り済み";
+
+    } else {
+
+        button.classList.remove(
+            "active"
+        );
+
+        button.textContent =
+            "☆ お気に入り";
+
+    }
+
+}
+
+
+/* =========================================
+   Toggle Favorite
+========================================= */
+
+async function toggleFavorite() {
+
+    if (!currentUser) {
+
+        alert(
+            "お気に入り機能を使うにはログインしてください。"
+        );
+
+        return;
+
+    }
+
+
+    const button =
+        document.getElementById(
+            "favorite-button"
+        );
+
+
+    button.disabled =
+        true;
+
+
+    try {
+
+        const {
+            data,
+            error
+        } =
+            await supabaseClient
+
+                .from("favorites")
+
+                .select("anime_id")
+
+                .eq(
+                    "user_id",
+                    currentUser.id
+                )
+
+                .eq(
+                    "anime_id",
+                    currentAnimeId
+                )
+
+                .maybeSingle();
+
+
+        if (error) {
+            throw error;
+        }
+
+
+        if (data) {
+
+            const {
+                error: deleteError
+            } =
+                await supabaseClient
+
+                    .from("favorites")
+
+                    .delete()
+
+                    .eq(
+                        "user_id",
+                        currentUser.id
+                    )
+
+                    .eq(
+                        "anime_id",
+                        currentAnimeId
+                    );
+
+
+            if (deleteError) {
+                throw deleteError;
+            }
+
+        } else {
+
+            const {
+                error: insertError
+            } =
+                await supabaseClient
+
+                    .from("favorites")
+
+                    .insert({
+
+                        user_id:
+                            currentUser.id,
+
+                        anime_id:
+                            currentAnimeId
+
+                    });
+
+
+            if (insertError) {
+                throw insertError;
+            }
+
+        }
+
+
+        await loadFavorite();
+
+
+    } catch (error) {
+
+        console.error(
+            "お気に入り更新エラー:",
+            error
+        );
+
+        alert(
+            "お気に入りの更新に失敗しました。"
+        );
+
+    }
+
+
+    button.disabled =
+        false;
+
+}
+
+
+/* =========================================
+   Watch status
+========================================= */
+
+async function loadWatchStatus() {
+
+    if (!currentUser) {
+        return;
+    }
+
+
+    const {
+        data,
+        error
+    } =
+        await supabaseClient
+
+            .from("user_anime_status")
+
+            .select(
+                "status,progress"
+            )
+
+            .eq(
+                "user_id",
+                currentUser.id
+            )
+
+            .eq(
+                "anime_id",
+                currentAnimeId
+            )
+
+            .maybeSingle();
+
+
+    if (error) {
+
+        console.error(
+            "視聴状況取得エラー:",
+            error
+        );
+
+        return;
+
+    }
+
+
+    if (!data) {
+        return;
+    }
+
+
+    document
+        .getElementById(
+            "watch-status"
+        )
+        .value =
+        data.status;
+
+
+    document
+        .getElementById(
+            "watch-progress"
+        )
+        .value =
+        data.progress ?? 0;
+
+}
+
+
+/* =========================================
+   Save watch status
+========================================= */
+
+async function saveWatchStatus() {
+
+    if (!currentUser) {
+
+        return;
+
+    }
+
+
+    const status =
+        document
+            .getElementById(
+                "watch-status"
+            )
+            .value;
+
+
+    const progress =
+        Number(
+            document
+                .getElementById(
+                    "watch-progress"
+                )
+                .value || 0
+        );
+
+
+    const message =
+        document.getElementById(
+            "status-message"
+        );
+
+
+    if (progress < 0) {
+
+        message.textContent =
+            "視聴話数は0以上で入力してください。";
+
+        return;
+
+    }
+
+
+    const {
+        error
+    } =
+        await supabaseClient
+
+            .from("user_anime_status")
+
+            .upsert({
+
+                user_id:
+                    currentUser.id,
+
+                anime_id:
+                    currentAnimeId,
+
+                status:
+                    status,
+
+                progress:
+                    progress,
+
+                updated_at:
+                    new Date()
+                        .toISOString()
+
+            });
+
+
+    if (error) {
+
+        console.error(
+            "視聴状況保存エラー:",
+            error
+        );
+
+        message.textContent =
+            "保存に失敗しました。";
+
+        return;
+
+    }
+
+
+    message.textContent =
+        "視聴状況を保存しました。";
+
+}
+
+
+/* =========================================
+   User rating
+========================================= */
+
+async function loadUserRating() {
+
+    if (!currentUser) {
+        return;
+    }
+
+
+    const {
+        data,
+        error
+    } =
+        await supabaseClient
+
+            .from("user_ratings")
+
+            .select("rating")
+
+            .eq(
+                "user_id",
+                currentUser.id
+            )
+
+            .eq(
+                "anime_id",
+                currentAnimeId
+            )
+
+            .maybeSingle();
+
+
+    if (error) {
+
+        console.error(
+            "評価取得エラー:",
+            error
+        );
+
+        return;
+
+    }
+
+
+    if (data) {
+
+        document
+            .getElementById(
+                "user-rating"
+            )
+            .value =
+            String(
+                Number(
+                    data.rating
+                )
+            );
+
+    }
+
+}
+
+
+/* =========================================
+   Save user rating
+========================================= */
+
+async function saveUserRating() {
+
+    if (!currentUser) {
+        return;
+    }
+
+
+    const rating =
+        document
+            .getElementById(
+                "user-rating"
+            )
+            .value;
+
+
+    const message =
+        document.getElementById(
+            "rating-message"
+        );
+
+
+    if (!rating) {
+
+        message.textContent =
+            "評価を選択してください。";
+
+        return;
+
+    }
+
+
+    const {
+        error
+    } =
+        await supabaseClient
+
+            .from("user_ratings")
+
+            .upsert({
+
+                user_id:
+                    currentUser.id,
+
+                anime_id:
+                    currentAnimeId,
+
+                rating:
+                    Number(rating),
+
+                updated_at:
+                    new Date()
+                        .toISOString()
+
+            });
+
+
+    if (error) {
+
+        console.error(
+            "評価保存エラー:",
+            error
+        );
+
+        message.textContent =
+            "評価の保存に失敗しました。";
+
+        return;
+
+    }
+
+
+    message.textContent =
+        "評価を保存しました。";
+
+}
+
+
+/* =========================================
+   Reviews
+========================================= */
+
+async function loadReviews() {
+
+    const container =
+        document.getElementById(
+            "review-list"
+        );
+
+
+    try {
+
+        const {
+            data,
+            error
+        } =
+            await supabaseClient
+
+                .from("reviews")
+
+                .select(`
+                    id,
+                    title,
+                    content,
+                    rating,
+                    spoiler,
+                    likes_count,
+                    created_at,
+                    user_id,
+                    profiles (
+                        username,
+                        display_name,
+                        avatar_url
+                    )
+                `)
+
+                .eq(
+                    "anime_id",
+                    currentAnimeId
+                )
+
+                .order(
+                    "created_at",
+                    {
+                        ascending: false
+                    }
+                );
+
+
+        if (error) {
+            throw error;
+        }
+
+
+        if (
+            !data ||
+            !data.length
+        ) {
+
+            container.innerHTML = `
+
+                <p class="status">
+
+                    まだレビューはありません。
+
+                </p>
+
+            `;
+
+            return;
+
+        }
+
+
+        container.innerHTML =
+            "";
+
+
+        for (
+            const review of data
+        ) {
+
+            const item =
+                document.createElement(
+                    "article"
+                );
+
+
+            item.className =
+                "review-item";
+
+
+            const profile =
+                review.profiles;
+
+
+            const username =
+                profile?.display_name ||
+                profile?.username ||
+                "Animeciaユーザー";
+
+
+            const date =
+                formatDateTime(
+                    review.created_at
+                );
+
+
+            const rating =
+                review.rating !== null &&
+                review.rating !== undefined
+
+                    ? `★ ${formatScore(
+                        review.rating
+                    )} / 10`
+
+                    : "";
+
+
+            let contentHTML =
+                "";
+
+
+            if (review.spoiler) {
+
+                contentHTML = `
+
+                    <div class="spoiler">
+
+                        このレビューには
+                        ネタバレが含まれています。
+
+                        <br>
+
+                        <button
+                            type="button"
+                            class="show-spoiler"
+                            style="
+                                margin-top:8px;
+                                padding:6px 10px;
+                                border:1px solid #ccc;
+                                border-radius:6px;
+                                background:#fff;
+                                cursor:pointer;
+                            ">
+
+                            ネタバレを表示
+
+                        </button>
+
+                        <div
+                            class="spoiler-content"
+                            style="display:none;margin-top:10px;">
+
+                            ${escapeHTML(
+                                review.content
+                            )}
+
+                        </div>
+
+                    </div>
+
+                `;
+
+            } else {
+
+                contentHTML = `
+
+                    <div class="review-content">
+
+                        ${escapeHTML(
+                            review.content
+                        )}
+
+                    </div>
+
+                `;
+
+            }
+
+
+            item.innerHTML = `
+
+                <div class="review-header">
+
+                    <span class="review-user">
+
+                        ${escapeHTML(
+                            username
+                        )}
+
+                    </span>
+
+                    <span class="review-date">
+
+                        ${escapeHTML(
+                            date
+                        )}
+
+                    </span>
+
+                </div>
+
+
+                ${
+                    review.title
+                        ? `
+
+                            <h3 class="review-title">
+
+                                ${escapeHTML(
+                                    review.title
+                                )}
+
+                            </h3>
+
+                        `
+                        : ""
+                }
+
+
+                ${
+                    rating
+                        ? `
+
+                            <div class="review-rating">
+
+                                ${escapeHTML(
+                                    rating
+                                )}
+
+                            </div>
+
+                        `
+                        : ""
+                }
+
+
+                ${contentHTML}
+
+
+                <div class="review-actions">
+
+                    <button
+                        type="button"
+                        class="review-like-button"
+                        data-review-id="${escapeHTML(
+                            review.id
+                        )}">
+
+                        ♡ 参考になった
+                        ${formatNumber(
+                            review.likes_count || 0
+                        )}
+
+                    </button>
+
+                    ${
+                        currentUser &&
+                        currentUser.id ===
+                        review.user_id
+
+                            ? `
+
+                                <button
+                                    type="button"
+                                    class="review-like-button review-delete-button"
+                                    data-review-id="${escapeHTML(
+                                        review.id
+                                    )}">
+
+                                    削除
+
+                                </button>
+
+                            `
+
+                            : ""
+                    }
+
+                </div>
+
+            `;
+
+
+            const spoilerButton =
+                item.querySelector(
+                    ".show-spoiler"
+                );
+
+
+            if (spoilerButton) {
+
+                spoilerButton.addEventListener(
+                    "click",
+                    () => {
+
+                        const content =
+                            item.querySelector(
+                                ".spoiler-content"
+                            );
+
+
+                        if (
+                            content.style.display ===
+                            "none"
+                        ) {
+
+                            content.style.display =
+                                "block";
+
+                            spoilerButton.textContent =
+                                "ネタバレを隠す";
+
+                        } else {
+
+                            content.style.display =
+                                "none";
+
+                            spoilerButton.textContent =
+                                "ネタバレを表示";
+
+                        }
+
+                    }
+                );
+
+            }
+
+
+            const likeButton =
+                item.querySelector(
+                    ".review-like-button:not(.review-delete-button)"
+                );
+
+
+            if (likeButton) {
+
+                likeButton.addEventListener(
+                    "click",
+                    () =>
+                        toggleReviewLike(
+                            review.id,
+                            likeButton
+                        )
+                );
+
+            }
+
+
+            const deleteButton =
+                item.querySelector(
+                    ".review-delete-button"
+                );
+
+
+            if (deleteButton) {
+
+                deleteButton.addEventListener(
+                    "click",
+                    () =>
+                        deleteReview(
+                            review.id
+                        )
+                );
+
+            }
+
+
+            container.appendChild(
+                item
+            );
+
+        }
+
+
+        await loadReviewLikeStates();
+
+
+    } catch (error) {
+
+        console.error(
+            "レビュー取得エラー:",
+            error
+        );
+
+        container.innerHTML = `
+
+            <p class="status">
+
+                レビューを取得できませんでした。
+
+            </p>
+
+        `;
+
+    }
+
+}
+
+
+/* =========================================
+   Date time
+========================================= */
+
+function formatDateTime(value) {
+
+    if (!value) {
+        return "";
+    }
+
+    const date =
+        new Date(value);
+
+    if (
+        Number.isNaN(
+            date.getTime()
+        )
+    ) {
+        return "";
+    }
+
+    return date.toLocaleString(
+        "ja-JP"
+    );
+
+}
+
+
+/* =========================================
+   Submit review
+========================================= */
+
+async function submitReview(event) {
+
+    event.preventDefault();
+
+
+    if (!currentUser) {
+
+        return;
+
+    }
+
+
+    const title =
+        document
+            .getElementById(
+                "review-title"
+            )
+            .value
+            .trim();
+
+
+    const content =
+        document
+            .getElementById(
+                "review-content"
+            )
+            .value
+            .trim();
+
+
+    const rating =
+        document
+            .getElementById(
+                "review-rating"
+            )
+            .value;
+
+
+    const spoiler =
+        document
+            .getElementById(
+                "review-spoiler"
+            )
+            .checked;
+
+
+    const message =
+        document.getElementById(
+            "review-message"
+        );
+
+
+    if (!content) {
+
+        message.textContent =
+            "レビュー内容を入力してください。";
+
+        return;
+
+    }
+
+
+    if (
+        content.length >
+        5000
+    ) {
+
+        message.textContent =
+            "レビューは5000文字以内で入力してください。";
+
+        return;
+
+    }
+
+
+    const button =
+        document.querySelector(
+            "#review-form button"
+        );
+
+
+    button.disabled =
+        true;
+
+
+    message.textContent =
+        "投稿しています……";
+
+
+    const {
+        error
+    } =
+        await supabaseClient
+
+            .from("reviews")
+
+            .insert({
+
+                user_id:
+                    currentUser.id,
+
+                anime_id:
+                    currentAnimeId,
+
+                title:
+                    title || null,
+
+                content:
+                    content,
+
+                rating:
+                    rating
+                        ? Number(rating)
+                        : null,
+
+                spoiler:
+                    spoiler
+
+            });
+
+
+    if (error) {
+
+        console.error(
+            "レビュー投稿エラー:",
+            error
+        );
+
+        message.textContent =
+            "レビューの投稿に失敗しました。";
+
+        button.disabled =
+            false;
+
+        return;
+
+    }
+
+
+    document
+        .getElementById(
+            "review-title"
+        )
+        .value =
+        "";
+
+
+    document
+        .getElementById(
+            "review-content"
+        )
+        .value =
+        "";
+
+
+    document
+        .getElementById(
+            "review-rating"
+        )
+        .value =
+        "";
+
+
+    document
+        .getElementById(
+            "review-spoiler"
+        )
+        .checked =
+        false;
+
+
+    message.textContent =
+        "レビューを投稿しました。";
+
+
+    await loadReviews();
+
+
+    button.disabled =
+        false;
+
+}
+
+
+/* =========================================
+   Review like
+========================================= */
+
+async function toggleReviewLike(
+    reviewId,
+    button
+) {
+
+    if (!currentUser) {
+
+        alert(
+            "レビューへのリアクションにはログインしてください。"
+        );
+
+        return;
+
+    }
+
+
+    button.disabled =
+        true;
+
+
+    try {
+
+        const {
+            data,
+            error
+        } =
+            await supabaseClient
+
+                .from("review_likes")
+
+                .select("review_id")
+
+                .eq(
+                    "user_id",
+                    currentUser.id
+                )
+
+                .eq(
+                    "review_id",
+                    reviewId
+                )
+
+                .maybeSingle();
+
+
+        if (error) {
+            throw error;
+        }
+
+
+        if (data) {
+
+            const {
+                error: deleteError
+            } =
+                await supabaseClient
+
+                    .from("review_likes")
+
+                    .delete()
+
+                    .eq(
+                        "user_id",
+                        currentUser.id
+                    )
+
+                    .eq(
+                        "review_id",
+                        reviewId
+                    );
+
+
+            if (deleteError) {
+                throw deleteError;
+            }
+
+
+        } else {
+
+            const {
+                error: insertError
+            } =
+                await supabaseClient
+
+                    .from("review_likes")
+
+                    .insert({
+
+                        user_id:
+                            currentUser.id,
+
+                        review_id:
+                            reviewId
+
+                    });
+
+
+            if (insertError) {
+                throw insertError;
+            }
+
+        }
+
+
+        await updateReviewLikeCount(
+            reviewId
+        );
+
+
+        await loadReviews();
+
+
+    } catch (error) {
+
+        console.error(
+            "レビューいいねエラー:",
+            error
+        );
+
+    }
+
+
+    button.disabled =
+        false;
+
+}
+
+
+/* =========================================
+   Update review like count
+========================================= */
+
+async function updateReviewLikeCount(
+    reviewId
+) {
+
+    const {
+        count,
+        error
+    } =
+        await supabaseClient
+
+            .from("review_likes")
+
+            .select(
+                "review_id",
+                {
+                    count: "exact",
+                    head: true
+                }
+            )
+
+            .eq(
+                "review_id",
+                reviewId
+            );
+
+
+    if (error) {
+
+        console.error(
+            "レビューいいね数取得エラー:",
+            error
+        );
+
+        return;
+
+    }
+
+
+    await supabaseClient
+
+        .from("reviews")
+
+        .update({
+
+            likes_count:
+                count || 0
+
+        })
+
+        .eq(
+            "id",
+            reviewId
+        );
+
+}
+
+
+/* =========================================
+   Review like states
+========================================= */
+
+async function loadReviewLikeStates() {
+
+    if (!currentUser) {
+        return;
+    }
+
+
+    const {
+        data,
+        error
+    } =
+        await supabaseClient
+
+            .from("review_likes")
+
+            .select(
+                "review_id"
+            )
+
+            .eq(
+                "user_id",
+                currentUser.id
+            );
+
+
+    if (error) {
+
+        console.error(
+            "レビューいいね状態取得エラー:",
+            error
+        );
+
+        return;
+
+    }
+
+
+    const likedIds =
+        new Set(
+            (data || [])
+                .map(
+                    item =>
+                        String(
+                            item.review_id
+                        )
+                )
+        );
+
+
+    document
+        .querySelectorAll(
+            ".review-like-button:not(.review-delete-button)"
+        )
+        .forEach(
+            button => {
+
+                const id =
+                    button.dataset.reviewId;
+
+
+                if (
+                    likedIds.has(
+                        String(id)
+                    )
+                ) {
+
+                    button.classList.add(
+                        "active"
+                    );
+
+                }
+
+            }
+        );
+
+}
+
+
+/* =========================================
+   Delete review
+========================================= */
+
+async function deleteReview(
+    reviewId
+) {
+
+    if (!currentUser) {
+        return;
+    }
+
+
+    const ok =
+        confirm(
+            "このレビューを削除しますか？"
+        );
+
+
+    if (!ok) {
+        return;
+    }
+
+
+    const {
+        error
+    } =
+        await supabaseClient
+
+            .from("reviews")
+
+            .delete()
+
+            .eq(
+                "id",
+                reviewId
+            )
+
+            .eq(
+                "user_id",
+                currentUser.id
+            );
+
+
+    if (error) {
+
+        console.error(
+            "レビュー削除エラー:",
+            error
+        );
+
+        alert(
+            "レビューの削除に失敗しました。"
+        );
+
+        return;
+
+    }
+
+
+    await loadReviews();
+
+}
+
+
+/* =========================================
+   Advertisement
 ========================================= */
 
 async function loadAdvertisement() {
@@ -1137,11 +5683,6 @@ async function loadAdvertisement() {
             "ad-container"
         );
 
-    section.style.display =
-        "none";
-
-    container.innerHTML =
-        "";
 
     try {
 
@@ -1153,9 +5694,14 @@ async function loadAdvertisement() {
 
                 .from("advertisements")
 
-                .select(
-                    "id,company_name,title,description,image_url,link_url"
-                )
+                .select(`
+                    id,
+                    company_name,
+                    title,
+                    description,
+                    image_url,
+                    link_url
+                `)
 
                 .eq(
                     "is_active",
@@ -1172,19 +5718,8 @@ async function loadAdvertisement() {
                 .limit(1);
 
 
-        if (error) {
-
-            console.error(
-                "広告取得エラー:",
-                error
-            );
-
-            return;
-
-        }
-
-
         if (
+            error ||
             !data ||
             !data.length
         ) {
@@ -1197,24 +5732,36 @@ async function loadAdvertisement() {
         const ad =
             data[0];
 
+
         let html =
             "";
 
 
-        if (
-            ad.image_url &&
-            isSafeURL(ad.image_url)
-        ) {
+        const image =
+            safeURL(
+                ad.image_url
+            );
+
+
+        const link =
+            safeURL(
+                ad.link_url
+            );
+
+
+        if (image) {
 
             html += `
 
                 <img
-                    src="${escapeHTML(ad.image_url)}"
-                    alt="${escapeHTML(
-                        ad.title || "広告"
+                    src="${escapeHTML(
+                        image
                     )}"
-                    loading="lazy"
-                    onerror="this.style.display='none';">
+                    alt="${escapeHTML(
+                        ad.title ||
+                        "広告"
+                    )}"
+                    loading="lazy">
 
             `;
 
@@ -1272,16 +5819,15 @@ async function loadAdvertisement() {
         }
 
 
-        if (
-            ad.link_url &&
-            isSafeURL(ad.link_url)
-        ) {
+        if (link) {
 
             html += `
 
                 <a
                     class="ad-button"
-                    href="${escapeHTML(ad.link_url)}"
+                    href="${escapeHTML(
+                        link
+                    )}"
                     target="_blank"
                     rel="noopener noreferrer nofollow">
 
@@ -1294,10 +5840,8 @@ async function loadAdvertisement() {
         }
 
 
-        if (!html.trim()) {
-
+        if (!html) {
             return;
-
         }
 
 
@@ -1311,7 +5855,7 @@ async function loadAdvertisement() {
     } catch (error) {
 
         console.error(
-            "広告読み込みエラー:",
+            "広告取得エラー:",
             error
         );
 
@@ -1321,1078 +5865,79 @@ async function loadAdvertisement() {
 
 
 /* =========================================
-   アニメ取得
-========================================= */
-
-async function loadAnime() {
-
-    if (!currentAnimeId) {
-
-        showError();
-
-        return;
-
-    }
-
-
-    try {
-
-        const {
-            data,
-            error
-        } =
-            await supabaseClient
-
-                .from("anime")
-
-                .select(
-                    "id,title,genre,description,review,official_url"
-                )
-
-                .eq(
-                    "id",
-                    currentAnimeId
-                )
-
-                .single();
-
-
-        if (error || !data) {
-
-            console.error(
-                "アニメ取得エラー:",
-                error
-            );
-
-            showError();
-
-            return;
-
-        }
-
-
-        const title =
-            data.title ||
-            "アニメ作品";
-
-
-        const genre =
-            data.genre ||
-            "";
-
-
-        const description =
-            data.description ||
-            "";
-
-
-        const review =
-            data.review ||
-            "";
-
-
-        /* =========================
-           SEO：ページタイトル
-        ========================= */
-
-        document.title =
-            `${title}｜レビュー・あらすじ・感想・評価 | Just An Anime Review`;
-
-
-        const metaDescription =
-            description
-                ?
-                description
-                    .replace(/\s+/g, " ")
-                    .trim()
-                    .slice(0, 155)
-                :
-                `${title}のあらすじ・作品情報・レビューを紹介しています。`;
-
-
-        document
-            .getElementById(
-                "meta-description"
-            )
-            .setAttribute(
-                "content",
-                metaDescription
-            );
-
-
-        const canonicalUrl =
-            window.location.origin +
-            window.location.pathname +
-            "?id=" +
-            encodeURIComponent(
-                data.id
-            );
-
-
-        document
-            .getElementById("canonical")
-            .setAttribute(
-                "href",
-                canonicalUrl
-            );
-
-
-        /* =========================
-           SEO：OGPタイトル
-        ========================= */
-
-        document
-            .getElementById("og-title")
-            .setAttribute(
-                "content",
-                `${title}｜レビュー・あらすじ・感想・評価 | Just An Anime Review`
-            );
-
-
-        document
-            .getElementById("og-description")
-            .setAttribute(
-                "content",
-                metaDescription
-            );
-
-
-        document
-            .getElementById("og-url")
-            .setAttribute(
-                "content",
-                canonicalUrl
-            );
-
-
-        document
-            .getElementById("title")
-            .textContent =
-            title;
-
-
-        const genreElement =
-            document.getElementById(
-                "genre"
-            );
-
-
-        if (genre) {
-
-            genreElement.textContent =
-                genre;
-
-            genreElement.style.display =
-                "inline-block";
-
-        } else {
-
-            genreElement.style.display =
-                "none";
-
-        }
-
-
-        document
-            .getElementById("description")
-            .textContent =
-            description ||
-            "あらすじは登録されていません。";
-
-
-        document
-            .getElementById("review")
-            .textContent =
-            review ||
-            "レビューは登録されていません。";
-
-
-        const officialWrapper =
-            document.getElementById(
-                "official-wrapper"
-            );
-
-
-        const official =
-            document.getElementById(
-                "official"
-            );
-
-
-        if (
-            data.official_url &&
-            isSafeURL(data.official_url)
-        ) {
-
-            official.href =
-                data.official_url;
-
-            officialWrapper.style.display =
-                "block";
-
-        } else {
-
-            officialWrapper.style.display =
-                "none";
-
-        }
-
-
-        /* =========================
-           構造化データ
-        ========================= */
-
-        const structuredData = {
-
-            "@context":
-                "https://schema.org",
-
-            "@type":
-                "Article",
-
-            "headline":
-                title,
-
-            "description":
-                metaDescription,
-
-            "url":
-                canonicalUrl,
-
-            "inLanguage":
-                "ja",
-
-            "about": {
-
-                "@type":
-                    "TVSeries",
-
-                "name":
-                    title
-
-            },
-
-            "mainEntityOfPage": {
-
-                "@type":
-                    "WebPage",
-
-                "@id":
-                    canonicalUrl
-
-            },
-
-            "publisher": {
-
-                "@type":
-                    "Organization",
-
-                "name":
-                    "Just An Anime Review",
-
-                "url":
-                    "https://just-an-anime-review.github.io/"
-
-            }
-
-        };
-
-
-        if (genre) {
-
-            structuredData.about.genre =
-                genre;
-
-        }
-
-
-        const oldSchema =
-            document.getElementById(
-                "anime-structured-data"
-            );
-
-
-        if (oldSchema) {
-
-            oldSchema.remove();
-
-        }
-
-
-        const schemaScript =
-            document.createElement(
-                "script"
-            );
-
-
-        schemaScript.type =
-            "application/ld+json";
-
-
-        schemaScript.id =
-            "anime-structured-data";
-
-
-        schemaScript.textContent =
-            JSON.stringify(
-                structuredData
-            );
-
-
-        document.head.appendChild(
-            schemaScript
-        );
-
-
-        /* =========================
-           表示
-        ========================= */
-
-        document
-            .getElementById("loading")
-            .style.display =
-            "none";
-
-
-        document
-            .getElementById("detail")
-            .style.display =
-            "block";
-
-
-        await initializeInteractions();
-
-
-    } catch (error) {
-
-        console.error(
-            "アニメ読み込みエラー:",
-            error
-        );
-
-        showError();
-
-    }
-
-}
-
-
-/* =========================================
-   いいね数取得
-========================================= */
-
-async function loadLikeCount() {
-
-    const {
-        count,
-        error
-    } =
-        await supabaseClient
-
-            .from("anime_likes")
-
-            .select(
-                "id",
-                {
-                    count: "exact",
-                    head: true
-                }
-            )
-
-            .eq(
-                "anime_id",
-                currentAnimeId
-            );
-
-
-    if (error) {
-
-        console.error(
-            "いいね数取得エラー:",
-            error
-        );
-
-        return;
-
-    }
-
-
-    document
-        .getElementById("like-count")
-        .textContent =
-        `${count || 0}件`;
-
-}
-
-
-/* =========================================
-   自分のいいね確認
-========================================= */
-
-async function checkLiked() {
-
-    const {
-        data,
-        error
-    } =
-        await supabaseClient
-
-            .from("anime_likes")
-
-            .select("id")
-
-            .eq(
-                "anime_id",
-                currentAnimeId
-            )
-
-            .eq(
-                "visitor_id",
-                visitorId
-            )
-
-            .maybeSingle();
-
-
-    if (error) {
-
-        console.error(
-            "いいね状態取得エラー:",
-            error
-        );
-
-        return;
-
-    }
-
-
-    const button =
-        document.getElementById(
-            "like-button"
-        );
-
-
-    if (data) {
-
-        button.classList.add(
-            "liked"
-        );
-
-        button.textContent =
-            "♥ いいね済み";
-
-    } else {
-
-        button.classList.remove(
-            "liked"
-        );
-
-        button.textContent =
-            "♡ いいね";
-
-    }
-
-}
-
-
-/* =========================================
-   いいね追加・削除
-========================================= */
-
-async function toggleLike() {
-
-    const button =
-        document.getElementById(
-            "like-button"
-        );
-
-
-    button.disabled =
-        true;
-
-
-    const {
-        data,
-        error
-    } =
-        await supabaseClient
-
-            .from("anime_likes")
-
-            .select("id")
-
-            .eq(
-                "anime_id",
-                currentAnimeId
-            )
-
-            .eq(
-                "visitor_id",
-                visitorId
-            )
-
-            .maybeSingle();
-
-
-    if (error) {
-
-        console.error(
-            "いいね確認エラー:",
-            error
-        );
-
-        button.disabled =
-            false;
-
-        return;
-
-    }
-
-
-    if (data) {
-
-        const {
-            error: deleteError
-        } =
-            await supabaseClient
-
-                .from("anime_likes")
-
-                .delete()
-
-                .eq(
-                    "id",
-                    data.id
-                )
-
-                .eq(
-                    "visitor_id",
-                    visitorId
-                );
-
-
-        if (deleteError) {
-
-            console.error(
-                "いいね削除エラー:",
-                deleteError
-            );
-
-            button.disabled =
-                false;
-
-            return;
-
-        }
-
-    } else {
-
-        const {
-            error: insertError
-        } =
-            await supabaseClient
-
-                .from("anime_likes")
-
-                .insert({
-
-                    anime_id:
-                        currentAnimeId,
-
-                    visitor_id:
-                        visitorId
-
-                });
-
-
-        if (insertError) {
-
-            console.error(
-                "いいね追加エラー:",
-                insertError
-            );
-
-            button.disabled =
-                false;
-
-            return;
-
-        }
-
-    }
-
-
-    await loadLikeCount();
-
-    await checkLiked();
-
-
-    button.disabled =
-        false;
-
-}
-
-
-/* =========================================
-   コメント取得
-========================================= */
-
-async function loadComments() {
-
-    const container =
-        document.getElementById(
-            "comment-list"
-        );
-
-
-    const {
-        data,
-        error
-    } =
-        await supabaseClient
-
-            .from("anime_comments")
-
-            .select(
-                "id,anime_id,nickname,comment,created_at,visitor_id"
-            )
-
-            .eq(
-                "anime_id",
-                currentAnimeId
-            )
-
-            .order(
-                "created_at",
-                {
-                    ascending: false
-                }
-            );
-
-
-    if (error) {
-
-        console.error(
-            "コメント取得エラー:",
-            error
-        );
-
-        container.innerHTML = `
-
-            <p class="no-comments">
-
-                コメントを取得できませんでした。
-
-            </p>
-
-        `;
-
-        return;
-
-    }
-
-
-    if (
-        !data ||
-        !data.length
-    ) {
-
-        container.innerHTML = `
-
-            <p class="no-comments">
-
-                まだコメントはありません。
-
-            </p>
-
-        `;
-
-        return;
-
-    }
-
-
-    container.innerHTML =
-        "";
-
-
-    data.forEach(
-        comment => {
-
-            const item =
-                document.createElement(
-                    "div"
-                );
-
-
-            item.className =
-                "comment-item";
-
-
-            const date =
-                new Date(
-                    comment.created_at
-                )
-                    .toLocaleString(
-                        "ja-JP"
-                    );
-
-
-            const isOwn =
-                comment.visitor_id ===
-                visitorId;
-
-
-            item.innerHTML = `
-
-                <div class="comment-header">
-
-                    <span class="comment-nickname">
-
-                        ${escapeHTML(
-                            comment.nickname
-                        )}
-
-                    </span>
-
-                    <span class="comment-date">
-
-                        ${escapeHTML(
-                            date
-                        )}
-
-                    </span>
-
-                </div>
-
-
-                <div class="comment-text">
-
-                    ${escapeHTML(
-                        comment.comment
-                    )}
-
-                </div>
-
-
-                ${
-                    isOwn
-                        ?
-                        `
-
-                            <div class="comment-actions">
-
-                                <button
-                                    type="button"
-                                    class="comment-delete">
-
-                                    コメントを削除
-
-                                </button>
-
-                            </div>
-
-                        `
-                        :
-                        ""
-                }
-
-            `;
-
-
-            if (isOwn) {
-
-                item
-                    .querySelector(
-                        ".comment-delete"
-                    )
-                    .addEventListener(
-                        "click",
-                        () =>
-                            deleteComment(
-                                comment.id
-                            )
-                    );
-
-            }
-
-
-            container.appendChild(
-                item
-            );
-
-        }
-    );
-
-}
-
-
-/* =========================================
-   コメント投稿
-========================================= */
-
-async function submitComment() {
-
-    const nickname =
-        document
-            .getElementById(
-                "comment-nickname"
-            )
-            .value
-            .trim();
-
-
-    const comment =
-        document
-            .getElementById(
-                "comment-text"
-            )
-            .value
-            .trim();
-
-
-    const message =
-        document.getElementById(
-            "comment-message"
-        );
-
-
-    const button =
-        document.getElementById(
-            "comment-submit"
-        );
-
-
-    if (!nickname) {
-
-        message.textContent =
-            "ニックネームを入力してください。";
-
-        return;
-
-    }
-
-
-    if (nickname.length > 30) {
-
-        message.textContent =
-            "ニックネームは30文字以内で入力してください。";
-
-        return;
-
-    }
-
-
-    if (!comment) {
-
-        message.textContent =
-            "コメントを入力してください。";
-
-        return;
-
-    }
-
-
-    if (comment.length > 1000) {
-
-        message.textContent =
-            "コメントは1000文字以内で入力してください。";
-
-        return;
-
-    }
-
-
-    button.disabled =
-        true;
-
-
-    message.textContent =
-        "投稿しています……";
-
-
-    const {
-        error
-    } =
-        await supabaseClient
-
-            .from("anime_comments")
-
-            .insert({
-
-                anime_id:
-                    currentAnimeId,
-
-                visitor_id:
-                    visitorId,
-
-                nickname:
-                    nickname,
-
-                comment:
-                    comment
-
-            });
-
-
-    if (error) {
-
-        console.error(
-            "コメント投稿エラー:",
-            error
-        );
-
-        message.textContent =
-            "コメントの投稿に失敗しました。";
-
-        button.disabled =
-            false;
-
-        return;
-
-    }
-
-
-    document
-        .getElementById(
-            "comment-nickname"
-        )
-        .value =
-        "";
-
-
-    document
-        .getElementById(
-            "comment-text"
-        )
-        .value =
-        "";
-
-
-    message.textContent =
-        "コメントを投稿しました。";
-
-
-    await loadComments();
-
-
-    button.disabled =
-        false;
-
-}
-
-
-/* =========================================
-   コメント削除
-========================================= */
-
-async function deleteComment(
-    commentId
-) {
-
-    const ok =
-        confirm(
-            "このコメントを削除しますか？"
-        );
-
-
-    if (!ok) {
-
-        return;
-
-    }
-
-
-    const {
-        error
-    } =
-        await supabaseClient
-
-            .from("anime_comments")
-
-            .delete()
-
-            .eq(
-                "id",
-                commentId
-            )
-
-            .eq(
-                "visitor_id",
-                visitorId
-            );
-
-
-    if (error) {
-
-        console.error(
-            "コメント削除エラー:",
-            error
-        );
-
-        alert(
-            "コメントの削除に失敗しました。"
-        );
-
-        return;
-
-    }
-
-
-    await loadComments();
-
-}
-
-
-/* =========================================
-   インタラクション初期化
-========================================= */
-
-async function initializeInteractions() {
-
-    await loadLikeCount();
-
-    await checkLiked();
-
-    await loadComments();
-
-}
-
-
-/* =========================================
-   イベント
+   Events
 ========================================= */
 
 document
     .getElementById(
-        "like-button"
+        "status-save"
     )
     .addEventListener(
         "click",
-        toggleLike
+        saveWatchStatus
     );
 
 
 document
     .getElementById(
-        "comment-submit"
+        "rating-save"
     )
     .addEventListener(
         "click",
-        submitComment
+        saveUserRating
+    );
+
+
+document
+    .getElementById(
+        "review-form"
+    )
+    .addEventListener(
+        "submit",
+        submitReview
     );
 
 
 /* =========================================
-   起動
+   Auth listener
 ========================================= */
 
-loadAnime();
+supabaseClient
+    .auth
+    .onAuthStateChange(
+        async (
+            event,
+            session
+        ) => {
 
-loadAdvertisement();
+            currentUser =
+                session?.user ||
+                null;
+
+
+            await loadUserState();
+
+            await loadReviews();
+
+        }
+    );
+
+
+/* =========================================
+   Start
+========================================= */
+
+(async function () {
+
+    await loadAuth();
+
+    await loadAnime();
+
+})();
 
 </script>
 
 </body>
 
 </html>
+```
